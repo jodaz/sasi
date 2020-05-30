@@ -16,7 +16,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'identification',
+        'email',
+        'password'
+        'genre_id',
+        'address',
+        'parish_id',
+        'community_id'
     ];
 
     /**
@@ -36,4 +43,39 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+
+    public function parish()
+    {
+        return $this->belongsTo(Parish::class);
+    }
+
+    public function community()
+    {
+        return $this->belongsTo(Community::class);
+    }
+
+    public function organizations()
+    {
+        return $this->belongsToMany(Organization::class);
+    }
+
+    public function novelties()
+    {
+        return $this->hasMany(Novelty::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
+
+    public function rol()
+    {
+        return $this->hasOne(Rol::class);
+    }
 }

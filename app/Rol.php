@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class Rol extends Model
 {
-    protected $table = 'genres';
+    protected $table = 'rols';
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Rol::class);
     }
 }
