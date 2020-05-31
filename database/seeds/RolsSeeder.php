@@ -6,8 +6,8 @@ use App\Rol;
 class RolsSeeder extends Seeder
 {
     protected $rols = Array(
-        'user',
         'admin',
+        'user',
         'analyst',
         'support'
     );

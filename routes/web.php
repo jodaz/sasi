@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController');
+Route::get('/', function() {
+    if (Auth::check()) {
+        return redirect('dashboard');
+    }
+    return redirect('login');
+});
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

@@ -24,7 +24,6 @@ class CreateNoveltiesTable extends Migration
             $table->unsignedBigInteger('state_id');
             $table->foreign('state_id')->references('id')->on('states')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamp('approved_at')->nullable();
             $table->timestamps();
         });
     }
