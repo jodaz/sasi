@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Mail;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -42,32 +44,52 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function register(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $validator = Validator::make($request->all(), [
+            'names' => ['required', 'string', 'max:30'],
+            'surnames' => ['required', 'string', 'max:30'],
+            'identification' => ['required', 'string', 'max:30'],
+            'email' => ['required', 'string', 'email', 'max:40', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = User::create([
+            'names' => $request->input('names'),
+            'surnames' => $request->input('surnames'),
+            'address' => $request->input('address'),
+            'identification' => $request->input('identification'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'password' => Hash::make($request->input('password')),
+            'remember_token' => $request->input('_token'),
+            'genre_id' => $request->input('genre_id'),
+            'parish_id' => $request->input('parish_id'),
+            'community_id' => $request->input('community_id'),
+        ]);
+
+        $content = [
+            'text' => '¡Gracias por registrarte en Sasi!' 
+        ];
+        $for = $request->input('email');
+
+        Mail::send('signup', $content, function ($msj) use ($subject, $for) {
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        return redirect()->route('dashboard')
+            ->with('success', '¡Gracias por regístrarte!, revisa tu correo electrónico para continuar.');
     }
 }

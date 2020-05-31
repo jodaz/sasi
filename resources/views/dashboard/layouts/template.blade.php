@@ -9,7 +9,7 @@
 	    <meta name="author" content="">
 	    <meta name="description" content="">
 	    <meta name="keywords" content="">
-    	<title>Título</title>
+    	<title>@yield('title') | SASI</title>
 
 		<!-- Loads CSS -->
 		<link rel="stylesheet" href="{{ asset('dash') }}/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css" id="style-resource-1">

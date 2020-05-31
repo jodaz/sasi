@@ -12,13 +12,11 @@
 	<meta name="description" content="" />
 	<meta name="author" content="FLAME" />
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
-	<title>SOAP</title>
+	<title>@yield('title') | SASI</title>
 
 	<script>var BASE_URL = "{{ url('/') }}"</script>
 	
 	@include('layouts.styles')
-    
-    
 </head>
 <body class="page-body login-page login-form-fall">
 	<div style="overflow:hidden">

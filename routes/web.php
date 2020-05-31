@@ -22,4 +22,7 @@ Route::get('/', function() {
     return redirect('login');
 });
 
+Route::prefix('/')->middleware('auth')->group(function() {
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+});
 

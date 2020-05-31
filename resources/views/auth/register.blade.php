@@ -1,5 +1,7 @@
 @extends('auth.main')
 
+@section('title', 'Regístrate')
+
 @section('content')
     <div class="login-container">
         <div class="login-header login-caret">
@@ -7,7 +9,7 @@
                 <a href="" class="logo">
                     <img src="https://demo.neontheme.com/assets/images/logo@2x.png" width="120" alt="" />
                 </a>
-                <p class="description">Creat tu cuenta!!</p>
+                <p class="description">Regístrate</p>
             </div>
         </div>
         <div class="login-progressbar"> <div></div> </div>

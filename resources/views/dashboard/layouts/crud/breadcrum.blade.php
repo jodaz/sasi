@@ -1,14 +1,14 @@
 <ol class="breadcrumb bc-3">
     <li>
-        <a href="{{ url('/dashboard') }}">
-            <i class="fa-home"></i>SOAP
+        <a href="{{ route('dashboard') }}">
+            <i class="fa-home"></i>SASI
         </a> >
         <strong>{{ $config['moduleLabel'] }}</strong>
     </li>
     <!-- sublevel -->
-    @if($breadcrumAction != "")
+    @if($breadcrumbAction != "")
         <li class="active">
-            <small>{{ $breadcrumAction }}</small>
+            <small>{{ $breadcrumbAction }}</small>
         </li>
     @endif
 </ol>
