@@ -26,7 +26,7 @@
                             <div class="input-group-addon">
                                 <i class="entypo-user"></i>
                             </div>
-                            <input type="text" class="form-control" name="identification" id="identification" placeholder="Cédula de identidad" autocomplete="off" />
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Correo electrónico" autocomplete="off" />
                         </div>
                     </div>
 
