@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Application;
+use App\Novelty;
+use App\Institution;
 
 class DashboardController extends Controller
 {
@@ -19,6 +23,7 @@ class DashboardController extends Controller
     {
         return view('dashboard.index')
             ->with('breadcrumbAction', '')
+            ->with('userCount', User::count())
             ->with('config', $this->config);
     }
 }

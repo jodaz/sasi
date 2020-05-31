@@ -109,7 +109,7 @@
 							<li class="profile-info dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									<img src="http://geekha.cl/photografy/photo1_crop.jpg" alt="" class="img-circle" width="44" />
-									Irwing Naranjo
+								    {{ Auth::user()->fullName }}	
 								</a>
 								<ul class="dropdown-menu">
 									<li class="caret"></li>
