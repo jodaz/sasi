@@ -1,7 +1,7 @@
 <ol class="breadcrumb bc-3">
     <li>
         <a href="{{ route('dashboard') }}">
-            <i class="fa-home"></i>SASI
+            <i class="fa-home"></i>Inicio
         </a> >
         <strong>{{ $config['moduleLabel'] }}</strong>
     </li>

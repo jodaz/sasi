@@ -21,6 +21,7 @@
 		<link rel="stylesheet" href="{{ asset('dash') }}/assets/css/neon-forms.css" id="style-resource-7">
 		<link rel="stylesheet" href="{{ asset('dash') }}/assets/css/custom.css" id="style-resource-8">
         <script src="https://demo.neontheme.com/assets/js/jquery-1.11.3.min.js"></script>
+        @stack('css')
 	</head>
 	<body class="page-body" data-url="{{ url('/') }}">
 		<div class="page-container">
@@ -141,5 +142,6 @@
 		<script src="https://demo.neontheme.com/assets/js/neon-demo.js"></script>
         <script src="https://demo.neontheme.com/assets/js/neon-skins.js"></script>
         <script src="https://demo.neontheme.com/assets/js/jquery.inputmask.bundle.js"></script>
+        @stack('js')
 	</body>
 </html>
