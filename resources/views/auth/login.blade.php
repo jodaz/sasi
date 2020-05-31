@@ -46,12 +46,10 @@
                         </button>
                     </div>
                 </form>
-
-                <div class="login-bottom-links">
+                <div>
                     <a href="{{ url('register') }}" class="link">Registrarme</a> <br />
                     <a href="{{ url('password/reset') }}" class="link">¿Olvidate tu contraseña?</a> <br />
                 </div>
-
             </div>
         </div>
     </div>

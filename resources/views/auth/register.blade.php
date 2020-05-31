@@ -27,9 +27,9 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"> <i class="entypo-user"></i> </div>
 
-                                    <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="off" autofocus placeholder="Nombres">
+                                    <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="names" value="{{ old('name') }}" required autocomplete="off" autofocus placeholder="Nombres">
 
-                                    @error('name')
+                                    @error('names')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -40,7 +40,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"> <i class="entypo-user"></i> </div>
 
-                                    <input type="text" id="surname" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="off" autofocus placeholder="Apellidos">
+                                    <input type="text" id="surname" class="form-control @error('surname') is-invalid @enderror" name="surnames" value="{{ old('surname') }}" required autocomplete="off" autofocus placeholder="Apellidos">
 
                                     @error('surname')
                                         <span class="invalid-feedback" role="alert">
@@ -49,6 +49,35 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"> <i class="entypo-user"></i> </div>
+
+                                    <input type="text" id="surname" class="form-control @error('identification') is-invalid @enderror" name="identification" value="{{ old('identification') }}" required autocomplete="off" autofocus placeholder="Cédula de identidad">
+
+                                    @error('identification')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"> <i class="entypo-user"></i> </div>
+
+                                    <input type="text" id="address" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="off" autofocus placeholder="Dirección">
+
+                                    @error('identification')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">
@@ -64,6 +93,39 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="entypo-mail"></i>
+                                    </div>
+
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="off" placeholder="Contraseña">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+ 
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="entypo-mail"></i>
+                                    </div>
+
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" value="{{ old('password') }}" required autocomplete="off" placeholder="Contraseña">
+
+                                    @error('password_confirmation')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-info btn-block btn-login"> <i class="entypo-right-open-mini"></i>
                                     Enviar

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Mail;
 use Illuminate\Http\Request;
+use Redirect;
 
 class RegisterController extends Controller
 {
@@ -74,17 +75,18 @@ class RegisterController extends Controller
             'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password')),
             'remember_token' => $request->input('_token'),
-            'genre_id' => $request->input('genre_id'),
-            'parish_id' => $request->input('parish_id'),
-            'community_id' => $request->input('community_id'),
+            'genre_id' => 1,// $request->input('genre_id'),
+            'parish_id' => 1,// $request->input('parish_id'),
+            'community_id' => 1// $request->input('community_id'),
         ]);
 
         $content = [
             'text' => '¡Gracias por registrarte en Sasi!' 
         ];
+        $subject = $request->input('email');
         $for = $request->input('email');
 
-        Mail::send('signup', $content, function ($msj) use ($subject, $for) {
+        Mail::send('emails.signup', $content, function ($msj) use ($subject, $for) {
             $msj->subject($subject);
             $msj->to($for);
         });
