@@ -66,6 +66,57 @@
 
                             <div class="form-group">
                                 <div class="input-group">
+                                    {!!
+                                        Form::select('genre_id', $genres, null, [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Seleccione su género'
+                                        ])
+                                    !!}
+
+                                    @error('genre_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    {!!
+                                        Form::select('parish_id', $parishes, null, [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Parroquia'
+                                        ])
+                                    !!}
+
+                                    @error('parish_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    {!!
+                                        Form::select('community_id', $communities, null, [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Seleccione su communidad'
+                                        ])
+                                    !!}
+
+                                    @error('genre_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
                                     <div class="input-group-addon"> <i class="entypo-user"></i> </div>
 
                                     <input type="text" id="address" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="off" autofocus placeholder="Dirección">

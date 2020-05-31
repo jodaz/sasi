@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use Mail;
 use Illuminate\Http\Request;
 use Redirect;
+use App\Genre;
+use App\Community;
+use App\Parish;
 
 class RegisterController extends Controller
 {
@@ -44,6 +47,14 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        return view('auth.register')
+            ->with('parishes', Parish::pluck('name', 'id'))
+            ->with('communities', Community::pluck('name', 'id'))
+            ->with('genres', Genre::pluck('name', 'id'));
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -75,15 +86,15 @@ class RegisterController extends Controller
             'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password')),
             'remember_token' => $request->input('_token'),
-            'genre_id' => 1,// $request->input('genre_id'),
-            'parish_id' => 1,// $request->input('parish_id'),
-            'community_id' => 1// $request->input('community_id'),
+            'genre_id' => $request->input('genre_id'),
+            'parish_id' => $request->input('parish_id'),
+            'community_id' => $request->input('community_id'),
         ]);
 
         $content = [
-            'text' => '¡Gracias por registrarte en Sasi!' 
+            'text' => 'Este sera un mensaje personalizado' 
         ];
-        $subject = $request->input('email');
+        $subject = '¡Gracias por registrarte en Sasi!';
         $for = $request->input('email');
 
         Mail::send('emails.signup', $content, function ($msj) use ($subject, $for) {
