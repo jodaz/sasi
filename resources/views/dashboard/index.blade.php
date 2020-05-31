@@ -11,17 +11,12 @@
                     <div class="panel-title">Solicitudes</div>
                     <div class="panel-options">
                         <a href="{{ route('applications.create') }}">
-                            <i class="fas fa-send"></i>
+                            <i class="entypo-home"></i>
                         </a>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <p>Solicitudes pendientes más recientes</p>
-                    <div class="panel-options">
-                        <a href="{{ route('novelties.create') }}">
-                            <i class="fas fa-send"></i>
-                        </a>
-                    </div>
+                    <p>Solicitudes pendientes más recientes</p> 
                 </div> 
             </div>
         </div>
@@ -31,6 +26,11 @@
             <div class="panel panel-info" data-collapsed="0">
                 <div class="panel-heading">
                     <div class="panel-title">Denuncias</div>
+                    <div class="panel-options">
+                        <a href="{{ route('novelties.create') }}">
+                            <i class="entypo-home"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <p>Denuncias pendientes más recientes</p>

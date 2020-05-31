@@ -3,18 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use DataTables;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
+    protected $config = [
+        'moduleName' => 'Usuarios',
+        'moduleLabel' => 'Usuarios',
+        'routeView' => 'users.index',
+        'routeLink' => 'profile',
+        'msgEmpty' => 'No hay datos disponibles',
+        'messageSuccess' => 'Operación realizada con éxito'
+    ];
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return DataTables::of(Application::get())
+                ->make(true);
+        }
+
+        return view('applications.index')
+            ->with('config', $this->config)
+            ->with('breadcrumbAction', '');
     }
 
     /**

@@ -29,7 +29,8 @@ Route::prefix('/')->middleware('auth')->group(function() {
     Route::resource('novelties', 'NoveltyController');
     Route::resource('users', 'UserController');
     Route::resource('organizations', 'OrganizationController');
-    Route::get('geographic-area', 'GeographicArea')
-        ->name('geographic-area');
+    Route::resource('sectors', 'SectorController');
+    Route::resource('communities', 'CommunityController');
+    Route::resource('parishes', 'ParishController');
 });
 

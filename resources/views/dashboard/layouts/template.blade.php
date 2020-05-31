@@ -62,12 +62,29 @@
 								<i class="entypo-star-empty"></i>
 								<span class="title">Instituciones</span>
 							</a>
-						</li>
-                        <li>
-							<a href="{{ route('geographic-area') }}">
-								<i class="entypo-star-empty"></i>
-								<span class="title">Área geográfica</span>
+						</li> 
+                        <li class="has-sub root-level">
+							<a href="#">
+								<i class="entypo-briefcase"></i>
+								<span class="title">Reportes de área</span>
 							</a>
+							<ul class="">
+								<li>
+									<a href="{{ route('sectors.index') }}">
+										<span class="title">Sectores</span>
+									</a>
+								</li>
+								<li>
+									<a href="{{ route('communities.index') }}">
+										<span class="title">Comunidades</span>
+									</a>
+								</li>
+								<li>
+									<a href="{{ route('parishes.index') }}">
+										<span class="title">Parroquias</span>
+									</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
