@@ -15,6 +15,7 @@ class CreateNoveltiesTable extends Migration
     {
         Schema::create('novelties', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('description');
             $table->integer('votes');
             $table->unsignedBigInteger('sector_id');

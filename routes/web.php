@@ -24,5 +24,12 @@ Route::get('/', function() {
 
 Route::prefix('/')->middleware('auth')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+    Route::resource('applications', 'ApplicationController');
+    Route::resource('novelties', 'NoveltyController');
+    Route::resource('users', 'UserController');
+    Route::resource('organizations', 'OrganizationController');
+    Route::get('geographic-area', 'GeographicArea')
+        ->name('geographic-area');
 });
 

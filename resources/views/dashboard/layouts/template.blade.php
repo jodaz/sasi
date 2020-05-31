@@ -20,7 +20,7 @@
 		<link rel="stylesheet" href="{{ asset('dash') }}/assets/css/neon-theme.css" id="style-resource-6">
 		<link rel="stylesheet" href="{{ asset('dash') }}/assets/css/neon-forms.css" id="style-resource-7">
 		<link rel="stylesheet" href="{{ asset('dash') }}/assets/css/custom.css" id="style-resource-8">
-		<script src="https://demo.neontheme.com/assets/js/jquery-1.11.3.min.js"></script>
+        <script src="https://demo.neontheme.com/assets/js/jquery-1.11.3.min.js"></script>
 	</head>
 	<body class="page-body" data-url="{{ url('/') }}">
 		<div class="page-container">
@@ -45,51 +45,27 @@
 					</header>
 					<ul id="main-menu" class="main-menu">
 						<li>
-							<a href="#">
+							<a href="{{ route('dashboard') }}">
 								<i class="entypo-home"></i>
-								<span class="title">Escritorio</span>
+								<span class="title">Inicio</span>
 							</a>
-						</li>
-						<li class="has-sub root-level">
-							<a href="#">
-								<i class="entypo-bookmarks"></i>
-								<span class="title">Servicios</span>
-							</a>
-							<ul class="">
-								<li>
-									<a href="#">
-										<span class="title">Proveedores</span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span class="title">Productos o servicios</span>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="has-sub root-level">
-							<a href="#">
-								<i class="entypo-briefcase"></i>
-								<span class="title">Revendedores</span>
-							</a>
-							<ul class="">
-								<li>
-									<a href="#">
-										<span class="title">Tiendas</span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span class="title">Ventas</span>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">
+                        </li>
+                        <li>
+							<a href="{{ route('users.index') }}">
 								<i class="entypo-star-empty"></i>
-								<span class="title">Reporte de visitas</span>
+								<span class="title">Usuarios</span>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ route('organizations.index') }}">
+								<i class="entypo-star-empty"></i>
+								<span class="title">Instituciones</span>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ route('geographic-area') }}">
+								<i class="entypo-star-empty"></i>
+								<span class="title">Área geográfica</span>
 							</a>
 						</li>
 						<li>
