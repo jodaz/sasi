@@ -5,12 +5,15 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRoles;
 
     protected $appends = [ 'full_name' ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -69,10 +72,5 @@ class User extends Authenticatable
     public function applications()
     {
         return $this->hasMany(Application::class);
-    }
-
-    public function rol()
-    {
-        return $this->hasOne(Rol::class);
     }
 }

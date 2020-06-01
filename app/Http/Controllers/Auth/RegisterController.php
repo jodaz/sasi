@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Validator;
 use Mail;
 use Illuminate\Http\Request;
 use Redirect;
+use App\Citizenship;
+use App\Parish;
 use App\Genre;
 use App\Community;
-use App\Parish;
 
 class RegisterController extends Controller
 {
@@ -51,6 +52,7 @@ class RegisterController extends Controller
     {
         return view('auth.register')
             ->with('parishes', Parish::pluck('name', 'id'))
+            ->with('citizenships', Citizenship::pluck('name', 'id'))
             ->with('communities', Community::pluck('name', 'id'))
             ->with('genres', Genre::pluck('name', 'id'));
     }
@@ -77,11 +79,14 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
+        $citizenship = Citizenship::find($request->input('citizenship_id'))->correlative;
+        $identification = $citizenship.$request->input('identification');
+
         $user = User::create([
             'names' => $request->input('names'),
             'surnames' => $request->input('surnames'),
             'address' => $request->input('address'),
-            'identification' => $request->input('identification'),
+            'identification' => $identification,
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password')),

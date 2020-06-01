@@ -53,6 +53,12 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"> <i class="entypo-user"></i> </div>
+                                    {!!
+                                        Form::select('citizenship_id', $citizenships, null, [
+                                            'class' => 'form-control',
+                                            'placeholder' => 'Nacionalidad'
+                                        ])
+                                    !!}
 
                                     <input type="text" id="surname" class="form-control @error('identification') is-invalid @enderror" name="identification" value="{{ old('identification') }}" required autocomplete="off" autofocus placeholder="Cédula de identidad">
 
