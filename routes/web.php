@@ -32,5 +32,21 @@ Route::prefix('/')->middleware('auth')->group(function() {
     Route::resource('sectors', 'SectorController');
     Route::resource('communities', 'CommunityController');
     Route::resource('parishes', 'ParishController');
+
+    /**
+     * Reports
+     */
+    Route::get('pending-applications', 'ApplicationController@pending')
+        ->name('pending-applications');
+    Route::get('pending-novelties', 'NoveltyController@pending')
+        ->name('pending-novelties');
+    Route::get('approved-applications', 'ApplicationController@approved')
+        ->name('approved-applications');
+    Route::get('approved-novelties', 'NoveltyController@approved')
+        ->name('approved-novelties');
+
+    /**
+     * Pdf
+     */
 });
 

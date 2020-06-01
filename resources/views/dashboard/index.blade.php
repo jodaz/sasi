@@ -11,7 +11,7 @@
                     <div class="panel-title">Solicitudes</div>
                     <div class="panel-options">
                         <a href="{{ route('applications.create') }}">
-                            <i class="entypo-home"></i>
+                            <i class="entypo-list-add"></i>
                         </a>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <div class="panel-title">Denuncias</div>
                     <div class="panel-options">
                         <a href="{{ route('novelties.create') }}">
-                            <i class="entypo-home"></i>
+                            <i class="entypo-list-add"></i>
                         </a>
                     </div>
                 </div>

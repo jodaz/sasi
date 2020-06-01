@@ -37,6 +37,17 @@ class NoveltyController extends Controller
             ->with('breadcrumbAction', '');
     }
 
+    public function pending(Request $request)
+    {
+        //
+    }
+
+    public function approved(Request $request)
+    {
+        //
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

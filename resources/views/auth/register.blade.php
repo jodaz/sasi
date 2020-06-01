@@ -56,7 +56,8 @@
                                     {!!
                                         Form::select('citizenship_id', $citizenships, null, [
                                             'class' => 'form-control',
-                                            'placeholder' => 'Nacionalidad'
+                                            'placeholder' => 'Nacionalidad',
+                                            'required'
                                         ])
                                     !!}
 

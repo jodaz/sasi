@@ -37,6 +37,40 @@ class ApplicationController extends Controller
             ->with('breadcrumbAction', 'Nueva solicitud');
     }
 
+    public function pending(Request $request)
+    {
+        $query = Application::whereNull('approved_at')
+            ->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($query)
+                ->make(true);
+        }
+
+        return view('applications.index')
+            ->with('config', $this->config)
+            ->with('title', 'Solicitudes pendientes')
+            ->with('route', 'pending-applications')
+            ->with('breadcrumbAction', '');
+    }
+
+    public function approved(Request $request)
+    {
+        $query = Application::whereNotNull('approved_at')
+            ->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($query)
+                ->make(true);
+        }
+
+        return view('applications.index')
+            ->with('config', $this->config)
+            ->with('title', 'Solicitudes aprobadas')
+            ->with('route', 'approved-applications')
+            ->with('breadcrumbAction', '');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

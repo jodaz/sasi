@@ -53,20 +53,56 @@
                         </li>
                         <li>
 							<a href="{{ route('users.index') }}">
-								<i class="entypo-star-empty"></i>
+								<i class="entypo-user"></i>
 								<span class="title">Usuarios</span>
 							</a>
 						</li>
                         <li>
 							<a href="{{ route('organizations.index') }}">
-								<i class="entypo-star-empty"></i>
+								<i class="entypo-briefcase"></i>
 								<span class="title">Instituciones</span>
 							</a>
 						</li> 
                         <li class="has-sub root-level">
 							<a href="#">
-								<i class="entypo-briefcase"></i>
-								<span class="title">Reportes de área</span>
+								<i class="entypo-paper-plane"></i>
+								<span class="title">Solicitudes</span>
+							</a>
+							<ul class="">
+								<li>
+									<a href="{{ route('pending-applications') }}">
+										<span class="title">Pendientes</span>
+									</a>
+								</li>
+								<li>
+									<a href="{{ route('approved-applications') }}">
+										<span class="title">Aprobadas</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+                        <li class="has-sub root-level">
+							<a href="#">
+								<i class="entypo-traffic-cone"></i>
+								<span class="title">Denuncias</span>
+							</a>
+							<ul class="">
+								<li>
+									<a href="{{ route('pending-novelties') }}">
+										<span class="title">Pendientes</span>
+									</a>
+								</li>
+								<li>
+									<a href="{{ route('approved-novelties') }}">
+										<span class="title">Recibidas</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+                        <li class="has-sub root-level">
+							<a href="#">
+								<i class="entypo-chart-bar"></i>
+								<span class="title">Reportes</span>
 							</a>
 							<ul class="">
 								<li>
