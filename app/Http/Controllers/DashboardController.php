@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Application;
 use App\Novelty;
-use App\Institution;
+use App\Organization;
 
 class DashboardController extends Controller
 {
@@ -23,7 +23,10 @@ class DashboardController extends Controller
     {
         return view('dashboard.index')
             ->with('breadcrumbAction', '')
-            ->with('userCount', User::count())
+            ->with('users', User::count())
+            ->with('apps', Application::count())
+            ->with('novelties', Novelty::count())
+            ->with('organizations', Organization::count())
             ->with('config', $this->config);
     }
 }

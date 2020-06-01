@@ -32,19 +32,39 @@ class NoveltyController extends Controller
                 ->make(true);
         }
 
-        return view('noveltys.index')
+        return view('novelties.index')
             ->with('config', $this->config)
             ->with('breadcrumbAction', '');
     }
 
     public function pending(Request $request)
     {
-        //
+        $query = Novelty::whereNull('approved_at')
+            ->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($query)
+                ->make(true);
+        }
+
+        return view('novelties.pending')
+            ->with('config', $this->config)
+            ->with('breadcrumbAction', '');
     }
 
     public function approved(Request $request)
     {
-        //
+        $query = Novelty::whereNotNull('approved_at')
+            ->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($query)
+                ->make(true);
+        }
+
+        return view('novelties.approved')
+            ->with('config', $this->config)
+            ->with('breadcrumbAction', '');
     }
 
 

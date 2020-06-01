@@ -47,10 +47,8 @@ class ApplicationController extends Controller
                 ->make(true);
         }
 
-        return view('applications.index')
+        return view('applications.pending')
             ->with('config', $this->config)
-            ->with('title', 'Solicitudes pendientes')
-            ->with('route', 'pending-applications')
             ->with('breadcrumbAction', '');
     }
 
@@ -64,10 +62,8 @@ class ApplicationController extends Controller
                 ->make(true);
         }
 
-        return view('applications.index')
+        return view('applications.approved')
             ->with('config', $this->config)
-            ->with('title', 'Solicitudes aprobadas')
-            ->with('route', 'approved-applications')
             ->with('breadcrumbAction', '');
     }
 

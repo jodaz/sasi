@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'identification' => ['required', 'string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:40', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'max:8']
         ]);
 
         if ($validator->fails()) {

@@ -61,7 +61,7 @@
                                         ])
                                     !!}
 
-                                    <input type="text" id="surname" class="form-control @error('identification') is-invalid @enderror" name="identification" value="{{ old('identification') }}" required autocomplete="off" autofocus placeholder="Cédula de identidad">
+                                    <input min="0" maxlength="8" type="number" id="surname" class="form-control @error('identification') is-invalid @enderror" name="identification" value="{{ old('identification') }}" required autocomplete="off" autofocus placeholder="Cédula de identidad">
 
                                     @error('identification')
                                         <span class="invalid-feedback" role="alert">
