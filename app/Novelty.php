@@ -15,8 +15,8 @@ class Novelty extends Model
         return $this->hasOne(State::class);
     }
 
-    public function sector()
+    public function category()
     {
-        return $this->hasOne(Sector::class);
+        return $this->hasOne(Category::class);
     }
 }

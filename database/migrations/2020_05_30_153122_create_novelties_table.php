@@ -18,8 +18,8 @@ class CreateNoveltiesTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->integer('votes');
-            $table->unsignedBigInteger('sector_id');
-            $table->foreign('sector_id')->references('id')->on('sectors')
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('approved_at')->nullable();
             $table->unsignedBigInteger('state_id');

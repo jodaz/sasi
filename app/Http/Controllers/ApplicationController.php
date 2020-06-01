@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class ApplicationController extends Controller
 {
     protected $config = [
-        'moduleName' => 'Usuarios',
-        'moduleLabel' => 'Usuarios',
-        'routeView' => 'users.index',
+        'moduleName' => 'Solicitudes',
+        'moduleLabel' => 'Solicitudes',
+        'routeView' => 'applications.index',
         'routeLink' => 'profile',
         'msgEmpty' => 'No hay datos disponibles',
         'messageSuccess' => 'Operación realizada con éxito'
@@ -41,7 +41,9 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        //
+        return view('applications.create')
+            ->with('config', $this->config)
+            ->with('breadcrumbAction', 'create');
     }
 
     /**
@@ -52,7 +54,7 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

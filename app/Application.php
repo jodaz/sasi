@@ -20,8 +20,8 @@ class Application extends Model
         return $this->belongsTo(State::class);
     }
 
-    public function sector()
+    public function category()
     {
-        return $this->hasOne(Sector::class);
+        return $this->hasOne(Category::class);
     }
 }

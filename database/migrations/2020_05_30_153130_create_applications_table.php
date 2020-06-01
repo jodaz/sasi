@@ -17,10 +17,10 @@ class CreateApplicationsTable extends Migration
             $table->id();
             $table->string('description');
             $table->integer('quantity');
-            $table->unsignedBigInteger('sector_id');
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('state_id');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('sector_id')->references('id')->on('sectors')
+            $table->foreign('category_id')->references('id')->on('categories')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('state_id')->references('id')->on('states')
                 ->onUpdate('cascade')->onDelete('cascade');

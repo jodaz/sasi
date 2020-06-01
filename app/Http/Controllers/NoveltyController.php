@@ -3,18 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Novelty;
+use App\Category;
+use App\State;
 use Illuminate\Http\Request;
+use DataTables;
+use Auth;
 
 class NoveltyController extends Controller
 {
+    protected $config = [
+        'moduleName' => 'Solicitudes',
+        'moduleLabel' => 'Solicitudes',
+        'routeView' => 'applications.index',
+        'routeLink' => 'profile',
+        'msgEmpty' => 'No hay datos disponibles',
+        'messageSuccess' => 'Operación realizada con éxito'
+    ];
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return DataTables::of(Novelty::get())
+                ->make(true);
+        }
+
+        return view('applications.index')
+            ->with('config', $this->config)
+            ->with('breadcrumbAction', '');
     }
 
     /**
@@ -24,7 +44,10 @@ class NoveltyController extends Controller
      */
     public function create()
     {
-        //
+        return view('novelties.create')
+            ->with('categories', Category::pluck('name', 'id'))
+            ->with('config', $this->config)
+            ->with('breadcrumbAction', '');
     }
 
     /**
