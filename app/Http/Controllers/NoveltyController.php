@@ -12,9 +12,9 @@ use Auth;
 class NoveltyController extends Controller
 {
     protected $config = [
-        'moduleName' => 'Solicitudes',
-        'moduleLabel' => 'Solicitudes',
-        'routeView' => 'applications.index',
+        'moduleName' => 'Denuncias',
+        'moduleLabel' => 'Denuncias',
+        'routeView' => 'novelties.index',
         'routeLink' => 'profile',
         'msgEmpty' => 'No hay datos disponibles',
         'messageSuccess' => 'Operación realizada con éxito'
@@ -32,7 +32,7 @@ class NoveltyController extends Controller
                 ->make(true);
         }
 
-        return view('applications.index')
+        return view('noveltys.index')
             ->with('config', $this->config)
             ->with('breadcrumbAction', '');
     }
@@ -58,7 +58,15 @@ class NoveltyController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $user = Auth::user();
+        $novelty = new Novelty($request->input());
+        $novelty->state_id = 1;
+        $novelty->votes = 1;
+
+        $user->novelties()->save($novelty);
+
+        return redirect()->back()
+            ->withSuccess('¡Denuncia publicada!');
     }
 
     /**

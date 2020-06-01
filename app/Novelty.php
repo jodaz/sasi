@@ -8,15 +8,28 @@ class Novelty extends Model
 {
     protected $table = 'novelties';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'content',
+        'category_id',
+        'state_id',
+        'user_id',
+        'votes',
+        'approved_at'
+    ];
 
     public function state()
     {
-        return $this->hasOne(State::class);
+        return $this->belongsTo(State::class);
     }
 
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
