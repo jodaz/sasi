@@ -7,6 +7,8 @@ use App\Category;
 use DataTables;
 use Auth;
 use PDF;
+use Mail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -39,7 +41,8 @@ class ApplicationController extends Controller
 
     public function pending(Request $request)
     {
-        $query = Application::whereNull('approved_at')
+        $query = Application::with(['user', 'category'])
+            ->whereNull('approved_at')
             ->get();
 
         if ($request->ajax()) {
@@ -129,6 +132,22 @@ class ApplicationController extends Controller
     public function update(Request $request, Application $application)
     {
         //
+    }
+
+    public function approve(Application $application)
+    {
+        $application->approved_at = Carbon::now();
+        $application->save();
+
+        return redirect()->back(); 
+    }
+
+    public function download(Application $application)
+    {
+        $user = $application->user;
+        $pdf = PDF::loadView('pdf.application', compact(['user', 'application']));
+        
+        return $pdf->download('solicitud.pdf');  
     }
 
     /**

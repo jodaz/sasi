@@ -46,7 +46,13 @@ Route::prefix('/')->middleware('auth')->group(function() {
         ->name('approved-novelties');
 
     /**
+     * Approve
+     */
+    Route::get('applications/{application}/approve', 'ApplicationController@approve');
+
+    /**
      * Pdf
      */
+    Route::get('applications/{application}/download', 'ApplicationController@download');
 });
 

@@ -10,6 +10,7 @@
                 <th>Usuario</th>
                 <th>Dirección</th>
                 <th>Categoría</th>
+                <th>Acciones</th>
             </tr>
         </thead>
     </table>
@@ -39,12 +40,21 @@
             url: '{{ route("pending-applications") }}'
         },
         columns: [
-            { data: 'quantity' },
+            { data: 'user.full_name' },
+            { data: 'user.address' },
+            { data: 'category.name' },
         ],
         createdRow: function(r, d, i) {
-            tr  = '<td width="35%" style="vertical-align:middle;" class="text-left">'+ (d["quantity"] ? d["full_name"] : "") +'</td>'
-            tr += '<td width="35%" style="vertical-align:middle;" class="text-left">'+ (d["quantity"] ? d["full_name"] : "") +'</td>'
-            tr += '<td width="30%" style="vertical-align:middle;" class="text-left">'+ (d["quantity"] ? d["full_name"] : "") +'</td>'
+            tr  = '<td width="25%" style="vertical-align:middle;" class="text-left">'+ (d["user"] ? d["user"].full_name : "") +'</td>'
+            tr += '<td width="25%" style="vertical-align:middle;" class="text-left">'+ (d["user"] ? d["user"].address : "") +'</td>'
+            tr += '<td width="25%" style="vertical-align:middle;" class="text-left">'+ (d["category"] ? d["category"].name : "") +'</td>'
+            tr += '<td width="25%" style="vertical-align:middle;">'
+            tr += 	'<div class="pull-right">'
+            tr += 		'<a href="/applications/'+d['id']+'/approve" class="btn btn-xs btn-info" style="margin-left:3px;">'
+            tr += 			'<i class="fa fa-pencil"></i>'
+            tr += 		'</a>'
+            tr += 	'</div>'
+            tr += '</td>'
             $(r).html(tr)
         }
     });
