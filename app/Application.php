@@ -10,6 +10,11 @@ class Application extends Model
 
     protected $guarded = [];
 
+    public function organization()
+    {
+        return $this->belongsToMany(Organization::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

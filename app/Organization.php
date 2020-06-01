@@ -38,6 +38,11 @@ class Organization extends Model
         return $this->belongsTo(Parish::class);
     }
 
+    public function applications()
+    {
+        return $this->belongsToMany(Application::class);
+    }
+
     public function community()
     {
         return $this->belongsTo(Community::class);
