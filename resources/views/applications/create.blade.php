@@ -1,54 +1,68 @@
 @extends('dashboard.layouts.template')
 
-@section('title', 'Usuarios')
+@section('title', 'Hacer solicitud')
 
 @section('content')
 <div class="row">
-    <table id="datatables" class="table table-bordered datatable">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Correo</th>
-            </tr>
-        </thead>
-    </table>
+    {!! Form::open(['route' => 'applications.store']) !!}
+        <div class="row">
+            <div class="col-sm-12">
+                {!!
+                    Form::textarea('description', null, [
+                        'placeholder' => 'Contenido',
+                        'class' => 'form-control',
+                        'rows' => 10,
+                        'required'
+                    ])
+                !!}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-5">
+                {!!
+                    Form::select('category_id', $categories, null, [
+                        'class' => 'form-control',
+                        'placeholder' => 'Seleccione una categoría',
+                        'required'
+                    ])
+                !!}
+            </div>
+            <div class="col-sm-5">
+                {!!
+                    Form::text('quantity', null, [
+                        'class' => 'form-control',
+                        'placeholder' => 'Cantidad',
+                        'required'
+                    ])
+                !!}
+            </div>
+            <div class="col-sm-2 post-save-changes">
+                <button type="submit" class="btn btn-green btn-lg btn-block btn-icon">
+                    Enviar
+                    <i class="entypo-check"></i>
+                </button>
+            </div>
+        </div>
+   
+    {!! Form::close() !!}
 </div>
 @endsection
 
 @push('css')
-<link rel='stylesheet' src="{{ asset('dash/assets/js/datatables/datatables.css') }}">
-@endpush
-
-@push('js')
-<script src="{{ asset('dash/assets/js/datatables/datatables.js') }}"></script>
-<script>
-    const tableInit = $('#datatables').DataTable({
-        language: {
-            url: "{{ asset('dash/assets/js/datatables/spanish.json') }}"
-        },
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        lengthChange: true,
-        deferRender: true,
-        autoWidth: true,
-        scrollX: true,
-        lengthMenu: [ 10, 50, 100, 500 ],
-        ajax: {
-            url: '{{ route("users.index") }}'
-        },
-        columns: [
-            { data: 'full_name' },
-            { data: 'surnames' },
-            { data: 'address' }
-        ],
-        createdRow: function(r, d, i) {
-            tr  = '<td width="40%" style="vertical-align:middle;" class="text-left">'+ (d["full_name"] ? d["full_name"] : "") +'</td>'
-	      	tr += '<td width="30" style="vertical-align:middle;" class="text-left">'+ (d["address"] ? d["address"] : "") +'</td>'
-	      	tr += '<td width="30%" style="vertical-align:middle;" class="text-left">'+ (d["email"] ? d["email"] : "") +'</td>'
-            $(r).html(tr)
-        }
-    });
-</script>
+<style>
+.ms-container .ms-list {
+    width: 135px;
+    height: 205px;
+}
+    .post-save-changes {
+    float: right;
+}
+@media screen and (max-width: 789px)
+{
+.post-save-changes {
+    float: none;
+    margin-bottom: 20px;
+}
+</style>
 @endpush

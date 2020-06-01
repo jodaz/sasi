@@ -8,7 +8,14 @@ class Application extends Model
 {
     protected $table = 'applications';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'description',
+        'quantity',
+        'user_id',
+        'category_id',
+        'state_id',
+        'approved_at'
+    ];
 
     public function organization()
     {

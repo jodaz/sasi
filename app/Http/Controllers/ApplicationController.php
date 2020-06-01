@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Category;
 use DataTables;
+use Auth;
+use PDF;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -31,7 +34,7 @@ class ApplicationController extends Controller
 
         return view('applications.index')
             ->with('config', $this->config)
-            ->with('breadcrumbAction', '');
+            ->with('breadcrumbAction', 'Nueva solicitud');
     }
 
     /**
@@ -43,6 +46,7 @@ class ApplicationController extends Controller
     {
         return view('applications.create')
             ->with('config', $this->config)
+            ->with('categories', Category::pluck('name', 'id'))
             ->with('breadcrumbAction', 'create');
     }
 
@@ -54,7 +58,13 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $user = Auth::user();
+        $application = new Application($request->input());
+        $application->state_id = 1;
+
+        $user->applications()->save($application);
+
+        return redirect()->back();
     }
 
     /**
