@@ -22,7 +22,6 @@ class DashboardController extends Controller
     public function index()
     {
         return view('dashboard.index')
-            ->with('breadcrumbAction', '')
             ->with('users', User::count())
             ->with('apps', Application::count())
             ->with('novelties', Novelty::count())

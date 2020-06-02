@@ -8,15 +8,6 @@ use DataTables;
 
 class UserController extends Controller
 {
-    protected $config = [
-        'moduleName' => 'Usuarios',
-        'moduleLabel' => 'Usuarios',
-        'routeView' => 'users.index',
-        'routeLink' => 'profile',
-        'msgEmpty' => 'No hay datos disponibles',
-        'messageSuccess' => 'Operación realizada con éxito'
-    ];
-
     /**
      * Display a listing of the resource.
      *
@@ -30,9 +21,18 @@ class UserController extends Controller
         }
 
         return view('users.index')
-            ->with('config', $this->config)
-            ->with('breadcrumbAction', '');
+            ->with('config', $this->config);
     }
+
+    public function changePass()
+    {
+        return view('users.change-password');
+    }
+
+    public function updatePassword()
+    {
+        //
+    }  
 
     /**
      * Show the form for creating a new resource.
@@ -88,6 +88,8 @@ class UserController extends Controller
     {
         //
     }
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -23,8 +23,8 @@ Route::get('/', function() {
 });
 
 Route::prefix('/')->middleware('auth')->group(function() {
+    
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-
     Route::resource('applications', 'ApplicationController');
     Route::resource('novelties', 'NoveltyController');
     Route::resource('users', 'UserController');
@@ -32,6 +32,7 @@ Route::prefix('/')->middleware('auth')->group(function() {
     Route::resource('sectors', 'SectorController');
     Route::resource('communities', 'CommunityController');
     Route::resource('parishes', 'ParishController');
+    Route::get('configurations', 'ConfigurationController@index');
 
     /**
      * Reports
@@ -49,6 +50,10 @@ Route::prefix('/')->middleware('auth')->group(function() {
      * Approve
      */
     Route::get('applications/{application}/approve', 'ApplicationController@approve');
+    Route::get('change-password', 'UserController@showChangePass')
+        ->name('change-password.show');
+    Route::post('change-password', 'UserController@updatePassword')
+        ->name('change-password.update');
 
     /**
      * Pdf
