@@ -13,51 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
-
-Route::get('/', function() {
-    if (Auth::check()) {
-        return redirect('dashboard');
-    }
-    return redirect('login');
-});
-
-Route::prefix('/')->middleware('auth')->group(function() {
-    
-    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-    Route::resource('applications', 'ApplicationController');
-    Route::resource('novelties', 'NoveltyController');
-    Route::resource('users', 'UserController');
-    Route::resource('organizations', 'OrganizationController');
-    Route::resource('sectors', 'SectorController');
-    Route::resource('communities', 'CommunityController');
-    Route::resource('parishes', 'ParishController');
-    Route::get('configurations', 'ConfigurationController@index');
-
-    /**
-     * Reports
-     */
-    Route::get('pending-applications', 'ApplicationController@pending')
-        ->name('pending-applications');
-    Route::get('pending-novelties', 'NoveltyController@pending')
-        ->name('pending-novelties');
-    Route::get('approved-applications', 'ApplicationController@approved')
-        ->name('approved-applications');
-    Route::get('approved-novelties', 'NoveltyController@approved')
-        ->name('approved-novelties');
-
-    /**
-     * Approve
-     */
-    Route::get('applications/{application}/approve', 'ApplicationController@approve');
-    Route::get('change-password', 'UserController@showChangePass')
-        ->name('change-password.show');
-    Route::post('change-password', 'UserController@updatePassword')
-        ->name('change-password.update');
-
-    /**
-     * Pdf
-     */
-    Route::get('applications/{application}/download', 'ApplicationController@download');
-});
+Route::get('/{path?}', 'HomeController@index');
 
