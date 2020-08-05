@@ -13,9 +13,11 @@ class UsersSeeder extends Seeder
     public function run()
     {
         User::create([
-            'names' => 'Jesús Armando',
-            'surnames' => 'Ordosgoitty Díaz',
-            'email' => 'jesuodz@outlook.com',
+            'first_name' => 'Jesús',
+            'second_name' => 'Armando',
+            'surname' => 'Ordosgoitty',
+            'second_surname' => 'Díaz',
+            'email' => 'jesuodz@gmail.com',
             'identification' => 'V-27572434',
             'password' => bcrypt('qwerty123'), 
             'genre_id' => 1,
