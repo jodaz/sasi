@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store/Index';
 import jwt_decode from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
-import setAuthToken from './utils/setAuthToken';
-import { setUser } from './store/actions';
 
-// Scenes
+// Scenes & Components
 import Login from './screens/Auth/Login';
 import Register from './screens/Auth/Register';
 import Home from './screens/Home';
 import Dashboard from './screens/Dashboard';
+import PrivateRoute from './components/PrivateRoute';
+// Custom helplers
+import store from './store';
+import { setAuthToken, history } from './utils';
+import { setUser } from './store/actions';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,14 +23,18 @@ const App = () => {
     setAuthToken(localStorage.sasi);
     const decoded = jwt_decode(localStorage.sasi);
     dispatch(setUser(decoded));
+    history.push('/dashboard');
   }
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
+      <Switch>
+        <PrivateRoute exact path='/dashboard' component={Dashboard} />
+      </Switch>
       <Route exact path='/register' component={Register} /> 
       <Route exact path='/login' component={Login} /> 
       <Route exact path='/' component={Home} /> 
-    </BrowserRouter>
+    </Router>
   );
 };
 
