@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { errorsReducer } from './services/Errors';
-import { authReducer } from './services/Auth';
+import { errorsReducer } from './Errors';
+import { authReducer } from './Auth';
 
 const rootReducer = combineReducers({
   errors: errorsReducer,
