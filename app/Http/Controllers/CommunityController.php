@@ -3,35 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Community;
-use DataTables;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
 {
-    protected $config = [
-        'moduleName' => 'Comunidades',
-        'moduleLabel' => 'Comunidades',
-        'routeView' => 'communities.index',
-        'routeLink' => 'profile',
-        'msgEmpty' => 'No hay datos disponibles',
-        'messageSuccess' => 'Operación realizada con éxito'
-    ];
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            return DataTables::of(Community::get())
-                ->make(true);
-        }
-
-        return view('communities.index')
-            ->with('config', $this->config)
-            ->with('breadcrumbAction', '');
+        return Community::get();
     }
 
     /**

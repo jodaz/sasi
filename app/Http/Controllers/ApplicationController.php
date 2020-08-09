@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use App\Category;
-use DataTables;
 use Auth;
 use PDF;
 use Mail;
@@ -13,61 +12,14 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-    protected $config = [
-        'moduleName' => 'Solicitudes',
-        'moduleLabel' => 'Solicitudes',
-        'routeView' => 'applications.index',
-        'routeLink' => 'profile',
-        'msgEmpty' => 'No hay datos disponibles',
-        'messageSuccess' => 'Operación realizada con éxito'
-    ];
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            return DataTables::of(Application::get())
-                ->make(true);
-        }
-
-        return view('applications.index')
-            ->with('config', $this->config)
-            ->with('breadcrumbAction', 'Nueva solicitud');
-    }
-
-    public function pending(Request $request)
-    {
-        $query = Application::with(['user', 'category'])
-            ->whereNull('approved_at')
-            ->get();
-
-        if ($request->ajax()) {
-            return DataTables::of($query)
-                ->make(true);
-        }
-
-        return view('applications.pending')
-            ->with('config', $this->config)
-            ->with('breadcrumbAction', '');
-    }
-
-    public function approved(Request $request)
-    {
-        $query = Application::whereNotNull('approved_at')
-            ->get();
-
-        if ($request->ajax()) {
-            return DataTables::of($query)
-                ->make(true);
-        }
-
-        return view('applications.approved')
-            ->with('config', $this->config)
-            ->with('breadcrumbAction', '');
+        return Application::get();
     }
 
     /**

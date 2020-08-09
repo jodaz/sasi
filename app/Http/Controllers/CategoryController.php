@@ -3,35 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use DataTables;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    protected $config = [
-        'moduleName' => 'Categoryes',
-        'moduleLabel' => 'Categoryes',
-        'routeView' => 'categorys.index',
-        'routeLink' => 'profile',
-        'msgEmpty' => 'No hay datos disponibles',
-        'messageSuccess' => 'Operación realizada con éxito'
-    ];
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            return DataTables::of(Category::get())
-                ->make(true);
-        }
-
-        return view('categorys.index')
-            ->with('config', $this->config)
-            ->with('breadcrumbAction', '');
+        return Category::get();
     }
 
     /**

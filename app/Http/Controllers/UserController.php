@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use DataTables;
 
 class UserController extends Controller
 {
@@ -13,26 +12,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            return DataTables::of(User::get())
-                ->make(true);
-        }
-
-        return view('users.index')
-            ->with('config', $this->config);
+        return User::get();
     }
-
-    public function changePass()
-    {
-        return view('users.change-password');
-    }
-
-    public function updatePassword()
-    {
-        //
-    }  
 
     /**
      * Show the form for creating a new resource.

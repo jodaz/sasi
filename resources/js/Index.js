@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Redirect, Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import { Helmet } from 'react-helmet';
@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <Route exact path='/' component={Home} />
+      <PrivateRoute exact path='/' component={Home} />
       <Route exact path='/register' component={Register} /> 
       <Route exact path='/login' component={Login} /> 
     </Router>
