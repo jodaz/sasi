@@ -20,4 +20,9 @@ Route::post('register', 'AuthController@register');
 Route::middleware('auth:api')->group(function() {
     Route::get('logout', 'AuthController@logout');
     Route::get('user', 'AuthController@getUser');
+
+    Route::resource('applications', 'ApplicationController');
+    Route::resource('parishes', 'ParishController');
+    Route::resource('communities', 'CommunityController');
+    Route::resource('categories', 'CategoryController');
 });

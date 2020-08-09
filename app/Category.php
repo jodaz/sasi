@@ -8,9 +8,11 @@ class Category extends Model
 {
     protected $table = 'categories';
 
-    public function novelties()
+    protected $fillable = [ 'name' ];
+
+    public function organizations()
     {
-        return $this->hasMany(Novelty::class);
+        return $this->hasMany(Organization::class);
     }
 
     public function applications()

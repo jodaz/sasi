@@ -29,21 +29,17 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <Helmet titleTemplate="%s | SASI" />
-      <Switch>
-        <Route exact path='/' component={Home} />
-      </Switch>
+      <Route exact path='/' component={Home} />
       <Route exact path='/register' component={Register} /> 
       <Route exact path='/login' component={Login} /> 
     </Router>
   );
 };
 
-if (document.getElementById('app')) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('app')
-  );
-}
+ReactDOM.render(
+  <Provider store={store}>
+    <Helmet titleTemplate="%s | SASI" />
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);

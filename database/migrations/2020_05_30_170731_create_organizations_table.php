@@ -21,14 +21,14 @@ class CreateOrganizationsTable extends Migration
             $table->unsignedBigInteger('parish_id');
             $table->unsignedBigInteger('organization_type_id');
             $table->unsignedBigInteger('community_id');
-            $table->unsignedBigInteger('sector_id');
+            $table->unsignedBigInteger('category_id');
             $table->foreign('parish_id')->references('id')->on('parishes')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('community_id')->references('id')->on('communities')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('organization_type_id')->references('id')->on('organization_types')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('sector_id')->references('id')->on('sectors')
+            $table->foreign('category_id')->references('id')->on('categories')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

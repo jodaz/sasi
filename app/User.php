@@ -66,11 +66,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Organization::class);
     }
 
-    public function novelties()
-    {
-        return $this->hasMany(Novelty::class);
-    }
-
     public function applications()
     {
         return $this->hasMany(Application::class);
