@@ -21,8 +21,8 @@ export const login = data => dispatch => {
       setAuthToken(token);
 
       const decoded = jwt_decode(token);
-      history.push('/dashboard');
       dispatch(setUser(decoded));
+      history.push('/');
     })
     .catch(err => dispatch({
       type: GET_ERRORS,

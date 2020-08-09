@@ -15,6 +15,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendors.bundle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/light.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/base.light.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/brand.light.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app"></div>

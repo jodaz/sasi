@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-
 // Scenes & Components
 import Login from './screens/Auth/Login';
 import Register from './screens/Auth/Register';
 import Home from './screens/Home';
-import Dashboard from './screens/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 // Custom helplers
 import store from './store';
@@ -23,17 +22,19 @@ const App = () => {
     setAuthToken(localStorage.sasi);
     const decoded = jwt_decode(localStorage.sasi);
     dispatch(setUser(decoded));
-    history.push('/dashboard');
+    history.push('/');
+  } else {
+    history.push('/login');
   }
 
   return (
     <Router history={history}>
+      <Helmet titleTemplate="%s | SASI" />
       <Switch>
-        <PrivateRoute exact path='/dashboard' component={Dashboard} />
+        <Route exact path='/' component={Home} />
       </Switch>
       <Route exact path='/register' component={Register} /> 
       <Route exact path='/login' component={Login} /> 
-      <Route exact path='/' component={Home} /> 
     </Router>
   );
 };

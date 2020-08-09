@@ -1,8 +1,14 @@
 import React from 'react';
 
+import Layout from './layouts';
+import Meta from '../components/Meta';
+
 const Home = () => {
   return (
-    <div></div>
+    <Layout>
+      <Meta title="Inicio" />
+      <div>Hello World</div>
+    </Layout>
   );
 };
 
