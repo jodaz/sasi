@@ -12,6 +12,7 @@ import ForgetPassword from './screens/Auth/ForgetPassword';
 import Register from './screens/Auth/Register';
 import Home from './screens/Home';
 import Reports from './screens/Reports';
+import Settings from './screens/Settings';
 import NotFound from './screens/NotFound';
 import Statistics from './screens/Statistics';
 import PrivateRoute from './components/PrivateRoute';
@@ -26,6 +27,7 @@ const App = () => {
 
   if (localStorage.sasi) {
     const decoded = jwt_decode(localStorage.sasi);
+    setAuthToken(localStorage.sasi);
     dispatch(setUser(decoded));
   }
 
@@ -34,6 +36,7 @@ const App = () => {
       <Switch>
         <PrivateRoute exact path='/' component={Home} />
         <PrivateRoute exact path='/statistics' component={Statistics} />
+        <PrivateRoute exact path='/settings' component={Settings} />
         <PrivateRoute exact path='/reports' component={Reports} />
       </Switch>
       <Switch>

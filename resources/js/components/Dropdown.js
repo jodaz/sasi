@@ -3,7 +3,7 @@ import { useDetectOutsideClick } from '../utils';
 import PropTypes from 'prop-types';
 
 const getClasses = (isOpen) => (
-  (isOpen) ? 'dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl show' : 'dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl'
+  (isOpen) ? 'dropdown-menu dropdown-menu-fit dropdown-menu-anim dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl show' : 'dropdown-menu dropdown-menu-fit dropdown-menu-anim dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl'
 );
 
 const Dropdown = ({ children }) => {

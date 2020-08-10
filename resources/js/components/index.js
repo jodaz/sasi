@@ -12,6 +12,12 @@ import Widget from './Widget';
 import WidgetIcon from './WidgetIcon';
 import WidgetInfo from './WidgetInfo';
 import WidgetItem from './WidgetItem';
+import HeaderLogo from './HeaderLogo';
+import HeaderMenu from './HeaderMenu';
+import MenuNavLink from './MenuNavLink';
+import Header from './Header';
+import HeaderMenuWrapper from './HeaderMenuWrapper';
+import HeaderTopBar from './HeaderTopBar';
 import { Success, Error, Warning, ToastWrapper } from './Toast';
 
 export {
@@ -31,5 +37,11 @@ export {
   ToastWrapper,
   Success,
   Error,
-  Warning
+  Warning,
+  MenuNavLink,
+  HeaderMenu,
+  Header,
+  HeaderTopBar,
+  HeaderMenuWrapper,
+  HeaderLogo,
 };
