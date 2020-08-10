@@ -61,7 +61,7 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Unauthorized'
+                'message' => 'Tu contraseña o correo son incorrectos'
             ], 401);
         }
 

@@ -12,6 +12,7 @@ import Widget from './Widget';
 import WidgetIcon from './WidgetIcon';
 import WidgetInfo from './WidgetInfo';
 import WidgetItem from './WidgetItem';
+import { Success, Error, Warning, ToastWrapper } from './Toast';
 
 export {
   Dropdown,
@@ -27,4 +28,8 @@ export {
   WidgetIcon,
   WidgetInfo,
   WidgetItem,
+  ToastWrapper,
+  Success,
+  Error,
+  Warning
 };

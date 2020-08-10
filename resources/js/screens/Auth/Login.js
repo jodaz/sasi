@@ -2,12 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/actions';
-import { Meta } from '../../components';
+import {
+  Meta,
+  Loading,
+  Error,
+  ToastWrapper
+} from '../../components';
+import { isEmpty } from '../../utils';
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(login(data));
+  const errors = useSelector(store => store.errors);
+
+  useEffect(() => {
+    if (!isEmpty(errors)) {
+      Error(errors.message);
+    }
+  }, [errors])
 
   return (
     <>
@@ -59,6 +72,8 @@ const Login = () => {
           </div>
         </div>  
       </div>
+
+      <ToastWrapper />
     </>
   );
 };
