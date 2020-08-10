@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Login from './screens/Auth/Login';
 import Register from './screens/Auth/Register';
 import Home from './screens/Home';
+import Reports from './screens/Reports';
+import NotFound from './screens/NotFound';
+import Statistics from './screens/Statistics';
 import PrivateRoute from './components/PrivateRoute';
 // Custom helplers
 import store from './store';
@@ -25,9 +28,16 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <PrivateRoute exact path='/' component={Home} />
-      <Route exact path='/register' component={Register} /> 
-      <Route exact path='/login' component={Login} /> 
+      <Switch>
+        <PrivateRoute exact path='/' component={Home} />
+        <PrivateRoute exact path='/statistics' component={Statistics} />
+        <PrivateRoute exact path='/reports' component={Reports} />
+      </Switch>
+      <Switch>
+        <Route exact path='/register' component={Register} /> 
+        <Route exact path='/login' component={Login} /> 
+        <Route path="*" component={NotFound} />
+      </Switch>
     </Router>
   );
 };
