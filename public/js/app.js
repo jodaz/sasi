@@ -53431,15 +53431,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jwt_decode__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var _screens_Auth_Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./screens/Auth/Login */ "./resources/js/screens/Auth/Login.js");
-/* harmony import */ var _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./screens/Auth/Register */ "./resources/js/screens/Auth/Register.js");
-/* harmony import */ var _screens_Home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./screens/Home */ "./resources/js/screens/Home.js");
-/* harmony import */ var _screens_Reports__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./screens/Reports */ "./resources/js/screens/Reports.js");
-/* harmony import */ var _screens_NotFound__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./screens/NotFound */ "./resources/js/screens/NotFound.js");
-/* harmony import */ var _screens_Statistics__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./screens/Statistics */ "./resources/js/screens/Statistics.js");
-/* harmony import */ var _components_PrivateRoute__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/PrivateRoute */ "./resources/js/components/PrivateRoute.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils */ "./resources/js/utils/index.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/actions */ "./resources/js/store/actions.js");
+/* harmony import */ var _screens_Auth_ForgetPassword__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./screens/Auth/ForgetPassword */ "./resources/js/screens/Auth/ForgetPassword.js");
+/* harmony import */ var _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./screens/Auth/Register */ "./resources/js/screens/Auth/Register.js");
+/* harmony import */ var _screens_Home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./screens/Home */ "./resources/js/screens/Home.js");
+/* harmony import */ var _screens_Reports__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./screens/Reports */ "./resources/js/screens/Reports.js");
+/* harmony import */ var _screens_NotFound__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./screens/NotFound */ "./resources/js/screens/NotFound.js");
+/* harmony import */ var _screens_Statistics__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./screens/Statistics */ "./resources/js/screens/Statistics.js");
+/* harmony import */ var _components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/PrivateRoute */ "./resources/js/components/PrivateRoute.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils */ "./resources/js/utils/index.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/actions */ "./resources/js/store/actions.js");
 
 
 
@@ -53447,6 +53448,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // Scenes & Components
+
 
 
 
@@ -53465,39 +53467,43 @@ var App = function App() {
 
   if (localStorage.sasi) {
     var decoded = jwt_decode__WEBPACK_IMPORTED_MODULE_4___default()(localStorage.sasi);
-    dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_15__["setUser"])(decoded));
+    dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_16__["setUser"])(decoded));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Router"], {
-    history: _utils__WEBPACK_IMPORTED_MODULE_14__["history"]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    history: _utils__WEBPACK_IMPORTED_MODULE_15__["history"]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__["default"], {
     exact: true,
     path: "/",
-    component: _screens_Home__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    component: _screens_Home__WEBPACK_IMPORTED_MODULE_9__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__["default"], {
     exact: true,
     path: "/statistics",
-    component: _screens_Statistics__WEBPACK_IMPORTED_MODULE_11__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    component: _screens_Statistics__WEBPACK_IMPORTED_MODULE_12__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__["default"], {
     exact: true,
     path: "/reports",
-    component: _screens_Reports__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _screens_Reports__WEBPACK_IMPORTED_MODULE_10__["default"]
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/register",
-    component: _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    exact: true,
+    path: "/forget-password",
+    component: _screens_Auth_ForgetPassword__WEBPACK_IMPORTED_MODULE_17__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/login",
     component: _screens_Auth_Login__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "*",
-    component: _screens_NotFound__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _screens_NotFound__WEBPACK_IMPORTED_MODULE_11__["default"]
   })));
 };
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
-  store: _store__WEBPACK_IMPORTED_MODULE_13__["default"]
+  store: _store__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_5__["Helmet"], {
   titleTemplate: "%s | SASI"
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null)), document.getElementById('app'));
@@ -54313,6 +54319,96 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/screens/Auth/ForgetPassword.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/screens/Auth/ForgetPassword.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/actions */ "./resources/js/store/actions.js");
+/* harmony import */ var _layouts_Auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layouts/Auth */ "./resources/js/screens/layouts/Auth.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components */ "./resources/js/components/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils */ "./resources/js/utils/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+
+
+
+
+
+var ForgetPassword = function ForgetPassword() {
+  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_1__["useForm"])(),
+      register = _useForm.register,
+      handleSubmit = _useForm.handleSubmit;
+
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
+
+  var onSubmit = function onSubmit(data) {
+    return dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_3__["login"])(data));
+  };
+
+  var errors = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (store) {
+    return store.errors;
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isEmpty"])(errors)) {
+      Object(_components__WEBPACK_IMPORTED_MODULE_5__["Error"])(errors.message);
+    }
+  }, [errors]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_Auth__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Meta"], {
+    title: "Recuperar contrase\xF1a"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__logo"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+    to: "/login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "img-responsive",
+    src: "/logo.png"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__signin"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__head"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "kt-login__title"
+  }, "Recuperar cuenta")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "kt-form",
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "input-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "form-control",
+    type: "text",
+    placeholder: "Correo electr\xF3nico",
+    name: "email",
+    ref: register
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__account"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "kt-login__account-msg"
+  }, "\xBFNo tiene una cuenta?"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+    className: "kt-link kt-link--light kt-login__account-link",
+    to: "/register"
+  }, "Reg\xEDstrese"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["ToastWrapper"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ForgetPassword);
+
+/***/ }),
+
 /***/ "./resources/js/screens/Auth/Login.js":
 /*!********************************************!*\
   !*** ./resources/js/screens/Auth/Login.js ***!
@@ -54367,8 +54463,8 @@ var Login = function Login() {
     className: "kt-login__container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__logo"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+    to: "/login"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "img-responsive",
     src: "/logo.png"
@@ -54408,8 +54504,8 @@ var Login = function Login() {
     name: "remember"
   }), " Recu\xE9rdame", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col kt-align-right"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+    to: "/forget-password",
     className: "kt-link kt-login__link"
   }, "\xBFOlvid\xF3 su contrase\xF1a ?"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__actions"

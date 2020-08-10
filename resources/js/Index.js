@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
+
 // Scenes & Components
 import Login from './screens/Auth/Login';
+import ForgetPassword from './screens/Auth/ForgetPassword';
 import Register from './screens/Auth/Register';
 import Home from './screens/Home';
 import Reports from './screens/Reports';
@@ -35,6 +37,7 @@ const App = () => {
       </Switch>
       <Switch>
         <Route exact path='/register' component={Register} /> 
+        <Route exact path='/forget-password' component={ForgetPassword} /> 
         <Route exact path='/login' component={Login} /> 
         <Route path="*" component={NotFound} />
       </Switch>
