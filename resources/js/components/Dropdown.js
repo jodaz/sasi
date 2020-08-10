@@ -1,54 +1,35 @@
-import React, { useEffect, forwardRef, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import { useDetectOutsideClick } from '../utils';
 import PropTypes from 'prop-types';
 
 const getClasses = (isOpen) => (
   (isOpen) ? 'dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl show' : 'dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl'
 );
 
-const Dropdown = forwardRef( function Dropdown(props, ref) {
-
-  const { children, isOpen, onClose } = props;
-
-  const [classNames, setClassNames] = useState(getClasses(isOpen));
-
-  const dropdownRef = useRef();
-
-  const handleEsc = (e) => {
-    if (e.key === 'Esc' || e.key === 'Escape') {
-      onClose();
-    }
-  }
-  
-  const handleClickOutside = (e) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-      onClose();
-    }
-  }
-
-  useEffect(() => {    
-    // document.addEventListener('click', handleClickOutside);
-    document.addEventListener('keyDown', handleEsc);
-    setClassNames( getClasses(isOpen) );
-    console.log(isOpen); 
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('keydown', handleEsc);
-    }
-  }, [isOpen]);
+const Dropdown = ({ children }) => {
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const onClick = () => setIsActive(!isActive);
 
   return (
-    <div className={classNames} ref={ref}>
-      <div ref={dropdownRef}>
+    <div className='kt-header__topbar-item kt-header__topbar-item--user'>    
+      <div className="kt-header__topbar-wrapper" onClick={onClick}>
+        <div className="kt-header__topbar-user">
+          <span className="kt-header__topbar-username kt-hidden-mobile">Sean</span>
+          <img className="kt-hidden" alt="Pic" src="./assets/media/users/300_25.jpg" />
+          <span className="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">S</span>
+        </div>
+      </div>
+
+      <div className={getClasses(isActive)} ref={dropdownRef}>
         {children}
       </div>
     </div>
   );
-});
+};
 
 Dropdown.propTypes = {
   children: PropTypes.node,
-  onClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
 }
 
 export default Dropdown;

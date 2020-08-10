@@ -9,11 +9,9 @@ const getClasses = (isOpen) => (
 );
 
 const Header = () => {
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const dispatch = useDispatch();
-  const handleLogout = () => dispatch(logout());
 
-  const handleProfileClick = () => setIsProfileMenuOpen(!isProfileMenuOpen);
+  const handleLogout = () => dispatch(logout());
 
   return (
     <div className="kt-header kt-grid__item  kt-header--fixed ">
@@ -25,24 +23,12 @@ const Header = () => {
         </div>
       </div>
       <div className="kt-header__topbar">
-        <div className={getClasses(isProfileMenuOpen)}>    
-          <div className="kt-header__topbar-wrapper" onClick={handleProfileClick}>
-            <div className="kt-header__topbar-user">
-              <span className="kt-header__topbar-username kt-hidden-mobile">Sean</span>
-              <img className="kt-hidden" alt="Pic" src="./assets/media/users/300_25.jpg" />
-              <span className="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">S</span>
-            </div>
-          </div>
-          <Dropdown
-            isOpen={isProfileMenuOpen}
-            onClose={() => setIsProfileMenuOpen(false)}
-          >
-            <Notification
-              title='Cerrar sesión'
-              onClick={handleLogout()}
-            />
-          </Dropdown>
-        </div>
+        <Dropdown>
+          <Notification
+            title='Cerrar sesión'
+            onClick={() => handleLogout()}
+          />
+        </Dropdown>
       </div>
     </div>
   );

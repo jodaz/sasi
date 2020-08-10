@@ -15,6 +15,7 @@ import Reports from './screens/Reports';
 import NotFound from './screens/NotFound';
 import Statistics from './screens/Statistics';
 import PrivateRoute from './components/PrivateRoute';
+
 // Custom helplers
 import store from './store';
 import { setAuthToken, history } from './utils';
@@ -39,7 +40,6 @@ const App = () => {
         <Route exact path='/register' component={Register} /> 
         <Route exact path='/forget-password' component={ForgetPassword} /> 
         <Route exact path='/login' component={Login} /> 
-        <Route path="*" component={NotFound} />
       </Switch>
     </Router>
   );
