@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { GET_ERRORS, LOGOUT_USER, SET_CURRENT_USER } from './types';
 import { setAuthToken, history } from '../utils';
 import { Redirect } from 'react-router-dom';
 
@@ -31,16 +31,20 @@ export const login = data => dispatch => {
     }));
 }
 
-export const logout = () => {
+export const logout = () => dispatch => {
   axios.get('/api/logout')
-    .then((res) => {
+    .then(res => {
       localStorage.removeItem('sasi');
       setAuthToken();
-      history.push('/login');
-    }).catch(err => dispatch({
+      history.push('/');
+      dispatch({
+        type: LOGOUT_USER
+      });
+    })
+    .catch(err => dispatch({
       type: GET_ERRORS,
       payload: err.response.data
-    }))
+    }));
 }
 
 export const setUser = (decoded, user) => ({

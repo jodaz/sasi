@@ -11,6 +11,7 @@ const getClasses = (isOpen) => (
 const Header = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const dispatch = useDispatch();
+  const handleLogout = () => dispatch(logout());
 
   const handleProfileClick = () => setIsProfileMenuOpen(!isProfileMenuOpen);
 
@@ -38,7 +39,7 @@ const Header = () => {
           >
             <Notification
               title='Cerrar sesión'
-              url='/api/logout'
+              onClick={handleLogout()}
             />
           </Dropdown>
         </div>

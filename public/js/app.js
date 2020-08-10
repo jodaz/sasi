@@ -50399,6 +50399,10 @@ var Header = function Header() {
 
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
 
+  var handleLogout = function handleLogout() {
+    return dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_4__["logout"])());
+  };
+
   var handleProfileClick = function handleProfileClick() {
     return setIsProfileMenuOpen(!isProfileMenuOpen);
   };
@@ -50438,7 +50442,7 @@ var Header = function Header() {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Notification"], {
     title: "Cerrar sesi\xF3n",
-    url: "/api/logout"
+    onClick: handleLogout()
   })))));
 };
 
@@ -50690,16 +50694,21 @@ var login = function login(data) {
   };
 };
 var logout = function logout() {
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/logout').then(function (res) {
-    localStorage.removeItem('sasi');
-    Object(_utils__WEBPACK_IMPORTED_MODULE_3__["setAuthToken"])();
-    _utils__WEBPACK_IMPORTED_MODULE_3__["history"].push('/login');
-  })["catch"](function (err) {
-    return dispatch({
-      type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_ERRORS"],
-      payload: err.response.data
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/logout').then(function (res) {
+      localStorage.removeItem('sasi');
+      Object(_utils__WEBPACK_IMPORTED_MODULE_3__["setAuthToken"])();
+      _utils__WEBPACK_IMPORTED_MODULE_3__["history"].push('/');
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["LOGOUT_USER"]
+      });
+    })["catch"](function (err) {
+      return dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_ERRORS"],
+        payload: err.response.data
+      });
     });
-  });
+  };
 };
 var setUser = function setUser(decoded, user) {
   return {
@@ -50745,15 +50754,17 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!*************************************!*\
   !*** ./resources/js/store/types.js ***!
   \*************************************/
-/*! exports provided: GET_ERRORS, SET_CURRENT_USER */
+/*! exports provided: GET_ERRORS, SET_CURRENT_USER, LOGOUT_USER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ERRORS", function() { return GET_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CURRENT_USER", function() { return SET_CURRENT_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER", function() { return LOGOUT_USER; });
 var GET_ERRORS = 'GET_ERRORS';
 var SET_CURRENT_USER = 'SET_CURRENT_USER';
+var LOGOUT_USER = 'LOGOUT_USER';
 
 /***/ }),
 
@@ -50828,7 +50839,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var setAuthToken = function setAuthToken(token) {
   if (token) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'] = token;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'] = 'Bearer ' + token;
   } else {
     delete axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'];
   }
