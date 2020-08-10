@@ -46979,6 +46979,38 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/redux-devtools-extension/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/redux-devtools-extension/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var compose = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js").compose;
+
+exports.__esModule = true;
+exports.composeWithDevTools = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
+    function() {
+      if (arguments.length === 0) return undefined;
+      if (typeof arguments[0] === 'object') return compose;
+      return compose.apply(null, arguments);
+    }
+);
+
+exports.devToolsEnhancer = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION__ :
+    function() { return function(noop) { return noop; } }
+);
+
+
+/***/ }),
+
 /***/ "./node_modules/redux-thunk/es/index.js":
 /*!**********************************************!*\
   !*** ./node_modules/redux-thunk/es/index.js ***!
@@ -49461,17 +49493,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var defaultProps = {
-  fluid: false,
-  label: false,
-  sublabel: false
-};
 
 var getClasses = function getClasses(isOpen) {
   return isOpen ? 'dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl show' : 'dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-top-unround dropdown-menu-xl';
 };
 
-var Dropdown = function Dropdown(props) {
+var Dropdown = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function Dropdown(props, ref) {
   var children = props.children,
       isOpen = props.isOpen,
       onClose = props.onClose;
@@ -49479,46 +49506,43 @@ var Dropdown = function Dropdown(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getClasses(isOpen)),
       _useState2 = _slicedToArray(_useState, 2),
       classNames = _useState2[0],
-      setClassNames = _useState2[1]; //  const dropdownRef = useRef();
+      setClassNames = _useState2[1];
 
+  var dropdownRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
 
   var handleEsc = function handleEsc(e) {
     if (e.key === 'Esc' || e.key === 'Escape') {
       onClose();
     }
   };
-  /**
-  const handleClickOutside = (e) => {
-    if (dropdown.current && !dropdownRef.current.contains(e.target)) {
+
+  var handleClickOutside = function handleClickOutside(e) {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
       onClose();
     }
-  } **/
-
+  };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    /**
-    document.addEventListener('click', handleClickOutside);
+    // document.addEventListener('click', handleClickOutside);
     document.addEventListener('keyDown', handleEsc);
-    **/
     setClassNames(getClasses(isOpen));
-    /**    
-    return () => {
+    console.log(isOpen);
+    return function () {
       document.removeEventListener('click', handleClickOutside);
       document.removeEventListener('keydown', handleEsc);
-    } **/
+    };
   }, [isOpen]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classNames
-  }, children);
-};
-
+    className: classNames,
+    ref: ref
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: dropdownRef
+  }, children));
+});
 Dropdown.propTypes = {
   children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   isOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
-};
-Dropdown.defaultProps = {
-  isOpen: false
 };
 /* harmony default export */ __webpack_exports__["default"] = (Dropdown);
 
@@ -50363,6 +50387,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var getClasses = function getClasses(isOpen) {
+  return isOpen ? 'kt-header__topbar-item kt-header__topbar-item--user show' : 'kt-header__topbar-item kt-header__topbar-item--user';
+};
+
 var Header = function Header() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -50389,7 +50417,7 @@ var Header = function Header() {
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-header__topbar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "kt-header__topbar-item kt-header__topbar-item--user"
+    className: getClasses(isProfileMenuOpen)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-header__topbar-wrapper",
     onClick: handleProfileClick
@@ -50552,6 +50580,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   isAuthenticated: false,
+  token: {},
   user: {}
 };
 
@@ -50562,8 +50591,9 @@ var authReducer = function authReducer() {
   switch (action.type) {
     case _types__WEBPACK_IMPORTED_MODULE_0__["SET_CURRENT_USER"]:
       return _objectSpread(_objectSpread({}, state), {}, {
+        token: action.payload.token,
         isAuthenticated: !Object(_utils_isEmpty__WEBPACK_IMPORTED_MODULE_1__["default"])(action.payload),
-        user: action.payload
+        user: action.payload.user
       });
 
     default:
@@ -50650,7 +50680,7 @@ var login = function login(data) {
       Object(_utils__WEBPACK_IMPORTED_MODULE_3__["setAuthToken"])(token);
       var decoded = jwt_decode__WEBPACK_IMPORTED_MODULE_1___default()(token);
       _utils__WEBPACK_IMPORTED_MODULE_3__["history"].push('/');
-      dispatch(setUser(decoded));
+      dispatch(setUser(decoded, res.data.user));
     })["catch"](function (err) {
       return dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_ERRORS"],
@@ -50671,10 +50701,13 @@ var logout = function logout() {
     });
   });
 };
-var setUser = function setUser(decoded) {
+var setUser = function setUser(decoded, user) {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_CURRENT_USER"],
-    payload: decoded
+    payload: {
+      decoded: decoded,
+      user: user
+    }
   };
 };
 
@@ -50691,17 +50724,20 @@ var setUser = function setUser(decoded) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Errors */ "./resources/js/store/Errors.js");
-/* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Auth */ "./resources/js/store/Auth.js");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Errors */ "./resources/js/store/Errors.js");
+/* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Auth */ "./resources/js/store/Auth.js");
+
 
 
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  errors: _Errors__WEBPACK_IMPORTED_MODULE_2__["errorsReducer"],
-  auth: _Auth__WEBPACK_IMPORTED_MODULE_3__["authReducer"]
+  errors: _Errors__WEBPACK_IMPORTED_MODULE_3__["errorsReducer"],
+  auth: _Auth__WEBPACK_IMPORTED_MODULE_4__["authReducer"]
 });
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]))));
 
 /***/ }),
 

@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/actions';
 
+const getClasses = (isOpen) => (
+  (isOpen) ? 'kt-header__topbar-item kt-header__topbar-item--user show' : 'kt-header__topbar-item kt-header__topbar-item--user'
+);
+
 const Header = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const dispatch = useDispatch();
@@ -20,7 +24,7 @@ const Header = () => {
         </div>
       </div>
       <div className="kt-header__topbar">
-        <div className="kt-header__topbar-item kt-header__topbar-item--user">    
+        <div className={getClasses(isProfileMenuOpen)}>    
           <div className="kt-header__topbar-wrapper" onClick={handleProfileClick}>
             <div className="kt-header__topbar-user">
               <span className="kt-header__topbar-username kt-hidden-mobile">Sean</span>

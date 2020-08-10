@@ -23,7 +23,7 @@ export const login = data => dispatch => {
 
       const decoded = jwt_decode(token);
       history.push('/');
-      dispatch(setUser(decoded));
+      dispatch(setUser(decoded, res.data.user));
     })
     .catch(err => dispatch({
       type: GET_ERRORS,
@@ -43,8 +43,8 @@ export const logout = () => {
     }))
 }
 
-export const setUser = decoded => ({
+export const setUser = (decoded, user) => ({
   type: SET_CURRENT_USER,
-  payload: decoded
+  payload: { decoded, user }
 });
 
