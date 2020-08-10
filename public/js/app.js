@@ -53458,12 +53458,8 @@ var App = function App() {
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
 
   if (localStorage.sasi) {
-    Object(_utils__WEBPACK_IMPORTED_MODULE_11__["setAuthToken"])(localStorage.sasi);
     var decoded = jwt_decode__WEBPACK_IMPORTED_MODULE_4___default()(localStorage.sasi);
     dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_12__["setUser"])(decoded));
-    _utils__WEBPACK_IMPORTED_MODULE_11__["history"].push('/');
-  } else {
-    _utils__WEBPACK_IMPORTED_MODULE_11__["history"].push('/login');
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Router"], {
@@ -54314,8 +54310,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/actions */ "./resources/js/store/actions.js");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components */ "./resources/js/components/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils */ "./resources/js/utils/index.js");
+/* harmony import */ var _layouts_Auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layouts/Auth */ "./resources/js/screens/layouts/Auth.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components */ "./resources/js/components/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils */ "./resources/js/utils/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
 
 
 
@@ -54338,19 +54338,15 @@ var Login = function Login() {
     return store.errors;
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_5__["isEmpty"])(errors)) {
-      Object(_components__WEBPACK_IMPORTED_MODULE_4__["Error"])(errors.message);
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isEmpty"])(errors)) {
+      Object(_components__WEBPACK_IMPORTED_MODULE_5__["Error"])(errors.message);
     }
   }, [errors]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_4__["Meta"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_Auth__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Meta"], {
     title: "Inicio de sesi\xF3n"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "kt-grid kt-grid--hor kt-grid--root kt-login kt-login--v2 kt-login--signin"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "kt-grid__item kt-grid__item--fluid kt-login__wrapper"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__logo"
@@ -54406,9 +54402,10 @@ var Login = function Login() {
     className: "kt-login__account"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "kt-login__account-msg"
-  }, "\xBFNo tiene una cuenta?"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "kt-link kt-link--light kt-login__account-link"
-  }, "Reg\xEDstrese")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_4__["ToastWrapper"], null));
+  }, "\xBFNo tiene una cuenta?"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+    className: "kt-link kt-link--light kt-login__account-link",
+    to: "/register"
+  }, "Reg\xEDstrese"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["ToastWrapper"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Login);
@@ -54426,23 +54423,31 @@ var Login = function Login() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/actions */ "./resources/js/store/actions.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components */ "./resources/js/components/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/actions */ "./resources/js/store/actions.js");
+/* harmony import */ var _layouts_Auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layouts/Auth */ "./resources/js/screens/layouts/Auth.js");
+
+
 
 
 
 
 var Register = function Register() {
-  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_Auth__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "register"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Meta"], {
+    title: "Reg\xEDstrate"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__signup"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__head"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "kt-login__title"
-  }, "Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Reg\xEDstrate"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__desc"
-  }, "Enter your details to create your account:")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  }, "Ingresa tus datos para crear una cuenta:")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "kt-login__form kt-form",
     action: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -54451,15 +54456,14 @@ var Register = function Register() {
     className: "form-control",
     type: "text",
     placeholder: "Fullname",
-    name: "fullname"
+    name: "first_name"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "input-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: "form-control",
     type: "text",
     placeholder: "Email",
-    name: "email",
-    autocomplete: "off"
+    name: "email"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "input-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -54482,7 +54486,7 @@ var Register = function Register() {
   }, "Sign Up"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "kt_login_signup_cancel",
     className: "btn btn-pill kt-login__btn-secondary"
-  }, "Cancel"))));
+  }, "Cancel")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Register);
@@ -54513,6 +54517,53 @@ var Home = function Home() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
+
+/***/ }),
+
+/***/ "./resources/js/screens/layouts/Auth.js":
+/*!**********************************************!*\
+  !*** ./resources/js/screens/layouts/Auth.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var getType = function getType(type) {
+  switch (type) {
+    case 'login':
+      return 'kt-login--signin';
+
+    case 'register':
+      return 'kt-login-signup';
+  }
+};
+
+var Auth = function Auth(props) {
+  var children = props.children,
+      type = props.type;
+  var style = getType(type);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: 'kt-grid kt-grid--hor kt-grid--root kt-login kt-login--v2 ' + style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-grid__item kt-grid__item--fluid kt-login__wrapper"
+  }, children)));
+};
+
+Auth.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (Auth);
 
 /***/ }),
 

@@ -19,12 +19,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   if (localStorage.sasi) {
-    setAuthToken(localStorage.sasi);
     const decoded = jwt_decode(localStorage.sasi);
     dispatch(setUser(decoded));
-    history.push('/');
-  } else {
-    history.push('/login');
   }
 
   return (
