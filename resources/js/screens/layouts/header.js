@@ -18,6 +18,7 @@ const getClasses = (isOpen) => (
 );
 
 const AppMenu = () => {
+  const dispatch = useDispatch();
   const user = useSelector(store => store.auth.user);
 
   const handleLogout = () => dispatch(logout());

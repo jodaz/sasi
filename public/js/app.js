@@ -55064,6 +55064,7 @@ var getClasses = function getClasses(isOpen) {
 };
 
 var AppMenu = function AppMenu() {
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
   var user = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(function (store) {
     return store.auth.user;
   });
