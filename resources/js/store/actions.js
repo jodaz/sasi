@@ -31,6 +31,18 @@ export const login = data => dispatch => {
     }));
 }
 
+export const logout = () => {
+  axios.get('/api/logout')
+    .then((res) => {
+      localStorage.removeItem('sasi');
+      setAuthToken();
+      history.push('/login');
+    }).catch(err => dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    }))
+}
+
 export const setUser = decoded => ({
   type: SET_CURRENT_USER,
   payload: decoded

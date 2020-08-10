@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/actions';
-import Meta from '../../components/Meta';
+import { Meta } from '../../components';
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
