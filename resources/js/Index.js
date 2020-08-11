@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Redirect, Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import jwt_decode from 'jwt-decode';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,7 +25,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   if (localStorage.sasi) {
-    const decoded = jwt_decode(localStorage.sasi);
     setAuthToken(localStorage.sasi);
     dispatch(getUser());
   }

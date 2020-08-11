@@ -16,9 +16,9 @@ const Dropdown = ({ user, children }) => {
       <div className="kt-header__topbar-wrapper" onClick={onClick}>
         <div className="kt-header__topbar-user">
           <span className="kt-header__topbar-username kt-hidden-mobile">
-            { user.first_name }
+            { user.full_name }
           </span>
-          <span className="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{ user.first_name }</span>
+          <span className="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{ user.first_name && user.first_name.charAt(0) }</span>
         </div>
       </div>
 

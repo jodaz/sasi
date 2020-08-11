@@ -1,5 +1,4 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
 import { GET_ERRORS, LOGOUT_USER, SET_CURRENT_USER } from './types';
 import { setAuthToken, history } from '../utils';
 import { Redirect } from 'react-router-dom';
@@ -21,7 +20,6 @@ export const login = data => dispatch => {
       localStorage.setItem('sasi', token);
       setAuthToken(token);
 
-      const decoded = jwt_decode(token);
       history.push('/');
       dispatch(setUser(res.data.user));
     })
