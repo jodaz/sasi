@@ -6,8 +6,9 @@ use App\State;
 class StatesSeeder extends Seeder
 {
     public $states = Array(
-        'APROBADA',
-        'DENEGADA'
+        'Pendiente',
+        'Aprobado',
+        'Denegado'
     );
 
     /**

@@ -28,6 +28,9 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('community_id');
             $table->unsignedBigInteger('parish_id');
             $table->unsignedBigInteger('genre_id');
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('community_id')->references('id')->on('communities')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('parish_id')->references('id')->on('parishes')
