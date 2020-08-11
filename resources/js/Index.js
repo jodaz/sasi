@@ -12,7 +12,7 @@ import ForgetPassword from './screens/Auth/ForgetPassword';
 import Register from './screens/Auth/Register';
 import Home from './screens/home';
 import Reports from './screens/reports';
-import Settings from './screens/Settings';
+import Settings from './screens/settings';
 import NotFound from './screens/NotFound';
 import Statistics from './screens/Statistics';
 import PrivateRoute from './components/PrivateRoute';
