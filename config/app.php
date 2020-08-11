@@ -168,7 +168,6 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Watson\Active\ActiveServiceProvider::class,
 
