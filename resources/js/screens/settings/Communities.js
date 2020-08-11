@@ -23,6 +23,7 @@ const Categories = () => {
 
   const columns = useMemo(() => [
     { header: 'Nombre', accessor: 'name' },
+    { header: 'Parroquia (s)', accessor: 'parish_names' },
   ], []);
 
   return (
