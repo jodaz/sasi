@@ -19,7 +19,9 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return Application::get();
+        $query = Application::with(['state']);
+
+        return $query->get();
     }
 
     /**

@@ -59,7 +59,7 @@ const AppMenu = () => {
         </HeaderMenu>
       </HeaderMenuWrapper>
       <HeaderTopBar>
-        <Dropdown>
+        <Dropdown user={user}>
           <Notification
             title='Cerrar sesión'
             onClick={() => handleLogout()}

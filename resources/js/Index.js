@@ -11,7 +11,7 @@ import Login from './screens/Auth/Login';
 import ForgetPassword from './screens/Auth/ForgetPassword';
 import Register from './screens/Auth/Register';
 import Home from './screens/home';
-import Reports from './screens/Reports';
+import Reports from './screens/reports';
 import Settings from './screens/Settings';
 import NotFound from './screens/NotFound';
 import Statistics from './screens/Statistics';
