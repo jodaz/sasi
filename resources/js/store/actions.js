@@ -23,7 +23,7 @@ export const login = data => dispatch => {
 
       const decoded = jwt_decode(token);
       history.push('/');
-      dispatch(setUser(decoded, res.data.user));
+      dispatch(setUser(res.data.user));
     })
     .catch(err => dispatch({
       type: GET_ERRORS,
@@ -47,8 +47,17 @@ export const logout = () => dispatch => {
     }));
 }
 
-export const setUser = (decoded, user) => ({
+export const getUser = () => dispatch => {
+  axios.get('/api/user')
+    .then( res => dispatch(setUser(res.data)))
+    .catch(err => dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    }));
+};
+
+export const setUser = user => ({
   type: SET_CURRENT_USER,
-  payload: { decoded, user }
+  payload: user
 });
 

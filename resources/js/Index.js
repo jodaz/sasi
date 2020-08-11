@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Login from './screens/Auth/Login';
 import ForgetPassword from './screens/Auth/ForgetPassword';
 import Register from './screens/Auth/Register';
-import Home from './screens/Home';
+import Home from './screens/home';
 import Reports from './screens/Reports';
 import Settings from './screens/Settings';
 import NotFound from './screens/NotFound';
@@ -20,7 +20,7 @@ import PrivateRoute from './components/PrivateRoute';
 // Custom helplers
 import store from './store';
 import { setAuthToken, history } from './utils';
-import { setUser } from './store/actions';
+import { getUser } from './store/actions';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const App = () => {
   if (localStorage.sasi) {
     const decoded = jwt_decode(localStorage.sasi);
     setAuthToken(localStorage.sasi);
-    dispatch(setUser(decoded));
+    dispatch(getUser());
   }
 
   return (

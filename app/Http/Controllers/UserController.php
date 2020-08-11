@@ -72,7 +72,34 @@ class UserController extends Controller
         //
     }
 
+    public function changePassword(Request $request)
+    {
+        $newPassword = $request->input('new-password');
+        $currentPass = $request->input('current-password');
+        $user = Auth::user();
+        
+        if (!Hash::check($currentPass, $user->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'La contraseña actual es incorrecta'
+            ]);
+        }
 
+        if ($currentPass == $newPassword) {
+            return response()->json([
+                'success' => false,
+                'message' => 'La nueva contraseña no debe ser igual a la anterior'
+            ]);
+        }
+
+        $user->password = bcrypt($newPassword);
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡Contraseña actualizada!'
+        ]);
+    }
 
     /**
      * Remove the specified resource from storage.

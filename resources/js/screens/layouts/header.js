@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   MenuNavLink,
   Dropdown,
@@ -17,6 +17,33 @@ const getClasses = (isOpen) => (
   (isOpen) ? 'kt-header__topbar-item kt-header__topbar-item--user show' : 'kt-header__topbar-item kt-header__topbar-item--user'
 );
 
+const specialNavLinks = userRole => {
+  const AdminAnalyst = () => (<>
+    <MenuNavLink to="/statistics">
+      Estadísticas
+    </MenuNavLink>
+    <MenuNavLink to="/reports">
+      Reportes
+    </MenuNavLink>
+  </>);
+
+  const OnlyAdmin = () => (
+    <MenuNavLink to="/settings">
+      Configuraciones
+    </MenuNavLink>
+  );
+  
+  switch (userRole) {
+    case "1": 
+      return (<>
+        <AdminAnalyst />
+        <OnlyAdmin />
+      </>);
+    default:
+      return <AdminAnalyst />;
+  }
+}
+
 const AppMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector(store => store.auth.user);
@@ -33,15 +60,11 @@ const AppMenu = () => {
           <MenuNavLink to="/">
             Inicio
           </MenuNavLink>
-          <MenuNavLink to="/statistics">
-            Estadísticas
-          </MenuNavLink>
-          <MenuNavLink to="/reports">
-            Reportes
-          </MenuNavLink>
-          <MenuNavLink to="/settings">
-            Configuraciones
-          </MenuNavLink>
+          { 
+            (user.role_id != 3) ? (
+              specialNavLinks(user.role_id)
+            ) : <></>
+          }
         </HeaderMenu>
       </HeaderMenuWrapper>
       <HeaderTopBar>
