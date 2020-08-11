@@ -24,4 +24,9 @@ class Parish extends Model
     {
        return $this->hasMany(Organization::class);
     }
+
+    public function applications()
+    {
+        return $this->hasManyThrough(Application::class, User::class);
+    }
 }
