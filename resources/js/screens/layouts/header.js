@@ -17,32 +17,20 @@ const getClasses = (isOpen) => (
   (isOpen) ? 'kt-header__topbar-item kt-header__topbar-item--user show' : 'kt-header__topbar-item kt-header__topbar-item--user'
 );
 
-const specialNavLinks = userRole => {
-  const AdminAnalyst = () => (<>
-    <MenuNavLink to="/statistics">
-      Estadísticas
-    </MenuNavLink>
-    <MenuNavLink to="/reports">
-      Reportes
-    </MenuNavLink>
-  </>);
+const Analyst = () => (<>
+  <MenuNavLink to="/statistics">
+    Estadísticas
+  </MenuNavLink>
+  <MenuNavLink to="/reports">
+    Reportes
+  </MenuNavLink>
+</>);
 
-  const OnlyAdmin = () => (
-    <MenuNavLink to="/settings">
-      Configuraciones
-    </MenuNavLink>
-  );
-  
-  switch (userRole) {
-    case "1": 
-      return (<>
-        <AdminAnalyst />
-        <OnlyAdmin />
-      </>);
-    default:
-      return <AdminAnalyst />;
-  }
-}
+const OnlyAdmin = () => (
+  <MenuNavLink to="/settings">
+    Configuraciones
+  </MenuNavLink>
+);
 
 const AppMenu = () => {
   const dispatch = useDispatch();
@@ -62,13 +50,16 @@ const AppMenu = () => {
           </MenuNavLink>
           { 
             (user.role_id != 3) ? (
-              specialNavLinks(user.role_id)
+              (user.role_id == 1) ? (<>
+                <Analyst /> 
+                <OnlyAdmin />
+              </>) : ( <Analyst /> )
             ) : <></>
           }
         </HeaderMenu>
       </HeaderMenuWrapper>
       <HeaderTopBar>
-        <Dropdown user>
+        <Dropdown>
           <Notification
             title='Cerrar sesión'
             onClick={() => handleLogout()}

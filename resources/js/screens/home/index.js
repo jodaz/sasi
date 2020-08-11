@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <Layout>
       <Meta title="Inicio" />
-      { (user.role_id != 3) ? (
+      { (user.role_id == 3) ? (
           <RegularHome />
         ) : (
           <SpecialHome />
