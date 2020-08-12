@@ -48,7 +48,7 @@ const ForgetPassword = () => {
           <span className="kt-login__account-msg">
             ¿No tiene una cuenta?
           </span>&nbsp;&nbsp;
-          <Link className="kt-link kt-link--light kt-login__account-link" to='/register'>
+          <Link className="kt-link kt-login__account-link" to='/register'>
             Regístrese
           </Link>
         </div>

@@ -27,7 +27,7 @@
   text-align: center;
   font-size: 1.5rem;
   font-weight: 500;
-  color: #fff;
+  color: inherit;
 }
 
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-login__head .kt-login__desc {
@@ -107,7 +107,7 @@
 }
 
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__extra .kt-login__link:hover {
-  color: #fff;
+  color: inherit;
 }
 
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions {
@@ -125,8 +125,8 @@
   margin-top: 0.8rem;
   border-radius: 60px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(255, 255, 255, 0.4);
+  color: #0abb87;
+  border-color: #0abb87;
 }
 
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary.active,
@@ -135,8 +135,8 @@
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary.active,
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary:active,
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary:hover {
-  color: #fff;
-  border-color: #fff;
+  color: inherit;
+  border-color: inherit;
 }
 
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary {
@@ -147,7 +147,7 @@
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary.active,
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary:active,
 .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary:hover {
-  color: #fff;
+  color: inherit;
   border-color: #fff;
 }
 

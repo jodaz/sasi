@@ -46,20 +46,14 @@ const Login = () => {
               <input className="form-control" type="password" placeholder="Contraseña" name="password" ref={register}/>
             </div>
             <div className="row kt-login__extra">
-              <div className="col">
-                <label className="kt-checkbox">
-                  <input type="checkbox" name="remember" /> Recuérdame 
-                  <span></span>
-                </label>
-              </div>
               <div className="col kt-align-right">
-                <Link to="/forget-password" className="kt-link kt-login__link">
+                <Link to="/forget-password" className="kt-link kt-login__account-link">
                   ¿Olvidó su contraseña ?
                 </Link>
               </div>
             </div>
             <div className="kt-login__actions">
-              <button className="btn btn-pill kt-login__btn-primary">Sign In</button>
+              <button className="btn btn-pill kt-login__btn-primary">Iniciar sesión</button>
             </div>
           </form>
         </div>
@@ -67,7 +61,7 @@ const Login = () => {
           <span className="kt-login__account-msg">
             ¿No tiene una cuenta?
           </span>&nbsp;&nbsp;
-          <Link className="kt-link kt-link--light kt-login__account-link" to='/register'>
+          <Link className="kt-link kt-login__account-link" to='/register'>
             Regístrese
           </Link>
         </div>
