@@ -76,11 +76,11 @@
             height: 46px;
             display: inline-block;
             text-align: center;
-            padding-left: 4rem;
-            padding-right: 4rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
             margin-top: 0.8rem;
             border-radius: 60px;
-            background: transparent;
+            border-width: 2px;
             color: #0abb87;
             border-color: #0abb87; }
             .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary.active, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary:active, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary:hover,
