@@ -53379,10 +53379,10 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
+/***/ "./resources/js/app.jsx":
+/*!******************************!*\
+  !*** ./resources/js/app.jsx ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53868,17 +53868,81 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var defaultProps = {
-  fluid: false,
-  label: false,
-  sublabel: false
-};
+var defaultProps = {};
 
 var getClasses = function getClasses(shouldFluid) {
   return shouldFluid ? 'kt-portlet kt-portlet--height-fluid' : 'kt-portlet';
 };
 
-var getPortletHeader = function getPortletHeader(label, sublabel) {
+var Portlet = function Portlet(props) {
+  var children = props.children,
+      fluid = props.fluid;
+  var classes = getClasses(fluid);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes
+  }, children);
+};
+
+Portlet.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node.isRequired,
+  isFluid: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+};
+Portlet.defaultProps = {
+  fluid: false
+};
+/* harmony default export */ __webpack_exports__["default"] = (Portlet);
+
+/***/ }),
+
+/***/ "./resources/js/components/PortletBody.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/PortletBody.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var PortletBody = function PortletBody(_ref) {
+  var children = _ref.children;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-portlet__body"
+  }, children);
+};
+
+PortletBody.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (PortletBody);
+
+/***/ }),
+
+/***/ "./resources/js/components/PortletHeader.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/PortletHeader.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var PortletHeader = function PortletHeader(_ref) {
+  var label = _ref.label,
+      sublabel = _ref.sublabel;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-portlet__head"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -53888,22 +53952,11 @@ var getPortletHeader = function getPortletHeader(label, sublabel) {
   }, label, sublabel ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, sublabel) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null))));
 };
 
-var Portlet = function Portlet(props) {
-  var label = props.label,
-      sublabel = props.sublabel,
-      children = props.children,
-      fluid = props.fluid;
-  var header = label ? getPortletHeader(label, sublabel) : '';
-  var classes = getClasses(fluid);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classes
-  }, header, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "kt-portlet__body"
-  }, children));
+PortletHeader.propTypes = {
+  label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  sublabel: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
-
-Portlet.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (Portlet);
+/* harmony default export */ __webpack_exports__["default"] = (PortletHeader);
 
 /***/ }),
 
@@ -54307,7 +54360,7 @@ var WidgetItem = function WidgetItem(_ref) {
 /*!******************************************!*\
   !*** ./resources/js/components/index.js ***!
   \******************************************/
-/*! exports provided: Dropdown, Formgroup, Loading, Col, Notification, Meta, Portlet, Row, Table, Widget, WidgetIcon, WidgetInfo, WidgetItem, ToastWrapper, Success, Error, Warning, MenuNavLink, HeaderMenu, Header, HeaderTopBar, HeaderMenuWrapper, HeaderLogo */
+/*! exports provided: Dropdown, Formgroup, Loading, Col, Notification, Meta, Portlet, Row, Table, Widget, WidgetIcon, WidgetInfo, WidgetItem, ToastWrapper, Success, Error, Warning, MenuNavLink, HeaderMenu, Header, HeaderTopBar, HeaderMenuWrapper, HeaderLogo, PortletHeader, PortletBody */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54370,14 +54423,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HeaderTopBar__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./HeaderTopBar */ "./resources/js/components/HeaderTopBar.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HeaderTopBar", function() { return _HeaderTopBar__WEBPACK_IMPORTED_MODULE_19__["default"]; });
 
-/* harmony import */ var _Toast__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./Toast */ "./resources/js/components/Toast.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ToastWrapper", function() { return _Toast__WEBPACK_IMPORTED_MODULE_20__["ToastWrapper"]; });
+/* harmony import */ var _PortletHeader__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./PortletHeader */ "./resources/js/components/PortletHeader.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PortletHeader", function() { return _PortletHeader__WEBPACK_IMPORTED_MODULE_20__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Success", function() { return _Toast__WEBPACK_IMPORTED_MODULE_20__["Success"]; });
+/* harmony import */ var _PortletBody__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./PortletBody */ "./resources/js/components/PortletBody.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PortletBody", function() { return _PortletBody__WEBPACK_IMPORTED_MODULE_21__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Error", function() { return _Toast__WEBPACK_IMPORTED_MODULE_20__["Error"]; });
+/* harmony import */ var _Toast__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./Toast */ "./resources/js/components/Toast.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ToastWrapper", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["ToastWrapper"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Warning", function() { return _Toast__WEBPACK_IMPORTED_MODULE_20__["Warning"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Success", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["Success"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Error", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["Error"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Warning", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["Warning"]; });
+
+
 
 
 
@@ -55139,12 +55200,10 @@ var Reports = function Reports() {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Meta"], {
     title: "Reportes"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Portlet"], {
-    label: "Hist\xF3rico de solicitudes"
-  }, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Loading"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Table"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["PortletBody"], null, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Loading"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Table"], {
     columns: columns,
     data: data
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["ToastWrapper"], null));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["ToastWrapper"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Reports);
@@ -55207,12 +55266,12 @@ var Categories = function Categories() {
       accessor: 'name'
     }];
   }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Loading"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Portlet"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Portlet"], null, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Loading"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletHeader"], {
     label: "Categor\xEDas"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Table"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Table"], {
     columns: columns,
     data: data
-  })));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Categories);
@@ -55278,12 +55337,12 @@ var Categories = function Categories() {
       accessor: 'parish_names'
     }];
   }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Loading"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Portlet"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Portlet"], null, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Loading"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletHeader"], {
     label: "Comunidades"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Table"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Table"], {
     columns: columns,
     data: data
-  })));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Categories);
@@ -55688,13 +55747,13 @@ var useDetectOutsideClick = function useDetectOutsideClick(el, initialState) {
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!**************************************************************!*\
+  !*** multi ./resources/js/app.jsx ./resources/sass/app.scss ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/sasi/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/sasi/resources/js/app.jsx */"./resources/js/app.jsx");
 module.exports = __webpack_require__(/*! /var/www/sasi/resources/sass/app.scss */"./resources/sass/app.scss");
 
 

@@ -12,6 +12,7 @@ import {
   Table,
   Error,
   ToastWrapper,
+  PortletBody,
   Loading
 } from '../../components';
 
@@ -35,14 +36,14 @@ const Reports = () => {
   return (
     <Layout>
       <Meta title="Reportes" />
-      <Portlet
-        label='Histórico de solicitudes'
-      >
-        { (loading) ? (
-          <Loading />
-        ) : (
-          <Table columns={columns} data={data} />
-        )}
+      <Portlet>
+        <PortletBody>
+          { (loading) ? (
+            <Loading />
+          ) : (
+            <Table columns={columns} data={data} />
+          )}
+        </PortletBody>
       </Portlet>
       <ToastWrapper />
     </Layout>

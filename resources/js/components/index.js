@@ -18,6 +18,8 @@ import MenuNavLink from './MenuNavLink';
 import Header from './Header';
 import HeaderMenuWrapper from './HeaderMenuWrapper';
 import HeaderTopBar from './HeaderTopBar';
+import PortletHeader from './PortletHeader';
+import PortletBody from './PortletBody';
 import { Success, Error, Warning, ToastWrapper } from './Toast';
 
 export {
@@ -44,4 +46,6 @@ export {
   HeaderTopBar,
   HeaderMenuWrapper,
   HeaderLogo,
+  PortletHeader,
+  PortletBody,
 };

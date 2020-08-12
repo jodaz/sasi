@@ -6,6 +6,8 @@ import React, {
 import axios from 'axios';
 import { 
   Portlet,
+  PortletBody,
+  PortletHeader,
   Table,
   Loading
 } from '../../components';
@@ -26,17 +28,18 @@ const Categories = () => {
   ], []);
 
   return (
-    <>
+    <Portlet>
       { (loading) ? (
-        <Portlet>
-          <Loading />
-        </Portlet>
-      ) : (
-        <Portlet label='Categorías'>
+          <PortletBody>          
+            <Loading />
+          </PortletBody>
+      ) : (<>
+        <PortletHeader label='Categorías' />
+        <PortletBody>
           <Table columns={columns} data={data} />
-        </Portlet>
-      )}
-    </>
+        </PortletBody>
+      </>)}
+    </Portlet> 
   );
 };
 

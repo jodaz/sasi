@@ -33,9 +33,7 @@
         "redux-thunk": "^2.3.0",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
-        "sass-loader": "^8.0.0"
-    },
-    "dependencies": {
+        "sass-loader": "^8.0.0",
         "history": "^4.10.1"
     }
 }
