@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/actions';
+import { resetPassword } from '../../store/actions';
 import Auth from '../layouts/Auth';
 import {
   Meta,
@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 const ForgetPassword = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const onSubmit = data => dispatch(login(data));
+  const onSubmit = data => dispatch(resetPassword(data));
   const errors = useSelector(store => store.errors);
 
   useEffect(() => {
@@ -41,6 +41,9 @@ const ForgetPassword = () => {
           <form className="kt-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="input-group">
               <input className="form-control" type="text" placeholder="Correo electrónico" name="email" ref={register}/>
+            </div>
+            <div className="kt-login__actions">
+              <button className="btn btn-pill kt-login__btn-primary">Recuperar contraseña</button>
             </div>
           </form>
         </div>

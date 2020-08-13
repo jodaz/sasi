@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Scenes & Components
 import Login from './screens/Auth/Login';
 import ForgetPassword from './screens/Auth/ForgetPassword';
+import GoToEmail from './screens/GoToEmail';
 import Register from './screens/Auth/Register';
 import Home from './screens/home';
 import Reports from './screens/reports';
@@ -41,6 +42,7 @@ const App = () => {
         <Route exact path='/register' component={Register} /> 
         <Route exact path='/forget-password' component={ForgetPassword} /> 
         <Route exact path='/login' component={Login} /> 
+        <Route exact path='/check-email' component={GoToEmail} /> 
       </Switch>
     </Router>
   );

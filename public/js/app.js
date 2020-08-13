@@ -53299,22 +53299,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var _screens_Auth_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./screens/Auth/Login */ "./resources/js/screens/Auth/Login.js");
 /* harmony import */ var _screens_Auth_ForgetPassword__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./screens/Auth/ForgetPassword */ "./resources/js/screens/Auth/ForgetPassword.js");
-/* harmony import */ var _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./screens/Auth/Register */ "./resources/js/screens/Auth/Register.js");
-/* harmony import */ var _screens_home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./screens/home */ "./resources/js/screens/home/index.js");
-/* harmony import */ var _screens_reports__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./screens/reports */ "./resources/js/screens/reports/index.js");
-/* harmony import */ var _screens_settings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./screens/settings */ "./resources/js/screens/settings/index.js");
-/* harmony import */ var _screens_NotFound__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./screens/NotFound */ "./resources/js/screens/NotFound.js");
-/* harmony import */ var _screens_Statistics__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./screens/Statistics */ "./resources/js/screens/Statistics.js");
-/* harmony import */ var _components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/PrivateRoute */ "./resources/js/components/PrivateRoute.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils */ "./resources/js/utils/index.js");
-/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/actions */ "./resources/js/store/actions.js");
+/* harmony import */ var _screens_GoToEmail__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./screens/GoToEmail */ "./resources/js/screens/GoToEmail.js");
+/* harmony import */ var _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./screens/Auth/Register */ "./resources/js/screens/Auth/Register.js");
+/* harmony import */ var _screens_home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./screens/home */ "./resources/js/screens/home/index.js");
+/* harmony import */ var _screens_reports__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./screens/reports */ "./resources/js/screens/reports/index.js");
+/* harmony import */ var _screens_settings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./screens/settings */ "./resources/js/screens/settings/index.js");
+/* harmony import */ var _screens_NotFound__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./screens/NotFound */ "./resources/js/screens/NotFound.js");
+/* harmony import */ var _screens_Statistics__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./screens/Statistics */ "./resources/js/screens/Statistics.js");
+/* harmony import */ var _components_PrivateRoute__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/PrivateRoute */ "./resources/js/components/PrivateRoute.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./utils */ "./resources/js/utils/index.js");
+/* harmony import */ var _store_actions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/actions */ "./resources/js/store/actions.js");
 
 
 
 
 
  // Scenes & Components
+
 
 
 
@@ -53334,32 +53336,32 @@ var App = function App() {
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
 
   if (localStorage.sasi) {
-    Object(_utils__WEBPACK_IMPORTED_MODULE_15__["setAuthToken"])(localStorage.sasi);
-    dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_16__["getUser"])());
+    Object(_utils__WEBPACK_IMPORTED_MODULE_16__["setAuthToken"])(localStorage.sasi);
+    dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_17__["getUser"])());
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Router"], {
-    history: _utils__WEBPACK_IMPORTED_MODULE_15__["history"]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    history: _utils__WEBPACK_IMPORTED_MODULE_16__["history"]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_14__["default"], {
     exact: true,
     path: "/",
-    component: _screens_home__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    component: _screens_home__WEBPACK_IMPORTED_MODULE_9__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_14__["default"], {
     exact: true,
     path: "/statistics",
-    component: _screens_Statistics__WEBPACK_IMPORTED_MODULE_12__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    component: _screens_Statistics__WEBPACK_IMPORTED_MODULE_13__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_14__["default"], {
     exact: true,
     path: "/settings",
-    component: _screens_settings__WEBPACK_IMPORTED_MODULE_10__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    component: _screens_settings__WEBPACK_IMPORTED_MODULE_11__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_14__["default"], {
     exact: true,
     path: "/reports",
-    component: _screens_reports__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _screens_reports__WEBPACK_IMPORTED_MODULE_10__["default"]
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/register",
-    component: _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _screens_Auth_Register__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/forget-password",
@@ -53368,11 +53370,15 @@ var App = function App() {
     exact: true,
     path: "/login",
     component: _screens_Auth_Login__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    exact: true,
+    path: "/check-email",
+    component: _screens_GoToEmail__WEBPACK_IMPORTED_MODULE_7__["default"]
   })));
 };
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
-  store: _store__WEBPACK_IMPORTED_MODULE_14__["default"]
+  store: _store__WEBPACK_IMPORTED_MODULE_15__["default"]
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_4__["Helmet"], {
   titleTemplate: "%s | SASI"
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null)), document.getElementById('app'));
@@ -54544,7 +54550,7 @@ var ForgetPassword = function ForgetPassword() {
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
 
   var onSubmit = function onSubmit(data) {
-    return dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_3__["login"])(data));
+    return dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_3__["resetPassword"])(data));
   };
 
   var errors = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (store) {
@@ -54585,7 +54591,11 @@ var ForgetPassword = function ForgetPassword() {
     placeholder: "Correo electr\xF3nico",
     name: "email",
     ref: register
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__actions"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn btn-pill kt-login__btn-primary"
+  }, "Recuperar contrase\xF1a")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-login__account"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "kt-login__account-msg"
@@ -54814,6 +54824,58 @@ var Register = function Register() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Register);
+
+/***/ }),
+
+/***/ "./resources/js/screens/GoToEmail.js":
+/*!*******************************************!*\
+  !*** ./resources/js/screens/GoToEmail.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_Auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/Auth */ "./resources/js/screens/layouts/Auth.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components */ "./resources/js/components/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+
+var ForgetPassword = function ForgetPassword() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_Auth__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    type: "login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Meta"], {
+    title: "\xA1Revise su correo electr\xF3nico!"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__logo"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/login"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "img-responsive",
+    src: "/logo.png"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__signin"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__head"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "kt-login__title"
+  }, "\xA1Hemos enviado un email a su correo!"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__account"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "kt-login__account-msg"
+  }, "Volver al"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/"
+  }, "Inicio"))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ForgetPassword);
 
 /***/ }),
 
@@ -55515,11 +55577,12 @@ var errorsReducer = function errorsReducer() {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: registerUser, login, logout, getUser, setUser */
+/*! exports provided: resetPassword, registerUser, login, logout, getUser, setUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetPassword", function() { return resetPassword; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerUser", function() { return registerUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
@@ -55534,10 +55597,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var resetPassword = function resetPassword(data) {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/reset-password', data).then(function (res) {
+      return _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/check-email');
+    })["catch"](function (err) {
+      return dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
+        payload: err.response.data
+      });
+    });
+  };
+};
 var registerUser = function registerUser(data) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data).then(function (res) {
-      return _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/login');
+      return console.log(res.data);
     })["catch"](function (err) {
       return dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],

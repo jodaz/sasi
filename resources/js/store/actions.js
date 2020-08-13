@@ -3,9 +3,18 @@ import { GET_ERRORS, LOGOUT_USER, SET_CURRENT_USER } from './types';
 import { setAuthToken, history } from '../utils';
 import { Redirect } from 'react-router-dom';
 
+export const resetPassword = data => dispatch => {
+  axios.post('/api/reset-password', data)
+    .then(res => history.push('/check-email'))
+    .catch(err => dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    }));
+}
+
 export const registerUser = data => dispatch => {
   axios.post('/api/register', data)
-    .then(res => history.push('/login'))
+    .then(res => console.log(res.data))
     .catch(err => dispatch({
       type: GET_ERRORS,
       payload: err.response.data
