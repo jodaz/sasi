@@ -9,8 +9,10 @@ import {
   PortletBody,
   PortletHeader,
   Table,
-  Loading
+  Loading,
+  PortletToolbar
 } from '../../components';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
   const [data, setData] = useState({});
@@ -34,7 +36,10 @@ const Categories = () => {
             <Loading />
           </PortletBody>
       ) : (<>
-        <PortletHeader label='Categorías' />
+        <PortletHeader label='Categorías'>
+          <PortletToolbar>
+          </PortletToolbar>
+        </PortletHeader>
         <PortletBody>
           <Table columns={columns} data={data} />
         </PortletBody>

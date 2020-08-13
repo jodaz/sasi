@@ -53379,10 +53379,10 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
-/***/ "./resources/js/app.jsx":
-/*!******************************!*\
-  !*** ./resources/js/app.jsx ***!
-  \******************************/
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53942,21 +53942,55 @@ __webpack_require__.r(__webpack_exports__);
 
 var PortletHeader = function PortletHeader(_ref) {
   var label = _ref.label,
-      sublabel = _ref.sublabel;
+      sublabel = _ref.sublabel,
+      children = _ref.children;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-portlet__head"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-portlet__head-label"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "kt-portlet__head-title"
-  }, label, sublabel ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, sublabel) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null))));
+  }, label, sublabel ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, sublabel) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null))), children);
 };
 
 PortletHeader.propTypes = {
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  sublabel: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  sublabel: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node
 };
 /* harmony default export */ __webpack_exports__["default"] = (PortletHeader);
+
+/***/ }),
+
+/***/ "./resources/js/components/PortletToolbar.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/PortletToolbar.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var PortletToolbar = function PortletToolbar(_ref) {
+  var children = _ref.children;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-portlet__head-toolbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-portlet__head-group"
+  }, children));
+};
+
+PortletToolbar.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (PortletToolbar);
 
 /***/ }),
 
@@ -54360,7 +54394,7 @@ var WidgetItem = function WidgetItem(_ref) {
 /*!******************************************!*\
   !*** ./resources/js/components/index.js ***!
   \******************************************/
-/*! exports provided: Dropdown, Formgroup, Loading, Col, Notification, Meta, Portlet, Row, Table, Widget, WidgetIcon, WidgetInfo, WidgetItem, ToastWrapper, Success, Error, Warning, MenuNavLink, HeaderMenu, Header, HeaderTopBar, HeaderMenuWrapper, HeaderLogo, PortletHeader, PortletBody */
+/*! exports provided: Dropdown, Formgroup, Loading, Col, Notification, Meta, Portlet, Row, Table, Widget, WidgetIcon, WidgetInfo, WidgetItem, ToastWrapper, Success, Error, Warning, MenuNavLink, HeaderMenu, Header, HeaderTopBar, HeaderMenuWrapper, HeaderLogo, PortletHeader, PortletBody, PortletToolbar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54411,32 +54445,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HeaderMenu__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./HeaderMenu */ "./resources/js/components/HeaderMenu.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HeaderMenu", function() { return _HeaderMenu__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _MenuNavLink__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./MenuNavLink */ "./resources/js/components/MenuNavLink.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MenuNavLink", function() { return _MenuNavLink__WEBPACK_IMPORTED_MODULE_16__["default"]; });
+/* harmony import */ var _PortletToolbar__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./PortletToolbar */ "./resources/js/components/PortletToolbar.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PortletToolbar", function() { return _PortletToolbar__WEBPACK_IMPORTED_MODULE_16__["default"]; });
 
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Header", function() { return _Header__WEBPACK_IMPORTED_MODULE_17__["default"]; });
+/* harmony import */ var _MenuNavLink__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./MenuNavLink */ "./resources/js/components/MenuNavLink.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MenuNavLink", function() { return _MenuNavLink__WEBPACK_IMPORTED_MODULE_17__["default"]; });
 
-/* harmony import */ var _HeaderMenuWrapper__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./HeaderMenuWrapper */ "./resources/js/components/HeaderMenuWrapper.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HeaderMenuWrapper", function() { return _HeaderMenuWrapper__WEBPACK_IMPORTED_MODULE_18__["default"]; });
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Header", function() { return _Header__WEBPACK_IMPORTED_MODULE_18__["default"]; });
 
-/* harmony import */ var _HeaderTopBar__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./HeaderTopBar */ "./resources/js/components/HeaderTopBar.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HeaderTopBar", function() { return _HeaderTopBar__WEBPACK_IMPORTED_MODULE_19__["default"]; });
+/* harmony import */ var _HeaderMenuWrapper__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./HeaderMenuWrapper */ "./resources/js/components/HeaderMenuWrapper.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HeaderMenuWrapper", function() { return _HeaderMenuWrapper__WEBPACK_IMPORTED_MODULE_19__["default"]; });
 
-/* harmony import */ var _PortletHeader__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./PortletHeader */ "./resources/js/components/PortletHeader.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PortletHeader", function() { return _PortletHeader__WEBPACK_IMPORTED_MODULE_20__["default"]; });
+/* harmony import */ var _HeaderTopBar__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./HeaderTopBar */ "./resources/js/components/HeaderTopBar.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HeaderTopBar", function() { return _HeaderTopBar__WEBPACK_IMPORTED_MODULE_20__["default"]; });
 
-/* harmony import */ var _PortletBody__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./PortletBody */ "./resources/js/components/PortletBody.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PortletBody", function() { return _PortletBody__WEBPACK_IMPORTED_MODULE_21__["default"]; });
+/* harmony import */ var _PortletHeader__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./PortletHeader */ "./resources/js/components/PortletHeader.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PortletHeader", function() { return _PortletHeader__WEBPACK_IMPORTED_MODULE_21__["default"]; });
 
-/* harmony import */ var _Toast__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./Toast */ "./resources/js/components/Toast.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ToastWrapper", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["ToastWrapper"]; });
+/* harmony import */ var _PortletBody__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./PortletBody */ "./resources/js/components/PortletBody.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PortletBody", function() { return _PortletBody__WEBPACK_IMPORTED_MODULE_22__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Success", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["Success"]; });
+/* harmony import */ var _Toast__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./Toast */ "./resources/js/components/Toast.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ToastWrapper", function() { return _Toast__WEBPACK_IMPORTED_MODULE_23__["ToastWrapper"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Error", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["Error"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Success", function() { return _Toast__WEBPACK_IMPORTED_MODULE_23__["Success"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Warning", function() { return _Toast__WEBPACK_IMPORTED_MODULE_22__["Warning"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Error", function() { return _Toast__WEBPACK_IMPORTED_MODULE_23__["Error"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Warning", function() { return _Toast__WEBPACK_IMPORTED_MODULE_23__["Warning"]; });
+
 
 
 
@@ -55224,6 +55262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components */ "./resources/js/components/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -55235,6 +55274,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -55268,7 +55308,7 @@ var Categories = function Categories() {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Portlet"], null, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Loading"], null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletHeader"], {
     label: "Categor\xEDas"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Table"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletToolbar"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Table"], {
     columns: columns,
     data: data
   }))));
@@ -55747,13 +55787,13 @@ var useDetectOutsideClick = function useDetectOutsideClick(el, initialState) {
 /***/ }),
 
 /***/ 0:
-/*!**************************************************************!*\
-  !*** multi ./resources/js/app.jsx ./resources/sass/app.scss ***!
-  \**************************************************************/
+/*!*************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/sasi/resources/js/app.jsx */"./resources/js/app.jsx");
+__webpack_require__(/*! /var/www/sasi/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /var/www/sasi/resources/sass/app.scss */"./resources/sass/app.scss");
 
 

@@ -14,6 +14,7 @@ import WidgetInfo from './WidgetInfo';
 import WidgetItem from './WidgetItem';
 import HeaderLogo from './HeaderLogo';
 import HeaderMenu from './HeaderMenu';
+import PortletToolbar from './PortletToolbar';
 import MenuNavLink from './MenuNavLink';
 import Header from './Header';
 import HeaderMenuWrapper from './HeaderMenuWrapper';
@@ -48,4 +49,5 @@ export {
   HeaderLogo,
   PortletHeader,
   PortletBody,
+  PortletToolbar,
 };
