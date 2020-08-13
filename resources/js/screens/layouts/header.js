@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   MenuNavLink,
   Dropdown,
@@ -32,18 +32,18 @@ const OnlyAdmin = () => (
   </MenuNavLink>
 );
 
-const AppMenu = () => {
+const AppMenu = ({ mobile }) => {
   const dispatch = useDispatch();
   const user = useSelector(store => store.auth.user);
 
   const handleLogout = () => dispatch(logout());
 
   return (
-    <Header>
+    <Header mobile={mobile}>
+      <HeaderLogo to='/'>
+        <img alt="Logo" src="logo-dark.png" />
+      </HeaderLogo>
       <HeaderMenuWrapper>
-        <HeaderLogo to='/'>
-          <img alt="Logo" src="logo-dark.png" />
-        </HeaderLogo>
         <HeaderMenu>
           <MenuNavLink to="/">
             Inicio

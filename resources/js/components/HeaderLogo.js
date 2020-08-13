@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const HeaderLogo = ({ children, to }) => (
-  <div className="kt-header-logo">
+  <div className="kt-header-mobile__logo">
     <Link to={to}>
       {children}
     </Link>
