@@ -24,6 +24,7 @@ Route::middleware('auth:api')->group(function() {
     Route::get('user', 'AuthController@getUser');
 
     Route::resource('applications', 'ApplicationController');
+    Route::resource('users', 'UserController');
     Route::resource('parishes', 'ParishController');
     Route::resource('communities', 'CommunityController');
     Route::resource('categories', 'CategoryController');

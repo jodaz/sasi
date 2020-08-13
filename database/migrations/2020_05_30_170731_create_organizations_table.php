@@ -19,6 +19,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('rif');
             $table->string('address');
             $table->unsignedBigInteger('parish_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('organization_type_id');
             $table->unsignedBigInteger('community_id');
             $table->unsignedBigInteger('category_id');
@@ -29,6 +30,8 @@ class CreateOrganizationsTable extends Migration
             $table->foreign('organization_type_id')->references('id')->on('organization_types')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

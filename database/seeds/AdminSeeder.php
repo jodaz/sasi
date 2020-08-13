@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
             'first_name' => env('FIRST_NAME', 'admin'),
             'surname' => env('SURNAME', 'user'),
             'email' => env('EMAIL', 'email@example.com'),
-            'identification' => env('IDENTIFICATION', 'V-00000000'),
+            'dni' => env('IDENTIFICATION', 'V-00000000'),
             'password' => bcrypt(env('PASSWORD', 'query123')),
             'genre_id' => 1,
             'community_id' => 1,

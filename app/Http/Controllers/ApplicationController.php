@@ -45,13 +45,16 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-        $application = new Application($request->input());
+        $user = $request->user();
+        $application = new Application($request->get());
         $application->state_id = 1;
 
         $user->applications()->save($application);
 
-        return redirect()->back();
+        return response()->json([
+            'success' => true,
+            'message' => '¡Solicitud recibida!'
+        ]);
     }
 
     /**

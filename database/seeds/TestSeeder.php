@@ -40,7 +40,7 @@ class TestSeeder extends Seeder
             'first_name' => 'Jesús',
             'surname' => 'Ordosgoitty',
             'email' => 'jesuodz@gmail.com',
-            'identification' => 'V-27572434',
+            'dni' => 'V-27572434',
             'password' => bcrypt('qwerty123'),
             'genre_id' => 1,
             'community_id' => 1,
@@ -51,10 +51,10 @@ class TestSeeder extends Seeder
         
         // Analyst user
         User::create([
-            'first_name' => 'Jesús',
-            'surname' => 'Ordosgoitty',
-            'email' => 'jesuodz@googlemail.com',
-            'identification' => 'V-27572434',
+            'first_name' => 'Andreina',
+            'surname' => 'Santana',
+            'email' => 'nomesetucorreo@gmail.com',
+            'dni' => 'V-26292605',
             'password' => bcrypt('qwerty123'),
             'genre_id' => 1,
             'community_id' => 1,

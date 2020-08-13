@@ -9,6 +9,7 @@ import {
 // Components
 import Categories from './Categories';
 import Communities from './Communities';
+import Users from './Users';
 
 const Settings = () => {
   return (
@@ -20,6 +21,11 @@ const Settings = () => {
         </Col>
         <Col md={6}>
           <Categories />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Users />
         </Col>
       </Row>
     </Layout>

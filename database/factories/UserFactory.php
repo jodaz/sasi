@@ -28,7 +28,7 @@ $factory->define(User::class, function (Faker $faker) use ($genres, $communities
     return [
         'first_name' => $faker->name,
         'surname' => $faker->lastName,
-        'identification' => $faker->ein,
+        'dni' => $faker->ein,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => bcrypt('qwerty123'),
