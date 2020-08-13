@@ -7,8 +7,11 @@ import axios from 'axios';
 import { 
   Portlet,
   PortletBody,
+  PortletToolbar,
   PortletHeader,
   Table,
+  Icon,
+  BtnLink,
   Loading
 } from '../../components';
 
@@ -35,7 +38,13 @@ const Categories = () => {
             <Loading />
           </PortletBody>
       ) : (<>
-        <PortletHeader label='Comunidades' />
+        <PortletHeader label='Comunidades'>
+          <PortletToolbar>
+            <BtnLink to='new-community' styles='btn-sm btn-icon btn-clean btn-icon-md'>
+              <Icon icon="plus" />
+            </BtnLink>
+          </PortletToolbar>
+        </PortletHeader>
         <PortletBody>
           <Table columns={columns} data={data} />
         </PortletBody>

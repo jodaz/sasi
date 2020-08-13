@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const defaultProps = {
-};
-
 const getClasses = (shouldFluid) => (
   (shouldFluid) ? 'kt-portlet kt-portlet--height-fluid' : 'kt-portlet'
 );

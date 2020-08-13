@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\CreateCategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -33,9 +34,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
+        $category = Category::create($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡La categoría '.$category->name.' fue creada!'
+        ]);
     }
 
     /**

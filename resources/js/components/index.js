@@ -1,8 +1,13 @@
 import Dropdown from './Dropdown';
 import Col from './Col';
+import CardBody from './CardBody';
+import BtnLink from './BtnLink';
+import Label from './Label';
 import Loading from './Loading';
 import Formgroup from './FormGroup';
+import Icon from './Icon';
 import Notification from './Notification';
+import PortletFooter from './PortletFooter';
 import Meta from './Meta';
 import Portlet from './Portlet';
 import PrivateRoute from './PrivateRoute';
@@ -50,4 +55,9 @@ export {
   PortletHeader,
   PortletBody,
   PortletToolbar,
+  Icon,
+  CardBody,
+  Label,
+  PortletFooter,
+  BtnLink,
 };

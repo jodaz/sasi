@@ -13,6 +13,7 @@ import Register from './screens/Auth/Register';
 import Home from './screens/home';
 import Reports from './screens/reports';
 import Settings from './screens/settings';
+import NewCategory from './screens/settings/NewCategory';
 import NotFound from './screens/NotFound';
 import Statistics from './screens/Statistics';
 import PrivateRoute from './components/PrivateRoute';
@@ -36,6 +37,7 @@ const App = () => {
         <PrivateRoute exact path='/' component={Home} />
         <PrivateRoute exact path='/statistics' component={Statistics} />
         <PrivateRoute exact path='/settings' component={Settings} />
+        <PrivateRoute exact path='/settings/new-category' component={NewCategory} />
         <PrivateRoute exact path='/reports' component={Reports} />
       </Switch>
       <Switch>

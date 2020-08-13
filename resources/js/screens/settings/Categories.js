@@ -10,6 +10,8 @@ import {
   PortletHeader,
   Table,
   Loading,
+  Icon,
+  BtnLink,
   PortletToolbar
 } from '../../components';
 import { Link } from 'react-router-dom';
@@ -38,6 +40,9 @@ const Categories = () => {
       ) : (<>
         <PortletHeader label='Categorías'>
           <PortletToolbar>
+            <BtnLink to='settings/new-category' styles='btn-sm btn-icon btn-clean btn-icon-md'>
+              <Icon to='settings/new-category' icon="plus" />
+            </BtnLink>
           </PortletToolbar>
         </PortletHeader>
         <PortletBody>

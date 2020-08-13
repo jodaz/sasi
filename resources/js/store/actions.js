@@ -68,3 +68,11 @@ export const setUser = user => ({
   payload: user
 });
 
+export const createCategory = data => dispatch => {
+  axios.post('/api/categories', data)
+    .then(res => history.push('settings'))
+    .catch(err => dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    }));
+}
