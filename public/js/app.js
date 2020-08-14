@@ -55690,7 +55690,8 @@ __webpack_require__.r(__webpack_exports__);
 var NewCategory = function NewCategory() {
   var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_1__["useForm"])(),
       register = _useForm.register,
-      handleSubmit = _useForm.handleSubmit;
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.errors;
 
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
 
@@ -55698,13 +55699,13 @@ var NewCategory = function NewCategory() {
     return dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_3__["createCategory"])(data));
   };
 
-  var errors = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (store) {
+  var getError = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (store) {
     return store.errors;
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isEmpty"])(errors)) {
-      Object(_components__WEBPACK_IMPORTED_MODULE_5__["Error"])(errors.message);
-    }
+    if (Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isEmpty"])(getError)) return;
+    Object(_components__WEBPACK_IMPORTED_MODULE_5__["Error"])(getError.message);
+    return;
   }, [errors]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Meta"], {
     title: "Nueva categor\xEDa"
@@ -55712,7 +55713,15 @@ var NewCategory = function NewCategory() {
     md: 12
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["PortletHeader"], {
     label: "Registrar nueva categor\xEDa"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["PortletToolbar"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "text",
+    className: "btn-secondary btn-sm",
+    onClick: function onClick(e) {
+      return Object(_utils__WEBPACK_IMPORTED_MODULE_6__["goBack"])(e);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Icon"], {
+    icon: "reply"
+  }), ' ', "Cancelar"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
@@ -55721,18 +55730,14 @@ var NewCategory = function NewCategory() {
     type: "text",
     placeholder: "Ejem.: Salud",
     name: "name",
-    ref: register
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["PortletFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: register({
+      required: true
+    })
+  }), errors.name && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-danger"
+  }, "Ingrese un nombre"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["PortletFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "btn-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "text",
-    className: "btn-secondary",
-    onClick: function onClick(e) {
-      return Object(_utils__WEBPACK_IMPORTED_MODULE_6__["goBack"])(e);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Icon"], {
-    icon: "reply"
-  }), "Cancelar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-primary"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Icon"], {
     icon: "save"

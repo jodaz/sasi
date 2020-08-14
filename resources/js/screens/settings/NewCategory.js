@@ -16,21 +16,22 @@ import {
   Col,
   Row,
   BtnLink,
-  Icon
+  Icon,
+  PortletToolbar
 } from '../../components';
 import { isEmpty, history, goBack } from '../../utils';
 import { Link } from 'react-router-dom';
 
 const NewCategory = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(createCategory(data));
-  const errors = useSelector(store => store.errors);
+  const getError = useSelector(store => store.errors);
 
   useEffect(() => {
-    if (!isEmpty(errors)) {
-      Error(errors.message);
-    }
+    if (isEmpty(getError)) return;
+    Error(getError.message);
+    return;
   }, [errors])
 
   return (<>
@@ -38,20 +39,23 @@ const NewCategory = () => {
     <Row>
       <Col md={12}>
         <Portlet>
-          <PortletHeader label='Registrar nueva categoría' />
+          <PortletHeader label='Registrar nueva categoría'>
+            <PortletToolbar>
+              <button type="text" className='btn-secondary btn-sm' onClick={e => goBack(e)}>
+                <Icon icon='reply' />{' '}Cancelar
+              </button>
+            </PortletToolbar>
+          </PortletHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
             <PortletBody>
               <div className="form-group">
                 <label>Categoría </label>
-                <input className="form-control" type="text" placeholder="Ejem.: Salud" name="name" ref={register}/>
+                <input className="form-control" type="text" placeholder="Ejem.: Salud" name="name" ref={register({ required: true })}/>
+                {errors.name && <span className='text-danger'>Ingrese un nombre</span>}
               </div>
             </PortletBody>
             <PortletFooter>
               <div className="btn-group">
-                <button type="text" className='btn-secondary' onClick={e => goBack(e)}>
-                  <Icon icon='reply' /> 
-                  Cancelar
-                </button>
                 <button className='btn btn-primary'>
                   <Icon icon='save' /> 
                   Registrar
