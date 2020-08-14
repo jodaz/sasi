@@ -1,7 +1,11 @@
 import axios from 'axios';
-import { GET_ERRORS, LOGOUT_USER, SET_CURRENT_USER } from './types';
+import {
+  NOTIFY,
+  GET_ERRORS,
+  LOGOUT_USER,
+  SET_CURRENT_USER
+} from './types';
 import { setAuthToken, history } from '../utils';
-import { Redirect } from 'react-router-dom';
 
 export const resetPassword = data => dispatch => {
   axios.post('/api/reset-password', data)
@@ -70,7 +74,13 @@ export const setUser = user => ({
 
 export const createCategory = data => dispatch => {
   axios.post('/api/categories', data)
-    .then(res => history.push('settings'))
+    .then(res => {
+      history.goBack();
+      dispatch({
+        type: NOTIFY,
+        payload: res.data
+      });
+    })
     .catch(err => dispatch({
       type: GET_ERRORS,
       payload: err.response.data

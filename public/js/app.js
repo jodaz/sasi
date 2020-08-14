@@ -53354,12 +53354,12 @@ var App = function App() {
     path: "/statistics",
     component: _screens_Statistics__WEBPACK_IMPORTED_MODULE_14__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    path: "/settings",
-    component: _screens_settings__WEBPACK_IMPORTED_MODULE_11__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_15__["default"], {
     exact: true,
     path: "/reports",
     component: _screens_reports__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    path: "/settings",
+    component: _screens_settings__WEBPACK_IMPORTED_MODULE_11__["default"]
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/register",
@@ -55833,10 +55833,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Categories__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Categories */ "./resources/js/screens/settings/Categories.js");
 /* harmony import */ var _Communities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Communities */ "./resources/js/screens/settings/Communities.js");
 /* harmony import */ var _Users__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Users */ "./resources/js/screens/settings/Users.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils */ "./resources/js/utils/index.js");
 
 
  // Components
+
+
 
 
 
@@ -55857,7 +55861,15 @@ var Settings = function Settings() {
 };
 
 var Index = function Index() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PrivateRoute"], {
+  var notification = Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["useSelector"])(function (store) {
+    return store.notification;
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_9__["isEmpty"])(notification)) {
+      return Object(_components__WEBPACK_IMPORTED_MODULE_2__["Success"])(notification.message);
+    }
+  }, [notification]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["PrivateRoute"], {
     exact: true,
     path: "/settings",
     component: Settings
@@ -55865,7 +55877,7 @@ var Index = function Index() {
     exact: true,
     path: "/settings/new-category",
     component: _NewCategory__WEBPACK_IMPORTED_MODULE_3__["default"]
-  })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["ToastWrapper"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -55947,6 +55959,36 @@ var errorsReducer = function errorsReducer() {
 
 /***/ }),
 
+/***/ "./resources/js/store/Notifications.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/Notifications.js ***!
+  \*********************************************/
+/*! exports provided: notificationsReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notificationsReducer", function() { return notificationsReducer; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./resources/js/store/types.js");
+
+
+var notificationsReducer = function notificationsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _types__WEBPACK_IMPORTED_MODULE_0__["NOTIFY"]:
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
+
+
+
+/***/ }),
+
 /***/ "./resources/js/store/actions.js":
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
@@ -55967,8 +56009,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/store/types.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
 
 
 
@@ -56050,7 +56090,11 @@ var setUser = function setUser(user) {
 var createCategory = function createCategory(data) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/categories', data).then(function (res) {
-      return _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('settings');
+      _utils__WEBPACK_IMPORTED_MODULE_2__["history"].goBack();
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["NOTIFY"],
+        payload: res.data
+      });
     })["catch"](function (err) {
       return dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
@@ -56076,7 +56120,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Errors */ "./resources/js/store/Errors.js");
-/* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Auth */ "./resources/js/store/Auth.js");
+/* harmony import */ var _Notifications__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Notifications */ "./resources/js/store/Notifications.js");
+/* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Auth */ "./resources/js/store/Auth.js");
+
 
 
 
@@ -56084,7 +56130,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   errors: _Errors__WEBPACK_IMPORTED_MODULE_3__["errorsReducer"],
-  auth: _Auth__WEBPACK_IMPORTED_MODULE_4__["authReducer"]
+  auth: _Auth__WEBPACK_IMPORTED_MODULE_5__["authReducer"],
+  notification: _Notifications__WEBPACK_IMPORTED_MODULE_4__["notificationsReducer"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(rootReducer, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]))));
 
@@ -56094,7 +56141,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!*************************************!*\
   !*** ./resources/js/store/types.js ***!
   \*************************************/
-/*! exports provided: GET_ERRORS, SET_CURRENT_USER, LOGOUT_USER */
+/*! exports provided: GET_ERRORS, SET_CURRENT_USER, LOGOUT_USER, NOTIFY */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56102,9 +56149,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ERRORS", function() { return GET_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CURRENT_USER", function() { return SET_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER", function() { return LOGOUT_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOTIFY", function() { return NOTIFY; });
 var GET_ERRORS = 'GET_ERRORS';
 var SET_CURRENT_USER = 'SET_CURRENT_USER';
 var LOGOUT_USER = 'LOGOUT_USER';
+var NOTIFY = 'NOTIFY';
 
 /***/ }),
 
