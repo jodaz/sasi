@@ -13,5 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{path?}', 'HomeController@index');
+Route::get('/{path?}', function () {
+    return view('app');
+})->where('path', '.*');
 

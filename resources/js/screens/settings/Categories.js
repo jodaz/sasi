@@ -14,9 +14,10 @@ import {
   BtnLink,
   PortletToolbar
 } from '../../components';
-import { Link } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 
 const Categories = () => {
+  let match = useRouteMatch();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -40,8 +41,8 @@ const Categories = () => {
       ) : (<>
         <PortletHeader label='Categorías'>
           <PortletToolbar>
-            <BtnLink to='settings/new-category' styles='btn-sm btn-icon btn-clean btn-icon-md'>
-              <Icon to='settings/new-category' icon="plus" />
+            <BtnLink to={`${match.url}/new-category`} styles='btn-sm btn-icon btn-clean btn-icon-md'>
+              <Icon icon="plus" />
             </BtnLink>
           </PortletToolbar>
         </PortletHeader>

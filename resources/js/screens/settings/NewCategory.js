@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../layouts';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategory } from '../../store/actions';
@@ -19,7 +18,7 @@ import {
   BtnLink,
   Icon
 } from '../../components';
-import { isEmpty } from '../../utils';
+import { isEmpty, history, goBack } from '../../utils';
 import { Link } from 'react-router-dom';
 
 const NewCategory = () => {
@@ -34,39 +33,36 @@ const NewCategory = () => {
     }
   }, [errors])
 
-  return (
-    <Layout>
-      <Meta title='Nueva categoría' />      
-
-      <Row>
-        <Col md={12}>
-          <Portlet>
-            <PortletHeader label='Registrar nueva categoría' />
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <PortletBody>
-                <div className="form-group">
-                  <label>Categoría </label>
-                  <input className="form-control" type="text" placeholder="Ejem.: Salud" name="name" ref={register}/>
-                </div>
-              </PortletBody>
-              <PortletFooter>
-                <div className="btn-group">
-                  <BtnLink styles='btn-secondary' to='settings'>
-                    <Icon icon='reply' /> 
-                    Cancelar
-                  </BtnLink>
-                  <button className='btn btn-primary'>
-                    <Icon icon='save' /> 
-                    Registrar
-                  </button>
-                </div>
-              </PortletFooter>
-            </form>
-          </Portlet> 
-        </Col>
-      </Row>
-    </Layout>
-  );
+  return (<>
+    <Meta title='Nueva categoría' />
+    <Row>
+      <Col md={12}>
+        <Portlet>
+          <PortletHeader label='Registrar nueva categoría' />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <PortletBody>
+              <div className="form-group">
+                <label>Categoría </label>
+                <input className="form-control" type="text" placeholder="Ejem.: Salud" name="name" ref={register}/>
+              </div>
+            </PortletBody>
+            <PortletFooter>
+              <div className="btn-group">
+                <button type="text" className='btn-secondary' onClick={e => goBack(e)}>
+                  <Icon icon='reply' /> 
+                  Cancelar
+                </button>
+                <button className='btn btn-primary'>
+                  <Icon icon='save' /> 
+                  Registrar
+                </button>
+              </div>
+            </PortletFooter>
+          </form>
+        </Portlet> 
+      </Col>
+    </Row>
+  </>);
 };
 
 export default NewCategory;

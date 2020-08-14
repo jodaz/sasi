@@ -60,4 +60,5 @@ export {
   Label,
   PortletFooter,
   BtnLink,
+  PrivateRoute
 };

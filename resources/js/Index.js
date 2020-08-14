@@ -32,12 +32,11 @@ const App = () => {
   }
 
   return (
-    <Router history={history}>
+    <Router history={history} basename={window.location.origin}>
       <Switch>
         <PrivateRoute exact path='/' component={Home} />
         <PrivateRoute exact path='/statistics' component={Statistics} />
-        <PrivateRoute exact path='/settings' component={Settings} />
-        <PrivateRoute exact path='/settings/new-category' component={NewCategory} />
+        <PrivateRoute path='/settings' component={Settings} />
         <PrivateRoute exact path='/reports' component={Reports} />
       </Switch>
       <Switch>
