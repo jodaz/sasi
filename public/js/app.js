@@ -60396,7 +60396,7 @@ var defaultProps = {
   widths: colWidths
 };
 var propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.element.isRequired,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node.isRequired,
   xs: columnProps,
   sm: columnProps,
   md: columnProps,
@@ -62064,10 +62064,52 @@ var Index = function Index() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components */ "./resources/js/components/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 var Index = function Index() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Special Home");
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      data = _useState2[0],
+      setData = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loading = _useState4[0],
+      setLoading = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/applications/?state=1').then(function (res) {
+      return setData(res.data);
+    }).then(function () {
+      return setLoading(false);
+    })["catch"](function (err) {
+      return setErrors(err.response.message);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    md: 8
+  }, loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Loading"], null))) : data.map(function (application, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Portlet"], {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletBody"], null, application.title));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -62103,7 +62145,7 @@ var Index = function Index() {
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Meta"], {
     title: "Inicio"
-  }), user.role_id == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RegularHome__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SpecialHome__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Row"], null, user.role_id == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RegularHome__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SpecialHome__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -63015,6 +63057,9 @@ var errorsReducer = function errorsReducer() {
     case _types__WEBPACK_IMPORTED_MODULE_0__["GET_ERRORS"]:
       return action.payload;
 
+    case _types__WEBPACK_IMPORTED_MODULE_0__["CLEAR_ERRORS"]:
+      return {};
+
     default:
       return state;
   }
@@ -63061,7 +63106,7 @@ var notificationsReducer = function notificationsReducer() {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: resetPassword, registerUser, login, logout, getUser, setUser, createCategory, createCommunity, clearNotification */
+/*! exports provided: resetPassword, registerUser, login, logout, getUser, setUser, createCategory, createCommunity, clearNotification, clearErrors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63075,6 +63120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createCategory", function() { return createCategory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createCommunity", function() { return createCommunity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearNotification", function() { return clearNotification; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearErrors", function() { return clearErrors; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/store/types.js");
@@ -63087,10 +63133,7 @@ var resetPassword = function resetPassword(data) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/reset-password', data).then(function (res) {
       return _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/check-email');
     })["catch"](function (err) {
-      return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
-        payload: err.response.data
-      });
+      return dispatch(setErrors(err.response.data));
     });
   };
 };
@@ -63099,10 +63142,7 @@ var registerUser = function registerUser(data) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data).then(function (res) {
       return console.log(res.data);
     })["catch"](function (err) {
-      return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
-        payload: err.response.data
-      });
+      return dispatch(setErrors(err.response.data));
     });
   };
 };
@@ -63114,11 +63154,9 @@ var login = function login(data) {
       Object(_utils__WEBPACK_IMPORTED_MODULE_2__["setAuthToken"])(token);
       _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/');
       dispatch(setUser(res.data.user));
+      dispatch(clearErrors());
     })["catch"](function (err) {
-      return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
-        payload: err.response.data
-      });
+      return dispatch(setErrors(err.response.data));
     });
   };
 };
@@ -63132,10 +63170,7 @@ var logout = function logout() {
         type: _types__WEBPACK_IMPORTED_MODULE_1__["LOGOUT_USER"]
       });
     })["catch"](function (err) {
-      return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
-        payload: err.response.data
-      });
+      return dispatch(setErrors(err.response.data));
     });
   };
 };
@@ -63144,10 +63179,12 @@ var getUser = function getUser() {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/user').then(function (res) {
       return dispatch(setUser(res.data));
     })["catch"](function (err) {
-      return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
-        payload: err.response.data
-      });
+      if (err.response.status) {
+        localStorage.removeItem('sasi');
+        _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/login');
+      }
+
+      dispatch(setErrors(err.response.data));
     });
   };
 };
@@ -63161,15 +63198,9 @@ var createCategory = function createCategory(data) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/categories', data).then(function (res) {
       _utils__WEBPACK_IMPORTED_MODULE_2__["history"].goBack();
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["NOTIFY"],
-        payload: res.data
-      });
+      dispatch(makeNotification(res.data.message));
     })["catch"](function (err) {
-      return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
-        payload: err.response.data
-      });
+      return dispatch(setErrors(err.response.data));
     });
   };
 };
@@ -63177,21 +63208,35 @@ var createCommunity = function createCommunity(data) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/communities', data).then(function (res) {
       _utils__WEBPACK_IMPORTED_MODULE_2__["history"].goBack();
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["NOTIFY"],
-        payload: res.data
-      });
+      dispatch(makeNotification(res.data.message));
+      dispatch(clearErrors());
     })["catch"](function (err) {
-      return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
-        payload: err.response.data
-      });
+      return dispatch(setErrors(err.response.data));
     });
   };
 };
 var clearNotification = function clearNotification() {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_1__["CLEAR_NOTIFICATION"]
+  };
+};
+var clearErrors = function clearErrors() {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_1__["CLEAR_ERRORS"]
+  };
+};
+
+var setErrors = function setErrors(payload) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_ERRORS"],
+    payload: payload
+  };
+};
+
+var makeNotification = function makeNotification(message) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_1__["NOTIFY"],
+    payload: message
   };
 };
 
@@ -63232,7 +63277,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!*************************************!*\
   !*** ./resources/js/store/types.js ***!
   \*************************************/
-/*! exports provided: GET_ERRORS, SET_CURRENT_USER, LOGOUT_USER, NOTIFY, CLEAR_NOTIFICATION */
+/*! exports provided: GET_ERRORS, SET_CURRENT_USER, LOGOUT_USER, NOTIFY, CLEAR_NOTIFICATION, CLEAR_ERRORS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63242,11 +63287,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER", function() { return LOGOUT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOTIFY", function() { return NOTIFY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_NOTIFICATION", function() { return CLEAR_NOTIFICATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ERRORS", function() { return CLEAR_ERRORS; });
 var GET_ERRORS = 'GET_ERRORS';
 var SET_CURRENT_USER = 'SET_CURRENT_USER';
 var LOGOUT_USER = 'LOGOUT_USER';
 var NOTIFY = 'NOTIFY';
 var CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
+var CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 /***/ }),
 

@@ -4,7 +4,6 @@ import { Redirect, Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-
 // Scenes & Components
 import Login from './screens/Auth/Login';
 import ForgetPassword from './screens/Auth/ForgetPassword';
@@ -17,7 +16,6 @@ import NewCategory from './screens/settings/NewCategory';
 import NotFound from './screens/NotFound';
 import Statistics from './screens/Statistics';
 import PrivateRoute from './components/PrivateRoute';
-
 // Custom helplers
 import store from './store';
 import { setAuthToken, history } from './utils';

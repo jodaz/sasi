@@ -4,26 +4,21 @@ import {
   GET_ERRORS,
   LOGOUT_USER,
   SET_CURRENT_USER,
-  CLEAR_NOTIFICATION
+  CLEAR_NOTIFICATION,
+  CLEAR_ERRORS
 } from './types';
 import { setAuthToken, history } from '../utils';
 
 export const resetPassword = data => dispatch => {
   axios.post('/api/reset-password', data)
     .then(res => history.push('/check-email'))
-    .catch(err => dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    }));
+    .catch(err => dispatch(setErrors(err.response.data)));
 }
 
 export const registerUser = data => dispatch => {
   axios.post('/api/register', data)
     .then(res => console.log(res.data))
-    .catch(err => dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    }));
+    .catch(err => dispatch(setErrors(err.response.data)));
 }
 
 export const login = data => dispatch => {
@@ -36,11 +31,9 @@ export const login = data => dispatch => {
 
       history.push('/');
       dispatch(setUser(res.data.user));
+      dispatch(clearErrors());
     })
-    .catch(err => dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    }));
+    .catch(err => dispatch(setErrors(err.response.data)));
 }
 
 export const logout = () => dispatch => {
@@ -53,19 +46,20 @@ export const logout = () => dispatch => {
         type: LOGOUT_USER
       });
     })
-    .catch(err => dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    }));
+    .catch(err => dispatch(setErrors(err.response.data)));
 }
 
 export const getUser = () => dispatch => {
   axios.get('/api/user')
     .then( res => dispatch(setUser(res.data)))
-    .catch(err => dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    }));
+    .catch(err => {
+      if (err.response.status) {
+        localStorage.removeItem('sasi');
+        history.push('/login');
+      }
+
+      dispatch(setErrors(err.response.data));
+    });
 };
 
 export const setUser = user => ({
@@ -77,32 +71,35 @@ export const createCategory = data => dispatch => {
   axios.post('/api/categories', data)
     .then(res => {
       history.goBack();
-      dispatch({
-        type: NOTIFY,
-        payload: res.data
-      });
+      dispatch(makeNotification(res.data.message));
     })
-    .catch(err => dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    }));
+    .catch(err => dispatch(setErrors(err.response.data)));
 }
 
 export const createCommunity = data => dispatch => {
   axios.post('/api/communities', data)
     .then(res => {
       history.goBack();
-      dispatch({
-        type: NOTIFY,
-        payload: res.data
-      });
+      dispatch(makeNotification(res.data.message))
+      dispatch(clearErrors());
     })
-    .catch(err => dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    }));
+    .catch(err => dispatch(setErrors(err.response.data)));
 }
 
 export const clearNotification = () => ({
   type: CLEAR_NOTIFICATION
 }); 
+
+export const clearErrors = () => ({
+  type: CLEAR_ERRORS
+});
+
+const setErrors = payload => ({
+  type: GET_ERRORS,
+  payload: payload
+});
+
+const makeNotification = (message) => ({
+  type: NOTIFY,
+  payload: message
+});

@@ -17,9 +17,14 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = Application::with(['state']);
+        if ($request->has('state')) {
+            $query = Application::whereStateId($request->state);
+        } else {
+            $query = Application::with(['state']);
+        }
+
 
         return $query->get();
     }
