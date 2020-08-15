@@ -40,7 +40,7 @@ const Categories = () => {
       ) : (<>
         <PortletHeader label='Comunidades'>
           <PortletToolbar>
-            <BtnLink to='new-community' styles='btn-sm btn-icon btn-clean btn-icon-md'>
+            <BtnLink to='/settings/new-community' styles='btn-sm btn-icon btn-clean btn-icon-md'>
               <Icon icon="plus" />
             </BtnLink>
           </PortletToolbar>

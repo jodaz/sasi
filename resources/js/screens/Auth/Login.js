@@ -13,14 +13,14 @@ import { isEmpty } from '../../utils';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const onSubmit = data => dispatch(login(data));
-  const errors = useSelector(store => store.errors);
+  const getErrors = useSelector(store => store.errors);
 
   useEffect(() => {
-    if (!isEmpty(errors)) {
-      Error(errors.message);
+    if (!isEmpty(getErrors)) {
+      Error(getErrors.message);
     }
   }, [errors])
 
@@ -39,11 +39,13 @@ const Login = () => {
             <h3 className="kt-login__title">Inicio de sesión</h3>
           </div>
           <form className="kt-form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="input-group">
-              <input className="form-control" type="text" placeholder="Correo electrónico" name="email" ref={register}/>
+            <div className="form-group">
+              <input className="form-control" type="text" placeholder="Correo electrónico" name="email" ref={register({ required: true })}/>
+              {errors.email && <span className='text-danger'>Ingrese su correo electrónico</span>}
             </div>
-            <div className="input-group">
-              <input className="form-control" type="password" placeholder="Contraseña" name="password" ref={register}/>
+            <div className="form-group">
+              <input className="form-control" type="password" placeholder="Contraseña" name="password" ref={register({ required: true })}/>
+              {errors.password && <span className='text-danger'>Ingrese su contraseña</span>}
             </div>
             <div className="row kt-login__extra">
               <div className="col kt-align-right">

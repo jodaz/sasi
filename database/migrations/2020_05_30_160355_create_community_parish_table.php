@@ -14,12 +14,14 @@ class CreateCommunityParishTable extends Migration
     public function up()
     {
         Schema::create('community_parish', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('community_id');
             $table->unsignedBigInteger('parish_id');
             $table->foreign('community_id')->references('id')->on('communities')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('parish_id')->references('id')->on('parishes')
                 ->onUpdate('cascade')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

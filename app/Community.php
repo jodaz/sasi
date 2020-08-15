@@ -15,7 +15,7 @@ class Community extends Model {
 
     public function parishes()
     {
-        return $this->belongsToMany(Parish::class);
+        return $this->belongsToMany(Parish::class, 'community_parish');
     }
 
     public function applications()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Community;
+use App\Parish;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
@@ -24,7 +25,14 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        //
+        $parishes = Parish::get()->map(function ($parish) {
+            return [
+                'label' => $parish->name,
+                'value' => $parish->id
+            ]; 
+        });
+
+        return response()->json($parishes);
     }
 
     /**
@@ -35,7 +43,17 @@ class CommunityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $parishes = array_map(function ($parish) {
+            return $parish['value'];
+        }, $request->get('parishes'));
+
+        $community = Community::create($request->all());
+        $community->parishes()->sync($parishes);
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡La comunidad '.$community->name.' ha sido creada!'
+        ]);
     }
 
     /**

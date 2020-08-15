@@ -3,7 +3,8 @@ import {
   NOTIFY,
   GET_ERRORS,
   LOGOUT_USER,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  CLEAR_NOTIFICATION
 } from './types';
 import { setAuthToken, history } from '../utils';
 
@@ -86,3 +87,22 @@ export const createCategory = data => dispatch => {
       payload: err.response.data
     }));
 }
+
+export const createCommunity = data => dispatch => {
+  axios.post('/api/communities', data)
+    .then(res => {
+      history.goBack();
+      dispatch({
+        type: NOTIFY,
+        payload: res.data
+      });
+    })
+    .catch(err => dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    }));
+}
+
+export const clearNotification = () => ({
+  type: CLEAR_NOTIFICATION
+}); 

@@ -13,4 +13,6 @@ const mix = require('laravel-mix');
 
 mix.react('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
-  .browserSync('sasi.loc');
+  .browserSync({
+    files: [ 'public/js/**/*.js', 'public/css/**/*.css' ],
+  });
