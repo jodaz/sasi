@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactLoading from 'react-loading';
 
-import Row from './Row';
-
 const Loading = ({ type, height, width  }) => 
 <div className="d-flex justify-content-center">
   <ReactLoading
