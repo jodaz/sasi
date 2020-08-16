@@ -40,7 +40,7 @@ const ApplicationsList = () => {
   }
 
   const fetchData = () => {
-    axios.get(`/api/applications/?state=1&page=${page}`)
+    axios.get(`/api/applications?state=1&page=${page}`)
       .then(res => {
         if (!isEmpty(data)) {
           setData([ ...data, ...res.data.data])
