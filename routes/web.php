@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{path?}', function () {
+Route::get('/{route?}', function () {
     return view('app');
-})->where('path', '.*');
+})->where('route', '.*');
 
