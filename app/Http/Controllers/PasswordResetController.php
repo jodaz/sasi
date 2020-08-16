@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\PasswordResetRequest;
 use App\Notifications\PasswordResetNotification;
+use App\Notifications\PasswordResetSuccessNotification;
 use App\User;
 use App\PasswordReset;
 use Auth;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PasswordResetController extends Controller
 {
-    public function resetPassword(PasswordResetRequest $request)
+    public function recover(PasswordResetRequest $request)
     {
         $user = User::whereEmail($request->get('email'))->first();
 
@@ -26,9 +28,11 @@ class PasswordResetController extends Controller
             ]);
         }
 
+        $hash = str_replace('/', '', Hash::make($request->get('email')));
+
         $passwordReset = PasswordReset::create([
             'email' => $request->get('email'),
-            'token' => Hash::make($request->get('email'))
+            'token' => $hash
         ]);
 
         $user->notify(new PasswordResetNotification($passwordReset->token));
@@ -38,7 +42,6 @@ class PasswordResetController extends Controller
             'message' => 'Te hemos enviado un correo con un link.'
         ]);
     }
-
 
     public function findToken($token)
     {
@@ -54,15 +57,33 @@ class PasswordResetController extends Controller
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
             $passwordReset->delete();
             return response()->json([
-                'message' => 'This password reset token is invalid.'
+                'message' => 'El link utilizado es inválido.'
+            ], 404);
+        }
+    }
+
+    public function resetPassword(ChangePasswordRequest $request)
+    {
+        $passwordReset = PasswordReset::whereToken($request->token)->first();
+
+        if (!$passwordReset) {
+            return response()->json([
+                'success' => false,
+                'message' => 'El link utilizado ha dejado de ser válido.'
             ], 404);
         }
 
-        return response()->json($passwordReset);
-    }
+        $user = User::whereEmail($passwordReset->email)->first();
 
-    public function changePassword(Request $request)
-    {
-        //
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
+        $passwordReset->delete();
+
+        $user->notify(new PasswordResetSuccessNotification());
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡Su contraseña ha sido actualizada!'
+        ]);
     }
 }

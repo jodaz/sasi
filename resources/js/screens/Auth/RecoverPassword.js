@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { recoverAccount } from '../../store/actions';
+import { resetPassword } from '../../store/actions';
 import Auth from '../layouts/Auth';
 import {
   Meta,
@@ -10,28 +10,34 @@ import {
   ToastWrapper
 } from '../../components';
 import { isEmpty } from '../../utils';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-const ForgetPassword = () => {
+const RecoverPassword = () => {
+  const { token } = useParams();
   const { register, handleSubmit } = useForm();
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const errors = useSelector(store => store.errors);
-  const onSubmit = data => {
-    dispatch(recoverAccount(data));
+
+  const onSubmit = formData => {
+    let data = {
+      ...formData,
+      token: token 
+    };
+
     setIsLoading(true);
-  };
+    dispatch(resetPassword(data));
+  }
 
   useEffect(() => {
     if (!isEmpty(errors)) {
       Error(errors.message);
-      setIsLoading(false);
     }
-  }, [errors]);
+  }, [errors])
 
   return (
     <Auth type='login'>
-      <Meta title="Recuperar contraseña" />
+      <Meta title="Cambiar contraseña" />
     
       <div className="kt-login__container">
         <div className="kt-login__logo">
@@ -41,15 +47,18 @@ const ForgetPassword = () => {
         </div>
         <div className="kt-login__signin">
           <div className="kt-login__head">
-            <h3 className="kt-login__title">Recuperar cuenta</h3>
+            <h3 className="kt-login__title">Cambiar contraseña</h3>
           </div>
           <form className="kt-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="input-group">
-              <input className="form-control" type="text" placeholder="Correo electrónico" name="email" ref={register}/>
+              <input className="form-control" type="password" placeholder="Nueva contraseña" name="password" ref={register}/>
+            </div>
+            <div className="input-group">
+              <input className="form-control" type="password" placeholder="Repita la nueva contraseña" name="password_confirmation" ref={register}/>
             </div>
             <div className="kt-login__actions">
               <button className="btn btn-success btn-pill" disabled={(isLoading) && true}>
-                { (isLoading) ? <Loading /> : 'Recuperar contraseña' }
+                { (isLoading) ? <Loading color='#fff'/> : 'Recuperar contraseña' }
               </button>
             </div>
           </form>
@@ -63,10 +72,9 @@ const ForgetPassword = () => {
           </Link>
         </div>
       </div>
-      <ToastWrapper />
     </Auth>
   );
 };
 
-export default ForgetPassword;
+export default RecoverPassword;
 

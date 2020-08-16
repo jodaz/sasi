@@ -9,9 +9,15 @@ import {
 } from './types';
 import { setAuthToken, history } from '../utils';
 
+export const recoverAccount = data => dispatch => {
+  axios.post('/api/recover-account', data)
+    .then(res => history.push('/check-email'))
+    .catch(err => dispatch(setErrors(err.response.data)));
+}
+
 export const resetPassword = data => dispatch => {
   axios.post('/api/reset-password', data)
-    .then(res => history.push('/check-email'))
+    .then(res => history.push('/login'))
     .catch(err => dispatch(setErrors(err.response.data)));
 }
 

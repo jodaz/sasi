@@ -19,18 +19,19 @@ class ApplicationController extends Controller
      */
     public function index(Request $request)
     {
+        $query = Application::query();
+
         if ($request->has('state')) {
             $results = $request->page * 10;
 
-            $query = Application::whereStateId($request->state)
+            $query = $query->whereStateId($request->state)
                 ->orderBy('created_at', 'DESC')
                 ->paginate($results);
-        } else {
-            $query = Application::with(['state'])->get();
+
+            return $query;
         }
 
-
-        return $query;
+        return $query->with(['state'])->get();
     }
 
     /**

@@ -14,8 +14,12 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const onSubmit = data => dispatch(login(data));
+  const onSubmit = data => {
+    setIsLoading(true);
+    dispatch(login(data));
+  }
   const getErrors = useSelector(store => store.errors);
 
   useEffect(() => {
@@ -55,7 +59,9 @@ const Login = () => {
               </div>
             </div>
             <div className="kt-login__actions">
-              <button className="btn btn-pill kt-login__btn-primary">Iniciar sesión</button>
+              <button className="btn btn-success btn-pill" disabled={(isLoading) && true}>
+                { (isLoading) ? <Loading color='#fff'/> : 'Iniciar sesión' }
+              </button>
             </div>
           </form>
         </div>
