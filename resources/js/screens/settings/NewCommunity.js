@@ -64,7 +64,7 @@ const NewCommunity = () => {
                 {errors.name && <span className='text-danger'>Ingrese un nombre</span>}
               </div>
               <div className="form-group">
-                <label>Seleccione una o más parroquias <span className='text-danger'> *</span></label>
+                <label>Parroquia (s) <span className='text-danger'> *</span></label>
                 <Controller
                   as={Select}
                   name="parishes"
@@ -73,7 +73,9 @@ const NewCommunity = () => {
                   control={control}
                   placeholder='Seleccione'
                   inputRef={register}
+                  rules={{ required: true }}
                 /> 
+                {errors.parishes && <span className='text-danger'>Seleccione al menos una parroquia</span>}
               </div>
             </PortletBody>
             <PortletFooter>

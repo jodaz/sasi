@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Wrapper from './wrapper';
 import Header from './header';
 import { isMobile, isEmpty } from '../../utils';
-import { ToastWrapper, Success } from '../../components';
+import { ToastWrapper, Error, Success } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearNotification  } from '../../store/actions';
 
@@ -13,7 +13,14 @@ const Index = ({ children }) => {
 
   useEffect(() => {
     if (!isEmpty(notification)) {
-      Success(notification.message); 
+      const { success, message } = notification;
+
+      if (success) {
+        Success(message);
+      } else {
+        Error(message);
+      }
+
       dispatch(clearNotification());
     }  
     return;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Community;
 use App\Parish;
+use App\Http\Requests\CreateCommunityRequest;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
@@ -41,7 +42,7 @@ class CommunityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCommunityRequest $request)
     {
         $parishes = array_map(function ($parish) {
             return $parish['value'];
