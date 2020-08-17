@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Redirect, Router, Route, Switch } from 'react-router-dom';
+import { useRouteMatch, Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,8 +28,9 @@ const App = () => {
   if (localStorage.sasi) {
     setAuthToken(localStorage.sasi);
     dispatch(getUser());
-    history.push('/home');
-  }
+
+    if (location.pathname == '/') history.push('/home');
+  } else history.push('/login');
 
   return (
     <Router history={history} basename={window.location.origin}>

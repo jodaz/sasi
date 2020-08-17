@@ -60246,8 +60246,8 @@ var App = function App() {
   if (localStorage.sasi) {
     Object(_utils__WEBPACK_IMPORTED_MODULE_18__["setAuthToken"])(localStorage.sasi);
     dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_19__["getUser"])());
-    _utils__WEBPACK_IMPORTED_MODULE_18__["history"].push('/home');
-  }
+    if (location.pathname == '/') _utils__WEBPACK_IMPORTED_MODULE_18__["history"].push('/home');
+  } else _utils__WEBPACK_IMPORTED_MODULE_18__["history"].push('/login');
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Router"], {
     history: _utils__WEBPACK_IMPORTED_MODULE_18__["history"],
