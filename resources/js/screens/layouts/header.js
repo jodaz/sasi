@@ -45,7 +45,7 @@ const AppMenu = ({ mobile }) => {
       </HeaderLogo>
       <HeaderMenuWrapper>
         <HeaderMenu>
-          <MenuNavLink to="/">
+          <MenuNavLink to="/home">
             Inicio
           </MenuNavLink>
           { 

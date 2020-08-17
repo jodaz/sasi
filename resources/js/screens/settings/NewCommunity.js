@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCommunity, clear } from '../../store/actions';
-import Auth from '../layouts/Auth';
 import Select from 'react-select';
 import axios from 'axios';
 import {

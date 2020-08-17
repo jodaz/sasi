@@ -35,7 +35,7 @@ export const login = data => dispatch => {
       localStorage.setItem('sasi', token);
       setAuthToken(token);
 
-      history.push('/');
+      history.push('/home');
       dispatch(setUser(res.data.user));
       dispatch(clearErrors());
     })
@@ -47,7 +47,7 @@ export const logout = () => dispatch => {
     .then(res => {
       localStorage.removeItem('sasi');
       setAuthToken();
-      history.push('/');
+      history.push('/login');
       dispatch({
         type: LOGOUT_USER
       });
@@ -78,6 +78,16 @@ export const createCategory = data => dispatch => {
     .then(res => {
       history.goBack();
       dispatch(makeNotification(res.data));
+    })
+    .catch(err => dispatch(setErrors(err.response.data.errors)));
+}
+
+export const createApplication = data => dispatch => {
+  axios.post('/api/applications', data)
+    .then(res => {
+      history.goBack();
+      dispatch(makeNotification(res.data))
+      dispatch(clearErrors());
     })
     .catch(err => dispatch(setErrors(err.response.data.errors)));
 }

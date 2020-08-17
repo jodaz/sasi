@@ -28,15 +28,16 @@ const App = () => {
   if (localStorage.sasi) {
     setAuthToken(localStorage.sasi);
     dispatch(getUser());
+    history.push('/home');
   }
 
   return (
     <Router history={history} basename={window.location.origin}>
       <Switch>
-        <PrivateRoute exact path='/' component={Home} />
         <PrivateRoute exact path='/statistics' component={Statistics} />
         <PrivateRoute exact path='/reports' component={Reports} />
         <PrivateRoute path='/settings' component={Settings} />
+        <PrivateRoute path='/home' component={Home} />
       </Switch>
       <Switch>
         <Route exact path='/register' component={Register} /> 

@@ -19,7 +19,12 @@ class ApplicationController extends Controller
      */
     public function index(Request $request)
     {
+        $user = $request->user();
         $query = Application::query();
+
+        if ($user->role_id == 3) {
+            $query->whereUserId($user->id);
+        }
 
         if ($request->has('state')) {
             $results = $request->page * 10;
@@ -39,12 +44,16 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('applications.create')
-            ->with('config', $this->config)
-            ->with('categories', Category::pluck('name', 'id'))
-            ->with('breadcrumbAction', 'create');
+        $categories = Category::get()->map(function ($category) {
+            return [
+                'label' => $category->name,
+                'value' => $category->id
+            ]; 
+        });
+
+        return $categories;
     }
 
     /**
@@ -56,8 +65,10 @@ class ApplicationController extends Controller
     public function store(Request $request)
     {
         $user = $request->user();
-        $application = new Application($request->get());
+        $category = $request->get('category')['value'];
+        $application = new Application($request->all());
         $application->state_id = 1;
+        $application->category_id = $category;
 
         $user->applications()->save($application);
 

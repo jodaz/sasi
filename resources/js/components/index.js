@@ -4,6 +4,7 @@ import CardBody from './CardBody';
 import BtnLink from './BtnLink';
 import Label from './Label';
 import Loading from './Loading';
+import Heading from './Heading';
 import Formgroup from './FormGroup';
 import Icon from './Icon';
 import Notification from './Notification';
@@ -60,5 +61,6 @@ export {
   Label,
   PortletFooter,
   BtnLink,
+  Heading,
   PrivateRoute
 };

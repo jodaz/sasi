@@ -32,7 +32,7 @@ const ApplicationsList = () => {
       && document.documentElement.scrollHeight)
       || document.body.scrollHeight;
 
-    if (scrollTop + window.innerHeight + (window.innerHeight * 0.1) >= scrollHeight) {
+    if (scrollTop + window.innerHeight + (window.innerHeight * 0.1) >= scrollHeight && (!isEmpty(data))) {
       setIsFetching(true);
     } else {
       return;
@@ -71,12 +71,22 @@ const ApplicationsList = () => {
   return (
     <>
       { 
-        data.map((application, index) => 
-          <Portlet key={index}>
+        (isEmpty(data)) 
+        ? (
+          <Portlet>
             <PortletBody>
-              {application.title}
+              {"Parece que no tiene una solicitud pendiente..."}
             </PortletBody>
           </Portlet>
+        )
+        : (
+          data.map((application, index) => 
+            <Portlet key={index}>
+              <PortletBody>
+                {application.description}
+              </PortletBody>
+            </Portlet>
+          )
         )
       }
       { (isFetching) && <LoadingPortlet /> }
