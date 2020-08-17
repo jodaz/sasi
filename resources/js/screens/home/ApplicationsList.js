@@ -32,7 +32,7 @@ const ApplicationsList = () => {
       && document.documentElement.scrollHeight)
       || document.body.scrollHeight;
 
-    if (scrollTop + window.innerHeight + (window.innerHeight * 0.1) >= scrollHeight && (!isEmpty(data))) {
+    if (scrollTop + window.innerHeight + (window.innerHeight * 0.1) >= scrollHeight && (isEmpty(data))) {
       setIsFetching(true);
     } else {
       return;

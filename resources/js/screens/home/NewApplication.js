@@ -26,8 +26,12 @@ import { Link } from 'react-router-dom';
 const NewApplication = () => {
   const [data, setData] = useState({});
   const { register, handleSubmit, control, errors } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const onSubmit = data => dispatch(createApplication(data));
+  const onSubmit = data => {
+    setIsLoading(true);
+    dispatch(createApplication(data));
+  }
   const getError = useSelector(store => store.errors);
   const getData = useSelector(store => store.data);
 
@@ -88,9 +92,15 @@ const NewApplication = () => {
             </PortletBody>
             <PortletFooter>
               <div className="btn-group">
-                <button className='btn btn-success btn-md'>
-                  <Icon icon='paper-plane' /> 
-                  Enviar
+                <button className="btn btn-success btn-md" disabled={(isLoading) && true}>
+                  {
+                    (isLoading) 
+                    ? <Loading color='#fff'/> 
+                    : (<> 
+                      <Icon icon='save' /> 
+                      Registrar
+                    </>) 
+                  }
                 </button>
               </div>
             </PortletFooter>

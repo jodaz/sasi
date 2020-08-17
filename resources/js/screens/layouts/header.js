@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/actions';
+import { isEmpty } from '../../utils';
 
 const getClasses = (isOpen) => (
   (isOpen) ? 'kt-header__topbar-item kt-header__topbar-item--user show' : 'kt-header__topbar-item kt-header__topbar-item--user'
@@ -49,7 +50,7 @@ const AppMenu = ({ mobile }) => {
             Inicio
           </MenuNavLink>
           { 
-            (user.role_id != 3) ? (
+            (user.role_id != 3 && !isEmpty(user)) ? (
               (user.role_id == 1) ? (<>
                 <Analyst /> 
                 <OnlyAdmin />

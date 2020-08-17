@@ -11,6 +11,7 @@ import {
   Portlet,
   Loading,
   Heading,
+  Notification,
   PortletBody
 } from '../../components';
 import { Link, Switch } from 'react-router-dom';
@@ -31,7 +32,7 @@ const Home = () => {
               <Portlet>
                 <PortletBody>
                   <Link to='/home/new-application'>
-                    Nueva solicitud
+                    <Notification title='Nueva solicitud' icon='paper-plane'/>
                   </Link>
                 </PortletBody>
               </Portlet>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use App\Category;
+use App\Http\Requests\CreateApplicationRequest;
 use Auth;
 use PDF;
 use Mail;
@@ -62,7 +63,7 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateApplicationRequest $request)
     {
         $user = $request->user();
         $category = $request->get('category')['value'];
