@@ -28,9 +28,9 @@ class Organization extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function sector()
+    public function category()
     {
-        return $this->belongsTo(Sector::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function parish()

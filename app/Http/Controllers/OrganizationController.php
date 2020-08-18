@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Organization;
+use App\Community;
+use App\Parish;
+use App\OrganizationType;
+use App\Category;
 
 class OrganizationController extends Controller
 {
@@ -14,7 +18,8 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        return Organization::get();
+        return Organization::with(['user'])
+            ->get();
     }
 
     /**
@@ -24,7 +29,30 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        //
+        $parishes = Parish::get()->map(function ($item) {
+            return [
+                'label' => $item->name,
+                'value' => $item->id
+            ]; 
+        });
+        $types = OrganizationType::get()->map(function ($item) {
+            return [
+                'label' => $item->name,
+                'value' => $item->id
+            ]; 
+        });
+        $categories = Category::get()->map(function ($item) {
+            return [
+                'label' => $item->name,
+                'value' => $item->id
+            ]; 
+        });
+
+        return Response([
+            'categories' => $categories,
+            'parishes' => $parishes,
+            'types' => $types
+        ]);
     }
 
     /**
@@ -35,7 +63,22 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        $organization = $user->organizations()->create([
+            'name' => $request->get('name'),
+            'rif' => $request->get('rif'),
+            'address' => $request->get('address'),
+            'category_id' => $request->get('category')['value'],
+            'parish_id' => $request->get('parish')['value'],
+            'organization_type_id' => $request->get('type')['value'],
+            'community_id' => $request->get('community')['value'],
+        ]);
+
+        return Response([
+            'success' => true,
+            'message' => '¡Ha agregado a '.$organization->name.' con éxito'
+        ]);
     }
 
     /**

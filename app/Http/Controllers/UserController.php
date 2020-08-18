@@ -63,9 +63,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return Response($user->load('applications', 'organizations'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
     }
@@ -89,35 +89,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
-
-    public function changePassword(Request $request)
-    {
-        $newPassword = $request->input('new-password');
-        $currentPass = $request->input('current-password');
-        $user = Auth::user();
-        
-        if (!Hash::check($currentPass, $user->password)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'La contraseña actual es incorrecta'
-            ]);
-        }
-
-        if ($currentPass == $newPassword) {
-            return response()->json([
-                'success' => false,
-                'message' => 'La nueva contraseña no debe ser igual a la anterior'
-            ]);
-        }
-
-        $user->password = bcrypt($newPassword);
-        $user->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => '¡Contraseña actualizada!'
-        ]);
     }
 
     /**

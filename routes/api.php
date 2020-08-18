@@ -25,10 +25,12 @@ Route::resource('users', 'UserController');
 Route::middleware('auth:api')->group(function() {
     Route::get('logout', 'AuthController@logout');
     Route::get('user', 'AuthController@getUser');
+    Route::post('update-password', 'UpdatePasswordController');
 
     Route::resource('users', 'UserController')->only(['index', 'destroy', 'update']);
     Route::resource('applications', 'ApplicationController');
     Route::resource('parishes', 'ParishController');
     Route::resource('communities', 'CommunityController');
     Route::resource('categories', 'CategoryController');
+    Route::resource('organizations', 'OrganizationController');
 });
