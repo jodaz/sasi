@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Citizenship;
+use App\Parish;
 
 class UserController extends Controller
 {
@@ -24,7 +26,24 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $citizenships = Citizenship::get()->map(function ($citizenship) {
+            return [
+                'label' => $citizenship->name,
+                'value' => $citizenship->id
+            ]; 
+        });
+
+        $parishes = Parish::get()->map(function ($parish) {
+            return [
+                'label' => $parish->name,
+                'value' => $parish->id
+            ]; 
+        });
+
+        return response()->json([
+            'parishes' => $parishes,
+            'citizenships' => $citizenships
+        ]);
     }
 
     /**

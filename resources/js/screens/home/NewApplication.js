@@ -61,12 +61,14 @@ const NewApplication = () => {
           </PortletHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
             <PortletBody>
-              <div className="form-group">
-                <label>Mensaje <span className='text-danger'> *</span></label>
-                <textarea className="form-control" type="textarea" placeholder="Describa su problema..." name="description" ref={register({ required: true })} rows="3" maxlength="500"/>
-                {errors.description && <span className='text-danger'> Ingrese una descripción para su solicitud</span>}
-              </div>
               <Row>
+                <Col md={12}>
+                  <div className="form-group">
+                    <label>Mensaje <span className='text-danger'> *</span></label>
+                    <textarea className="form-control" type="textarea" placeholder="Describa su problema..." name="description" ref={register({ required: true })} rows="3" maxlength="500"/>
+                    {errors.description && <span className='text-danger'> Ingrese una descripción para su solicitud</span>}
+                  </div>
+                </Col>
                 <Col md={6}>
                   <div className="form-group">
                     <label>Categoría <span className='text-danger'> *</span></label>

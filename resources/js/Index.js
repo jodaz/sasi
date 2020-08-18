@@ -30,7 +30,7 @@ const App = () => {
     dispatch(getUser());
 
     if (location.pathname == '/') history.push('/home');
-  } else history.push('/login');
+  }
 
   return (
     <Router history={history} basename={window.location.origin}>
