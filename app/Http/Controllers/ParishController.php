@@ -27,5 +27,8 @@ class ParishController extends Controller
         //
     }
 
-
+    public function show(Parish $parish)
+    {
+        return Response($parish->load('applications', 'users'));
+    }
 }
