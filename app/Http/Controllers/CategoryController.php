@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -52,7 +53,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return Response($category->load('applications'));
     }
 
     /**
@@ -63,7 +64,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return Response($category);
     }
 
     /**
@@ -73,9 +74,14 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡La categoría '.$category->name.' fue actualizada!'
+        ]);
     }
 
     /**
@@ -86,6 +92,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡La categoría '.$category->name.' fue eliminada!'
+        ]);
     }
 }
