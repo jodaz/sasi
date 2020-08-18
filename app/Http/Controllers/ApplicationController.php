@@ -116,9 +116,13 @@ class ApplicationController extends Controller
     public function approve(Application $application)
     {
         $application->approved_at = Carbon::now();
+        $application->state_id = 2;
         $application->save();
 
-        return redirect()->back(); 
+        return Response([
+            'success' => true,
+            'message' => '¡Solicitud aprobada!'
+        ]);
     }
 
     public function download(Application $application)
@@ -137,6 +141,17 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+        if ($application->state_id == 2) {
+            return Response([
+                'success' => false,
+                'message' => 'Las solicitudes aprobadas no pueden ser borradas'
+            ]);
+        }
+        $application->delete();
+
+        return Response([
+            'success' => true,
+            'message' => '¡Solicitud borrada!'
+        ]);
     }
 }
