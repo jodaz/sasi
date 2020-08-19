@@ -22,9 +22,14 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('dni')->unique();
             $table->string('email')->unique();
+            $table->string('activation_token');
+            $table->boolean('active')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->nullable();
+            $table->softDeletes();
+            $table->rememberToken();
+            $table->timestamps();
             $table->unsignedBigInteger('community_id');
             $table->unsignedBigInteger('parish_id');
             $table->unsignedBigInteger('genre_id');
@@ -37,8 +42,6 @@ class CreateUsersTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->rememberToken();
-            $table->timestamps();
         });
     }
 

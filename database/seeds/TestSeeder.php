@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Application;
 use App\Category;
+use Illuminate\Support\Str;
 
 class TestSeeder extends Seeder
 {
@@ -46,6 +47,8 @@ class TestSeeder extends Seeder
             'community_id' => 1,
             'parish_id' => 1,
             'role_id' => 1,
+            'active' => true,
+            'activation_token' => Str::random(60),
             'address' => 'Ave. Libertad 123'
         ]);
         
@@ -60,6 +63,8 @@ class TestSeeder extends Seeder
             'community_id' => 1,
             'parish_id' => 1,
             'role_id' => 2,
+            'active' => true,
+            'activation_token' => Str::random(60),
             'address' => 'Ave. Libertad 123'
         ]);
     }

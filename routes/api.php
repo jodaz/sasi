@@ -21,7 +21,6 @@ Route::post('login', 'AuthController@login');
 Route::post('recover-account', 'PasswordResetController@recover');
 Route::post('reset-password', 'PasswordResetController@resetPassword');
 Route::get('reset-password/{token}', 'PasswordResetController@findToken');
-Route::post('register', 'AuthController@register');
 Route::resource('users', 'UserController');
 // Authenticated only
 Route::middleware('auth:api')->group(function () {

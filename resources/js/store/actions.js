@@ -22,7 +22,7 @@ export const resetPassword = data => dispatch => {
 }
 
 export const registerUser = data => dispatch => {
-  axios.post('/api/register', data)
+  axios.post('/api/users', data)
     .then(res => console.log(res.data))
     .catch(err => dispatch(setErrors(err.response.data.errors)));
 }

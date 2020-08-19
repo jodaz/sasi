@@ -97633,6 +97633,8 @@ var App = function App() {
     Object(_utils__WEBPACK_IMPORTED_MODULE_18__["setAuthToken"])(localStorage.sasi);
     dispatch(Object(_store_actions__WEBPACK_IMPORTED_MODULE_19__["getUser"])());
     if (location.pathname == '/') _utils__WEBPACK_IMPORTED_MODULE_18__["history"].push('/home');
+  } else {
+    _utils__WEBPACK_IMPORTED_MODULE_18__["history"].push('/login');
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Router"], {
@@ -101292,7 +101294,7 @@ var resetPassword = function resetPassword(data) {
 };
 var registerUser = function registerUser(data) {
   return function (dispatch) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', data).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/users', data).then(function (res) {
       return console.log(res.data);
     })["catch"](function (err) {
       return dispatch(setErrors(err.response.data.errors));

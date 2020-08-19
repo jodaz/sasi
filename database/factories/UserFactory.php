@@ -32,6 +32,8 @@ $factory->define(User::class, function (Faker $faker) use ($genres, $communities
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => bcrypt('qwerty123'),
+        'active' => true,
+        'activation_token' => Str::random(60),
         'genre_id' => $genres->random(1)->first(),
         'community_id' => $communities->random(1)->first(),
         'parish_id' => $parishes->random(1)->first(),

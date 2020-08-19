@@ -15,44 +15,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|max:100',
-            'surname' => 'required|string|max:100',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-            'community_id' => 'required',
-            'parish_id' => 'required',
-            'genre_id' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
-        }
-
-        $password = Hash::make($request->password);
-        // Create user
-        User::create([
-            'first_name' => $request->get('first_name'),
-            'second_name' => $request->get('second_name'),
-            'surname' => $request->get('surname'),
-            'second_surname' => $request->get('second_surname'),
-            'email' => $request->get('email'),
-            'password' => $password,
-            'address' => $request->get('address'),
-            'identification' => $request->get('identification'),
-            'community_id' => $request->get('community_id'),
-            'parish_id' => $request->get('parish_id'),
-            'genre_id' => $request->get('genre_id')
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'message' => '¡Usuario creado!'
-        ], 201);
-    }
-
     public function login(LoginRequest $request)
     {
         $credentials = request(['email', 'password']);

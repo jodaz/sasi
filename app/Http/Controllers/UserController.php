@@ -54,7 +54,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $password = Hash::make($request->password);
+        User::create([
+            'first_name' => $request->get('first_name'),
+            'surname' => $request->get('surname'),
+            'email' => $request->get('email'),
+            'password' => $password,
+            'address' => $request->get('address'),
+            'identification' => $request->get('identification'),
+            'community_id' => 1,
+            'parish_id' => $request->get('parish_id'),
+            'genre_id' => $request->get('genre_id')
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡Usuario creado!'
+        ], 201);
+       //
     }
 
     /**
