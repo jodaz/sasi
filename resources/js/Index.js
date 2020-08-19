@@ -15,7 +15,7 @@ import Reports from './screens/reports';
 import Settings from './screens/settings';
 import NewCategory from './screens/settings/NewCategory';
 import NotFound from './screens/NotFound';
-import Statistics from './screens/Statistics';
+import Statistics from './screens/statistics';
 import PrivateRoute from './components/PrivateRoute';
 // Custom helplers
 import store from './store';

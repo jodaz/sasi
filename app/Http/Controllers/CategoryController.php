@@ -14,9 +14,15 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Category::get();
+        $query = Category::query();
+
+        if ($request->has('applicationsCount')) {
+            $query->withCount('applications');
+        }
+
+        return $query->get();
     }
 
     /**

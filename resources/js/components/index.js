@@ -1,6 +1,7 @@
 import Dropdown from './Dropdown';
 import Col from './Col';
 import CardBody from './CardBody';
+import Chart from './Chart';
 import BtnLink from './BtnLink';
 import Label from './Label';
 import Loading from './Loading';
@@ -62,5 +63,6 @@ export {
   PortletFooter,
   BtnLink,
   Heading,
+  Chart,
   PrivateRoute
 };
