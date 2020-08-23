@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useRouteMatch, Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { useDispatch, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 // Scenes & Components
 import Login from './screens/Auth/Login';
 import ForgetPassword from './screens/Auth/ForgetPassword';
@@ -28,10 +27,9 @@ const App = () => {
   if (localStorage.sasi) {
     setAuthToken(localStorage.sasi);
     dispatch(getUser());
-
     if (location.pathname == '/') history.push('/home');
   } else {
-    history.push('/login');
+    if (location.pathname == '/') history.push('/login');
   }
 
   return (

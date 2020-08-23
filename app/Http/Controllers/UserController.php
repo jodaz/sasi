@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Genre;
 use App\Citizenship;
 use App\Parish;
+use App\Community;
+use Illuminate\Support\Str;
+use Hash;
 
 class UserController extends Controller
 {
@@ -33,6 +37,13 @@ class UserController extends Controller
             ]; 
         });
 
+        $genres = Genre::get()->map(function ($citizenship) {
+            return [
+                'label' => $citizenship->name,
+                'value' => $citizenship->id
+            ]; 
+        });
+
         $parishes = Parish::get()->map(function ($parish) {
             return [
                 'label' => $parish->name,
@@ -40,8 +51,17 @@ class UserController extends Controller
             ]; 
         });
 
+        $communities = Community::get()->map(function ($community) {
+            return [
+                'label' => $community->name,
+                'value' => $community->id
+            ]; 
+        });
+
         return response()->json([
             'parishes' => $parishes,
+            'communities' => $communities,
+            'genres' => $genres,
             'citizenships' => $citizenships
         ]);
     }
@@ -55,23 +75,28 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $password = Hash::make($request->password);
+        $citizenshipCorr = Citizenship::find($request->get('citizenship')['value'])
+            ->correlative;
+        $identification = $citizenshipCorr.'-'.$request->get('identification');
+
         User::create([
             'first_name' => $request->get('first_name'),
             'surname' => $request->get('surname'),
             'email' => $request->get('email'),
             'password' => $password,
             'address' => $request->get('address'),
-            'identification' => $request->get('identification'),
-            'community_id' => 1,
-            'parish_id' => $request->get('parish_id'),
-            'genre_id' => $request->get('genre_id')
+            'dni' => $identification,
+            'community_id' => $request->get('community')['value'],
+            'parish_id' => $request->get('parish')['value'],
+            'genre_id' => $request->get('genre')['value'],
+            'activation_token' => Str::random(60),
+            'role_id' => 3 // By default, users are common  
         ]);
 
         return response()->json([
             'success' => true,
             'message' => '¡Usuario creado!'
         ], 201);
-       //
     }
 
     /**

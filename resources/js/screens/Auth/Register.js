@@ -45,8 +45,6 @@ const Register = () => {
       .catch(err => Error(err.message));
   }, []);
 
-  const handleChange = (selectedOption) => console.log(selectedOption);
-
   if (isLoading) return <Loading />
 
   return (
@@ -82,7 +80,7 @@ const Register = () => {
                     {errors.surname && <span className='text-danger'>Ingrese su primer apellido</span>}
                   </div>
                 </Col>
-                <Col md={12}>
+                <Col md={6}>
                   <div className="form-group">
                     <label>Nacionalidad <span className='text-danger'> *</span></label>
                     <Controller
@@ -96,10 +94,27 @@ const Register = () => {
                     /> 
                     {errors.citizenship && <span className='text-danger'>Seleccione su nacionalidad</span>}
                   </div>
+                </Col>
+                <Col md={6}>
+                  <div className="form-group">
+                    <label>Género <span className='text-danger'> *</span></label>
+                    <Controller
+                      as={Select}
+                      name="genre"
+                      options={data.genres}
+                      control={control}
+                      placeholder='Seleccione'
+                      inputRef={register}
+                      rules={{ required: true }}
+                    /> 
+                    {errors.genre && <span className='text-danger'>Seleccione su género</span>}
+                  </div>
+                </Col>
+                <Col md={12}>
                   <div className="form-group">
                     <label>Cédula de identidad<span className='text-danger'> *</span></label>
                     <input className="form-control" type="text" placeholder="Cédula de identidad (*)" name="dni" ref={register({ required: true })}/>
-                    {errors.dni && <span className='text-danger'>Ingrese su primer apellido</span>}
+                    {errors.dni && <span className='text-danger'>Ingrese su cédula</span>}
                   </div>
                 </Col>
                 <Col md={12}>
@@ -113,9 +128,23 @@ const Register = () => {
                       placeholder='Seleccione'
                       inputRef={register}
                       rules={{ required: true }}
-                      onChange={handleChange}
                     /> 
                     {errors.parish && <span className='text-danger'>Seleccione una parroquia</span>}
+                  </div>
+                </Col>
+                <Col md={12}>
+                  <div className="form-group">
+                    <label>Comunidad <span className='text-danger'> *</span></label>
+                    <Controller
+                      as={Select}
+                      name="community"
+                      options={data.communities}
+                      control={control}
+                      placeholder='Seleccione'
+                      inputRef={register}
+                      rules={{ required: true }}
+                    /> 
+                    {errors.community && <span className='text-danger'>Seleccione una parroquia</span>}
                   </div>
                 </Col>
                 <Col md={12}>
@@ -125,11 +154,25 @@ const Register = () => {
                     {errors.address && <span className='text-danger'>Ingrese su dirección</span>}
                   </div>
                 </Col>
-                <Col md={6}>
+                <Col md={12}>
                   <div className="form-group">
                     <label>Correo electrónico <span className='text-danger'> *</span></label>
                     <input className="form-control" type="email" placeholder="ejemplo@email.com" name="email" ref={register({ required: true })}/>
                     {errors.email && <span className='text-danger'>Ingrese su correo electrónico</span>}
+                  </div>
+                </Col>
+                <Col md={12}>
+                  <div className="form-group">
+                    <label>Contraseña <span className='text-danger'> *</span></label>
+                    <input className="form-control" type="password" name="password" ref={register({ required: true })}/>
+                    {errors.password && <span className='text-danger'>Ingrese su dirección</span>}
+                  </div>
+                </Col>
+                <Col md={12}>
+                  <div className="form-group">
+                    <label>Repita la contraseña <span className='text-danger'> *</span></label>
+                    <input className="form-control" type="password" name="password_confirmation" ref={register({ required: true })}/>
+                    {errors.password_confirmation && <span className='text-danger'>Repita su contraseña</span>}
                   </div>
                 </Col>
               </Row>
