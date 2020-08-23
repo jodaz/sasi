@@ -28,7 +28,7 @@ const Reports = () => {
   }, []);
 
   const columns = useMemo(() => [
-    { header: 'Título', accessor: 'title' },
+    { header: 'Título', accessor: 'description' },
     { header: 'Cantidad', accessor: 'quantity' },
     { header: 'Estado', accessor: 'state.name' }
   ], []);

@@ -34,12 +34,13 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::middleware('auth:api')->group(function() {
+    Route::get('states', 'StateController');
     Route::resource('parishes', 'ParishController');
     Route::resource('communities', 'CommunityController');
     Route::resource('categories', 'CategoryController');
     Route::resource('organizations', 'OrganizationController');
 
-    /// Applications
+    // Applications
     Route::get('applications/{application}/approve', 'ApplicationController@approve');
     Route::resource('applications', 'ApplicationController');
 });
