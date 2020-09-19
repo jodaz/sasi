@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ToastWrapper, Error } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrors, clearNotification  } from '../../store/actions';
+import { Actions  } from '../../store';
 import { isEmpty } from '../../utils';
 
 const getType = (type) => {
@@ -27,8 +27,10 @@ const Auth = (props) => {
         Error(message);
       }
 
-      dispatch(clearNotification());
-      dispatch(clearErrors());
+      (async () => {
+        await dispatch(Actions.clearErrors());
+        await dispatch(Actions.clearNotification());
+      })();
     }  
     return;
   }, [notification]);
@@ -42,6 +44,7 @@ const Auth = (props) => {
           {children}  
         </div>
       </div>  
+      <ToastWrapper />
     </div>
   );
 };

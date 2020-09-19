@@ -39,7 +39,7 @@ export const login = data => dispatch => {
       dispatch(setUser(res.data.user));
       dispatch(clearErrors());
     })
-    .catch(err => dispatch(setErrors(err.response.data.errors)));
+    .catch(err => dispatch(setErrors(err.response.data)));
 }
 
 export const logout = () => dispatch => {
@@ -115,7 +115,7 @@ const setErrors = payload => ({
   payload: payload
 });
 
-const makeNotification = (response) => ({
+export const makeNotification = (response) => ({
   type: NOTIFY,
   payload: response
 });

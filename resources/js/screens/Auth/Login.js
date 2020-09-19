@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/actions';
+import { Actions } from '../../store';
 import Auth from '../layouts/Auth';
 import {
   Meta,
   Loading,
-  Error,
-  ToastWrapper
 } from '../../components';
 import { isEmpty } from '../../utils';
 import { Link } from 'react-router-dom';
@@ -16,17 +14,19 @@ const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const store = useSelector(store => store);
+
   const onSubmit = data => {
     setIsLoading(true);
-    dispatch(login(data));
+    dispatch(Actions.login(data));
   }
-  const getErrors = useSelector(store => store.errors);
 
   useEffect(() => {
-    if (!isEmpty(getErrors)) {
-      Error(getErrors.message);
+    if (!isEmpty(store.errors)) {
+      setIsLoading(false);
+      dispatch(Actions.makeNotification(store.errors));
     }
-  }, [errors])
+  }, [store]);
 
   return (
     <Auth type='login'>
@@ -59,9 +59,14 @@ const Login = () => {
               </div>
             </div>
             <div className="kt-login__actions">
-              <button className="btn btn-success btn-pill" disabled={(isLoading) && true}>
-                { (isLoading) ? <Loading color='#fff'/> : 'Iniciar sesión' }
-              </button>
+              { (isLoading) 
+                ? <Loading color='#781adb'/>
+                : <> 
+                  <button className="btn btn-success btn-pill" disabled={(isLoading) && true}>
+                    {'Iniciar sesión'}
+                  </button>
+                </>
+              }
             </div>
           </form>
         </div>
@@ -74,7 +79,6 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      <ToastWrapper />
     </Auth>
   );
 };
