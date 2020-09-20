@@ -51,16 +51,8 @@ class UserController extends Controller
             ]; 
         });
 
-        $communities = Community::get()->map(function ($community) {
-            return [
-                'label' => $community->name,
-                'value' => $community->id
-            ]; 
-        });
-
         return response()->json([
             'parishes' => $parishes,
-            'communities' => $communities,
             'genres' => $genres,
             'citizenships' => $citizenships
         ]);

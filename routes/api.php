@@ -21,7 +21,10 @@ Route::post('login', 'AuthController@login');
 Route::post('recover-account', 'PasswordResetController@recover');
 Route::post('reset-password', 'PasswordResetController@resetPassword');
 Route::get('reset-password/{token}', 'PasswordResetController@findToken');
+
+Route::get('parishes/{parish}/communities', 'ParishController@getCommunities');
 Route::resource('users', 'UserController');
+
 // Authenticated only
 Route::middleware('auth:api')->group(function () {
     Route::get('logout', 'AuthController@logout');
