@@ -6,7 +6,7 @@ import {
 } from '../components';
 import { Link } from 'react-router-dom';
 
-const ForgetPassword = () => (
+const CheckEmail = () => (
   <Auth type='login'>
     <Meta title="¡Revise su correo electrónico!" />
 
@@ -33,5 +33,5 @@ const ForgetPassword = () => (
   </Auth>
 );
 
-export default ForgetPassword;
+export default CheckEmail;
 

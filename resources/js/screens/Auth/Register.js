@@ -25,8 +25,14 @@ const Register = () => {
   const [selectedParish, setSelectedParish] = useState({});
   const dispatch = useDispatch();
 
-  const onSubmit = data => {
+  const onSubmit = d => {
     setIsLoading(true);
+
+    const data = {
+      ...d,
+      parish: selectedParish
+    };
+
     dispatch(Actions.registerUser(data));
   }
 
@@ -103,6 +109,7 @@ const Register = () => {
                           options={data.citizenships}
                           control={control}
                           placeholder='Seleccione'
+                          defaultValue=""
                           inputRef={register}
                           rules={{ required: true }}
                         /> 
@@ -115,6 +122,7 @@ const Register = () => {
                         <Controller
                           as={Select}
                           name="genre"
+                          defaultValue=""
                           options={data.genres}
                           control={control}
                           placeholder='Seleccione'
@@ -127,7 +135,7 @@ const Register = () => {
                     <Col md={12}>
                       <div className="form-group">
                         <label>Cédula de identidad<span className='text-danger'> *</span></label>
-                        <input className="form-control" type="text" placeholder="Cédula de identidad (*)" name="dni" ref={register({ required: true })}/>
+                        <input className="form-control" maxLength={10} type="text" placeholder="Cédula de identidad (*)" name="dni" ref={register({ required: true })}/>
                         {errors.dni && <span className='text-danger'>Ingrese su cédula</span>}
                       </div>
                     </Col>
@@ -137,13 +145,13 @@ const Register = () => {
                         <Controller
                           name="parish"
                           control={control}
-                          inputRef={register}
-                          rules={{ required: true }}
-                          render={({ onChange }) => (
+                          render={({ onChange, value, name, inputRef }) => (
                             <Select
+                              name={name}
                               options={data.parishes}
                               onChange={selected => setSelectedParish(selected)}
                               placeholder='Seleccione'
+                              value={value}
                             />
                           )}
                         /> 
@@ -161,9 +169,10 @@ const Register = () => {
                             control={control}
                             placeholder='Seleccione'
                             inputRef={register}
+                            defaultValue=""
                             rules={{ required: true }}
                           /> 
-                          {errors.community && <span className='text-danger'>Seleccione una parroquia</span>}
+                          {errors.community && <span className='text-danger'>Seleccione una comunidad</span>}
                         </div>
                       </Col>
                     }

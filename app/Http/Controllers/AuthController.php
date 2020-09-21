@@ -18,6 +18,8 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = request(['email', 'password']);
+        $credentials['active'] = true;
+        $credentials['deleted_at'] = null;
 
         if (!Auth::attempt($credentials)) {
             return response()->json([

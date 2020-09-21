@@ -9,6 +9,7 @@ use App\Citizenship;
 use App\Parish;
 use App\Community;
 use Illuminate\Support\Str;
+use App\Notifications\SignupActivate;
 use Hash;
 
 class UserController extends Controller
@@ -71,7 +72,7 @@ class UserController extends Controller
             ->correlative;
         $identification = $citizenshipCorr.'-'.$request->get('identification');
 
-        User::create([
+        $user = User::create([
             'first_name' => $request->get('first_name'),
             'surname' => $request->get('surname'),
             'email' => $request->get('email'),
@@ -82,8 +83,11 @@ class UserController extends Controller
             'parish_id' => $request->get('parish')['value'],
             'genre_id' => $request->get('genre')['value'],
             'activation_token' => Str::random(60),
+            'active' => false,
             'role_id' => 3 // By default, users are common  
         ]);
+
+        $user->notify(new SignupActivate($user->activation_token));
 
         return response()->json([
             'success' => true,
@@ -100,6 +104,23 @@ class UserController extends Controller
     public function show(User $user)
     {
         return Response($user->load('applications', 'organizations'));
+    }
+
+    public function activate()
+    {
+        $user = User::where('activation_token', $token)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'This activation token is invalid.'
+            ], 404);
+        }
+
+        $user->active = true;
+        $user->activation_token = '';
+        $user->save();
+
+        return $user;
     }
 
     /**

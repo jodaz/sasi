@@ -100528,8 +100528,13 @@ var Register = function Register() {
 
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
 
-  var onSubmit = function onSubmit(data) {
+  var onSubmit = function onSubmit(d) {
     setIsLoading(true);
+
+    var data = _objectSpread(_objectSpread({}, d), {}, {
+      parish: selectedParish
+    });
+
     dispatch(_store__WEBPACK_IMPORTED_MODULE_8__["Actions"].registerUser(data));
   };
 
@@ -100621,6 +100626,7 @@ var Register = function Register() {
     options: data.citizenships,
     control: control,
     placeholder: "Seleccione",
+    defaultValue: "",
     inputRef: register,
     rules: {
       required: true
@@ -100636,6 +100642,7 @@ var Register = function Register() {
   }, " *")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_1__["Controller"], {
     as: react_select__WEBPACK_IMPORTED_MODULE_4__["default"],
     name: "genre",
+    defaultValue: "",
     options: data.genres,
     control: control,
     placeholder: "Seleccione",
@@ -100653,6 +100660,7 @@ var Register = function Register() {
     className: "text-danger"
   }, " *")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: "form-control",
+    maxLength: 10,
     type: "text",
     placeholder: "C\xE9dula de identidad (*)",
     name: "dni",
@@ -100670,18 +100678,19 @@ var Register = function Register() {
   }, " *")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_1__["Controller"], {
     name: "parish",
     control: control,
-    inputRef: register,
-    rules: {
-      required: true
-    },
     render: function render(_ref) {
-      var onChange = _ref.onChange;
+      var onChange = _ref.onChange,
+          value = _ref.value,
+          name = _ref.name,
+          inputRef = _ref.inputRef;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        name: name,
         options: data.parishes,
         onChange: function onChange(selected) {
           return setSelectedParish(selected);
         },
-        placeholder: "Seleccione"
+        placeholder: "Seleccione",
+        value: value
       });
     }
   }), errors.parish && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -100699,12 +100708,13 @@ var Register = function Register() {
     control: control,
     placeholder: "Seleccione",
     inputRef: register,
+    defaultValue: "",
     rules: {
       required: true
     }
   }), errors.community && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "text-danger"
-  }, "Seleccione una parroquia"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Col"], {
+  }, "Seleccione una comunidad"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Col"], {
     md: 12
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
@@ -100804,7 +100814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ForgetPassword = function ForgetPassword() {
+var CheckEmail = function CheckEmail() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_Auth__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "login"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Meta"], {
@@ -100833,7 +100843,7 @@ var ForgetPassword = function ForgetPassword() {
   }, "Inicio"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (ForgetPassword);
+/* harmony default export */ __webpack_exports__["default"] = (CheckEmail);
 
 /***/ }),
 
@@ -101508,7 +101518,7 @@ var Wrapper = function Wrapper(_ref) {
     className: "kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_subheader__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "kt-content  kt-grid__item kt-grid__item--fluid"
   }, children)))));
 };
@@ -102498,7 +102508,7 @@ var resetPassword = function resetPassword(data) {
 var registerUser = function registerUser(data) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/users', data).then(function (res) {
-      return console.log(res.data);
+      return _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/check-email');
     })["catch"](function (err) {
       return dispatch(setErrors(err.response.data.errors));
     });
