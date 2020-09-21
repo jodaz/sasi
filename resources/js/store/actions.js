@@ -24,6 +24,12 @@ export const resetPassword = data => dispatch => {
     .catch(err => dispatch(setErrors(err.response.data.errors)));
 }
 
+export const activateAccount = token => dispatch => {
+  axios.get(`/api/activate-account/${token}`)
+    .then(res => dispatch(makeNotification(res.data)))
+    .catch(err => dispatch(setErrors(err.response.data)));
+}
+
 export const registerUser = data => dispatch => {
   axios.post('/api/users', data)
     .then(res => history.push('/check-email'))

@@ -98633,7 +98633,7 @@ var App = function App() {
     component: _screens_Auth_RecoverPassword__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
-    path: "/login",
+    path: "/login/:token?",
     component: _screens_Auth_Login__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
@@ -100232,6 +100232,9 @@ var Login = function Login() {
     return store;
   });
 
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["useParams"])(),
+      token = _useParams.token;
+
   var onSubmit = function onSubmit(data) {
     setIsLoading(true);
     dispatch(_store__WEBPACK_IMPORTED_MODULE_3__["Actions"].login(data));
@@ -100243,6 +100246,12 @@ var Login = function Login() {
       dispatch(_store__WEBPACK_IMPORTED_MODULE_3__["Actions"].makeNotification(store.errors));
     }
   }, [store]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["isEmpty"])(token)) {
+      dispatch(_store__WEBPACK_IMPORTED_MODULE_3__["Actions"].activateAccount(token));
+      setIsLoading(false);
+    }
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layouts_Auth__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "login"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Meta"], {
@@ -102496,13 +102505,14 @@ var notificationsReducer = function notificationsReducer() {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: recoverAccount, resetPassword, registerUser, login, logout, getUser, setUser, createCategory, createApplication, createCommunity, clearNotification, clearErrors, makeNotification */
+/*! exports provided: recoverAccount, resetPassword, activateAccount, registerUser, login, logout, getUser, setUser, createCategory, createApplication, createCommunity, clearNotification, clearErrors, makeNotification */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recoverAccount", function() { return recoverAccount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetPassword", function() { return resetPassword; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activateAccount", function() { return activateAccount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerUser", function() { return registerUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
@@ -102537,6 +102547,15 @@ var resetPassword = function resetPassword(data) {
       _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/login');
     })["catch"](function (err) {
       return dispatch(setErrors(err.response.data.errors));
+    });
+  };
+};
+var activateAccount = function activateAccount(token) {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/activate-account/".concat(token)).then(function (res) {
+      return dispatch(makeNotification(res.data));
+    })["catch"](function (err) {
+      return dispatch(setErrors(err.response.data));
     });
   };
 };
@@ -102963,8 +102982,8 @@ var useDetectOutsideClick = function useDetectOutsideClick(el, initialState) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/dei/code/sasi/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/dei/code/sasi/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/jodaz/code/sasi/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/jodaz/code/sasi/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

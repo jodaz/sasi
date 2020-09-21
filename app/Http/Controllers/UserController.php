@@ -112,7 +112,8 @@ class UserController extends Controller
 
         if (!$user) {
             return response()->json([
-                'message' => 'This activation token is invalid.'
+                'success' => false,
+                'message' => '¡El usuario ya tiene una cuenta activa!'
             ], 404);
         }
 
@@ -120,7 +121,10 @@ class UserController extends Controller
         $user->activation_token = '';
         $user->save();
 
-        return $user;
+        return response()->json([
+            'success' => true,
+            'message' => '¡Su cuenta ha sido activada!'
+        ]);
     }
 
     /**

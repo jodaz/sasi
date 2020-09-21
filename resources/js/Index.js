@@ -43,7 +43,7 @@ const App = () => {
         <Route exact path='/register' component={Register} /> 
         <Route exact path='/forget-password' component={ForgetPassword} /> 
         <Route exact path='/reset-password/:token' component={RecoverPassword} /> 
-        <Route exact path='/login' component={Login} /> 
+        <Route exact path='/login/:token?' component={Login} /> 
         <Route exact path='/check-email' component={GoToEmail} /> 
       </Switch>
     </Router>

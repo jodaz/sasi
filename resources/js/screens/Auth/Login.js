@@ -8,13 +8,14 @@ import {
   Loading,
 } from '../../components';
 import { isEmpty } from '../../utils';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const store = useSelector(store => store);
+  const { token } = useParams();
 
   const onSubmit = data => {
     setIsLoading(true);
@@ -27,6 +28,13 @@ const Login = () => {
       dispatch(Actions.makeNotification(store.errors));
     }
   }, [store]);
+
+  useEffect(() => {
+    if (!isEmpty(token)) {
+      dispatch(Actions.activateAccount(token));
+      setIsLoading(false);
+    } 
+  }, []);
 
   return (
     <Auth type='login'>
