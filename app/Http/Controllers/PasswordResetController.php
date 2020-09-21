@@ -28,7 +28,7 @@ class PasswordResetController extends Controller
             ]);
         }
 
-        $hash = str_replace('/', '', Hash::make($request->get('email')));
+        $hash = bin2hex(random_bytes(60));
 
         $passwordReset = PasswordReset::create([
             'email' => $request->get('email'),
@@ -48,23 +48,20 @@ class PasswordResetController extends Controller
         $passwordReset = PasswordReset::whereToken($token)->first();
 
         if (!$passwordReset) {
-            return response()->json([
-                'success' => false,
-                'message' => 'El link utilizado ha dejado de ser válido.'
-            ], 404);
+            return false;
         }
 
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
             $passwordReset->delete();
-            return response()->json([
-                'message' => 'El link utilizado es inválido.'
-            ], 404);
+            return false;
         }
+
+        return $passwordReset;
     }
 
     public function resetPassword(ChangePasswordRequest $request)
     {
-        $passwordReset = PasswordReset::whereToken($request->token)->first();
+        $passwordReset = $this->findToken($request->token); 
 
         if (!$passwordReset) {
             return response()->json([

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { ToastWrapper, Error } from '../../components';
+import { ToastWrapper, Success, Error } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Actions  } from '../../store';
 import { isEmpty } from '../../utils';
@@ -25,6 +25,8 @@ const Auth = (props) => {
 
       if (!success) {
         Error(message);
+      } else {
+        Success(message);
       }
 
       (async () => {

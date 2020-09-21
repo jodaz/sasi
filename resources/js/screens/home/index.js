@@ -25,7 +25,9 @@ const Home = () => {
   return (
     <Row>
       <Meta title="Inicio" />
-      <Col md={8}>
+      <Col md={4} sm={12}>
+      </Col>
+      <Col md={8} sm={12}>
         { 
           (user.role_id == 3)
           ? (<>

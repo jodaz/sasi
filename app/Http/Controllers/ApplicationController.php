@@ -31,6 +31,7 @@ class ApplicationController extends Controller
             $results = $request->page * 10;
 
             $query = $query->whereStateId($request->state)
+                ->with(['user', 'category'])
                 ->orderBy('created_at', 'DESC')
                 ->paginate($results);
 

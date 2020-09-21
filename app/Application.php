@@ -36,4 +36,9 @@ class Application extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Date('d/m/Y h:i', strtotime($value));
+    }
 }

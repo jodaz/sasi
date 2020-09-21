@@ -100447,7 +100447,14 @@ var RecoverPassword = function RecoverPassword() {
   }, "\xBFNo tiene una cuenta?"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
     className: "kt-link kt-login__account-link",
     to: "/register"
-  }, "Reg\xEDstrese"))));
+  }, "Reg\xEDstrese")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "kt-login__account"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "kt-login__account-msg"
+  }, "\xBFTiene una cuenta?"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+    className: "kt-link kt-login__account-link",
+    to: "/login"
+  }, "Iniciar sesi\xF3n"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (RecoverPassword);
@@ -100839,7 +100846,7 @@ var CheckEmail = function CheckEmail() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "kt-login__account-msg"
   }, "Volver al"), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/"
+    to: "/login"
   }, "Inicio"))));
 };
 
@@ -100918,6 +100925,16 @@ var LoadingPortlet = function LoadingPortlet() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Loading"], null)));
 };
 
+var applicationInfo = function applicationInfo(application) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "kt-menu__link-text"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "kt-badge kt-badge--inline kt-badge--danger"
+  }, application.category.name), ' ', ' ', application.quantity && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "kt-badge kt-badge--inline kt-badge--success"
+  }, application.quantity));
+};
+
 var ApplicationsList = function ApplicationsList() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -100982,7 +100999,18 @@ var ApplicationsList = function ApplicationsList() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, Object(_utils__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(data) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletBody"], null, "Parece que no tiene una solicitud pendiente...")) : data.map(function (application, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Portlet"], {
       key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletBody"], null, application.description));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletHeader"], {
+      label: application.user.full_name,
+      sublabel: application.created_at
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletToolbar"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-sm btn-brand btn-circle btn-icon"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+      icon: "check"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-sm btn-secondary btn-circle btn-icon"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+      icon: "trash"
+    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletBody"], null, application.description, applicationInfo(application)));
   }), isFetching && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoadingPortlet, null));
 };
 
@@ -101188,7 +101216,11 @@ var Home = function Home() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Meta"], {
     title: "Inicio"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Col"], {
-    md: 8
+    md: 4,
+    sm: 12
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Col"], {
+    md: 8,
+    sm: 12
   }, user.role_id == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["PortletBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Link"], {
     to: "/home/new-application"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_5__["Notification"], {
@@ -101269,6 +101301,8 @@ var Auth = function Auth(props) {
 
       if (!success) {
         Object(_components__WEBPACK_IMPORTED_MODULE_3__["Error"])(message);
+      } else {
+        Object(_components__WEBPACK_IMPORTED_MODULE_3__["Success"])(message);
       }
 
       _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -102499,7 +102533,8 @@ var recoverAccount = function recoverAccount(data) {
 var resetPassword = function resetPassword(data) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/reset-password', data).then(function (res) {
-      return _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/login');
+      dispatch(makeNotification(res.data));
+      _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/login');
     })["catch"](function (err) {
       return dispatch(setErrors(err.response.data.errors));
     });

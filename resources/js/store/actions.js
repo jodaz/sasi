@@ -17,7 +17,10 @@ export const recoverAccount = data => dispatch => {
 
 export const resetPassword = data => dispatch => {
   axios.post('/api/reset-password', data)
-    .then(res => history.push('/login'))
+    .then(res => {
+      dispatch(makeNotification(res.data))      
+      history.push('/login')
+    })
     .catch(err => dispatch(setErrors(err.response.data.errors)));
 }
 

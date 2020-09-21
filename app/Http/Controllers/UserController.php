@@ -106,7 +106,7 @@ class UserController extends Controller
         return Response($user->load('applications', 'organizations'));
     }
 
-    public function activate()
+    public function activate($token)
     {
         $user = User::where('activation_token', $token)->first();
 

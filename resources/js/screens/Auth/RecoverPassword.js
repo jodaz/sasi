@@ -71,6 +71,14 @@ const RecoverPassword = () => {
             Regístrese
           </Link>
         </div>
+        <div className="kt-login__account">
+          <span className="kt-login__account-msg">
+            ¿Tiene una cuenta?
+          </span>&nbsp;&nbsp;
+          <Link className="kt-link kt-login__account-link" to='/login'>
+            Iniciar sesión
+          </Link>
+        </div>
       </div>
     </Auth>
   );

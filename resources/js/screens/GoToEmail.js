@@ -25,7 +25,7 @@ const CheckEmail = () => (
         <span className="kt-login__account-msg">
           Volver al
         </span>&nbsp;&nbsp;
-        <Link to='/'>
+        <Link to='/login'>
           Inicio
         </Link>
       </div>

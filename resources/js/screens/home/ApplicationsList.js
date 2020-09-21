@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import {
   Loading,
   Portlet,
+  PortletHeader,
+  PortletToolbar,
   PortletBody,
+  Icon,
   Row
 } from '../../components';
 import axios from 'axios';
@@ -16,6 +19,21 @@ const LoadingPortlet = () => (
   </Portlet>
 );
 
+const applicationInfo = (application) => (
+  <span className="kt-menu__link-text">
+    <span className="kt-badge kt-badge--inline kt-badge--danger">
+      {application.category.name}
+    </span>
+    {' '}
+    {' '}
+    { (application.quantity) && 
+      <span className="kt-badge kt-badge--inline kt-badge--success">
+        {application.quantity}
+      </span>
+    }
+  </span>
+);
+
 const ApplicationsList = () => {
   const [data, setData] = useState({});
   const [page, setPage] = useState(1);
@@ -26,7 +44,6 @@ const ApplicationsList = () => {
     const scrollTop = (document.documentElement
       && document.documentElement.scrollTop)
       || document.body.scrollTop;
-
 
     const scrollHeight = (document.documentElement
       && document.documentElement.scrollHeight)
@@ -82,8 +99,22 @@ const ApplicationsList = () => {
         : (
           data.map((application, index) => 
             <Portlet key={index}>
+              <PortletHeader
+                label={application.user.full_name}
+                sublabel={application.created_at}
+              >
+                <PortletToolbar>
+                  <button className="btn btn-sm btn-brand btn-circle btn-icon">
+                    <Icon icon='check' />
+                  </button>
+                  <button className="btn btn-sm btn-secondary btn-circle btn-icon">
+                    <Icon icon='trash' />
+                  </button>
+                </PortletToolbar>
+              </PortletHeader>
               <PortletBody>
                 {application.description}
+                {applicationInfo(application)}
               </PortletBody>
             </Portlet>
           )

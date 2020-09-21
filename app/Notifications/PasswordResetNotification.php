@@ -41,7 +41,7 @@ class PasswordResetNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/api/reset-password/'.$this->token);
+        $url = url('/reset-password/'.$this->token);
 
         return (new MailMessage)
                     ->line('Recuperar contraseña')
