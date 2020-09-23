@@ -15,15 +15,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/vendors.bundle.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/light.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/base.light.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/brand.light.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dark.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 </head>
 <body>
-    <div id="app"></div>
+    <div id="root"></div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

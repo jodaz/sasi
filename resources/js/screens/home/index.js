@@ -1,71 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import Layout from '../layouts';
-import ApplicationsList from './ApplicationsList';
-import NewApplication from './NewApplication';
-import {
-  PrivateRoute,
-  Col,
-  Row,
-  Meta,
-  Portlet,
-  Loading,
-  Heading,
-  Notification,
-  PortletBody
-} from '../../components';
-import { Link, Switch } from 'react-router-dom';
-import { isEmpty } from '../../utils';
+import Layout from '../../layouts';
 
-const Home = () => {
-  const user = useSelector(store => store.auth.user);
-
-  if (isEmpty(user)) return <Loading />
-
+export default function home () {
   return (
-    <Row>
-      <Meta title="Inicio" />
-      <Col md={4} sm={12}>
-      </Col>
-      <Col md={8} sm={12}>
-        { 
-          (user.role_id == 3)
-          ? (<>
-              <Portlet>
-                <PortletBody>
-                  <Link to='/home/new-application'>
-                    <Notification title='Nueva solicitud' icon='paper-plane'/>
-                  </Link>
-                </PortletBody>
-              </Portlet>
-              
-              <Heading>
-                Mis solicitudes pendientes
-              </Heading>
-
-              <ApplicationsList />
-            </>)
-          : (<>
-              <Heading>
-                Solicitudes por revisar
-              </Heading>
-
-              <ApplicationsList />
-          </>)
-        }
-      </Col>
-    </Row>
+    <Layout title='Inicio'>
+      <div>
+        {'Hello World'}
+      </div>
+    </Layout>
   );
 };
 
-const Index = () => (
-  <Layout>
-    <Switch>
-      <PrivateRoute exact path='/home' component={Home} />
-
-      <PrivateRoute exact path='/home/new-application' component={NewApplication} />
-    </Switch>
-  </Layout>
-);
-
-export default Index;
