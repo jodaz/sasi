@@ -2,6 +2,8 @@ import React from 'react';
 import SignIn from './auth';
 import Home from './home';
 import Settings from './settings';
+import UpdatePassword from './account/UpdatePassword';
+import Profile from './account/Profile';
 import { Router, Route, Switch } from 'react-router-dom';
 import { PrivateRoute, history } from '../utils';
 
@@ -14,6 +16,8 @@ export default function App() {
       <Switch>
         <PrivateRoute path='/home' component={Home} />
         <PrivateRoute path='/settings' component={Settings} />
+        <PrivateRoute path='/update-password' component={UpdatePassword} />
+        <PrivateRoute path='/profile' component={Profile} />
       </Switch>
     </Router>
   ); 

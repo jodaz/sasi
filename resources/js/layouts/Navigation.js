@@ -21,7 +21,6 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import CloseIcon from '@material-ui/icons/Close';
-import { Route, MemoryRouter } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
 import routes from '../routes';
 import { Actions } from '../store';
@@ -128,8 +127,8 @@ function ResponsiveDrawer() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Cambiar contraseña</MenuItem>
+      <ListItemLink to='/profile' primary='Perfil'/> 
+      <ListItemLink to='/update-password' primary='Actualizar contraseña'/> 
       <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
     </Menu>
   );

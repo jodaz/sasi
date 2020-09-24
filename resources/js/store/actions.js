@@ -36,6 +36,12 @@ export const registerUser = data => dispatch => {
     .catch(err => dispatch(setErrors(err.response.data.errors)));
 }
 
+export const updatePassword = data => dispatch => {
+  axios.post('/update-password', data)
+    .then(res => dispatch(makeNotification(res.data)))
+    .catch(err => dispatch(setErrors(err.response.data.errors)));
+}
+
 export const login = data => dispatch => {
   axios.post('/login', data)
     .then(res => {
