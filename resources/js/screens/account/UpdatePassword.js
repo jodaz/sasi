@@ -77,7 +77,7 @@ export default function UpdatePassword() {
           name="new_password"
           label="Nueva contraseña"
           type="password"
-          id="current-password"
+          id="new-password"
           required
           inputRef={register({ required: true })}
           helperText={errors.new_password && 'Introduzca su contraseña'}
@@ -90,7 +90,7 @@ export default function UpdatePassword() {
           name="new_password_confirmation"
           label="Repita la nueva contraseña"
           type="password"
-          id="current-password"
+          id="new-password-confirm"
           required
           inputRef={register({ required: true })}
           helperText={errors.new_password && 'Introduzca su contraseña'}
@@ -102,7 +102,7 @@ export default function UpdatePassword() {
           color="primary"
           className={classes.submit}
         >
-          Acceder
+          Actualizar contraseña
         </Button>
       </form>
     </Layout>

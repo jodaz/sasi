@@ -1,14 +1,13 @@
 import React from 'react';
 import Navigation from './Navigation'; 
 import Helmet from 'react-helmet';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
   makeStyles,
   useTheme,
   Grid
 } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
+import { Notification } from '../components';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -17,21 +16,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function DescriptionAlert(props) {
-  const { success, message } = props;
-
-  if (success) {
-    return (<>
-      <Alert severity="success">
-        {message}
-      </Alert>
-    </>); 
-  }
-}
-
 export default function Layout({ title, children }) {
   const classes = useStyles();
-  const notification = useSelector(store => store.notification);
 
   return (<>
     <Helmet title={title} />
@@ -42,6 +28,8 @@ export default function Layout({ title, children }) {
         {children}    
       </Grid>
     </Container>
+
+    <Notification /> 
   </>);
 };
 
