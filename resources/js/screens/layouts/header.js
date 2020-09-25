@@ -41,7 +41,7 @@ const AppMenu = ({ mobile }) => {
 
   return (
     <Header mobile={mobile}>
-      <HeaderLogo to='/'>
+      <HeaderLogo to='/home'>
         <img alt="Logo" src={window.location.origin + "/logo-dark.png"} />
       </HeaderLogo>
       <HeaderMenuWrapper>

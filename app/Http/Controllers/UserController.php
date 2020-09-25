@@ -21,7 +21,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::get();
+        $query = User::latest('users.created_at')
+            ->with('role');
+
+        return $query->get();
     }
 
     /**

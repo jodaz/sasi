@@ -28,10 +28,12 @@ import HeaderMenuWrapper from './HeaderMenuWrapper';
 import HeaderTopBar from './HeaderTopBar';
 import PortletHeader from './PortletHeader';
 import PortletBody from './PortletBody';
+import Modal from './Modal';
 import { Success, Error, Warning, ToastWrapper } from './Toast';
 
 export {
   Dropdown,
+  Modal,
   Formgroup,
   Loading,
   Col,

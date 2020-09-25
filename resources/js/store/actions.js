@@ -5,6 +5,8 @@ import {
   LOGOUT_USER,
   SET_CURRENT_USER,
   CLEAR_NOTIFICATION,
+  OPEN_MODAL,
+  CLOSE_MODAL,
   CLEAR_ERRORS
 } from './types';
 import { setAuthToken, history } from '../utils';
@@ -122,6 +124,15 @@ export const clearErrors = () => ({
 const setErrors = payload => ({
   type: GET_ERRORS,
   payload: payload
+});
+
+export const openModal = payload => ({
+  type: OPEN_MODAL,
+  payload: payload  
+});
+
+export const closeModal = () => ({
+  type: CLOSE_MODAL
 });
 
 export const makeNotification = (response) => ({

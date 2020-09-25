@@ -9,7 +9,9 @@ import {
   Row
 } from '../../components';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { loadingPortlet, isEmpty } from '../../utils';
+import { Actions } from '../../store';
 
 const LoadingPortlet = () => (
   <Portlet>
@@ -39,6 +41,8 @@ const ApplicationsList = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(true);
+  const user = useSelector(store => store.auth.user);
+  const dispatch = useDispatch();
 
   function isScrolling(){
     const scrollTop = (document.documentElement
@@ -83,6 +87,9 @@ const ApplicationsList = () => {
     fetchData();
   }, [isFetching]);
 
+  const approve = () => dispatch(Actions.openModal('¿Desea aprobar esta solicitud?'));
+  const refuse = () => dispatch(Actions.openModal('¿Desea denegar esta solicitud?'));
+
   if (loading) return <LoadingPortlet />
 
   return (
@@ -103,14 +110,16 @@ const ApplicationsList = () => {
                 label={application.user.full_name}
                 sublabel={application.created_at}
               >
+                { (user.role_id == 2) &&   
                 <PortletToolbar>
-                  <button className="btn btn-sm btn-brand btn-circle btn-icon">
+                  <button className="btn btn-sm btn-brand btn-circle btn-icon" onClick={approve}>
                     <Icon icon='check' />
                   </button>
-                  <button className="btn btn-sm btn-secondary btn-circle btn-icon">
+                  <button className="btn btn-sm btn-secondary btn-circle btn-icon" onClick={refuse}>
                     <Icon icon='trash' />
                   </button>
                 </PortletToolbar>
+                }
               </PortletHeader>
               <PortletBody>
                 {application.description}

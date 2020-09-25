@@ -27,7 +27,8 @@ const Users = () => {
 
   const columns = useMemo(() => [
     { header: 'Nombre', accessor: 'full_name' },
-    { header: 'Cédula', accessor: 'identification' },
+    { header: 'Cédula', accessor: 'dni' },
+    { header: 'Rol', accessor: 'role.name' }
   ], []);
 
   return (

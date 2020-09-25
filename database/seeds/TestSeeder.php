@@ -40,7 +40,7 @@ class TestSeeder extends Seeder
         User::create([
             'first_name' => 'Jesús',
             'surname' => 'Ordosgoitty',
-            'email' => 'jesuodz@gmail.com',
+            'email' => 'admin@gmail.com',
             'dni' => 'V-27572434',
             'password' => bcrypt('qwerty123'),
             'genre_id' => 1,
@@ -56,7 +56,7 @@ class TestSeeder extends Seeder
         User::create([
             'first_name' => 'Andreina',
             'surname' => 'Santana',
-            'email' => 'nomesetucorreo@gmail.com',
+            'email' => 'analista@gmail.com',
             'dni' => 'V-26292605',
             'password' => bcrypt('qwerty123'),
             'genre_id' => 1,

@@ -12,7 +12,8 @@ import {
   Loading,
   Heading,
   Notification,
-  PortletBody
+  PortletBody,
+  Modal
 } from '../../components';
 import { Link, Switch } from 'react-router-dom';
 import { isEmpty } from '../../utils';
@@ -44,13 +45,15 @@ const Home = () => {
               </Heading>
 
               <ApplicationsList />
-            </>)
-          : (<>
+            </>
+          ) : (<>
               <Heading>
                 Solicitudes por revisar
               </Heading>
 
               <ApplicationsList />
+
+              <Modal />
           </>)
         }
       </Col>
