@@ -111,7 +111,7 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $application)
     {
-        //
+        dd($request->all());
     }
 
     public function approve(Application $application)

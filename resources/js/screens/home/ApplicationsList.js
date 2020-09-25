@@ -87,8 +87,11 @@ const ApplicationsList = () => {
     fetchData();
   }, [isFetching]);
 
-  const approve = () => dispatch(Actions.openModal('¿Desea aprobar esta solicitud?'));
-  const refuse = () => dispatch(Actions.openModal('¿Desea denegar esta solicitud?'));
+  const handlerApplication = ({ application, action }) => dispatch(Actions.openModal({
+    message: '¿Desea aprobar esta solicitud?',
+    application: application,
+    action: action
+  }));
 
   if (loading) return <LoadingPortlet />
 
@@ -112,10 +115,10 @@ const ApplicationsList = () => {
               >
                 { (user.role_id == 2) &&   
                 <PortletToolbar>
-                  <button className="btn btn-sm btn-brand btn-circle btn-icon" onClick={approve}>
+                  <button className="btn btn-sm btn-brand btn-circle btn-icon" onClick={handlerApplication(application.id, 'approve')}>
                     <Icon icon='check' />
                   </button>
-                  <button className="btn btn-sm btn-secondary btn-circle btn-icon" onClick={refuse}>
+                  <button className="btn btn-sm btn-secondary btn-circle btn-icon" onClick={handlerApplication(application.id, 'refuse')}>
                     <Icon icon='trash' />
                   </button>
                 </PortletToolbar>

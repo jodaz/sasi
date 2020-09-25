@@ -17,6 +17,15 @@ export const recoverAccount = data => dispatch => {
     .catch(err => dispatch(setErrors(err.response.data.errors)));
 }
 
+export const updateApplication = data => dispatch => {
+  axios.post(`/api/applications/${application}`, data)
+    .then(res => {
+      dispatch(makeNotification(res.data));
+      dispatch(closeModal()); 
+    })
+    .catch(err => dispatch(setErrors(err.response.data.errors)));
+}
+
 export const resetPassword = data => dispatch => {
   axios.post('/api/reset-password', data)
     .then(res => {

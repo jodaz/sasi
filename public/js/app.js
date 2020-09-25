@@ -101022,9 +101022,19 @@ function Index() {
   var message = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (store) {
     return store.modal.message;
   });
+  var data = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (store) {
+    return {
+      action: store.modal.action,
+      application: store.modal.application
+    };
+  });
 
   var closeModal = function closeModal() {
     return dispatch(_store__WEBPACK_IMPORTED_MODULE_2__["Actions"].closeModal());
+  };
+
+  var onSubmit = function onSubmit() {
+    dispatch(_store__WEBPACK_IMPORTED_MODULE_2__["Actions"].updateApplication(data));
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_modal__WEBPACK_IMPORTED_MODULE_3___default.a, {
@@ -101034,7 +101044,17 @@ function Index() {
     overlayClassName: "overlay"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_4__["Portlet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_4__["PortletHeader"], {
     label: message
-  })));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_4__["PortletFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn btn-success",
+    onClick: onSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_4__["Icon"], {
+    icon: "trash"
+  }), "Cancelar"), '  ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn btn-danger",
+    onClick: closeModal
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(___WEBPACK_IMPORTED_MODULE_4__["Icon"], {
+    icon: "trash"
+  }), "Cancelar"))));
 }
 
 /***/ }),
@@ -102747,12 +102767,14 @@ var ApplicationsList = function ApplicationsList() {
     fetchData();
   }, [isFetching]);
 
-  var approve = function approve() {
-    return dispatch(_store__WEBPACK_IMPORTED_MODULE_5__["Actions"].openModal('¿Desea aprobar esta solicitud?'));
-  };
-
-  var refuse = function refuse() {
-    return dispatch(_store__WEBPACK_IMPORTED_MODULE_5__["Actions"].openModal('¿Desea denegar esta solicitud?'));
+  var handlerApplication = function handlerApplication(_ref) {
+    var application = _ref.application,
+        action = _ref.action;
+    return dispatch(_store__WEBPACK_IMPORTED_MODULE_5__["Actions"].openModal({
+      message: '¿Desea aprobar esta solicitud?',
+      application: application,
+      action: action
+    }));
   };
 
   if (loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoadingPortlet, null);
@@ -102764,12 +102786,12 @@ var ApplicationsList = function ApplicationsList() {
       sublabel: application.created_at
     }, user.role_id == 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletToolbar"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn btn-sm btn-brand btn-circle btn-icon",
-      onClick: approve
+      onClick: handlerApplication(application.id, 'approve')
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
       icon: "check"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn btn-sm btn-secondary btn-circle btn-icon",
-      onClick: refuse
+      onClick: handlerApplication(application.id, 'refuse')
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
       icon: "trash"
     })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_1__["PortletBody"], null, application.description, applicationInfo(application)));
@@ -104238,7 +104260,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var initialState = {
   isOpen: false,
-  message: {}
+  message: {},
+  action: '',
+  application: ''
 };
 
 var modalReducer = function modalReducer() {
@@ -104249,13 +104273,17 @@ var modalReducer = function modalReducer() {
     case _types__WEBPACK_IMPORTED_MODULE_0__["OPEN_MODAL"]:
       return {
         isOpen: true,
-        message: action.payload
+        message: action.payload.message,
+        action: action.payload.action,
+        application: action.payload.application
       };
 
     case _types__WEBPACK_IMPORTED_MODULE_0__["CLOSE_MODAL"]:
       return {
         isOpen: false,
-        message: ''
+        message: '',
+        action: '',
+        application: ''
       };
 
     default:
@@ -104304,12 +104332,13 @@ var notificationsReducer = function notificationsReducer() {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: recoverAccount, resetPassword, activateAccount, registerUser, login, logout, getUser, setUser, createCategory, createApplication, createCommunity, clearNotification, clearErrors, openModal, closeModal, makeNotification */
+/*! exports provided: recoverAccount, updateApplication, resetPassword, activateAccount, registerUser, login, logout, getUser, setUser, createCategory, createApplication, createCommunity, clearNotification, clearErrors, openModal, closeModal, makeNotification */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recoverAccount", function() { return recoverAccount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateApplication", function() { return updateApplication; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetPassword", function() { return resetPassword; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activateAccount", function() { return activateAccount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerUser", function() { return registerUser; });
@@ -104336,6 +104365,16 @@ var recoverAccount = function recoverAccount(data) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/recover-account', data).then(function (res) {
       return _utils__WEBPACK_IMPORTED_MODULE_2__["history"].push('/check-email');
+    })["catch"](function (err) {
+      return dispatch(setErrors(err.response.data.errors));
+    });
+  };
+};
+var updateApplication = function updateApplication(data) {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/applications/".concat(application), data).then(function (res) {
+      dispatch(makeNotification(res.data));
+      dispatch(closeModal());
     })["catch"](function (err) {
       return dispatch(setErrors(err.response.data.errors));
     });
