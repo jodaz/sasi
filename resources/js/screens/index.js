@@ -1,5 +1,5 @@
 import React from 'react';
-import SignIn from './auth';
+import { SignIn, SignUp } from './auth';
 import Home from './home';
 import Settings from './settings';
 import UpdatePassword from './account/UpdatePassword';
@@ -12,6 +12,7 @@ export default function App() {
     <Router history={history}>
       <Switch>
         <Route path='/login' component={SignIn} />
+        <Route path='/register' component={SignUp} />
       </Switch>
       <Switch>
         <PrivateRoute path='/home' component={Home} />
