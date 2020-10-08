@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import {
   Button,
+  Container,
   TextField,
   FormControlLabel,
   Link,
@@ -10,7 +11,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-// 
+// Components 
 import Helmet from 'react-helmet';
 import Layout from '../../layouts';
 import { useForm } from 'react-hook-form';
@@ -53,8 +54,10 @@ export default function UpdatePassword() {
   const onSubmit = data => dispatch(Actions.updatePassword(data));
 
   return (
-    <Layout title='Inicio'>
-      <Helmet title='Actualizar contraseña' />
+    <Layout title='Actualizar contraseña'>
+      
+      <Typography>Actualizar contraseña</Typography>
+
       <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
         <TextField
           variant="outlined"

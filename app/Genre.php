@@ -8,8 +8,8 @@ class Genre extends Model
 {
     protected $table = 'genres';
 
-    public function users()
+    public function profile()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Profile::class);
     }
 }

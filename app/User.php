@@ -12,8 +12,6 @@ class User extends Authenticatable
     use Notifiable;
     use HasApiTokens;
 
-    protected $appends = [ 'full_name' ];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -39,21 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function genre()
-    {
-        return $this->belongsTo(Genre::class);
-    }
-
-    public function parish()
-    {
-        return $this->belongsTo(Parish::class);
-    }
-
-    public function community()
-    {
-        return $this->belongsTo(Community::class);
-    }
-
     public function organizations()
     {
         return $this->hasMany(Organization::class);
@@ -64,13 +47,13 @@ class User extends Authenticatable
         return $this->hasMany(Application::class);
     }
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(Rol::class);
-    }
-
-    public function getFullNameAttribute()
-    {
-        return "{$this->first_name} {$this->surname}";
     }
 }

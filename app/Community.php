@@ -23,9 +23,9 @@ class Community extends Model {
         return $this->hasManyThrough(Application::class, User::class);
     }
 
-    public function users()
+    public function profile()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Profile::class);
     }
 
     public function organizations()

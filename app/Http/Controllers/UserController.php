@@ -68,20 +68,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $password = Hash::make($request->password);
-        $citizenshipCorr = Citizenship::find($request->get('citizenship')['value'])
-            ->correlative;
-        $identification = $citizenshipCorr.'-'.$request->get('identification');
 
         $user = User::create([
-            'first_name' => $request->get('first_name'),
-            'surname' => $request->get('surname'),
-            'email' => $request->get('email'),
-            'password' => $password,
-            'address' => $request->get('address'),
-            'dni' => $identification,
-            'community_id' => $request->get('community')['value'],
-            'parish_id' => $request->get('parish')['value'],
-            'genre_id' => $request->get('genre')['value'],
             'activation_token' => Str::random(60),
             'active' => false,
             'role_id' => 3 // By default, users are common  
