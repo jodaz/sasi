@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { useForm } from 'react-hook-form';
-import { Actions } from '../../store';
-import { isEmpty } from '../../utils';
-import { useDispatch, useSelector } from 'react-redux';
-
+import * as React from 'react';
+import { useState } from 'react';
+import { useLogin, useNotify, Notification } from 'react-admin';
+import {
+  makeStyles,
+  Typography,
+  Box,
+  Grid,
+  Link,
+  FormControlLabel,
+  TextField,
+  Button,
+  Avatar
+} from '@material-ui/core';
 // Layout
 import Auth from '../../layouts/Auth';
 
@@ -45,25 +41,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  const { register, handleSubmit, errors } = useForm();
+const Login = () => {
+  const [errors, setErrors] = useState({});
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const loginErrors = useSelector(store => store.errors);
-  
-  const onSubmit = data => dispatch(Actions.login(data));
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const login = useLogin();
+  const notify = useNotify();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login({ email, password })
+      .catch(() => notify('Correo o contraseña inválidos.'));
+  };
 
   return (
-    <Auth title="Inicio de sesión">
-      <CssBaseline />
+    <Auth>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Inicio de sesión
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             error={errors.email && true}
@@ -72,8 +72,8 @@ export default function SignIn() {
             id="login"
             label="Correo electrónico"
             name="email"
+            onChange={e => setEmail(e.target.value)}
             required
-            inputRef={register({ required: true })}
             helperText={errors.email && 'Ingrese su correo electrónico'}
           />
           <TextField
@@ -85,11 +85,10 @@ export default function SignIn() {
             label="Contraseña"
             type="password"
             id="password"
+            onChange={e => setPassword(e.target.value)}
             required
-            inputRef={register({ required: true })}
             helperText={errors.password && 'Introduzca su contraseña'}
           />
-          {!isEmpty(loginErrors) && ErrorTypo(loginErrors.message) }
           <Button
             type="submit"
             fullWidth
@@ -101,6 +100,10 @@ export default function SignIn() {
           </Button>
         </form>
       </div>
+
+      <Notification />
     </Auth>
   );
-}
+};
+
+export default Login;

@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Box, Link, makeStyles } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Helmet from 'react-helmet';
+import { Container, Box, Link, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   footer: {
@@ -34,7 +31,6 @@ export default function Auth(props) {
   return (
     <>
       <Container component="main" maxWidth="xs">
-        <Helmet title={title} />
 
         {children}
 
