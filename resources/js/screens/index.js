@@ -4,23 +4,30 @@ import Home from './home';
 import Settings from './settings';
 import UpdatePassword from './account/UpdatePassword';
 import Profile from './account/Profile';
-import { Router, Route, Switch } from 'react-router-dom';
-import { PrivateRoute, history } from '../utils';
+import { Admin, Resource } from 'react-admin';
+import jsonapiClient from 'ra-jsonapi-client';
+import redux from 'redux';
+import { Provider, useDispatch } from 'react-redux';
+import { store as createStore, Actions } from '../store';
+
+const dataProvider = jsonapiClient('http://dev.sasi.loc/api');
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 
 export default function App() {
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path='/login' component={SignIn} />
-        <Route path='/register' component={SignUp} />
-      </Switch>
-      <Switch>
-        <PrivateRoute path='/home' component={Home} />
-        <PrivateRoute path='/settings' component={Settings} />
-        <PrivateRoute path='/update-password' component={UpdatePassword} />
-        <PrivateRoute path='/profile' component={Profile} />
-      </Switch>
-    </Router>
+    <Provider store={createStore({
+        dataProvider,
+        history
+      })}>
+      <Admin
+        dashboard={Home}
+        dataProvider={dataProvider}
+        history={history}
+      >
+        
+      </Admin>
+    </Provider>
   ); 
 }
 

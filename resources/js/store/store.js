@@ -4,14 +4,29 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { errorsReducer } from './Errors';
 import { notificationsReducer } from './Notifications';
 import { authReducer } from './Auth';
+import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { adminReducer } from 'react-admin';
 
-const rootReducer = combineReducers({
-  errors: errorsReducer,
-  auth: authReducer,
-  notification: notificationsReducer
-});
+export default ({ 
+  dataProvider,
+  history,
+}) => {
+  const rootReducer = combineReducers({
+    errors: errorsReducer,
+    auth: authReducer,
+    notification: notificationsReducer,
+    router: connectRouter(history),
+    admin: adminReducer
+  });
 
-export default createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
-);
+  return createStore(
+    rootReducer,
+    composeWithDevTools(
+      applyMiddleware(
+        thunk,
+        routerMiddleware(history)
+      ),
+    ),
+  );
+} 
+  
