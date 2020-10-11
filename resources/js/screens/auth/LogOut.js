@@ -13,7 +13,7 @@ const LogoutButton = forwardRef((props, ref) => {
       onClick={handleClick}
       ref={ref}
     >
-      <ExitIcon /> Logout
+      <ExitIcon /> Cerrar sesión
     </MenuItem>
   );
 });

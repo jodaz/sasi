@@ -20,25 +20,11 @@ class ApplicationController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
-        $query = Application::query();
+        $query = Application::latest()->with(['category', 'state']);
 
-        if ($user->role_id == 3) {
-            $query->whereUserId($user->id);
-        }
+        $results = $request->page['number'] * $request->page['size'];
 
-        if ($request->has('state')) {
-            $results = $request->page * 10;
-
-            $query = $query->whereStateId($request->state)
-                ->with(['user', 'category'])
-                ->orderBy('created_at', 'DESC')
-                ->paginate($results);
-
-            return $query;
-        }
-
-        return $query->with(['state'])->get();
+        return $query->paginate($results);
     }
 
     /**

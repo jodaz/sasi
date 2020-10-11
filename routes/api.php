@@ -44,6 +44,7 @@ Route::middleware('auth:api')->group(function() {
     Route::resource('organizations', 'OrganizationController');
 
     // Applications
-    Route::get('applications/{application}/approve', 'ApplicationController@approve');
     Route::resource('applications', 'ApplicationController');
+    Route::get('applications/{application}/approve', 'ApplicationController@approve');
 });
+

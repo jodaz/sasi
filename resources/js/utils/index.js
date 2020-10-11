@@ -1,17 +1,5 @@
-import history from './history';
-import goBack from './goBack';
-import isEmpty from './isEmpty';
-import setAuthToken from './setAuthToken';
-import useDetectOutsideClick from './useDetectOutsideClick';
-import isMobile from './isMobile';
-import PrivateRoute from './PrivateRoute';
+export { default as authProvider  } from './authProvider';
+export { default as dataProvider  } from './dataProvider';
+export { default as history  } from './history';
+export { default as setAuthToken } from './setAuthToken';
 
-export {
-  history,
-  setAuthToken,
-  goBack,
-  isEmpty,
-  useDetectOutsideClick,
-  isMobile,
-  PrivateRoute 
-};

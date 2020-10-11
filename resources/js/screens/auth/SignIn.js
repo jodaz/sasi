@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useLogin, useNotify, Notification } from 'react-admin';
+import {
+  useLogin, 
+  useNotify,
+  Notification,
+  Title
+} from 'react-admin';
 import {
   makeStyles,
   Typography,
@@ -57,6 +62,7 @@ const Login = () => {
 
   return (
     <Auth>
+      <Title title='Inicio de sesión' />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
         </Avatar>
