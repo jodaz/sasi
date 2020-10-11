@@ -10,6 +10,7 @@ use App\Parish;
 use App\Community;
 use Illuminate\Support\Str;
 use App\Notifications\SignupActivate;
+use App\Http\Requests\CreateUserRequest;
 use Hash;
 
 class UserController extends Controller
@@ -68,11 +69,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         $password = Hash::make($request->password);
 
         $user = User::create([
+            'email' => $request->email,
+            'password' => $request->password,
             'activation_token' => Str::random(60),
             'active' => false,
             'role_id' => 3 // By default, users are common  

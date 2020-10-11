@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Admin, Resource } from 'react-admin';
-import jsonapiClient from 'ra-jsonapi-client';
-import { setAuthToken } from './utils';
+import { customRoutes, setAuthToken } from './utils';
 import { 
   authProvider as authClient,
   dataProvider as apiClient,
@@ -13,10 +12,13 @@ import {
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
-// Components
-import Home from './screens/home';
-import SignIn from './screens/auth/SignIn';
-import LogOut from './screens/auth/LogOut';
+// Custom components
+import {
+  Login,
+  Dashboard,
+  LogOut,
+  Layout
+} from './components';
 
 // Initializing providers
 const dataProvider = apiClient('http://dev.sasi.loc/api');
@@ -32,13 +34,15 @@ export default function App() {
   }
 
   return (
-     <Admin
-      dashboard={Home}
+    <Admin
+      layout={Layout}  
+      dashboard={Dashboard}
       authProvider={authProvider}
       dataProvider={dataProvider}
-      loginPage={SignIn}
+      loginPage={Login}
       logoutButton={LogOut}
-      title='Sasi'
+      history={history}
+      customRoutes={customRoutes}
     >
       <Resource
         name="applications"
