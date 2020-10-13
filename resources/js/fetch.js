@@ -9,7 +9,7 @@ export const login = data =>
       localStorage.setItem('sasiToken', token);
       setAuthToken(token);
 
-      history.push('/');
+      history.push('/home');
       return user;
     });
 

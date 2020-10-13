@@ -4,8 +4,17 @@ import { MenuItemLink, getResources, Responsive  } from 'react-admin';
 import Badge from '@material-ui/core/Badge';
 import { withRouter } from 'react-router-dom';
 
+import DashboardIcon from '@material-ui/icons/Dashboard';
+
 const Menu = ({ resources, onMenuClick }) => (
-  <div>
+  <>
+    <MenuItemLink
+      to="/home"
+      primaryText="Inicio"
+      onClick={onMenuClick}
+      leftIcon={<DashboardIcon />}
+    />
+
     {
       resources.map(resource => (
         <MenuItemLink
@@ -17,7 +26,7 @@ const Menu = ({ resources, onMenuClick }) => (
         />
       ))
     }
-  </div>
+  </>
 );
 
 const mapStateToProps = state => ({

@@ -4,8 +4,11 @@ import {
   Datagrid, 
   TextField
 } from 'react-admin';
+import { useAuth } from'../../utils';
 
 export default function(props) {
+  const auth = useAuth();
+
   return (
     <List {...props} title="Solicitudes">
       <Datagrid>

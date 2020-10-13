@@ -5,11 +5,14 @@ import {
   TextField,
   Pagination
 } from 'react-admin';
+import { useAuth } from'../../utils';
 
 const UserPagination = props =>
   <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
 
 export default function(props) {
+  const auth = useAuth();
+
   return (
     <List {...props} title="Usuarios" pagination={<UserPagination />}>
 

@@ -7,7 +7,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Title title='Dashboard' />
+      <Title title='Inicio' />
     </>
   );
 };

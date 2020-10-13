@@ -12,14 +12,11 @@ import {
 // Icons
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 // Custom components
 import {
   Login,
-  Dashboard,
-  LogOut,
   Layout
 } from './components';
 // Resources
@@ -41,15 +38,9 @@ export default function App() {
       layout={Layout}  
       dataProvider={dataProvider}
       loginPage={Login}
-      logoutButton={LogOut}
       history={history}
       customRoutes={customRoutes}
     >
-      <Resource
-        name=''
-        icon={<DashboardIcon />}
-        options={{ label: 'Inicio' }}
-      />
       <Resource
         name="applications"
         list={ApplicationList}
