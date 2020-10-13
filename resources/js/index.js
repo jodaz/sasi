@@ -12,6 +12,8 @@ import {
 // Icons
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 // Custom components
 import {
@@ -37,7 +39,6 @@ export default function App() {
   return (
     <Admin
       layout={Layout}  
-      dashboard={Dashboard}
       dataProvider={dataProvider}
       loginPage={Login}
       logoutButton={LogOut}
@@ -45,9 +46,14 @@ export default function App() {
       customRoutes={customRoutes}
     >
       <Resource
+        name=''
+        icon={<DashboardIcon />}
+        options={{ label: 'Inicio' }}
+      />
+      <Resource
         name="applications"
         list={ApplicationList}
-        icon={TelegramIcon}
+        icon={<TelegramIcon />}
         options={{
           label: 'Solicitudes'
         }}
@@ -55,7 +61,7 @@ export default function App() {
       <Resource
         name="users"
         list={UserList}
-        icon={UserIcon}
+        icon={<UserIcon />}
         options={{
           label: 'Usuarios'
         }}
@@ -65,8 +71,8 @@ export default function App() {
         options={{
           label: 'Configuraciones'
         }}
+        icon={<SettingsIcon />}
       />
-      <Resource name='profile' />
     </Admin>
   ); 
 }
