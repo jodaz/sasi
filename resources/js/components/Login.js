@@ -4,19 +4,19 @@ import { useState, useEffect } from 'react';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { isEmpty } from '../utils';
 import {
-  useLogin, 
   useNotify
 } from 'react-admin';
 import {
   makeStyles,
   Typography,
   Box,
-  Grid,
-  Link,
   FormControlLabel,
   TextField,
-  Button,
+  Button
 } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { login } from '../actions';
+import { useDispatch } from 'react-redux';
 // Layout
 import Auth from './Auth';
 
@@ -41,14 +41,13 @@ const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const login = useLogin();
+  const dispatch = useDispatch();
   const notify = useNotify();
   const { token } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ email, password })
-      .catch(() => notify('Correo o contraseña inválidos.'));
+    dispatch(login({ email, password }));
   };
 
   useEffect(() => {
@@ -89,13 +88,14 @@ const Login = () => {
         />
         <Button
           type="submit"
-          fullWidth
           variant="contained"
           color="primary"
           className={classes.submit}
+          startIcon={<ExitToAppIcon />}  
         >
           Acceder
         </Button>
+        <RouterLink to='/register'>Regístrese</RouterLink>
       </form>
     </Auth>
   );

@@ -2,17 +2,16 @@ import * as React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNotify } from 'react-admin';
+import { Link } from 'react-router-dom';
 import {
   makeStyles,
   Typography,
   Box,
-  Grid,
-  Link,
   FormControlLabel,
   TextField,
   Button,
-  Avatar
 } from '@material-ui/core';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { history } from '../utils';
 // Layout
 import Auth from './Auth';
@@ -102,13 +101,15 @@ const SignUp = () => {
         />
         <Button
           type="submit"
-          fullWidth
           variant="contained"
           color="primary"
+          fullWidth
           className={classes.submit}
+          startIcon={<AccountBoxIcon />}
         >
-          Acceder
+          Crear cuenta
         </Button>
+        <p>¿Ya tiene una cuenta? <Link to='/login'>Iniciar sesión</Link></p>
       </form>
     </Auth>
   );

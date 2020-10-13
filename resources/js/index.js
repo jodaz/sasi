@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { Admin, Resource } from 'react-admin';
-import { customRoutes, setAuthToken } from './utils';
-import { 
-  authProvider as authClient,
-  dataProvider as apiClient,
+import { isEmpty, customRoutes, setAuthToken } from './utils';
+import {
+  store,
+  dataProvider,
   history
-} from './utils';
+} from './initializers';
 
 // Icons
 import UserIcon from '@material-ui/icons/People';
@@ -19,25 +20,24 @@ import {
   LogOut,
   Layout
 } from './components';
-
-// Initializing providers
-const dataProvider = apiClient('http://dev.sasi.loc/api');
-const authProvider = authClient('sasiAuth')
-
 // Resources
 import { UserList } from './screens/users';
 import { ApplicationList } from './screens/applications';
+import { fetchUser } from './actions';
+import { useDispatch } from 'react-redux';
 
 export default function App() {
-  if (localStorage.sasiAuth) {
-    setAuthToken(localStorage.sasiAuth);
+  const dispatch = useDispatch();
+
+  if (!isEmpty(localStorage.sasiToken)) {
+    setAuthToken(localStorage.sasiToken);
+    dispatch(fetchUser());
   }
 
   return (
     <Admin
       layout={Layout}  
       dashboard={Dashboard}
-      authProvider={authProvider}
       dataProvider={dataProvider}
       loginPage={Login}
       logoutButton={LogOut}
@@ -60,11 +60,23 @@ export default function App() {
           label: 'Usuarios'
         }}
        />
+      <Resource 
+        name='settings' 
+        options={{
+          label: 'Configuraciones'
+        }}
+      />
+      <Resource name='profile' />
     </Admin>
   ); 
 }
 
 if (document.getElementById('root')) {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
 }
 

@@ -4,10 +4,14 @@ import {
   ResetPassword,
   CheckEmail,
   Login,
+  Settings,
+  Profile,
   SignUp
 } from '../components';
 
 export default [
+  <Route exact path="/settings" component={Settings} />,
+  <Route exact path="/profile" component={Profile.edit} />,
   <Route exact path="/login/:token?" component={Login} noLayout />,
   <Route exact path="/reset-password" component={ResetPassword} noLayout />,
   <Route exact path="/check-email" component={CheckEmail} noLayout />,

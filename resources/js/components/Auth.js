@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     width: '100%',
     textAlign: 'center',
-    position: 'fixed',
     padding: '1em',
+    position: 'relative',
     clear: 'both',
     justifyContent: 'space-around',
     bottom: 0,
@@ -59,7 +59,6 @@ export default function Auth(props) {
           <Notification />
         </div>
       </Container>
-      <Footer className={classes.footer}/>
     </>
   );
 }

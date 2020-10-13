@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
-import { useLogout } from 'react-admin';
+import { logout } from '../actions';
+import { useDispatch } from 'react-redux';
 import MenuItem from '@material-ui/core/MenuItem';
 import ExitIcon from '@material-ui/icons/PowerSettingsNew';
 
 const LogoutButton = forwardRef((props, ref) => {
-  const logout = useLogout();
-  const handleClick = () => logout();
+  const dispatch = useDispatch();
+  const handleClick = () => dispatch(logout());
 
   return (
     <MenuItem
