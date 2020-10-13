@@ -7,7 +7,7 @@ import {
   adminSaga,
 } from 'react-admin';
 import { userReducer } from './reducers';  
-import { watchLogin, watchFetchUser } from './sagas';
+import customSagas from './sagas';
 
 export default ({
   dataProvider,
@@ -23,8 +23,7 @@ export default ({
     yield all(
       [
         adminSaga(dataProvider),
-        watchFetchUser,
-        watchLogin
+        customSagas
       ].map(fork)
     );
   };

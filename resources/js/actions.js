@@ -1,20 +1,11 @@
-import axios from 'axios';
-
 export const login = credentials => ({
   type: 'LOGIN',
   payload: credentials
 });
 
-export const logout = () => dispatch => {
-  axios.get('/logout')
-    .then(res => {
-      localStorage.removeItem('sasiToken');
-      setAuthToken();
-      history.push('/login');
-      dispatch(setUser());
-    })
-    .catch(err => console.log(err.response.data));
-}
+export const logout = () => ({
+  type: 'LOGOUT'
+});
 
 export const setUser = (user = {}) => ({
   type: 'SET_USER',
