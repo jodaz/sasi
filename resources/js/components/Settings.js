@@ -8,7 +8,7 @@ export default function Settings() {
   return (
     <div>
       <Title title="Configuraciones" />
-      {'Hello World'}
+      {'Módulo de configuraciones'}
     </div>
   );
 };

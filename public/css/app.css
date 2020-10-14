@@ -1,23 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);.custom-modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  padding: 2em;
-  min-width: 20em;
-  max-width: 70%;
-  color: #5867dd;
-  border-radius: 1em;
-  transform: translate(-50%, -50%);
-  outline: transparent;
-}
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;
 
-.overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+400;500;700;900&display=swap);* {
+  font-family: "Roboto", "sans-serif";
 }
 
