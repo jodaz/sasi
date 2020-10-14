@@ -24,7 +24,10 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
+            'first_name' => 'required',
+            'dni' => 'required|unique:users',
+            'surname' => 'required',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
         ];
     }
@@ -32,6 +35,10 @@ class CreateUserRequest extends FormRequest
     public function messages()
     {
         return [
+            'first_name.required' => 'Ingrese su nombre',
+            'dni.required' => 'Ingrese su cédula de identidad',
+            'dni.unique' => 'La cédula ya ha sido registrada',
+            'surname.required' => 'Ingrese su apellido',
             'email.required' => 'Ingrese su correo',
             'email.email' => 'Ingrese un correo electrónico válido',
             'email.unique' => 'Este correo ya ha sido utilizado',

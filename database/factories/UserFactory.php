@@ -26,9 +26,12 @@ $parishes = Parish::all();
 
 $factory->define(User::class, function (Faker $faker) use ($genres, $communities, $parishes) {
     return [
+        'first_name' => $faker->name,
+        'surname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => bcrypt('qwerty123'),
+        'dni' => $faker->unique()->randomNumber,
         'active' => true,
         'activation_token' => Str::random(60),
         'remember_token' => Str::random(10),

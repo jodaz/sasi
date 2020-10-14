@@ -38,16 +38,16 @@ class TestSeeder extends Seeder
         
         // Admin user
         $admin = User::create([
+            'first_name' => 'Jesús',
+            'surname' => 'Ordosgoitty',
             'email' => 'jesuodz@gmail.com',
             'password' => bcrypt('qwerty123'),
+            'dni' => 'V-27572434',
             'role_id' => 1,
             'active' => true,
             'activation_token' => Str::random(60),
         ]);
         $admin->profile()->create([
-            'first_name' => 'Jesús',
-            'surname' => 'Ordosgoitty',
-            'dni' => 'V-27572434',
             'genre_id' => 1,
             'community_id' => 1,
             'parish_id' => 1,
@@ -56,16 +56,16 @@ class TestSeeder extends Seeder
         
         // Analyst user
         $analyst = User::create([
+            'first_name' => 'Andreina',
+            'surname' => 'Santana',
             'email' => 'nomesetucorreo@gmail.com',
+            'dni' => 'V-26292605',
             'password' => bcrypt('qwerty123'),
             'role_id' => 2,
             'active' => true,
             'activation_token' => Str::random(60),
         ]);
         $analyst->profile()->create([
-            'first_name' => 'Andreina',
-            'surname' => 'Santana',
-            'dni' => 'V-26292605',
             'genre_id' => 1,
             'community_id' => 1,
             'parish_id' => 1,

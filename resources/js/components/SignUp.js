@@ -63,6 +63,42 @@ const SignUp = () => {
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
+          error={errors.first_name && true}
+          margin="normal"
+          fullWidth
+          id="first_name"
+          label="Primer nombre"
+          name="first_name"
+          onChange={handleChange}
+          required
+          helperText={errors.first_name && errors.first_name}
+        />
+        <TextField
+          variant="outlined"
+          error={errors.surname && true}
+          margin="normal"
+          fullWidth
+          id="surname"
+          label="Primer apellido"
+          name="surname"
+          onChange={handleChange}
+          required
+          helperText={errors.surname && errors.surname}
+        />
+        <TextField
+          variant="outlined"
+          error={errors.dni && true}
+          margin="normal"
+          fullWidth
+          id="dni"
+          label="Cédula de identidad"
+          name="dni"
+          onChange={handleChange}
+          required
+          helperText={errors.dni && errors.dni}
+        />
+        <TextField
+          variant="outlined"
           error={errors.email && true}
           margin="normal"
           fullWidth
