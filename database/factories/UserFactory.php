@@ -3,9 +3,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
-use App\Community;
-use App\Parish;
-use App\Genre;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -20,11 +17,7 @@ use Illuminate\Support\Str;
 |
 */
 
-$genres = Genre::all();
-$communities = Community::all();
-$parishes = Parish::all();
-
-$factory->define(User::class, function (Faker $faker) use ($genres, $communities, $parishes) {
+$factory->define(User::class, function (Faker $faker) {
     return [
         'first_name' => $faker->name,
         'surname' => $faker->lastName,

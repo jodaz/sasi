@@ -16,6 +16,7 @@ import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import PublicIcon from '@material-ui/icons/Public';
 
 // Custom components
 import {
@@ -26,6 +27,7 @@ import {
 import { UserList } from './screens/users';
 import { ApplicationCreate, ApplicationList } from './screens/applications';
 import { CategoryList, CategoryCreate } from './screens/categories';
+import { CommunityList, CommunityCreate } from './screens/communities';
 import { fetchUser } from './actions';
 
 export default function App() {
@@ -71,6 +73,15 @@ export default function App() {
         icon={<LocalOfferIcon />}
         list={CategoryList}
         create={CategoryCreate}
+      />
+      <Resource 
+        name='communities' 
+        options={{
+          label: 'Comunidades'
+        }}
+        icon={<PublicIcon />}
+        list={CommunityList}
+        create={CommunityCreate}
       />
     </Admin>
   ); 

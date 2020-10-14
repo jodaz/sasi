@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Application;
 use App\Category;
+use App\Profile;
 use Illuminate\Support\Str;
 
 class TestSeeder extends Seeder
@@ -24,16 +25,17 @@ class TestSeeder extends Seeder
             ->each(function ($user) use ($categories) {
                 $category = $categories->random(1)->first();
                 
+                $profile = $user->profile()->save(factory(Profile::class)->make());
+
                 // Create applications
                 factory(Application::class, rand(1, 5))
                     ->make()
-                    ->each(function ($application) use ($category, $user){
+                    ->each(function ($application) use ($category, $profile){
                         $application
-                            ->user()->associate($user)
+                            ->profile()->associate($profile)
                             ->category()->associate($category)
                             ->save();
                     });
-
             });
         
         // Admin user

@@ -11,20 +11,15 @@ class Profile extends Model
     protected $appends = [ 'full_name' ];
 
     protected $fillable = [
-        'first_name',
         'second_name',
-        'surname',
         'second_surname',
-        'email',
-        'password',
         'address',
-        'dni',
         'community_id',
         'parish_id',
         'genre_id',
     ];
 
-    public function user()
+    public function profile()
     {
         return $this->hasOne(User::class);
     }

@@ -20,7 +20,7 @@ class Community extends Model {
 
     public function applications()
     {
-        return $this->hasManyThrough(Application::class, User::class);
+        return $this->hasManyThrough(Application::class, Profile::class);
     }
 
     public function profile()
@@ -36,10 +36,5 @@ class Community extends Model {
     public function getParishNamesAttribute()
     {
         return $this->parishes()->get()->implode('name', ', ');
-    }
-
-    public function getNumApplicationsAttribute()
-    {
-        return $this->applications()->count();
     }
 }

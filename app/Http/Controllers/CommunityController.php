@@ -14,9 +14,14 @@ class CommunityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Community::get();
+        $query = Community::query()->withCount('applications');
+
+        $results = $request->page['number'] * $request->page['size'];
+
+        return $query->paginate($results);
+
     }
 
     /**

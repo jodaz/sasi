@@ -11,7 +11,7 @@ class Application extends Model
     protected $fillable = [
         'description',
         'quantity',
-        'user_id',
+        'profile_id',
         'category_id',
         'state_id',
         'approved_at'
@@ -22,9 +22,9 @@ class Application extends Model
         return $this->belongsToMany(Organization::class);
     }
 
-    public function user()
+    public function profile()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Profile::class);
     }
 
     public function state()
