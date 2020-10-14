@@ -16,13 +16,11 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Category::query();
+        $query = Category::query()->withCount('applications');
 
-        if ($request->has('applicationsCount')) {
-            $query->withCount('applications');
-        }
+        $results = $request->page['number'] * $request->page['size'];
 
-        return $query->get();
+        return $query->paginate($results);
     }
 
     /**
@@ -45,10 +43,7 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->all());
 
-        return response()->json([
-            'success' => true,
-            'message' => '¡La categoría '.$category->name.' fue creada!'
-        ]);
+        return $category; 
     }
 
     /**

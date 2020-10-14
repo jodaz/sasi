@@ -34,14 +34,7 @@ class ApplicationController extends Controller
      */
     public function create(Request $request)
     {
-        $categories = Category::get()->map(function ($category) {
-            return [
-                'label' => $category->name,
-                'value' => $category->id
-            ]; 
-        });
-
-        return $categories;
+        return Category::pluck('id', 'name');
     }
 
     /**
@@ -52,6 +45,7 @@ class ApplicationController extends Controller
      */
     public function store(CreateApplicationRequest $request)
     {
+        dd($request->all());
         $user = $request->user();
         $category = $request->get('category')['value'];
         $application = new Application($request->all());

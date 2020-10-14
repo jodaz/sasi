@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Admin, Resource } from 'react-admin';
 import { isEmpty, customRoutes, setAuthToken } from './utils';
+import { useDispatch } from 'react-redux';
 import {
   store,
   dataProvider,
+  i18nProvider,
   history
 } from './initializers';
 
@@ -13,6 +15,7 @@ import {
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import SettingsIcon from '@material-ui/icons/Settings';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 
 // Custom components
 import {
@@ -21,9 +24,9 @@ import {
 } from './components';
 // Resources
 import { UserList } from './screens/users';
-import { ApplicationList } from './screens/applications';
+import { ApplicationCreate, ApplicationList } from './screens/applications';
+import { CategoryList, CategoryCreate } from './screens/categories';
 import { fetchUser } from './actions';
-import { useDispatch } from 'react-redux';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -40,10 +43,13 @@ export default function App() {
       loginPage={Login}
       history={history}
       customRoutes={customRoutes}
+      locale='es'
+      i18nProvider={i18nProvider}
     >
       <Resource
         name="applications"
         list={ApplicationList}
+        create={ApplicationCreate}
         icon={<TelegramIcon />}
         options={{
           label: 'Solicitudes'
@@ -58,11 +64,13 @@ export default function App() {
         }}
        />
       <Resource 
-        name='settings' 
+        name='categories' 
         options={{
-          label: 'Configuraciones'
+          label: 'Categorias'
         }}
-        icon={<SettingsIcon />}
+        icon={<LocalOfferIcon />}
+        list={CategoryList}
+        create={CategoryCreate}
       />
     </Admin>
   ); 

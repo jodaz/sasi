@@ -18,6 +18,7 @@ export default function(props) {
 
       <Datagrid>
         <TextField label='Correo' source="email" />
+        <TextField label='Nombre' source="full_name" />
         <TextField label='Rol' source="role.name" />
       </Datagrid>
     </List>
