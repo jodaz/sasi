@@ -68,7 +68,7 @@ export default function App() {
       <Resource 
         name='categories' 
         options={{
-          label: 'Categorias'
+          label: 'Categorías'
         }}
         icon={<LocalOfferIcon />}
         list={CategoryList}

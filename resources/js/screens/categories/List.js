@@ -3,11 +3,7 @@ import { cloneElement, useMemo } from 'react';
 import {
   List, 
   Datagrid, 
-  TextField
-} from 'react-admin';
-import { Link } from 'react-router-dom';
-import { useAuth } from'../../utils';
-import {
+  Filter,
   EditButton,
   DeleteButton,
   useListContext,
@@ -15,9 +11,12 @@ import {
   BulkDeleteButton,
   TopToolbar,
   CreateButton,
-  ExportButton,
-  Button
+  Button,
+  TextField,
+  TextInput
 } from 'react-admin';
+import { Link } from 'react-router-dom';
+import { useAuth } from'../../utils';
 import IconEvent from '@material-ui/icons/Event';
 
 const CategoriesActionsButtons = props => (
@@ -55,10 +54,16 @@ const CategoriesActions = props => {
         filterValues,
         context: 'button',
       })}
-      <CreateButton />
+      <CreateButton basePath={basePath}/>
     </TopToolbar>
   );
 };
+
+const ArticlesFilter = (props) => (
+  <Filter {...props}>
+    <TextInput label="Buscar" source="name" alwaysOn />
+  </Filter>
+);
 
 export default function(props) {
   const auth = useAuth();
@@ -68,6 +73,7 @@ export default function(props) {
       title="Categorías"
       bulkActionButtons={<CategoriesActionsButtons />}
       actions={<CategoriesActions />}
+      filters={<ArticlesFilter />}
     >
       <Datagrid>
         <TextField source='name' label='Nombre' />

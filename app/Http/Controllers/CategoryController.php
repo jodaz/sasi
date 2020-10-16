@@ -20,6 +20,12 @@ class CategoryController extends Controller
 
         $results = $request->page['number'] * $request->page['size'];
 
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+            $name = $filters['name'];
+            $query->where('name', 'ILIKE', "%{$name}%");
+        }
+
         return $query->paginate($results);
     }
 
