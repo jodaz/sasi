@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_ENV') == 'production') {
             \URL::forceScheme('https');
         }
+
+        Builder::macro('whereLike', function (string $attribute, string $searchTerm) {
+            return $this->where($attribute, 'ILIKE', "%{$searchTerm}%");
+        });
     }
 }

@@ -23,7 +23,7 @@ class CategoryController extends Controller
         if ($request->has('filter')) {
             $filters = $request->filter;
             $name = $filters['name'];
-            $query->where('name', 'ILIKE', "%{$name}%");
+            $query->whereLike('name', $name);
         }
 
         return $query->paginate($results);
