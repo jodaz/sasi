@@ -24,6 +24,14 @@ class ApplicationController extends Controller
 
         $results = $request->page['number'] * $request->page['size'];
 
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+            // Get fields
+            $description = $filters['description'];
+            
+            $query->whereLike('description', $description);
+        }
+
         return $query->paginate($results);
     }
 

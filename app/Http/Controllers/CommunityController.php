@@ -20,6 +20,13 @@ class CommunityController extends Controller
 
         $results = $request->page['number'] * $request->page['size'];
 
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+            // Get fields
+            $name = $filters['name'];
+            $query->whereLike('name', $name);
+        }
+
         return $query->paginate($results);
 
     }

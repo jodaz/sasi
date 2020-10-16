@@ -5,12 +5,17 @@ import {
   TextField
 } from 'react-admin';
 import { useAuth } from'../../utils';
+import { Filter, ModuleActions } from '../../components';
 
 export default function(props) {
   const auth = useAuth();
 
   return (
-    <List {...props} title="Solicitudes">
+    <List {...props}
+      title="Solicitudes"
+      actions={<ModuleActions />}
+      filters={<Filter defaultfilter='description'/>}
+    >
       <Datagrid>
         <TextField label='Descripción' source="description" />
         <TextField label='Estado' source="state.name" />
