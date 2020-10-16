@@ -4,9 +4,8 @@ import {
   SimpleForm,
   TextInput
 } from 'react-admin';
-import RichTextInput from 'ra-input-rich-text';
 
-const ApplicationCreate = (props) => { 
+const CategoryCreate = (props) => { 
 
   return (
     <Create {...props} title='Nueva categoría'>
@@ -17,5 +16,5 @@ const ApplicationCreate = (props) => {
   );
 };
 
-export default ApplicationCreate;
+export default CategoryCreate;
 

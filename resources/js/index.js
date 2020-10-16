@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Admin, Resource } from 'react-admin';
+import { EditGuesser, Admin, Resource } from 'react-admin';
 import { isEmpty, customRoutes, setAuthToken } from './utils';
 import { useDispatch } from 'react-redux';
 import {
@@ -26,7 +26,7 @@ import {
 // Resources
 import { UserList } from './screens/users';
 import { ApplicationCreate, ApplicationList } from './screens/applications';
-import { CategoryList, CategoryCreate } from './screens/categories';
+import { CategoryList, CategoryEdit, CategoryCreate } from './screens/categories';
 import { CommunityList, CommunityCreate } from './screens/communities';
 import { fetchUser } from './actions';
 
@@ -73,6 +73,7 @@ export default function App() {
         icon={<LocalOfferIcon />}
         list={CategoryList}
         create={CategoryCreate}
+        edit={CategoryEdit}
       />
       <Resource 
         name='communities' 
