@@ -14,9 +14,11 @@ class Organization extends Model
         'address',
         'organization_type_id',
         'parish_id',
-        'sector_id',
+        'category_id',
         'community_id'
     ];
+
+    protected $appends = [ 'full_address' ];
 
     public function user()
     {
@@ -47,4 +49,10 @@ class Organization extends Model
     {
         return $this->belongsTo(Community::class);
     }
+
+    public function getFullAddressAttribute()
+    {
+        return "{$this->community->name} {$this->address}";
+    }
+
 }

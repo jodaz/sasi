@@ -34,9 +34,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('users', 'UserController')->only([
         'index', 'destroy', 'update', 'show'
     ]);
-});
 
-Route::middleware('auth:api')->group(function() {
     Route::get('states', 'StateController');
     Route::resource('parishes', 'ParishController');
     Route::resource('communities', 'CommunityController');

@@ -111,6 +111,10 @@ class CommunityController extends Controller
      */
     public function destroy(Community $community)
     {
-        //
+        $community->delete();
+
+        return response()->json([
+            'message' => "¡Ha sido eliminada la comunidad {$community->name}!"
+        ]);
     }
 }

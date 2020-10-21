@@ -17,6 +17,7 @@ import TelegramIcon from '@material-ui/icons/Telegram';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PublicIcon from '@material-ui/icons/Public';
+import AccessibleIcon from '@material-ui/icons/Accessible';
 
 // Custom components
 import {
@@ -28,6 +29,7 @@ import { UserList } from './screens/users';
 import { ApplicationCreate, ApplicationList } from './screens/applications';
 import { CategoryList, CategoryEdit, CategoryCreate } from './screens/categories';
 import { CommunityList, CommunityCreate } from './screens/communities';
+import { OrganizationList } from './screens/organizations';
 import { fetchUser } from './actions';
 
 export default function App() {
@@ -55,6 +57,14 @@ export default function App() {
         icon={<TelegramIcon />}
         options={{
           label: 'Solicitudes'
+        }}
+       />
+      <Resource
+        name="organizations"
+        list={OrganizationList}
+        icon={<AccessibleIcon />}
+        options={{
+          label: 'Organizaciones'
         }}
        />
       <Resource

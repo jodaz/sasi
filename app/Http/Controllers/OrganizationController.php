@@ -16,13 +16,24 @@ class OrganizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Organization::with(['user'])
-            ->get();
+        $query = Organization::query()->withCount('applications');
+
+        $results = $request->page['number'] * $request->page['size'];
+
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+            // Get fields
+            $name = $filters['name'];
+            $query->whereLike('name', $name);
+        }
+
+        return $query->paginate($results);
+
     }
 
-    /**
+   /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
