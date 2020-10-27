@@ -42,7 +42,7 @@ class ApplicationController extends Controller
      */
     public function create(Request $request)
     {
-        return Category::pluck('id', 'name');
+        return Category::get()->toArray();
     }
 
     /**
@@ -53,14 +53,13 @@ class ApplicationController extends Controller
      */
     public function store(CreateApplicationRequest $request)
     {
-        dd($request->all());
-        $user = $request->user();
-        $category = $request->get('category')['value'];
+        $profile = $request->user()->profile;
+        $category = $request->get('category');
         $application = new Application($request->all());
         $application->state_id = 1;
         $application->category_id = $category;
 
-        $user->applications()->save($application);
+        $profile->applications()->save($application);
 
         return response()->json([
             'success' => true,

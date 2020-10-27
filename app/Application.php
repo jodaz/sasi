@@ -14,6 +14,7 @@ class Application extends Model
         'profile_id',
         'category_id',
         'state_id',
+        'profile_id',
         'approved_at'
     ];
 

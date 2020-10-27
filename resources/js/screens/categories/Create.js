@@ -5,11 +5,20 @@ import {
   TextInput
 } from 'react-admin';
 
-const CategoryCreate = (props) => { 
+const validator = (values) => {
+  const errors = {};
 
+  if (!values.name) {
+    errors.name = ['Ingrese un nombre.'];
+  }
+
+  return errors;
+}
+
+const CategoryCreate = (props) => { 
   return (
     <Create {...props} title='Nueva categoría'>
-      <SimpleForm>
+      <SimpleForm validate={validator}>
         <TextInput source='name' label='Nombre'/>
       </SimpleForm>
     </Create>

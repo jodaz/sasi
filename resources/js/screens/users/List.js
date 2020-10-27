@@ -20,6 +20,7 @@ export default function(props) {
       pagination={<UserPagination />}
       actions={<ModuleActions/>}
       filters={<Filter defaultfilter='email'/>}
+      bulkActionButtons={false}
     >
 
       <Datagrid>

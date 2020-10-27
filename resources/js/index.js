@@ -28,7 +28,7 @@ import {
 import { UserList } from './screens/users';
 import { ApplicationCreate, ApplicationList } from './screens/applications';
 import { CategoryList, CategoryEdit, CategoryCreate } from './screens/categories';
-import { CommunityList, CommunityCreate } from './screens/communities';
+import { CommunityEdit, CommunityList, CommunityCreate } from './screens/communities';
 import { OrganizationList } from './screens/organizations';
 import { fetchUser } from './actions';
 
@@ -93,6 +93,7 @@ export default function App() {
         icon={<PublicIcon />}
         list={CommunityList}
         create={CommunityCreate}
+        edit={CommunityEdit}
       />
     </Admin>
   ); 
@@ -106,4 +107,3 @@ if (document.getElementById('root')) {
     document.getElementById('root')
   );
 }
-

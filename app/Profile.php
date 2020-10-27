@@ -17,11 +17,12 @@ class Profile extends Model
         'community_id',
         'parish_id',
         'genre_id',
+        'user_id'
     ];
 
-    public function profile()
+    public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function genre()
@@ -37,6 +38,11 @@ class Profile extends Model
     public function community()
     {
         return $this->belongsTo(Community::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
     }
 
     public function getFullNameAttribute()

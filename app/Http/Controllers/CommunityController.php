@@ -38,14 +38,7 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        $parishes = Parish::get()->map(function ($parish) {
-            return [
-                'label' => $parish->name,
-                'value' => $parish->id
-            ]; 
-        });
-
-        return response()->json($parishes);
+        return Parish::get();
     }
 
     /**
@@ -56,12 +49,10 @@ class CommunityController extends Controller
      */
     public function store(CreateCommunityRequest $request)
     {
-        $parishes = array_map(function ($parish) {
-            return $parish['value'];
-        }, $request->get('parishes'));
-
-        $community = Community::create($request->all());
-        $community->parishes()->sync($parishes);
+        $community = Community::create([
+            'name' => $request->name
+        ]);
+        $community->parishes()->sync($request->parishes);
 
         return response()->json([
             'success' => true,
@@ -77,7 +68,7 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        //
+        return $community->load('parishes');
     }
 
     /**
@@ -88,7 +79,7 @@ class CommunityController extends Controller
      */
     public function edit(Community $community)
     {
-        //
+        return $community->load('parishes');
     }
 
     /**
