@@ -6,6 +6,7 @@ import {
   EDIT,
   DELETE,
   GET_MANY,
+  DELETE_MANY,
   GET_ONE,
   UPDATE,
   GET_MANY_REFERENCE
@@ -76,6 +77,11 @@ export default (apiURL, customSettings = {}) => (type, resource, params) => {
       options.method = settings.updateMethod;
       options.data = JSON.stringify(data);
       break;
+    case DELETE_MANY:
+      url = `${apiURL}/${resource}/delete`;
+      options.method = 'POST';
+      options.data = params;
+      break;
     default:
       throw new NotImplementedError(`Unsupported Data Provider request type ${type}`);
   }
@@ -117,6 +123,10 @@ export default (apiURL, customSettings = {}) => (type, resource, params) => {
             data: { ...res.data },
           }
           break;
+        case DELETE_MANY:
+          return {
+            data: {...res.data}
+          }
         case UPDATE:
           return {
             data: { ...res.data }

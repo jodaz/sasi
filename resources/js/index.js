@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ListGuesser, Admin, Resource } from 'react-admin';
+import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
 import { isEmpty, customRoutes, setAuthToken } from './utils';
 import { useDispatch } from 'react-redux';
 import {
@@ -10,7 +12,9 @@ import {
   i18nProvider,
   history
 } from './initializers';
-
+import {
+  createMuiTheme
+} from '@material-ui/core';
 // Icons
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
@@ -18,6 +22,14 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PublicIcon from '@material-ui/icons/Public';
 import AccessibleIcon from '@material-ui/icons/Accessible';
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: purple[500]
+    }
+  }
+});
 
 // Custom components
 import {
@@ -49,6 +61,7 @@ export default function App() {
       customRoutes={customRoutes}
       locale='es'
       i18nProvider={i18nProvider}
+      theme={theme}
     >
       <Resource
         name="applications"

@@ -91,6 +91,11 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function deleteMany(Request $request)
+    {
+        dd($request->all());
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -38,6 +38,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('states', 'StateController');
     Route::resource('parishes', 'ParishController');
     Route::resource('communities', 'CommunityController');
+    Route::post('categories/delete', 'CategoryController@deleteMany');
     Route::resource('categories', 'CategoryController');
     Route::resource('organizations', 'OrganizationController');
 
