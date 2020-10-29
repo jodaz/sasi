@@ -85,8 +85,8 @@ export default (apiURL, customSettings = {}) => (type, resource, params) => {
       let total;
 
       if ([GET_LIST, GET_MANY, GET_MANY_REFERENCE].includes(type)) {
-        if (res.data.meta && settings.total) {
-          total = res.data.meta[settings.total];
+        if (res.data && settings.total) {
+          total = res.data[settings.total];
         }  
         total = total || res.data.data.length;
       }
@@ -94,7 +94,6 @@ export default (apiURL, customSettings = {}) => (type, resource, params) => {
       switch(type) {
         case GET_LIST: 
           return { data: res.data.data.map(item => item), total };
-
           break;
         case CREATE: 
           const { id, attributes  } = res.data;

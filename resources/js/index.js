@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { EditGuesser, Admin, Resource } from 'react-admin';
+import { ListGuesser, Admin, Resource } from 'react-admin';
 import { isEmpty, customRoutes, setAuthToken } from './utils';
 import { useDispatch } from 'react-redux';
 import {
