@@ -40,29 +40,10 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        $parishes = Parish::get()->map(function ($item) {
-            return [
-                'label' => $item->name,
-                'value' => $item->id
-            ]; 
-        });
-        $types = OrganizationType::get()->map(function ($item) {
-            return [
-                'label' => $item->name,
-                'value' => $item->id
-            ]; 
-        });
-        $categories = Category::get()->map(function ($item) {
-            return [
-                'label' => $item->name,
-                'value' => $item->id
-            ]; 
-        });
-
         return Response([
-            'categories' => $categories,
-            'parishes' => $parishes,
-            'types' => $types
+            'categories' => Category::get(),
+            'parishes' => Parish::with('communities')->get(),
+            'types' => OrganizationType::get()
         ]);
     }
 
@@ -74,16 +55,16 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->user();
+        $profile = $request->user()->profile();
 
-        $organization = $user->organizations()->create([
+        $organization = $profile->organizations()->create([
             'name' => $request->get('name'),
             'rif' => $request->get('rif'),
             'address' => $request->get('address'),
-            'category_id' => $request->get('category')['value'],
-            'parish_id' => $request->get('parish')['value'],
-            'organization_type_id' => $request->get('type')['value'],
-            'community_id' => $request->get('community')['value'],
+            'category_id' => $request->get('category'),
+            'parish_id' => $request->get('parish'),
+            'organization_type_id' => $request->get('type'),
+            'community_id' => $request->get('community')
         ]);
 
         return Response([

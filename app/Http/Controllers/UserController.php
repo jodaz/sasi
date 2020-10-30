@@ -44,32 +44,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $citizenships = Citizenship::get()->map(function ($citizenship) {
-            return [
-                'label' => $citizenship->name,
-                'value' => $citizenship->id
-            ]; 
-        });
-
-        $genres = Genre::get()->map(function ($citizenship) {
-            return [
-                'label' => $citizenship->name,
-                'value' => $citizenship->id
-            ]; 
-        });
-
-        $parishes = Parish::get()->map(function ($parish) {
-            return [
-                'label' => $parish->name,
-                'value' => $parish->id
-            ]; 
-        });
-
-        return response()->json([
-            'parishes' => $parishes,
-            'genres' => $genres,
-            'citizenships' => $citizenships
-        ]);
+        //
     }
 
     /**

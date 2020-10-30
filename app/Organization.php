@@ -15,14 +15,13 @@ class Organization extends Model
         'organization_type_id',
         'parish_id',
         'category_id',
+        'profile_id',
         'community_id'
     ];
 
-    protected $appends = [ 'full_address' ];
-
-    public function user()
+    public function profile()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Profile::class);
     }
 
     public function organizationType()

@@ -41,7 +41,7 @@ import { UserList } from './screens/users';
 import { ApplicationCreate, ApplicationList } from './screens/applications';
 import { CategoryList, CategoryEdit, CategoryCreate } from './screens/categories';
 import { CommunityEdit, CommunityList, CommunityCreate } from './screens/communities';
-import { OrganizationList } from './screens/organizations';
+import { OrganizationCreate, OrganizationList } from './screens/organizations';
 import { fetchUser } from './actions';
 
 export default function App() {
@@ -75,9 +75,10 @@ export default function App() {
       <Resource
         name="organizations"
         list={OrganizationList}
+        create={OrganizationCreate}
         icon={<AccessibleIcon />}
         options={{
-          label: 'Organizaciones'
+          label: 'Instituciones'
         }}
        />
       <Resource
