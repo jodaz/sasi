@@ -5,10 +5,10 @@ import {
   CheckEmail,
   Login,
   Profile,
-  Dashboard,
   UpdatePassword,
   SignUp
 } from '../components';
+import Dashboard from '../screens/dashboard';
 
 export default [
   <Route exact path="/home" component={Dashboard} />,

@@ -46,5 +46,9 @@ Route::middleware('auth:api')->group(function () {
 
     // Applications
     Route::resource('applications', 'ApplicationController');
+    // Analytics
+    Route::prefix('analytics')->group(function () {
+        Route::get('home', 'AnalyticsController@home');
+    });
 });
 
