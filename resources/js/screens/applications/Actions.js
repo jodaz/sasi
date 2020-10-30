@@ -51,7 +51,10 @@ const Actions = props => {
           label="Descargar"
           {...props}
           icon={<GetAppIcon />}
-          onClick={download(`applications/${record.id}/download`, 'certificado.pdf')}
+          onClick={
+            (e) =>
+              download(`applications/${record.id}/download`, 'certificado.pdf')
+          }
         />
       }
       <ShowButton {...props} />
