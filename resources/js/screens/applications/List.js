@@ -2,12 +2,12 @@ import * as React from "react";
 import {
   List, 
   Datagrid, 
-  DeleteButton,
   TextField,
-  ShowButton,
 } from 'react-admin';
+import axios from 'axios';
 import { useAuth } from'../../utils';
 import { Filter, ModuleActions } from '../../components';
+import Actions from './Actions';
 
 export default function(props) {
   const auth = useAuth();
@@ -22,8 +22,7 @@ export default function(props) {
         <TextField label='Descripción' source="description" />
         <TextField label='Estado' source="state.name" />
         <TextField label='Categoría' source="category.name" />
-        <DeleteButton />
-        <ShowButton />
+        <Actions {...props} />
       </Datagrid>
     </List>
   );

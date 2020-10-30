@@ -98,11 +98,6 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $application)
     {
-        dd($request->all());
-    }
-
-    public function approve(Application $application)
-    {
         $application->approved_at = Carbon::now();
         $application->state_id = 2;
         $application->save();
@@ -116,9 +111,9 @@ class ApplicationController extends Controller
     public function download(Application $application)
     {
         $user = $application->user;
-        $pdf = PDF::loadView('pdf.application', compact(['user', 'application']));
+        $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
         
-        return $pdf->download('solicitud.pdf');  
+        return $pdf->download('certificado.pdf');
     }
 
     /**

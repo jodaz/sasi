@@ -20,6 +20,7 @@
         "chart.js": "^2.9.3",
         "cross-env": "^7.0",
         "history": "^4.10.1",
+        "js-file-download": "^0.4.12",
         "laravel-mix": "^5.0.6",
         "lodash": "^4.17.20",
         "qs": "^6.9.4",
