@@ -6,7 +6,7 @@ import {
 import spanishMessages from '@blackbox-vision/ra-language-spanish';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 
-export const dataProvider = apiClient('http://dev.sasi.loc/api');
+export const dataProvider = apiClient(`${window.location.origin}/api`);
 
 const i18nProvider = polyglotI18nProvider(() => spanishMessages);
 
