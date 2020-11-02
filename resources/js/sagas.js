@@ -1,16 +1,20 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { setError, setUser } from './actions';
+import { setError, setUser, logoutUser } from './actions';
 import { login, fetchUser, logout } from './fetch';
+import { history } from './initializers';
+import { setAuthToken } from './utils';
 
 function* loginSaga(action) {
   const user = yield call(() => login(action.payload));
   yield put(setUser(user));
 }
 
-function* fetchUserSaga() {
+function* fetchUserSaga(action) {
   try {
-    const user = yield call(() => fetchUser());
+    setAuthToken(action.payload);
+    const user = yield call(() => fetchUser(action.payload));
     yield put(setUser(user));
+    history.push('/home');
   } catch(error) {
     yield put(setError({
       auth: {
@@ -22,7 +26,7 @@ function* fetchUserSaga() {
 
 function* logoutSaga() {
   yield call(() => logout());
-  yield put(setUser());
+  yield put(logoutUser());
 }
 
 export default function* rootSaga() {

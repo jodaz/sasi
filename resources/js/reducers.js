@@ -1,23 +1,39 @@
-export const errorsReducer = (previousState = {}, action) => {
+const usersInitialState = {
+  user: {},
+  isAuth: false
+};
+
+const errorsInitialState = {
+  form: {},
+  notification: null
+};
+
+export const errorsReducer = (state = errorsInitialState, action) => {
   switch(action.type) {
-    case 'SET_ERRORS':
-      return { ...previousState, ...action.payload };
+    case 'SET_FORM_ERRORS':
+      return { ...previousState, form: action.payload };
       break;
     case 'CLEAR_ERRORS':
-      return {};
+      return errorsInitialState;
+      break;
+    case 'SET_NOTIFICATION_ERRORS':
+      return {...previousState, notification: action.payload };
       break;
     default:
-      return previousState;
+      return state;
   }
 }
 
-export const userReducer = (previousState = { auth: {} }, action) => {
+export const userReducer = (state = usersInitialState, action) => {
   switch(action.type) {
     case 'SET_USER': 
-      return { ...previousState, ...action.payload };
+      return { ...state, user: action.payload, isAuth: true };
+      break;
+    case 'LOGOUT':
+      return { ...state, ...usersInitialState };
       break;
     default:
-      return previousState;
+      return state;
   }
 }
 

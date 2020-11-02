@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNotify } from 'react-admin';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,6 +7,8 @@ import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 import { isEmpty, customRoutes, setAuthToken } from './utils';
 import { useSelector, useDispatch } from 'react-redux';
+import jwt_decode from "jwt-decode";
+
 import {
   store,
   dataProvider,
@@ -16,13 +18,6 @@ import {
 import {
   createMuiTheme
 } from '@material-ui/core';
-// Icons
-import UserIcon from '@material-ui/icons/People';
-import TelegramIcon from '@material-ui/icons/Telegram';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import PublicIcon from '@material-ui/icons/Public';
-import AccessibleIcon from '@material-ui/icons/Accessible';
 
 const theme = createMuiTheme({
   palette: {
@@ -33,31 +28,30 @@ const theme = createMuiTheme({
 });
 
 // Custom components
-import { Login, Layout } from './components';
+import { Loading, Login, Layout } from './components';
 // Resources
-import { UserList } from './screens/users';
-import { ApplicationCreate, ApplicationList } from './screens/applications';
-import { CategoryList, CategoryEdit, CategoryCreate } from './screens/categories';
-import { CommunityEdit, CommunityList, CommunityCreate } from './screens/communities';
-import { OrganizationCreate, OrganizationList } from './screens/organizations';
+import Resources from './resources';
 import { fetchUser } from './actions';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const notify = useNotify();
   const dispatch = useDispatch();
-  const authErrors = useSelector(store => store.errors.auth);
+  const user = useSelector(store => store.user);
 
-  if (!isEmpty(localStorage.sasiToken) && isEmpty(authErrors)) {
-    setAuthToken(localStorage.sasiToken);
-    dispatch(fetchUser());
-  }
-  
   useEffect(() => {
-    if (!isEmpty(authErrors)) {
+    if (localStorage.sasiToken) {
+      const decoded = jwt_decode(localStorage.sasiToken);
+      
+      // Remember to check if token is valid
+      dispatch(fetchUser(localStorage.sasiToken));
+    } else {
       history.push('/login');
-      notify(authErrors.message)
     }
-  }, [authErrors]);
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) return <Loading />
 
   return (
     <Admin
@@ -70,52 +64,7 @@ export default function App() {
       i18nProvider={i18nProvider}
       theme={theme}
     >
-      <Resource
-        name="applications"
-        list={ApplicationList}
-        create={ApplicationCreate}
-        icon={<TelegramIcon />}
-        options={{
-          label: 'Solicitudes'
-        }}
-       />
-      <Resource
-        name="organizations"
-        list={OrganizationList}
-        create={OrganizationCreate}
-        icon={<AccessibleIcon />}
-        options={{
-          label: 'Instituciones'
-        }}
-       />
-      <Resource
-        name="users"
-        list={UserList}
-        icon={<UserIcon />}
-        options={{
-          label: 'Usuarios'
-        }}
-       />
-      <Resource 
-        name='categories' 
-        options={{
-          label: 'Categorías'
-        }}
-        icon={<LocalOfferIcon />}
-        list={CategoryList}
-        create={CategoryCreate}
-        edit={CategoryEdit}
-      />
-      <Resource 
-        name='communities' 
-        options={{
-          label: 'Comunidades'
-        }}
-        icon={<PublicIcon />}
-        list={CommunityList}
-        create={CommunityCreate}
-        edit={CommunityEdit}
-      />
+      <Resources />
     </Admin>
   ); 
 }

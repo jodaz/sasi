@@ -23,5 +23,5 @@ export const logout = () =>
 
 export const fetchUser = () => 
   axios.get('/user')
-    .then(res => res.data);
+    .then(res => res.data.user);
 
