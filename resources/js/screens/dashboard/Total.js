@@ -29,6 +29,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const LoadingCards = (classes) => (
+  <>
+    <Card className={classes.root}>
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Loading />
+        </CardContent>
+      </div>
+    </Card>
+  </>
+);
+
 const Total = props => {
   const [data, setData] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,10 +57,10 @@ const Total = props => {
 
   return (
     (isLoading)
-    ? <Loading />
+    ? <LoadingCards classes={classes} />
     : 
     data.map((item, key) =>
-      <Card className={classes.root}>
+      <Card className={classes.root} key={key}>
         <div className={classes.details}>
           <CardContent className={classes.content}>
             <Typography component="h5" variant="h5">
