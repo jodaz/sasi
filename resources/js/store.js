@@ -6,7 +6,7 @@ import {
   adminReducer,
   adminSaga,
 } from 'react-admin';
-import { userReducer } from './reducers';  
+import { errorsReducer, userReducer } from './reducers';  
 import customSagas from './sagas';
 
 export default ({
@@ -16,7 +16,8 @@ export default ({
   const reducer = combineReducers({
     admin: adminReducer,
     router: connectRouter(history),
-    user: userReducer 
+    user: userReducer,
+    errors: errorsReducer
   });
 
   const saga = function* rootSaga() {

@@ -1,5 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { setUser } from './actions';
+import { setError, setUser } from './actions';
 import { login, fetchUser, logout } from './fetch';
 
 function* loginSaga(action) {
@@ -8,8 +8,16 @@ function* loginSaga(action) {
 }
 
 function* fetchUserSaga() {
-  const user = yield call(() => fetchUser());
-  yield put(setUser(user));
+  try {
+    const user = yield call(() => fetchUser());
+    yield put(setUser(user));
+  } catch(error) {
+    yield put(setError({
+      auth: {
+        message: '¡Debe iniciar sesión!'
+      }
+    }));
+  }
 }
 
 function* logoutSaga() {

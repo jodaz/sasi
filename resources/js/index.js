@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import { useNotify } from 'react-admin';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ListGuesser, Admin, Resource } from 'react-admin';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 import { isEmpty, customRoutes, setAuthToken } from './utils';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   store,
   dataProvider,
@@ -32,10 +33,7 @@ const theme = createMuiTheme({
 });
 
 // Custom components
-import {
-  Login,
-  Layout
-} from './components';
+import { Login, Layout } from './components';
 // Resources
 import { UserList } from './screens/users';
 import { ApplicationCreate, ApplicationList } from './screens/applications';
@@ -45,12 +43,21 @@ import { OrganizationCreate, OrganizationList } from './screens/organizations';
 import { fetchUser } from './actions';
 
 export default function App() {
+  const notify = useNotify();
   const dispatch = useDispatch();
+  const authErrors = useSelector(store => store.errors.auth);
 
-  if (!isEmpty(localStorage.sasiToken)) {
+  if (!isEmpty(localStorage.sasiToken) && isEmpty(authErrors)) {
     setAuthToken(localStorage.sasiToken);
     dispatch(fetchUser());
   }
+  
+  useEffect(() => {
+    if (!isEmpty(authErrors)) {
+      history.push('/login');
+      notify(authErrors.message)
+    }
+  }, [authErrors]);
 
   return (
     <Admin

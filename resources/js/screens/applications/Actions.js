@@ -2,6 +2,8 @@ import * as React from "react";
 import {
   useMutation,
   useNotify,
+  useUpdate,
+  useDelete,
   useRedirect,
 } from 'react-admin';
 // Icons
@@ -27,10 +29,10 @@ const ButtonMenu = ({ onClick, icon, label }) => (
   >
     <ListItemIcon>
       {icon}
+      <Typography fontSize="small">
+        {label}
+      </Typography>
     </ListItemIcon>
-    <Typography fontSize="small">
-      {label}
-    </Typography>
   </MenuItem>
 );
 
@@ -38,18 +40,15 @@ const Actions = ({ record, handleClose }) => {
   const notify = useNotify();
   const redirect = useRedirect();
 
-  const [approve, { loading }] = useMutation({
-    type: 'update',
-    resource: 'applications',
-    payload: { id: record.id }
-  }, {
-    undoable: true,
-    onSuccess: ({ data }) => {
-      redirect('/applications');
-      notify('¡Solicitud aprobada!', 'info', {}, true);
-    },
-    onFailure: (error) => notify(`Error: ${error.message}`, 'warning')
-  });
+  const [deleteOne, {
+    loading: deleteLoading,
+    error: deleteError
+  }] = useDelete('applications', record.id);
+
+  const [approve, {
+    loading: approveLoading,
+    error: approveError
+  }] = useUpdate('applications', record.id, {}, record);
 
   return (<>
     <ButtonMenu
@@ -82,10 +81,11 @@ const Actions = ({ record, handleClose }) => {
           }}
         />
         <ButtonMenu
-          label='Rechazar'
+          label='Anular'
           icon={<DeleteIcon />}
           onClick={
             (e) => {
+              deleteOne();
               handleClose();
           }}
         />
