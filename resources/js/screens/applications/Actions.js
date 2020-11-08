@@ -23,18 +23,20 @@ import { download } from '../../utils';
 
 const ITEM_HEIGHT = 48;
 
-const ButtonMenu = ({ onClick, icon, label }) => (
+const ref =  React.createRef();
+
+const ButtonMenu = React.forwardRef(( props, ref ) => (
   <MenuItem
-    onClick={onClick}
+    onClick={props.onClick}
   >
     <ListItemIcon>
-      {icon}
+      {props.icon}
       <Typography fontSize="small">
-        {label}
+        {props.label}
       </Typography>
     </ListItemIcon>
   </MenuItem>
-);
+));
 
 const Actions = ({ record, handleClose }) => {
   const notify = useNotify();
@@ -58,6 +60,7 @@ const Actions = ({ record, handleClose }) => {
       (e) => {
         handleClose()
       }}
+      ref={ref}
     />
     { (record.state.name == 'Aprobado') &&
         <ButtonMenu
@@ -68,6 +71,7 @@ const Actions = ({ record, handleClose }) => {
             download(`applications/${record.id}/download`, 'certificado.pdf');
             handleClose(); 
           }}
+          ref={ref}
         />
     }
     { (record.state.name == 'Pendiente') && (<>
@@ -79,6 +83,7 @@ const Actions = ({ record, handleClose }) => {
               approve();
               handleClose();
           }}
+          ref={ref}
         />
         <ButtonMenu
           label='Anular'
@@ -88,6 +93,7 @@ const Actions = ({ record, handleClose }) => {
               deleteOne();
               handleClose();
           }}
+          ref={ref}
         />
       </>)
     }
@@ -131,7 +137,7 @@ const MenuActions = props => {
           },
         }}
       >
-        <Actions record={record} handleClose={handleClose}/>
+        <Actions record={record} handleClose={ref => handleClose}/>
       </Menu>
     </div>
   );

@@ -16,6 +16,9 @@ import {
   NotImplementedError
 } from './errors';
 import defaultSettings from './defaultSettings';
+import init from './initializer';
+
+init('sasiToken');
 
 export default (apiURL, customSettings = {}) => (type, resource, params) => {
   let url = '';

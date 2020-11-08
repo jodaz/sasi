@@ -7,7 +7,6 @@ export const login = data =>
       const { token, user } = res.data;
 
       localStorage.setItem('sasiToken', token);
-      setAuthToken(token);
 
       history.push('/home');
       return user;
@@ -17,7 +16,6 @@ export const logout = () =>
   axios.get('/logout')
     .then(res => {
       localStorage.removeItem('sasiToken');
-      setAuthToken();
       history.push('/login');
     });
 

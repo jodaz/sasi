@@ -1,3 +1,5 @@
+import { history, setAuthToken } from './utils';
+
 const usersInitialState = {
   user: {},
   isAuth: false
@@ -11,13 +13,13 @@ const errorsInitialState = {
 export const errorsReducer = (state = errorsInitialState, action) => {
   switch(action.type) {
     case 'SET_FORM_ERRORS':
-      return { ...previousState, form: action.payload };
+      return { ...state, form: action.payload };
       break;
     case 'CLEAR_ERRORS':
       return errorsInitialState;
       break;
     case 'SET_NOTIFICATION_ERRORS':
-      return {...previousState, notification: action.payload };
+      return {...state, notification: action.payload };
       break;
     default:
       return state;
@@ -27,13 +29,33 @@ export const errorsReducer = (state = errorsInitialState, action) => {
 export const userReducer = (state = usersInitialState, action) => {
   switch(action.type) {
     case 'SET_USER': 
-      return { ...state, user: action.payload, isAuth: true };
+      const { user, token } = action.payload;
+
+      setAuthToken(token);
+
+      return { ...state, user: user, isAuth: true };
       break;
     case 'LOGOUT':
+      setAuthToken();
+      history.push('/login');
+
       return { ...state, ...usersInitialState };
       break;
     default:
       return state;
+  }
+}
+
+export const voterReducer = (previousState = {}, action) => {
+  switch(action.type) {
+    case 'SET_VOTER': 
+      return { ...action.payload };
+      break;
+    case 'CLEAR_VOTER':
+      return {};
+      break;
+    default:
+      return previousState;
   }
 }
 

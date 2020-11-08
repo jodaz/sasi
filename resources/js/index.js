@@ -2,77 +2,40 @@ import React, { useState, useEffect } from 'react';
 import { useNotify } from 'react-admin';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ListGuesser, Admin, Resource } from 'react-admin';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-import { isEmpty, customRoutes, setAuthToken } from './utils';
 import { useSelector, useDispatch } from 'react-redux';
 import jwt_decode from "jwt-decode";
-
-import {
-  store,
-  dataProvider,
-  i18nProvider,
-  history
-} from './initializers';
-import {
-  createMuiTheme
-} from '@material-ui/core';
-
-const theme = createMuiTheme({
-  palette: {
-    secondary: {
-      main: purple[500]
-    }
-  }
-});
-
+import { isEmpty } from './utils';
+import { history, store } from './initializers';
 // Custom components
-import { Loading, Login, Layout } from './components';
+import { Loading } from './components';
 // Resources
-import Resources from './resources';
+import App from './App';
 import { fetchUser } from './actions';
 
-export default function App() {
+export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const notify = useNotify();
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
 
   useEffect(() => {
-    if (localStorage.sasiToken) {
-      const decoded = jwt_decode(localStorage.sasiToken);
-      
-      // Remember to check if token is valid
-      dispatch(fetchUser(localStorage.sasiToken));
+    let route = window.location.pathname;
+
+    if (!isEmpty(localStorage.sasiToken)) {
+      route = (route == '/login' || route == '/') ? '/home' : route;
     } else {
-      history.push('/login');
+      route = '/login';
     }
-    setIsLoading(false);
+    history.push(route);
   }, []);
 
-  if (isLoading) return <Loading />
-
-  return (
-    <Admin
-      layout={Layout}  
-      dataProvider={dataProvider}
-      loginPage={Login}
-      history={history}
-      customRoutes={customRoutes}
-      locale='es'
-      i18nProvider={i18nProvider}
-      theme={theme}
-    >
-      <Resources />
-    </Admin>
-  ); 
+  return <App />;
 }
 
 if (document.getElementById('root')) {
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <Index />
     </Provider>,
     document.getElementById('root')
   );

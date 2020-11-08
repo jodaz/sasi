@@ -12,21 +12,15 @@ export const setUser = (user = {}) => ({
   payload: user
 });
 
-export const logoutUser = () => ({
-  type: 'LOGOUT'
+export const fetchUser = () => ({
+  type: 'FETCH_USER' 
 });
 
-export const setError = error => ({
-  type: 'SET_ERRORS',
-  payload: error
+export const setErrors = (errors = {}) => ({
+  type: 'SET_FORM_ERRORS',
+  payload: errors
 });
 
 export const clearErrors = () => ({
   type: 'CLEAR_ERRORS'
 });
-
-export const fetchUser = token => ({
-  type: 'FETCH_USER',
-  payload: token
-});
-

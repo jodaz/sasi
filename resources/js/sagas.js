@@ -1,32 +1,28 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { setError, setUser, logoutUser } from './actions';
+import { setUser, setErrors, clearErrors } from './actions';
 import { login, fetchUser, logout } from './fetch';
-import { history } from './initializers';
-import { setAuthToken } from './utils';
+import { history } from './utils';
 
 function* loginSaga(action) {
-  const user = yield call(() => login(action.payload));
-  yield put(setUser(user));
+  const { response, error } = yield call(() => login(action.payload));
+
+  if (response) {
+    yield put(setUser(response))
+    yield put(clearErrors());
+    history.push('/home');
+  } else {
+    yield put(setErrors(error))
+  }
 }
 
-function* fetchUserSaga(action) {
-  try {
-    setAuthToken(action.payload);
-    const user = yield call(() => fetchUser(action.payload));
-    yield put(setUser(user));
-    history.push('/home');
-  } catch(error) {
-    yield put(setError({
-      auth: {
-        message: '¡Debe iniciar sesión!'
-      }
-    }));
-  }
+function* fetchUserSaga() {
+  const user = yield call(() => fetchUser());
+  yield put(setUser(user));
 }
 
 function* logoutSaga() {
   yield call(() => logout());
-  yield put(logoutUser());
+  yield put(setUser());
 }
 
 export default function* rootSaga() {
