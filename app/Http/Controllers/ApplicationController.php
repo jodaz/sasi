@@ -20,9 +20,10 @@ class ApplicationController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Application::latest()->with(['category', 'state']);
+        $results = $request->perPage;
 
-        $results = $request->page['number'] * $request->page['size'];
+        $query = Application::latest()
+            ->with(['category', 'state']);
 
         if ($request->has('filter')) {
             $filters = $request->filter;

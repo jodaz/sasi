@@ -23,6 +23,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $query = User::latest()->with(['role']);
+        $results = $request->perPage;
 
         if ($request->has('filter')) {
             $filters = $request->filter;
@@ -31,8 +32,6 @@ class UserController extends Controller
             
             $query->whereLike('email', $email);
         }
-
-        $results = $request->page['number'] * $request->page['size'];
 
         return $query->paginate($results);
     }

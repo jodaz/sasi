@@ -33,8 +33,8 @@ export default (apiURL, customSettings = {}) => (type, resource, params) => {
 
       // Create query with pagination params.
       const query = {
-        'page[number]': page,
-        'page[size]': perPage,
+        'page': page,
+        'perPage': perPage,
       };
 
       // Add all filter params to query.

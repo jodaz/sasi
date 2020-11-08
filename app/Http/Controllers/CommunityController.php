@@ -17,8 +17,7 @@ class CommunityController extends Controller
     public function index(Request $request)
     {
         $query = Community::query()->withCount('applications');
-
-        $results = $request->page['number'] * $request->page['size'];
+        $results = $request->perPage;
 
         if ($request->has('filter')) {
             $filters = $request->filter;
