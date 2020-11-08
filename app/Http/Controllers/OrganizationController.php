@@ -29,7 +29,6 @@ class OrganizationController extends Controller
         }
 
         return $query->paginate($results);
-
     }
 
    /**
@@ -60,10 +59,10 @@ class OrganizationController extends Controller
             'name' => $request->get('name'),
             'rif' => $request->get('rif'),
             'address' => $request->get('address'),
-            'category_id' => $request->get('category'),
-            'parish_id' => $request->get('parish'),
-            'organization_type_id' => $request->get('type'),
-            'community_id' => $request->get('community')
+            'category_id' => $request->get('categories'),
+            'parish_id' => $request->get('parishes'),
+            'organization_type_id' => $request->get('types'),
+            'community_id' => $request->get('communities')
         ]);
 
         return Response([

@@ -41,7 +41,7 @@ class Organization extends Model
 
     public function applications()
     {
-        return $this->belongsToMany(Application::class);
+        return $this->belongsToMany(Application::class, 'organization_application');
     }
 
     public function community()

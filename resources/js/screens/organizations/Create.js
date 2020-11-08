@@ -40,6 +40,12 @@ const OrganizationCreate = (props) => {
       () => setCommunities(comm); 
     }
   }, [parish]);
+  
+  useEffect(() => {
+    if (!loading) {
+      setCommunities(data.parishes[0].communities);
+    }
+  }, [loading]);
 
   return (
     <Create {...props} title="Nueva institución">

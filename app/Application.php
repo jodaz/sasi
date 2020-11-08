@@ -20,7 +20,7 @@ class Application extends Model
 
     public function organization()
     {
-        return $this->belongsToMany(Organization::class);
+        return $this->belongsToMany(Organization::class, 'organization_application');
     }
 
     public function profile()
