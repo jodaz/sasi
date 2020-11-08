@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { login } from '../actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Layout
 import Auth from './Auth';
 
@@ -37,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const [errors, setErrors] = useState({});
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const notify = useNotify();
   const { token } = useParams();
+  const errors = useSelector(store => store.errors.form);
 
   const handleSubmit = (e) => {
     e.preventDefault();

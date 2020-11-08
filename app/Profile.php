@@ -45,6 +45,11 @@ class Profile extends Model
         return $this->hasMany(Application::class);
     }
 
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class);
+    }
+
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->surname}";

@@ -26,6 +26,7 @@ export default function Index() {
     } else {
       route = '/login';
     }
+
     history.push(route);
   }, []);
 

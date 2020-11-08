@@ -7,7 +7,7 @@ function* loginSaga(action) {
   const { response, error } = yield call(() => login(action.payload));
 
   if (response) {
-    yield put(setUser(response))
+    yield put(setUser(response));
     yield put(clearErrors());
     history.push('/home');
   } else {
@@ -23,6 +23,7 @@ function* fetchUserSaga() {
 function* logoutSaga() {
   yield call(() => logout());
   yield put(setUser());
+  history.push('/login');
 }
 
 export default function* rootSaga() {

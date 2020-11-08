@@ -54,7 +54,7 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        $profile = $request->user()->profile();
+        $profile = $request->user()->profile;
 
         $organization = $profile->organizations()->create([
             'name' => $request->get('name'),

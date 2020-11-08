@@ -1,5 +1,5 @@
 import React from 'react';
-import { Notification, Title } from 'react-admin';
+import { Title } from 'react-admin';
 import {
   Avatar,
   Container,
@@ -55,8 +55,6 @@ export default function Auth(props) {
           </Typography>
 
           {children}
-
-          <Notification />
         </div>
       </Container>
     </>

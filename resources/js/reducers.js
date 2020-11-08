@@ -30,6 +30,7 @@ export const userReducer = (state = usersInitialState, action) => {
   switch(action.type) {
     case 'SET_USER': 
       const { user, token } = action.payload;
+      console.log(token);
 
       setAuthToken(token);
 
