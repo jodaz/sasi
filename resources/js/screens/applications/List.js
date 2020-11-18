@@ -7,7 +7,7 @@ import {
 import axios from 'axios';
 import { useAuth } from'../../utils';
 import { Filter, ModuleActions } from '../../components';
-import Actions from './Actions';
+import { Actions } from '../../components';
 
 export default function(props) {
   const auth = useAuth();

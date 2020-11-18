@@ -31,11 +31,13 @@ const MenuActions = props => {
     error
   }] = useDelete(resource, record.id);
 
-  useEffect(async () => {
-    if (loaded) {
-      await notify(data.message);
-      await refresh();
-    }
+  useEffect(() => {
+    (async function () {
+      if (loaded) {
+        await notify(data.message);
+        await refresh();
+      }
+    })();
   }, [loaded]);
 
   if (error) return notify('Ha ocurrido un error');

@@ -6,7 +6,7 @@ import {
   TextField
 } from 'react-admin';
 import { useAuth } from'../../utils';
-import { Filter, ModuleActions } from '../../components';
+import { Filter, Actions, ModuleActions } from '../../components';
 
 export default function(props) {
   const auth = useAuth();
@@ -23,7 +23,7 @@ export default function(props) {
         <TextField source='name' label='Nombre' />
         <TextField source='full_address' label='Dirección' />
         <TextField source='applications_count' label='Solicitudes' />
-        <DeleteButton />
+        <Actions {...props} />
       </Datagrid>
     </List>
   );

@@ -2,16 +2,11 @@ import * as React from "react";
 import { cloneElement, useMemo } from 'react';
 import {
   List, 
-  Datagrid, 
-  EditButton,
-  DeleteButton,
+  Datagrid,
   BulkDeleteButton,
-  TopToolbar,
-  Button,
-  TextField,
-  TextInput
+  TextField
 } from 'react-admin';
-import { Filter, ModuleActions } from '../../components';
+import { Actions, Filter, ModuleActions } from '../../components';
 import { useAuth } from'../../utils';
 
 const CategoriesActionsButtons = props => (
@@ -33,8 +28,7 @@ export default function(props) {
       <Datagrid>
         <TextField source='name' label='Nombre' />
         <TextField source='applications_count' label='Solicitudes' />
-        <EditButton />
-        <DeleteButton />
+        <Actions {...props} shouldEdit />
       </Datagrid>
     </List>
   );
