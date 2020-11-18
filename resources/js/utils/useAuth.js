@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { isEmpty, history } from './index';
+import history from './history';
+import isEmpty from 'is-empty';
 import { useNotify } from 'react-admin';
 
 const useAuth = () => {

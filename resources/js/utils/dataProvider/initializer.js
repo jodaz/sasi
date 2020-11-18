@@ -12,7 +12,7 @@ export default (tokenName) => {
 
       // When a 'token' is available set as Bearer token.
       if (token) {
-        newConfig.headers.Authorization = `${token}`;
+        newConfig.headers.Authorization = `Bearer ${token}`;
       }
 
       return newConfig;

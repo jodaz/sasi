@@ -1,19 +1,17 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
 import { createMuiTheme } from '@material-ui/core';
-import { isEmpty, customRoutes, setAuthToken } from './utils';
-import { purple, green } from '@material-ui/core/colors';
+import { customRoutes } from './utils';
+import { green } from '@material-ui/core/colors';
 // Icons
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
-import SettingsIcon from '@material-ui/icons/Settings';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PublicIcon from '@material-ui/icons/Public';
 import AccessibleIcon from '@material-ui/icons/Accessible';
 import { Login, Layout } from './components';
 
 import {
-  store,
   dataProvider,
   i18nProvider,
   history
@@ -29,7 +27,7 @@ import { OrganizationCreate, OrganizationList } from './screens/organizations';
 const theme = createMuiTheme({
   palette: {
     secondary: {
-      main: purple[500]
+      main: green[500]
     }
   }
 });

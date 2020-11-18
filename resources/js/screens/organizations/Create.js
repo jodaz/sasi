@@ -8,7 +8,7 @@ import {
   Loading,
   Error
 } from 'react-admin';
-import { isEmpty } from '../../utils';
+import isEmpty from 'is-empty';
 
 const validator = (values) => {
   const errors = {};

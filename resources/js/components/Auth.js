@@ -1,10 +1,10 @@
 import React from 'react';
-import { Title } from 'react-admin';
+import { Notification, Title } from 'react-admin';
+import GradeIcon from '@material-ui/icons/Grade';
 import {
   Avatar,
   Container,
   Box,
-  Link,
   Typography,
   makeStyles
 } from '@material-ui/core';
@@ -49,12 +49,18 @@ export default function Auth(props) {
 
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
+            <GradeIcon /> 
           </Avatar>
           <Typography component="h1" variant="h5">
             {title} 
           </Typography>
+          <Typography component="subtitle1" variant="body2" >
+            SASI
+          </Typography>
 
           {children}
+
+          <Notification />
         </div>
       </Container>
     </>

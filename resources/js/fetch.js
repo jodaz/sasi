@@ -1,30 +1,30 @@
 import axios from 'axios';
 import { history, setAuthToken } from './utils';
+import { apiURL } from './config';
 
 export const login = data => 
-  axios.post('/login', data)
+  axios.post(apiURL+'/login', data)
     .then(res => ({ response: res.data }))
-    .catch(err => {
-      let errors = {};
-      if (err.response) {
-        errors = err.response.data.errors;
-      } else if (err.request) {
-        errors = err.request.errors;
-      } else {
-        errors = err.message.errors;
-      }
-      
-      return ({ error: errors });
-    });
+    .catch(err => ({ error: err.message.data }));
 
 export const logout = () =>
-  axios.get('/logout')
+  axios.get(`${apiURL}/logout`)
     .then(res => {
-      localStorage.removeItem('sasiToken');
+      setAuthToken();
       history.push('/login');
     });
 
-export const fetchUser = () => 
-  axios.get('/user')
-    .then(res => res.data.user);
+export const fetchUser = id => 
+  axios.post(`${apiURL}/users/current`, { 'id': id })
+    .then(res => ({ response: res.data }))
+    .catch(err => ({ error: err.message.data }));
 
+export const fetchUsers = () => 
+  axios.get(`${apiURL}/users?role=USER`)
+    .then(res => ({ response: res.data }));
+
+export const vote = async (id, data) => {
+  await axios.post(`${apiURL}/votation-centers/${id}`, data)
+    .then(res => ({ response: res.data }))
+    .catch(error => ({ error: error.message.data }));
+}

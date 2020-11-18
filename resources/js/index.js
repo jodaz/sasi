@@ -3,14 +3,10 @@ import { useNotify } from 'react-admin';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
-import jwt_decode from "jwt-decode";
-import { isEmpty } from './utils';
+import isEmpty from 'is-empty';
 import { history, store } from './initializers';
-// Custom components
-import { Loading } from './components';
 // Resources
 import App from './App';
-import { fetchUser } from './actions';
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);

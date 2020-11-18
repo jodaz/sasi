@@ -32,7 +32,7 @@ class AuthController extends Controller
         $tokenResult = $user->createToken('authToken');
 
         return response()->json([
-            'token' => 'Bearer '.$tokenResult->accessToken,
+            'token' => $tokenResult->accessToken,
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at)
                     ->toDateTimeString(),

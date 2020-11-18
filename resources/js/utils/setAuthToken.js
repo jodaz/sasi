@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const setAuthToken = token => {
   if (token) {
     localStorage.setItem('sasiToken', token);

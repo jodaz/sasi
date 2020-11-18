@@ -1,5 +1,3 @@
-import { history, setAuthToken } from './utils';
-
 const usersInitialState = {
   user: {},
   isAuth: false
@@ -29,34 +27,12 @@ export const errorsReducer = (state = errorsInitialState, action) => {
 export const userReducer = (state = usersInitialState, action) => {
   switch(action.type) {
     case 'SET_USER': 
-      const { user, token } = action.payload;
-      console.log(token);
-
-      setAuthToken(token);
-
-      return { ...state, user: user, isAuth: true };
+      return { ...state, user: action.payload, isAuth: true };
       break;
     case 'LOGOUT':
-      setAuthToken();
-      history.push('/login');
-
       return { ...state, ...usersInitialState };
       break;
     default:
       return state;
   }
 }
-
-export const voterReducer = (previousState = {}, action) => {
-  switch(action.type) {
-    case 'SET_VOTER': 
-      return { ...action.payload };
-      break;
-    case 'CLEAR_VOTER':
-      return {};
-      break;
-    default:
-      return previousState;
-  }
-}
-

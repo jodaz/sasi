@@ -1,30 +1,16 @@
 import * as React from 'react';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Link as RouterLink, useParams } from 'react-router-dom';
-import { isEmpty } from '../utils';
-import {
-  useNotify
-} from 'react-admin';
+import { useState } from 'react';
 import {
   makeStyles,
-  Typography,
-  Box,
-  FormControlLabel,
   TextField,
   Button
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { login } from '../actions';
-import { useDispatch, useSelector } from 'react-redux';
 // Layout
 import Auth from './Auth';
-
-const ErrorTypo = (text) => (
-  <Typography variant="overline" color="error">
-    {text}
-  </Typography>
-);
+import { login } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setErrors } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -38,64 +24,61 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [data, setData] = useState({});
   const dispatch = useDispatch();
-  const notify = useNotify();
-  const { token } = useParams();
   const errors = useSelector(store => store.errors.form);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(login(data));
   };
 
-  useEffect(() => {
-    if (!isEmpty(token)) {
-      axios.get(`/activate-account/${token}`)
-        .then(res => notify(res.data.message))
-        .catch(err => notify(res.data.message));
-    }
-  }, []);
+  const handleData = (e) => {
+    const { name, value } = e.target;
+
+    setData({...data, [name]: value });
+    dispatch(setErrors({...errors, [name]: ''}));
+  }
 
   return (
-    <Auth title='Inicio de sesión'>
+    <Auth title='Iniciar sesión'>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
-          error={errors.email && true}
+          error={errors.login && true}
+          type='email'
           margin="normal"
           fullWidth
           id="login"
           label="Correo electrónico"
           name="email"
-          onChange={e => setEmail(e.target.value)}
+          onChange={handleData}
           required
-          helperText={errors.email && 'Ingrese su correo electrónico'}
+          helperText={errors.login && errors.login}
         />
         <TextField
           variant="outlined"
           error={errors.password && true}
           margin="normal"
           fullWidth
-          name="password"
-          label="Contraseña"
-          type="password"
           id="password"
-          onChange={e => setPassword(e.target.value)}
+          label="Contraseña"
+          name="password"
+          type="password"
+          onChange={handleData}
           required
-          helperText={errors.password && 'Introduzca su contraseña'}
+          helperText={errors.password && errors.password}
         />
         <Button
           type="submit"
           variant="contained"
-          color="primary"
+          color='secondary'
           className={classes.submit}
           startIcon={<ExitToAppIcon />}  
+          fullWidth
         >
           Acceder
         </Button>
-        <RouterLink to='/register'>Regístrese</RouterLink>
       </form>
     </Auth>
   );

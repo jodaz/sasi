@@ -16,7 +16,7 @@ export default ({
   const reducer = combineReducers({
     admin: adminReducer,
     router: connectRouter(history),
-    user: userReducer,
+    user: userReducer, 
     errors: errorsReducer
   });
 
