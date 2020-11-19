@@ -45,7 +45,7 @@ const Login = () => {
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
-          error={errors.login && true}
+          error={errors.email && true}
           type='email'
           margin="normal"
           fullWidth
@@ -54,7 +54,7 @@ const Login = () => {
           name="email"
           onChange={handleData}
           required
-          helperText={errors.login && errors.login}
+          helperText={errors.email && errors.email}
         />
         <TextField
           variant="outlined"

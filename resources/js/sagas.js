@@ -1,11 +1,14 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { setNotifications, setUser, setErrors, clearErrors } from './actions';
-import { updatePassword, login, fetchUser, logout } from './fetch';
+import { postRequest, fetchUser, logout } from './fetch';
 import { setAuthToken } from './utils';
 import { history } from './initializers';
 
 function* loginSaga(action) {
-  const { response, error } = yield call(() => login(action.payload));
+  const { payload } = action;
+  const {
+    response, error
+  } = yield call(() => postRequest(payload, 'login'));
 
   if (response) {
     const { token, user } = response;
@@ -19,7 +22,10 @@ function* loginSaga(action) {
 }
 
 function* fetchUserSaga(action) {
-  const { response, error } = yield call(() => fetchUser(action.payload));
+  const { payload } = action;
+  const {
+    response, error
+  } = yield call(() => postRequest(payload, 'users/current'));
 
   if (response) {
     yield put(setUser(response));
@@ -32,25 +38,16 @@ function* fetchUserSaga(action) {
 }
 
 function* updatePasswordSaga(action) {
-  const { response, error } = yield call(() => updatePassword(action.payload));
+  const { payload } = action;
+  const {
+    response, error
+  } = yield call(() => postRequest(payload, 'update-password'));
 
   if (response) {
     yield put(setNotifications(response.message))
     history.goBack();
   } else {
-    let errors = {};
-
-    if (error.request) {
-      errors = { ...error.request };
-    }
-    if (error.response) {
-      errors = { ...error.response.data };
-    }
-    if (error.message) {
-      errors = { ...error.message.errors };
-    }
-
-    yield put(setErrors(errors))
+    yield put(setErrors(error))
   }
 }
 
