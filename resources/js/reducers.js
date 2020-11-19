@@ -4,8 +4,12 @@ const usersInitialState = {
 };
 
 const errorsInitialState = {
-  form: {},
-  notification: null
+  form: {}
+};
+
+const notificationsInitialState = {
+  show: false,
+  message: null
 };
 
 export const errorsReducer = (state = errorsInitialState, action) => {
@@ -15,9 +19,6 @@ export const errorsReducer = (state = errorsInitialState, action) => {
       break;
     case 'CLEAR_ERRORS':
       return errorsInitialState;
-      break;
-    case 'SET_NOTIFICATION_ERRORS':
-      return {...state, notification: action.payload };
       break;
     default:
       return state;
@@ -31,6 +32,19 @@ export const userReducer = (state = usersInitialState, action) => {
       break;
     case 'LOGOUT':
       return { ...state, ...usersInitialState };
+      break;
+    default:
+      return state;
+  }
+}
+
+export const notificationsReducer = (state = notificationsInitialState, action) => {
+  switch (action.type) {
+    case 'SET_NOTIFICATIONS':
+      return { message: action.payload, show: true };
+      break;
+    case 'CLEAR_NOTIFICATIONS':
+      return notificationsInitialState;
       break;
     default:
       return state;

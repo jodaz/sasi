@@ -6,7 +6,7 @@ import {
   adminReducer,
   adminSaga,
 } from 'react-admin';
-import { errorsReducer, userReducer } from './reducers';  
+import { notificationsReducer, errorsReducer, userReducer } from './reducers';  
 import customSagas from './sagas';
 
 export default ({
@@ -17,6 +17,7 @@ export default ({
     admin: adminReducer,
     router: connectRouter(history),
     user: userReducer, 
+    notifications: notificationsReducer,
     errors: errorsReducer
   });
 

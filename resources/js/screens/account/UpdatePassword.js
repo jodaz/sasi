@@ -14,16 +14,7 @@ import {
 // Components 
 import Helmet from 'react-helmet';
 import Layout from '../../layouts';
-import { useForm } from 'react-hook-form';
-import { Actions } from '../../store';
-import { isEmpty } from '../../utils';
 import { useDispatch, useSelector } from 'react-redux';
-
-const ErrorTypo = (text) => (
-  <Typography variant="overline" color="error">
-    {text}
-  </Typography>
-);
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,12 +37,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function UpdatePassword() {
-  const { register, handleSubmit, errors } = useForm();
   const classes = useStyles();
+  const [data, setData] = useState({});
   const dispatch = useDispatch();
-  const loginErrors = useSelector(store => store.errors);
-  
-  const onSubmit = data => dispatch(Actions.updatePassword(data));
+  const errors = useSelector(store => store.errors.form);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updatePassword(data));
+  };
+
+  const handleData = (e) => {
+    const { name, value } = e.target;
+
+    setData({...data, [name]: value });
+    dispatch(setErrors({...errors, [name]: ''}));
+  }
 
   return (
     <Layout title='Actualizar contraseña'>

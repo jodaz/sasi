@@ -2,29 +2,29 @@ import axios from 'axios';
 import { history, setAuthToken } from './utils';
 import { apiURL } from './config';
 
-export const login = data => 
-  axios.post(apiURL+'/login', data)
+const getErrors = (error) => {
+  let errors = {};
+
+  if (error.request) {
+    errors = { ...error.request };
+  }
+  if (error.response) {
+    errors = { ...error.response.data };
+  }
+  if (error.message) {
+    errors = { ...error.message.errors };
+  }
+
+  return errors;
+}
+
+export const postRequest = (data, route) =>
+  axios.post(`${apiURL}/${route}`, data)
     .then(res => ({ response: res.data }))
-    .catch(err => ({ error: err.message.data }));
+    .catch(err => ({ error: getErrors(err) }));
 
 export const logout = () =>
   axios.get(`${apiURL}/logout`)
-    .then(res => {
-      setAuthToken();
-      history.push('/login');
-    });
-
-export const fetchUser = id => 
-  axios.post(`${apiURL}/users/current`, { 'id': id })
     .then(res => ({ response: res.data }))
-    .catch(err => ({ error: err.message.data }));
-
-export const fetchUsers = () => 
-  axios.get(`${apiURL}/users?role=USER`)
-    .then(res => ({ response: res.data }));
-
-export const vote = async (id, data) => {
-  await axios.post(`${apiURL}/votation-centers/${id}`, data)
-    .then(res => ({ response: res.data }))
-    .catch(error => ({ error: error.message.data }));
-}
+    .catch(err => ({ error: getErrors(err) }));
+ 

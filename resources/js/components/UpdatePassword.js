@@ -13,8 +13,8 @@ import {
   TextField,
   Button,
 } from '@material-ui/core';
-import axios from 'axios';
-import { history } from '../initializers';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatePassword } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,18 +34,14 @@ const useStyles = makeStyles((theme) => ({
 
 const UpdatePassword = () => {
   const classes = useStyles();
-  const [errors, setErrors] = useState({});
+  const errors = useSelector(store => store.errors.form);
   const [data, setData] = useState({});
+  const dispatch = useDispatch();
   const notify = useNotify();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/update-password', data)
-      .then(res => {
-        notify(res.data.message);
-        history.push('/home');
-      })
-      .catch((err) => notify('Ha ocurrido un error. Por favor intente de nuevo.'));
+    dispatch(updatePassword(data));
   };
 
   const handleData = (e) => {
@@ -71,11 +67,11 @@ const UpdatePassword = () => {
             name="current_password"
             onChange={handleData}
             required
-            helperText={errors.current_password && 'Ingrese su correo electrónico'}
+            helperText={errors.current_password && errors.current_password}
           />
           <TextField
             variant="outlined"
-            error={errors.password && true}
+            error={errors.new_password && true}
             margin="normal"
             name="new_password"
             label="Nueva contraseña"
@@ -84,11 +80,11 @@ const UpdatePassword = () => {
             fullWidth
             onChange={handleData}
             required
-            helperText={errors.password && 'Introduzca su contraseña'}
+            helperText={errors.new_password && errors.new_password}
           />
           <TextField
             variant="outlined"
-            error={errors.password && true}
+            error={errors.new_password_confirmation && true}
             margin="normal"
             name="new_password_confirmation"
             label="Repita la contraseña"
@@ -97,7 +93,7 @@ const UpdatePassword = () => {
             onChange={handleData}
             fullWidth
             required
-            helperText={errors.password && 'Introduzca su contraseña'}
+            helperText={errors.new_password_confirmation && errors.new_password_confirmation}
           />
           <Button
             type="submit"

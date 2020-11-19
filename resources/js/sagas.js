@@ -1,18 +1,17 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { setUser, setErrors, clearErrors } from './actions';
-import { login, fetchUser, logout } from './fetch';
-import { setAuthToken, history } from './utils';
+import { setNotifications, setUser, setErrors, clearErrors } from './actions';
+import { postRequest, fetchUser, logout } from './fetch';
+import { setAuthToken } from './utils';
+import { history } from './initializers';
 
 function* loginSaga(action) {
-  const { response, error } = yield call(() => login(action.payload));
+  const { payload } = action;
+  const {
+    response, error
+  } = yield call(() => postRequest(payload, 'login'));
 
   if (response) {
     const { token, user } = response;
-
-    if (user.role === 'USER') {
-      yield put(updateVotes(user.votationCenter.votes));
-    }
-
     yield put(setUser(user))
     yield put(clearErrors());
     setAuthToken(token);
@@ -23,20 +22,32 @@ function* loginSaga(action) {
 }
 
 function* fetchUserSaga(action) {
-  const { response, error } = yield call(() => fetchUser(action.payload));
+  const { payload } = action;
+  const {
+    response, error
+  } = yield call(() => postRequest(payload, 'users/current'));
 
   if (response) {
     yield put(setUser(response));
-
-    if (response.role === 'USER') {
-      yield put(updateVotes(response.votationCenter.votes));
-    }
-
     yield put(clearErrors());
   } else {
     setAuthToken();
     yield put(setErrors(error));
     history.push('/login');
+  }
+}
+
+function* updatePasswordSaga(action) {
+  const { payload } = action;
+  const {
+    response, error
+  } = yield call(() => postRequest(payload, 'update-password'));
+
+  if (response) {
+    yield put(setNotifications(response.message))
+    history.goBack();
+  } else {
+    yield put(setErrors(error))
   }
 }
 
@@ -52,5 +63,6 @@ export default function* rootSaga() {
   yield takeEvery('FETCH_USER', fetchUserSaga);
   yield takeEvery('LOGIN', loginSaga);
   yield takeEvery('LOGOUT', logoutSaga);
+  yield takeEvery('UPDATE_PASSWORD', updatePasswordSaga);
 }
 

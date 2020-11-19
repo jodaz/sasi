@@ -24,7 +24,9 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Tu contraseña o correo son incorrectos'
+                'errors' => [
+                    'email' => 'Tu contraseña o correo son inválidos.'
+                ]
             ], 401);
         }
 
