@@ -1,5 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { setUser, setErrors, clearErrors } from './actions';
+import { setNotifications, setUser, setErrors, clearErrors } from './actions';
 import { updatePassword, login, fetchUser, logout } from './fetch';
 import { setAuthToken } from './utils';
 import { history } from './initializers';
@@ -35,6 +35,7 @@ function* updatePasswordSaga(action) {
   const { response, error } = yield call(() => updatePassword(action.payload));
 
   if (response) {
+    yield put(setNotifications(response.message))
     history.goBack();
   } else {
     let errors = {};

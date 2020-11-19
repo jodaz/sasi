@@ -17,6 +17,15 @@ export const fetchUser = id => ({
   payload: id
 });
 
+export const setNotifications = message => ({
+  type: 'SET_NOTIFICATIONS',
+  payload: message
+});
+
+export const clearNotifications = () => ({
+  type: 'CLEAR_NOTIFICATIONS'
+});
+
 export const setErrors = (errors = {}) => ({
   type: 'SET_FORM_ERRORS',
   payload: errors

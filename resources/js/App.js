@@ -1,5 +1,6 @@
 import React from 'react';
-import { Admin, Resource } from 'react-admin';
+import { useNotify, Admin, Resource } from 'react-admin';
+import { useSelector, useDispatch } from 'react-redux';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green } from '@material-ui/core/colors';
@@ -10,6 +11,7 @@ import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PublicIcon from '@material-ui/icons/Public';
 import AccessibleIcon from '@material-ui/icons/Accessible';
 import { Login, Layout } from './components';
+import { clearNotifications } from './actions';
 
 import {
   dataProvider,
@@ -33,6 +35,17 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
+  const notification = useSelector(store => store.notifications);
+  const notify = useNotify();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (notification.show) {
+      notify(notification.message);
+      dispatch(clearNotifications());
+    }
+  }, [notification]);
+
   return (
     <Admin
       layout={Layout}  
