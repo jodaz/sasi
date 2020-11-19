@@ -25,3 +25,8 @@ export const setErrors = (errors = {}) => ({
 export const clearErrors = () => ({
   type: 'CLEAR_ERRORS'
 });
+
+export const updatePassword = data => ({
+  type: 'UPDATE_PASSWORD',
+  payload: data,
+});

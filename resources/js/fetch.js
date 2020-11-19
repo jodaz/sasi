@@ -19,12 +19,8 @@ export const fetchUser = id =>
     .then(res => ({ response: res.data }))
     .catch(err => ({ error: err.message.data }));
 
-export const fetchUsers = () => 
-  axios.get(`${apiURL}/users?role=USER`)
-    .then(res => ({ response: res.data }));
-
-export const vote = async (id, data) => {
-  await axios.post(`${apiURL}/votation-centers/${id}`, data)
+export const updatePassword = data => 
+  axios.post(`${apiURL}/update-password`, data)
     .then(res => ({ response: res.data }))
-    .catch(error => ({ error: error.message.data }));
-}
+    .catch(err => ({ error: err }));
+
