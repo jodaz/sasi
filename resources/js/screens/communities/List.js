@@ -15,7 +15,7 @@ export default function(props) {
   return (
     <List
       {...props}
-      title="Communidades"
+      title="Comunidades"
       actions={<ModuleActions shouldCreate/>}
       filters={<Filter defaultfilter='name' />}
     >

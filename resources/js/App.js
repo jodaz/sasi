@@ -3,7 +3,7 @@ import { useNotify, Admin, Resource } from 'react-admin';
 import { useSelector, useDispatch } from 'react-redux';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
-import { green } from '@material-ui/core/colors';
+import { green, purple } from '@material-ui/core/colors';
 // Icons
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
@@ -28,8 +28,12 @@ import { OrganizationCreate, OrganizationList } from './screens/organizations';
 
 const theme = createMuiTheme({
   palette: {
+    primary: {
+      main: purple[500]
+    },
     secondary: {
-      main: green[500]
+      main: green[900],
+      contrastText: '#fff'
     }
   }
 });
