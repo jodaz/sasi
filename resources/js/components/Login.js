@@ -8,9 +8,10 @@ import {
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Layout
 import Auth from './Auth';
-import { login } from '../actions';
+import { setAuthToken } from '../utils';
+import { clearAll, setErrors, postData, setUser, clearErrors } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { setErrors } from '../actions';
+import { history } from '../initializers'; 
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -27,10 +28,15 @@ const Login = () => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
   const errors = useSelector(store => store.errors.form);
+  const {
+    response,
+    loading,
+    success
+  } = useSelector(store => store.fetch);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(data));
+    dispatch(postData(data, 'login'));
   };
 
   const handleData = (e) => {
@@ -39,6 +45,16 @@ const Login = () => {
     setData({...data, [name]: value });
     dispatch(setErrors({...errors, [name]: ''}));
   }
+
+  React.useEffect(() => {
+    if (success) {
+      const { token, user } = response;
+      setAuthToken(token);
+      dispatch(setUser(user));
+      dispatch(clearAll());
+      history.push('/home');
+    }
+  }, [success]);
 
   return (
     <Auth title='Iniciar sesión'>
@@ -79,6 +95,7 @@ const Login = () => {
         >
           Acceder
         </Button>
+
       </form>
     </Auth>
   );

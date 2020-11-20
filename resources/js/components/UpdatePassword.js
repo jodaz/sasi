@@ -14,7 +14,8 @@ import {
   Button,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePassword } from '../actions';
+import { setNotifications, clearAll, postData } from '../actions';
+import { history } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,15 +39,29 @@ const UpdatePassword = () => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
   const notify = useNotify();
+  const {
+    response,
+    loading,
+    success
+  } = useSelector(store => store.fetch);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updatePassword(data));
+    dispatch(postData(data, 'update-password'));
   };
 
   const handleData = (e) => {
     setData({...data, [e.target.name]: e.target.value});
   }
+
+  React.useEffect(() => {
+    if (success) {
+      dispatch(setNotifications(response.message));
+      history.goBack();
+      dispatch(clearAll());
+
+    }
+  }, [success]);
 
   return (
     <>

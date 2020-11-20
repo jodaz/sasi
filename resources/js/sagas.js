@@ -1,24 +1,33 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { setNotifications, setUser, setErrors, clearErrors } from './actions';
+import {
+  loading,
+  setNotifications,
+  clearNotifications,
+  setUser,
+  setErrors,
+  fetchLoading,
+  fetchSuccess,
+  clearFetch,
+  clearErrors
+} from './actions';
 import { postRequest, fetchUser, logout } from './fetch';
 import { setAuthToken } from './utils';
 import { history } from './initializers';
 
-function* loginSaga(action) {
-  const { payload } = action;
+function* postRequestSaga(action) {
+  const { payload, route } = action;
+  yield put(fetchLoading());
   const {
     response, error
-  } = yield call(() => postRequest(payload, 'login'));
+  } = yield call(() => postRequest(payload, route));
 
   if (response) {
-    const { token, user } = response;
-    yield put(setUser(user))
+    yield put(fetchSuccess(response));
     yield put(clearErrors());
-    setAuthToken(token);
-    history.push('/home');
   } else {
     yield put(setErrors(error))
   }
+  yield put(clearFetch());
 }
 
 function* fetchUserSaga(action) {
@@ -37,18 +46,10 @@ function* fetchUserSaga(action) {
   }
 }
 
-function* updatePasswordSaga(action) {
-  const { payload } = action;
-  const {
-    response, error
-  } = yield call(() => postRequest(payload, 'update-password'));
-
-  if (response) {
-    yield put(setNotifications(response.message))
-    history.goBack();
-  } else {
-    yield put(setErrors(error))
-  }
+function* clearAllSaga() {
+  yield put(clearErrors());
+  yield put(clearFetch());
+  yield put(clearNotifications());
 }
 
 function* logoutSaga() {
@@ -60,9 +61,9 @@ function* logoutSaga() {
 }
 
 export default function* rootSaga() {
+  yield takeEvery('POST_DATA', postRequestSaga)
   yield takeEvery('FETCH_USER', fetchUserSaga);
-  yield takeEvery('LOGIN', loginSaga);
   yield takeEvery('LOGOUT', logoutSaga);
-  yield takeEvery('UPDATE_PASSWORD', updatePasswordSaga);
+  yield takeEvery('CLEAR_ALL', clearAllSaga);
 }
 

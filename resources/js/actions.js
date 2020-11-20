@@ -1,8 +1,3 @@
-export const login = credentials => ({
-  type: 'LOGIN',
-  payload: credentials
-});
-
 export const logout = () => ({
   type: 'LOGOUT'
 });
@@ -39,3 +34,27 @@ export const updatePassword = data => ({
   type: 'UPDATE_PASSWORD',
   payload: data,
 });
+
+export const postData = (data, route) => ({
+  type: 'POST_DATA',
+  payload: data,
+  route: route
+});
+
+export const fetchSuccess = data => ({
+  type: 'SUCCESS',
+  payload: data
+});
+
+export const clearFetch = () => ({
+  type: 'CLEAR_FETCH'
+});
+
+export const fetchLoading = () => ({
+  type: 'LOADING'
+});
+
+export const clearAll = () => ({
+  type: 'CLEAR_ALL'
+});
+

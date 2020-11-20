@@ -11,16 +11,12 @@ import {
   TextField,
   Button,
 } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import { history } from '../utils';
+import { history } from '../initializers';
 // Layout
 import Auth from './Auth';
-
-const ErrorTypo = (text) => (
-  <Typography variant="overline" color="error">
-    {text}
-  </Typography>
-);
+import { postData, setErrors } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -33,30 +29,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
-  const [errors, setErrors] = useState({});
-  const [data, setData] = useState({});
   const classes = useStyles();
-  const notify = useNotify();
+  const [data, setData] = useState({});
+  const dispatch = useDispatch();
+  const errors = useSelector(store => store.errors.form);
+  const {
+    response,
+    loading,
+    success
+  } = useSelector(store => store.fetch);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/users', data)
-      .then(res => {
-        history.push('/check-email');
-        notify(res.data.message);
-        setData({});
-        setErrors({});
-      })
-      .catch(err => setErrors(err.response.data.errors));
+    dispatch(postData(data, 'users'));
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
-    setData({ ...data, [name]: value });
-    setErrors({ ...errors, [name]: '' });
+    setData({...data, [name]: value });
+    dispatch(setErrors({...errors, [name]: ''}));
   }
+
+  React.useEffect(() => {
+    if (success) {
+      history.push('/check-email');
+    }
+  }, [success]);
 
   return (
     <Auth title={'Crear cuenta'}>

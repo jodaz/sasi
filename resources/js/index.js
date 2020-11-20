@@ -14,18 +14,6 @@ export default function Index() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
 
-  useEffect(() => {
-    let route = window.location.pathname;
-
-    if (!isEmpty(localStorage.sasiToken)) {
-      route = (route == '/login' || route == '/') ? '/home' : route;
-    } else {
-      route = '/login';
-    }
-
-    history.push(route);
-  }, []);
-
   return <App />;
 }
 

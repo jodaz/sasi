@@ -7,10 +7,38 @@ const errorsInitialState = {
   form: {}
 };
 
+const fetchInitialState = {
+  response: {},
+  loading: false,
+  success: false
+};
+
 const notificationsInitialState = {
   show: false,
   message: null
 };
+
+export const fetchReducer = (state = fetchInitialState, action) => {
+  switch(action.type) {
+    case 'LOADING':
+      return { ...state,
+        response: {},
+        loading: true
+      };
+      break;
+    case 'SUCCESS':
+      return { ...state,
+        response: action.payload,
+        success: true
+      };
+      break;
+    case 'CLEAR_FETCH':
+      return fetchInitialState;
+      break;
+    default:
+      return state;
+  }
+}
 
 export const errorsReducer = (state = errorsInitialState, action) => {
   switch(action.type) {
