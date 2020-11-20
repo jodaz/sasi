@@ -14,7 +14,7 @@ import {
 } from 'react-admin';
 
 const ApplicationTitle = ({ record }) => (
-  <span>Solicitud #{record ? `"${record.num}"` : ''}</span>
+  <span>Solicitud #{record ? `${record.num}` : ''}</span>
 );
 
 const ApplicationShow = (props) => { 
