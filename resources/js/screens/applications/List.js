@@ -12,6 +12,7 @@ import { Actions } from '../../components';
 export default function(props) {
   const auth = useAuth();
 
+  const data = (d) => console.log(d);
   return (
     <List {...props}
       title="Solicitudes"
@@ -22,7 +23,7 @@ export default function(props) {
         <TextField label='Descripción' source="description" />
         <TextField label='Estado' source="state.name" />
         <TextField label='Categoría' source="category.name" />
-        <Actions {...props} />
+        <Actions {...props} shouldShow shouldDelete={{ label: 'Anular' }} />
       </Datagrid>
     </List>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNotify, Admin, Resource } from 'react-admin';
+import { ShowGuesser, useNotify, Admin, Resource } from 'react-admin';
 import { useSelector, useDispatch } from 'react-redux';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
@@ -21,7 +21,11 @@ import {
 
 // Resources
 import { UserList } from './screens/users';
-import { ApplicationCreate, ApplicationList } from './screens/applications';
+import {
+  ApplicationShow,
+  ApplicationCreate,
+  ApplicationList
+} from './screens/applications';
 import { CategoryList, CategoryEdit, CategoryCreate } from './screens/categories';
 import { CommunityEdit, CommunityList, CommunityCreate } from './screens/communities';
 import { OrganizationCreate, OrganizationList } from './screens/organizations';
@@ -63,6 +67,7 @@ export default function App() {
     >
       <Resource
         name="applications"
+        show={ApplicationShow}
         list={ApplicationList}
         create={ApplicationCreate}
         icon={<TelegramIcon />}
