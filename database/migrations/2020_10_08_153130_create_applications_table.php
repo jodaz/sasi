@@ -28,6 +28,7 @@ class CreateApplicationsTable extends Migration
             $table->foreign('profile_id')->references('id')->on('profiles')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('approved_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

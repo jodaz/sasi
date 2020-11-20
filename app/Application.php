@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\NewValue;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Application extends Model
 {
+    use NewValue, SoftDeletes;
+
     protected $table = 'applications';
 
     protected $fillable = [

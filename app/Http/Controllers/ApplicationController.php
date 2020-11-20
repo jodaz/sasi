@@ -57,6 +57,7 @@ class ApplicationController extends Controller
         $profile = $request->user()->profile;
         $category = $request->get('category');
         $application = new Application($request->all());
+        $application->num = Application::getNewNum();
         $application->state_id = 1;
         $application->category_id = $category;
 
