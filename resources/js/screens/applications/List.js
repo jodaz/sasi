@@ -4,12 +4,18 @@ import {
   Datagrid, 
   TextField,
 } from 'react-admin';
-import { useAuth } from'../../utils';
 import { Filter, ModuleActions } from '../../components';
 import { Actions } from '../../components';
+import { history } from '../../initializers';
+import isEmpty from 'is-empty';
 
 export default function(props) {
-  const auth = useAuth();
+
+  React.useEffect(() => {
+    if (isEmpty(localStorage.sasiToken)) {
+      history.push('/login');
+    }
+  }, []);
 
   return (
     <List {...props}

@@ -44,7 +44,6 @@ const theme = createMuiTheme({
 
 export default function App() {
   const notification = useSelector(store => store.notifications);
-  const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
 
@@ -54,8 +53,6 @@ export default function App() {
       dispatch(clearNotifications());
     }
   }, [notification]);
-
-  console.log(store);
 
   return (
     <Admin

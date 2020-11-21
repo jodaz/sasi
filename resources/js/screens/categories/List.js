@@ -7,7 +7,6 @@ import {
   TextField
 } from 'react-admin';
 import { Actions, Filter, ModuleActions } from '../../components';
-import { useAuth } from'../../utils';
 
 const CategoriesActionsButtons = props => (
   <>
@@ -16,7 +15,6 @@ const CategoriesActionsButtons = props => (
 );
 
 export default function(props) {
-  const auth = useAuth();
 
   return (
     <List {...props}

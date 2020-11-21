@@ -1,15 +1,12 @@
 import * as React from "react";
 import {
   List, 
-  DeleteButton,
   Datagrid, 
   TextField
 } from 'react-admin';
-import { useAuth } from'../../utils';
 import { Filter, Actions, ModuleActions } from '../../components';
 
 export default function(props) {
-  const auth = useAuth();
 
   return (
     <List

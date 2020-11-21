@@ -1,6 +1,5 @@
 import React from 'react';
 import { Title } from 'react-admin';
-import { useAuth } from '../../utils';
 import Totals from './Total';
 import {
   Container,
@@ -9,7 +8,6 @@ import {
 } from '@material-ui/core';
 
 export default function Dashboard() {
-  const auth = useAuth();
 
   return (
     <Grid container spacing={3}>

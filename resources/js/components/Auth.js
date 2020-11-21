@@ -54,7 +54,7 @@ export default function Auth(props) {
           <Typography component="h1" variant="h5">
             {title} 
           </Typography>
-          <Typography component="subtitle1" variant="body2" >
+          <Typography variant="body2" >
             SASI
           </Typography>
 
