@@ -43,16 +43,24 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
-  const notification = useSelector(store => store.notifications);
+  const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
+  const { pathname } = store.router.location;
+  const { notifications } = store;
 
   React.useEffect(() => {
-    if (notification.show) {
-      notify(notification.message);
+    if (store.auth) {
+      history.push('/login');
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (notifications.show) {
+      notify(notifications.message);
       dispatch(clearNotifications());
     }
-  }, [notification]);
+  }, [notifications]);
 
   return (
     <Admin
