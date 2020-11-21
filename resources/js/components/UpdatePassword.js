@@ -9,13 +9,13 @@ import {
   makeStyles,
   Typography,
   Paper,
-  Link,
   TextField,
   Button,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotifications, clearAll, postData } from '../actions';
 import { history } from '../utils';
+import LoadingButton from './LoadingButton';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,7 +38,6 @@ const UpdatePassword = () => {
   const errors = useSelector(store => store.errors.form);
   const [data, setData] = useState({});
   const dispatch = useDispatch();
-  const notify = useNotify();
   const {
     response,
     loading,
@@ -59,7 +58,6 @@ const UpdatePassword = () => {
       dispatch(setNotifications(response.message));
       history.goBack();
       dispatch(clearAll());
-
     }
   }, [success]);
 
@@ -110,14 +108,14 @@ const UpdatePassword = () => {
             required
             helperText={errors.new_password_confirmation && errors.new_password_confirmation}
           />
-          <Button
+          <LoadingButton
             type="submit"
             variant="contained"
-            color="primary"
-            className={classes.submit}
+            classes={classes.submit} 
+            loading={loading}
           >
             Actualizar
-          </Button>
+          </LoadingButton>
         </form>
       </Paper>
       <Notification />

@@ -4,7 +4,6 @@ import {
   Datagrid, 
   TextField,
 } from 'react-admin';
-import axios from 'axios';
 import { useAuth } from'../../utils';
 import { Filter, ModuleActions } from '../../components';
 import { Actions } from '../../components';
@@ -12,7 +11,6 @@ import { Actions } from '../../components';
 export default function(props) {
   const auth = useAuth();
 
-  const data = (d) => console.log(d);
   return (
     <List {...props}
       title="Solicitudes"

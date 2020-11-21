@@ -2,8 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import {
   makeStyles,
-  TextField,
-  Button
+  TextField
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Layout
@@ -11,7 +10,8 @@ import Auth from './Auth';
 import { setAuthToken } from '../utils';
 import { clearAll, setErrors, postData, setUser, clearErrors } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../initializers'; 
+import { history } from '../initializers';
+import LoadingButton from './LoadingButton';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -85,17 +85,17 @@ const Login = () => {
           required
           helperText={errors.password && errors.password}
         />
-        <Button
+        <LoadingButton
           type="submit"
           variant="contained"
           color='secondary'
-          className={classes.submit}
-          startIcon={<ExitToAppIcon />}  
+          classes={classes.submit}
+          icon={<ExitToAppIcon />} 
+          loading={loading}
           fullWidth
         >
           Acceder
-        </Button>
-
+        </LoadingButton>
       </form>
     </Auth>
   );
