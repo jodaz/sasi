@@ -11,7 +11,7 @@ import TelegramIcon from '@material-ui/icons/Telegram';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PublicIcon from '@material-ui/icons/Public';
 import AccessibleIcon from '@material-ui/icons/Accessible';
-import { Login, Layout } from './components';
+import { Loading, Login, Layout } from './components';
 import { clearNotifications } from './actions';
 
 import {
@@ -43,12 +43,6 @@ const theme = createMuiTheme({
   }
 });
 
-const Ready = () => (
-  <div>
-    <h1>Admin ready</h1>
-  </div>
-);
-
 export default function App() {
   /**  
   const store = useSelector(store => store);
@@ -73,7 +67,7 @@ export default function App() {
       history={history}
       customRoutes={customRoutes}
       theme={theme}
-      ready={Ready}
+      ready={Loading}
     >
       {/*
       <Resource
