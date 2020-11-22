@@ -1,20 +1,17 @@
-import * as React from 'react';
 import isEmpty from 'is-empty';
 import jwt_decode from "jwt-decode";
 
-export default function({ token }) {
-  const [authenticated, isAuthenticated] = React.useState(false);
-  const jwtToken = localStorage.getItem(token);
+export default function(tokenName) {
+  const jwtToken = localStorage.getItem(tokenName);
 
-  if (isEmpty(jwtToken)) return authenticated;
+  if (isEmpty(jwtToken)) return false;
 
   const decodedToken = jwt_decode(jwtToken);
 
-  if (decodedToken.exp > new Date().getTime()/1000) {
-    console.log("IS AUTHENTICATED");
-    isAuthenticated(!authenticated);
+  if (decodedToken.exp < new Date().getTime()/1000) {
+    return false;
   }
 
-  return authenticated;
+  return jwtToken;
 }
 

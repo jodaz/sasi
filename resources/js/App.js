@@ -1,9 +1,10 @@
 import React from 'react';
-import { ShowGuesser, useNotify, Admin, Resource } from 'react-admin';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNotify, Admin, Resource } from 'react-admin';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
+import isEmpty from 'is-empty';
 // Icons
 import UserIcon from '@material-ui/icons/People';
 import TelegramIcon from '@material-ui/icons/Telegram';
@@ -42,25 +43,27 @@ const theme = createMuiTheme({
   }
 });
 
+const Ready = () => (
+  <div>
+    <h1>Admin ready</h1>
+  </div>
+);
+
 export default function App() {
+  /**  
   const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
-  const { pathname } = store.router.location;
   const { notifications } = store;
-
-  React.useEffect(() => {
-    if (store.auth) {
-      history.push('/login');
-    }
-  }, []);
-
+  
   React.useEffect(() => {
     if (notifications.show) {
       notify(notifications.message);
       dispatch(clearNotifications());
     }
   }, [notifications]);
+   **/
+  console.log("Check")
 
   return (
     <Admin
@@ -69,10 +72,10 @@ export default function App() {
       loginPage={Login}
       history={history}
       customRoutes={customRoutes}
-      locale='es'
-      i18nProvider={i18nProvider}
       theme={theme}
+      ready={Ready}
     >
+      {/*
       <Resource
         name="applications"
         show={ApplicationShow}
@@ -120,6 +123,7 @@ export default function App() {
         create={CommunityCreate}
         edit={CommunityEdit}
       />
+      */}
     </Admin>
   );
 }

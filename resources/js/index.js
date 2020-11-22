@@ -1,32 +1,43 @@
 import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNotify } from 'react-admin';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { useDispatch, useSelector } from 'react-redux';
+import { store } from './initializers';
 import isEmpty from 'is-empty';
-import { history, store } from './initializers';
-import { useAuth } from './utils';
+import { history, setAuthToken, useAuth } from './utils';
 // Resources
+const routes = [
+  '/login',
+  '/register'
+];
 import App from './App';
 
 export default function Index() {
+  /**
   const store = useSelector(store => store);
-  const dispatch = useDispatch();
-  // custom
   const auth = useAuth('sasiToken');
-  const {
-    response,
-    loading,
-    success
-  } = store.fetch;
+  const { pathname } = store.router.location;
+  const definedRoute = routes.filter(route => pathname === route);
 
   React.useEffect(() => {
-    if (auth) {
-      setAuthToken(token);
+    if (!auth) {
+      if (!isEmpty(definedRoute)) {
+        history.push(pathname);
+      } else {
+        history.push('/login');
+      }
+    } else {
+      if (pathname === '/' || !isEmpty(definedRoute)) {
+        history.push('/home');
+      } else {
+        history.push(pathname)
+      }
     }
   }, []);
+   **/
 
-  return <App />;
+  return <App />
 }
 
 if (document.getElementById('root')) {
