@@ -47,7 +47,7 @@ export default function App() {
  
   // Check if authenticated
   React.useEffect(() => {
-    if (isAuth) {
+    if (isAuth || localStorage.getItem('sasiToken')) {
       history.push('/home');
     } else {
       setAuthToken();
@@ -65,7 +65,7 @@ export default function App() {
       theme={theme}
       ready={Loading}
     >
-      {Screens}
+      { isAuth && Screens}
     </Admin>
   );
 }

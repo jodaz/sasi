@@ -14,11 +14,11 @@ class AnalyticsController extends Controller
         $users = User::with('profile')->count();
         
         $data = [
-            [
+            'applications' => [
                 'name' => 'Solicitudes aprobadas',
                 'amount' => $applications
             ],
-            [
+            'users' => [
                 'name' => 'Usuarios registrados',
                 'amount' => $users
             ]

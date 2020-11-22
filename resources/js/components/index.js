@@ -10,4 +10,5 @@ export { default as Filter } from './Filter';
 export { default as ModuleActions } from './ModuleActions';
 export { default as UpdatePassword } from './UpdatePassword';
 export { default as Loading } from './Loading';
+export { default as Welcome } from './Welcome';
 
