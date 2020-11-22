@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';import {
+import React, { useEffect } from 'react';
+import { green } from '@material-ui/core/colors';
+import {
   CircularProgress,
   makeStyles
 } from '@material-ui/core';
@@ -9,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  circularProgress: {
+    color: green[500]
   }
 }));
 
@@ -17,7 +22,11 @@ export default function Loading() {
 
   return (
     <div className={classes.container}>
-      <CircularProgress />
+      <CircularProgress
+        size={80}
+        thickness={4}
+        className={classes.circularProgress}
+      />
     </div>
   ); 
 }
