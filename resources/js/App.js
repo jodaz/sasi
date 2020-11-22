@@ -5,7 +5,7 @@ import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
 import isEmpty from 'is-empty';
-import { useAuth } from './utils';
+import { setAuthToken, useAuth } from './utils';
 // Icons
 import { Loading, Login, Layout } from './components';
 import { clearNotifications } from './actions';
@@ -32,12 +32,12 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
-  const auth = useAuth('sasiToken');
+  const isAuth = useAuth('sasiToken');
   const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
   const { notifications } = store;
-  
+ 
   React.useEffect(() => {
     if (notifications.show) {
       notify(notifications.message);
@@ -45,13 +45,15 @@ export default function App() {
     }
   }, [notifications]);
  
+  // Check if authenticated
   React.useEffect(() => {
-    if (!auth) {
-      history.push('/login'); 
-    } else {
+    if (isAuth) {
       history.push('/home');
+    } else {
+      setAuthToken();
+      history.push('/login'); 
     }
-  }, [auth]);
+  }, [isAuth]);
 
   return (
     <Admin
