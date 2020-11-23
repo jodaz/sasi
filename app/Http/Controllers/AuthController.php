@@ -30,7 +30,8 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+        $user = Auth::user()->load('applications');
+
         $tokenResult = $user->createToken('authToken');
 
         return response()->json([

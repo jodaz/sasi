@@ -41,6 +41,11 @@ export const postData = (data, route) => ({
   route: route
 });
 
+export const getData = (route) => ({
+  type: 'GET_DATA',
+  route: route
+});
+
 export const fetchSuccess = data => ({
   type: 'SUCCESS',
   payload: data

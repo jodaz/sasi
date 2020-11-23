@@ -41,12 +41,12 @@ class User extends Authenticatable
 
     public function organizations()
     {
-        return $this->hasMany(Organization::class);
+        return $this->hasManyThrough(Organization::class, Profile::class);
     }
 
     public function applications()
     {
-        return $this->hasMany(Application::class);
+        return $this->hasManyThrough(Application::class, Profile::class);
     }
 
     public function profile()

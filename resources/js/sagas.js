@@ -10,7 +10,7 @@ import {
   clearFetch,
   clearErrors
 } from './actions';
-import { postRequest, fetchUser, logout } from './fetch';
+import { postRequest, getRequest, logout } from './fetch';
 import { setAuthToken } from './utils';
 import { history } from './initializers';
 
@@ -30,19 +30,19 @@ function* postRequestSaga(action) {
   yield put(clearFetch());
 }
 
-function* fetchUserSaga(action) {
-  const { payload } = action;
+function* getRequestSaga(action) {
+  const { route } = action;
+  yield put(fetchLoading());
   const {
     response, error
-  } = yield call(() => postRequest(payload, 'users/current'));
+  } = yield call(() => getRequest(route));
 
   if (response) {
-    yield put(setUser(response));
+    yield put(fetchSuccess(response));
     yield put(clearErrors());
   } else {
     setAuthToken();
     yield put(setErrors(error));
-    history.push('/login');
   }
 }
 
@@ -62,7 +62,7 @@ function* logoutSaga() {
 
 export default function* rootSaga() {
   yield takeEvery('POST_DATA', postRequestSaga)
-  yield takeEvery('FETCH_USER', fetchUserSaga);
+  yield takeEvery('GET_DATA', getRequestSaga);
   yield takeEvery('LOGOUT', logoutSaga);
   yield takeEvery('CLEAR_ALL', clearAllSaga);
 }

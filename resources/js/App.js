@@ -1,16 +1,14 @@
 import React from 'react';
-import { ShowGuesser, useNotify, Admin, Resource } from 'react-admin';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNotify, Admin, Resource } from 'react-admin';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
+import isEmpty from 'is-empty';
+import { setAuthToken, useAuth } from './utils';
+import { clearAll, setErrors, getData, setUser, clearErrors } from './actions';
 // Icons
-import UserIcon from '@material-ui/icons/People';
-import TelegramIcon from '@material-ui/icons/Telegram';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import PublicIcon from '@material-ui/icons/Public';
-import AccessibleIcon from '@material-ui/icons/Accessible';
-import { Login, Layout } from './components';
+import { Loading, Login, Layout } from './components';
 import { clearNotifications } from './actions';
 
 import {
@@ -19,16 +17,8 @@ import {
   history
 } from './initializers';
 
-// Resources
-import { UserList } from './screens/users';
-import {
-  ApplicationShow,
-  ApplicationCreate,
-  ApplicationList
-} from './screens/applications';
-import { CategoryList, CategoryEdit, CategoryCreate } from './screens/categories';
-import { CommunityEdit, CommunityList, CommunityCreate } from './screens/communities';
-import { OrganizationCreate, OrganizationList } from './screens/organizations';
+// Screens
+import Screens from './screens';
 
 const theme = createMuiTheme({
   palette: {
@@ -43,16 +33,38 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
-  const notification = useSelector(store => store.notifications);
+  const isAuth = useAuth('sasiToken');
+  const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
-
+  const { response, loading, success } = store.fetch;
+  const { notifications } = store;
+      
   React.useEffect(() => {
-    if (notification.show) {
-      notify(notification.message);
+    if (notifications.show) {
+      notify(notifications.message);
       dispatch(clearNotifications());
     }
-  }, [notification]);
+  }, [notifications]);
+ 
+  // Check if authenticated
+  React.useEffect(() => {
+    console.log(isAuth);
+    if (isAuth) {
+      history.push('/home');
+      (() => dispatch(getData('user')))();
+    } else {
+      setAuthToken();
+      history.push('/login'); 
+    }
+  }, [isAuth]);
+
+  React.useEffect(() => {
+    if (success) {
+      dispatch(setUser(response));
+      dispatch(clearAll());
+    }
+  }, [success]);
 
   return (
     <Admin
@@ -61,57 +73,10 @@ export default function App() {
       loginPage={Login}
       history={history}
       customRoutes={customRoutes}
-      locale='es'
-      i18nProvider={i18nProvider}
       theme={theme}
+      ready={Loading}
     >
-      <Resource
-        name="applications"
-        show={ApplicationShow}
-        list={ApplicationList}
-        create={ApplicationCreate}
-        icon={<TelegramIcon />}
-        options={{
-          label: 'Solicitudes'
-        }}
-     />
-      <Resource
-        name="organizations"
-        list={OrganizationList}
-        create={OrganizationCreate}
-        icon={<AccessibleIcon />}
-        options={{
-          label: 'Instituciones'
-        }}
-     />
-      <Resource
-        name="users"
-        list={UserList}
-        icon={<UserIcon />}
-        options={{
-          label: 'Usuarios'
-        }}
-     />
-      <Resource 
-        name='categories' 
-        options={{
-          label: 'Categorías'
-        }}
-        icon={<LocalOfferIcon />}
-        list={CategoryList}
-        create={CategoryCreate}
-        edit={CategoryEdit}
-      />
-      <Resource 
-        name='communities' 
-        options={{
-          label: 'Comunidades'
-        }}
-        icon={<PublicIcon />}
-        list={CommunityList}
-        create={CommunityCreate}
-        edit={CommunityEdit}
-      />
+      { isAuth && Screens}
     </Admin>
   );
 }
