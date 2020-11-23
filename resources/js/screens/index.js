@@ -8,6 +8,7 @@ import AccessibleIcon from '@material-ui/icons/Accessible';
 import CenterFocusStrong from '@material-ui/icons/CenterFocusStrong';
 
 // Resources
+import claps from './claps';
 import { UserList } from './users';
 import {
   ApplicationShow,
@@ -56,6 +57,13 @@ export default [
     list={CategoryList}
     create={CategoryCreate}
     edit={CategoryEdit}
+  />,
+  <Resource 
+    name='claps' 
+    options={{
+      label: 'Claps'
+    }}
+    {...claps}
   />,
   <Resource 
     name='axes' 
