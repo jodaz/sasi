@@ -14,6 +14,7 @@ import {
   ApplicationList
 } from './applications';
 import { CategoryList, CategoryEdit, CategoryCreate } from './categories';
+import { AxisList, AxisEdit, AxisCreate } from './axes';
 import { CommunityEdit, CommunityList, CommunityCreate } from './communities';
 import { OrganizationCreate, OrganizationList } from './organizations';
 
@@ -54,6 +55,16 @@ export default [
     list={CategoryList}
     create={CategoryCreate}
     edit={CategoryEdit}
+  />,
+  <Resource 
+    name='axes' 
+    options={{
+      label: 'Ejes'
+    }}
+    icon={<LocalOfferIcon />}
+    list={AxisList}
+    create={AxisCreate}
+    edit={AxisEdit}
   />,
   <Resource 
     name='communities' 
