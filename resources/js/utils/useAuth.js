@@ -13,9 +13,9 @@ const getDelayTime = jwtToken => {
 }
 
 export default function(tokenName) {
-  const [isAuth, setIsAuth] = React.useState(false);
   const [delay, setDelay] = React.useState(null);
   const [token, setToken] = React.useState(() => localStorage.getItem(tokenName));
+  const [isAuth, setIsAuth] = React.useState(() => localStorage.getItem(tokenName));
 
   // Check if token is valid
   React.useEffect(() => {

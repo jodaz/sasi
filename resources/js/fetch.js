@@ -23,6 +23,11 @@ export const postRequest = (data, route) =>
     .then(res => ({ response: res.data }))
     .catch(err => ({ error: getErrors(err) }));
 
+export const getRequest = route =>
+  axios.get(`${apiURL}/${route}`)
+    .then(res => ({ response: res.data }))
+    .catch(err => ({ error: getErrors(err) }));
+
 export const logout = () =>
   axios.get(`${apiURL}/logout`)
     .then(res => ({ response: res.data }))

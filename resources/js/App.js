@@ -6,6 +6,7 @@ import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
 import isEmpty from 'is-empty';
 import { setAuthToken, useAuth } from './utils';
+import { clearAll, setErrors, getData, setUser, clearErrors } from './actions';
 // Icons
 import { Loading, Login, Layout } from './components';
 import { clearNotifications } from './actions';
@@ -36,8 +37,9 @@ export default function App() {
   const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
+  const { response, loading, success } = store.fetch;
   const { notifications } = store;
- 
+      
   React.useEffect(() => {
     if (notifications.show) {
       notify(notifications.message);
@@ -47,13 +49,22 @@ export default function App() {
  
   // Check if authenticated
   React.useEffect(() => {
-    if (isAuth || localStorage.getItem('sasiToken')) {
+    console.log(isAuth);
+    if (isAuth) {
       history.push('/home');
+      (() => dispatch(getData('user')))();
     } else {
       setAuthToken();
       history.push('/login'); 
     }
   }, [isAuth]);
+
+  React.useEffect(() => {
+    if (success) {
+      dispatch(setUser(response));
+      dispatch(clearAll());
+    }
+  }, [success]);
 
   return (
     <Admin
