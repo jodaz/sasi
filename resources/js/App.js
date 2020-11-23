@@ -49,7 +49,6 @@ export default function App() {
  
   // Check if authenticated
   React.useEffect(() => {
-    console.log(isAuth);
     if (isAuth) {
       history.push('/home');
       (() => dispatch(getData('user')))();

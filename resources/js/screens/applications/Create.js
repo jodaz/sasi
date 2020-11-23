@@ -28,33 +28,19 @@ const validator = (values) => {
 }
 
 const ApplicationCreate = (props) => { 
-  const { data, loading, error } = useQuery({
-    type: 'NEW', 
-    resource: 'applications'
-  });
 
   return (
     <Create {...props} title="Nueva solicitud">
-      { (loading)
-        ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
-        : ( 
-        <SimpleForm
-          validate={validator}
-        >
-          <TextInput
-            source="description"
-            label="Asunto"
-            multiline
-          />
-          <SelectInput
-            source="category"
-            choices={data} 
-            label='Categoría (*)'
-            initialValue={1}
-          />
-          <NumberInput source="quantity" label='Elementos requeridos' />
-        </SimpleForm>
-      )}
+      <SimpleForm
+        validate={validator}
+      >
+        <TextInput
+          source="description"
+          label="Asunto"
+          multiline
+        />
+        <NumberInput source="quantity" label='Elementos requeridos' />
+      </SimpleForm>
     </Create>
   );
 };

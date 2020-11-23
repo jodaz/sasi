@@ -14,29 +14,6 @@ const routes = [
 import App from './App';
 
 export default function Index() {
-  /**
-  const store = useSelector(store => store);
-  const auth = useAuth('sasiToken');
-  const { pathname } = store.router.location;
-  const definedRoute = routes.filter(route => pathname === route);
-
-  React.useEffect(() => {
-    if (!auth) {
-      if (!isEmpty(definedRoute)) {
-        history.push(pathname);
-      } else {
-        history.push('/login');
-      }
-    } else {
-      if (pathname === '/' || !isEmpty(definedRoute)) {
-        history.push('/home');
-      } else {
-        history.push(pathname)
-      }
-    }
-  }, []);
-   **/
-
   return <App />
 }
 
