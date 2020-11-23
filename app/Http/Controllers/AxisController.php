@@ -56,9 +56,11 @@ class AxisController extends Controller
      * @param  \App\Axis  $axis
      * @return \Illuminate\Http\Response
      */
-    public function show(Axis $axis)
+    public function show(Request $request)
     {
-        //
+        $axis = Axis::find($request->axe);
+
+        return Response($axis);
     }
 
     /**
