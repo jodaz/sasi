@@ -5,6 +5,7 @@ import TelegramIcon from '@material-ui/icons/Telegram';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import PublicIcon from '@material-ui/icons/Public';
 import AccessibleIcon from '@material-ui/icons/Accessible';
+import CenterFocusStrong from '@material-ui/icons/CenterFocusStrong';
 
 // Resources
 import { UserList } from './users';
@@ -61,7 +62,7 @@ export default [
     options={{
       label: 'Ejes'
     }}
-    icon={<LocalOfferIcon />}
+    icon={<CenterFocusStrong />}
     list={AxisList}
     create={AxisCreate}
     edit={AxisEdit}

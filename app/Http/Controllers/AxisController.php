@@ -79,7 +79,7 @@ class AxisController extends Controller
      * @param  \App\Axis  $axis
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateAxisRequest $request, Axis $axis)
+    public function update(CreateAxisRequest $request)
     {
         $axis->update($request->all());
 
@@ -96,13 +96,14 @@ class AxisController extends Controller
      * @param  \App\Axis  $axis
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Axis $axis)
+    public function destroy(Request $request)
     {
+        $axis = Axis::find($request->axe);
         $axis->delete();
 
         return response()->json([
             'success' => true,
-            'message' => '¡La categoría '.$axis->name.' fue eliminada!'
+            'message' => '¡El eje '.$axis->name.' fue eliminado!'
         ]);
     }
 }
