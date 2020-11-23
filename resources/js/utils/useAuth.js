@@ -38,6 +38,11 @@ export default function(tokenName) {
     }
   }, [delay]);
 
+  // Sync local state with storage
+  React.useEffect(() => {
+    setToken(localStorage[tokenName]);
+  }, [localStorage[tokenName]]);
+
   return isAuth;
 }
 

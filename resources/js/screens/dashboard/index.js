@@ -6,6 +6,7 @@ import {
   Grid,
   makeStyles
 } from '@material-ui/core';
+import NewApplication from './NewApplication';
 
 export default function Dashboard() {
   return (
@@ -13,10 +14,12 @@ export default function Dashboard() {
       <Title title='Inicio' />
 
       <Grid item xs={12}>
-        <Welcome />
+        <Welcome title={'Sistema de Atención Social Integral'} />
       </Grid>
 
       <Totals />
+
+      <NewApplication />
     </Grid>
   );
 };

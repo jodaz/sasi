@@ -16,14 +16,14 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Welcome() {
+export default function Welcome({ title }) {
   const classes = useStyles();
 
   return (
     <Card className={classes.welcome}>
       <CardContent>
         <Typography className={classes.title} color="textPrimary" variant="subtitle1" gutterBottom>
-          Sistema de atención Social Integral
+          {title}
         </Typography>
       </CardContent>
     </Card>
