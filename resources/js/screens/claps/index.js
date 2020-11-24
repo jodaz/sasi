@@ -5,9 +5,13 @@ import Edit from './Edit';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 export default {
+  name: "claps",
   list: List,
   create: Create,
   edit: Edit,
-  icon: <GroupWorkIcon />
+  icon: <GroupWorkIcon />,
+  options: {
+    label: 'Claps'
+  }
 };
 

@@ -1,3 +1,16 @@
-export { default as CommunityList } from './List';
-export { default as CommunityCreate } from './Create';
-export { default as CommunityEdit } from './Edit';
+import React from 'react';
+import List from './List';
+import Edit from './Edit';
+import Create from './Create';
+import PublicIcon from '@material-ui/icons/Public';
+
+export default {
+    name: "communities",
+    list: List,
+    create: Create,
+    edit: Edit,
+    icon: <PublicIcon />,
+    options: {
+      label: 'Comunidades'
+    }
+}
