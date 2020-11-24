@@ -1,2 +1,14 @@
-export { default as OrganizationList } from './List';
-export { default as OrganizationCreate } from './Create';
+import React from 'react';
+import List from './List';
+import Create from './Create';
+import AccessibleIcon from '@material-ui/icons/Accessible';
+
+export default {
+    name: "organizations",
+    list: List,
+    create: Create,
+    icon: <AccessibleIcon />,
+    options: {
+      label: 'Instituciones'
+    }
+}
