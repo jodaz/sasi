@@ -4,14 +4,10 @@ import {
   TextInput,
   SimpleForm,
   DateInput,
+  NumberInput,
   SelectInput
 } from 'react-admin';
-import {
-  useQuery,
-  NumberInput,
-  Loading,
-  Error
-} from 'react-admin';
+import { useFetch } from '../../fetch';
 
 const validator = (values) => {
   const errors = {};
@@ -28,17 +24,19 @@ const validator = (values) => {
 }
 
 const ApplicationCreate = (props) => { 
+  const { isLoading, response, error } = useFetch('applications/create');
 
   return (
     <Create {...props} title="Nueva solicitud">
-      <SimpleForm
-        validate={validator}
-      >
+      <SimpleForm validate={validator} redirect={'/home'}>
         <TextInput
           source="description"
           label="Asunto"
           multiline
         />
+        { (!isLoading) &&
+          <SelectInput label="Categorías" source="category" choices={response} />
+        }
         <NumberInput source="quantity" label='Elementos requeridos' />
       </SimpleForm>
     </Create>

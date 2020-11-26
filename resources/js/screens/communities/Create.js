@@ -7,6 +7,7 @@ import {
   useQuery,
   TextInput
 } from 'react-admin';
+import { useFetch } from '../../fetch';
 
 const validator = (values) => {
   const errors = {};
@@ -19,23 +20,16 @@ const validator = (values) => {
 }
 
 const CommunityCreate = (props) => { 
-  const { data, loading, errors } = useQuery({
-    type: 'NEW',
-    resource: 'communities'
-  });
+  const { isLoading, response: data, error } = useFetch('communities/create');
 
   return (
-    <Create {...props}
-      title="Nueva comunidad" 
-    >
-      { (loading)
-        ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
-        : ( 
-        <SimpleForm validate={validator}>
-          <TextInput
-            source="name"
-            label="Nombre"
-          />
+    <Create {...props} title="Nueva comunidad" >
+      <SimpleForm validate={validator} redirect="list">
+        <TextInput
+          source="name"
+          label="Nombre"
+        />
+        { (!isLoading) &&
           <SelectArrayInput
             source="parishes"
             choices={data} 
@@ -44,8 +38,8 @@ const CommunityCreate = (props) => {
               fullWidth: true
             }}
           />
-        </SimpleForm>
-      )}
+        }
+      </SimpleForm>
     </Create>
   );
 };

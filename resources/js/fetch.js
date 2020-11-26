@@ -1,4 +1,5 @@
 import axios from 'axios';
+import React from 'react';
 import { history, setAuthToken } from './utils';
 import { apiURL } from './config';
 
@@ -33,3 +34,25 @@ export const logout = () =>
     .then(res => ({ response: res.data }))
     .catch(err => ({ error: getErrors(err) }));
  
+export const useFetch = (url) => {
+  const [response, setResponse] = React.useState(null);
+  const [error, setError] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const res = await getRequest(url); 
+        setResponse(res.response);
+        setIsLoading(false)
+      } catch (error) {
+        setError(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return { response, error, isLoading  };
+};
+
