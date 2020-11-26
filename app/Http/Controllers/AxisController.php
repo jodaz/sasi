@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Axis;
+use App\Parish;
 use App\Http\Requests\CreateAxisRequest;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class AxisController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Axis::query();
+        $query = Axis::with('parishes');
         $results = $request->perPage;
 
         if ($request->has('filter')) {
@@ -34,7 +35,7 @@ class AxisController extends Controller
      */
     public function create()
     {
-        //
+        return Parish::get()->toArray();
     }
 
     /**
@@ -45,7 +46,11 @@ class AxisController extends Controller
      */
     public function store(CreateAxisRequest $request)
     {
-        $axis = Axis::create($request->all());
+        $axis = Axis::create([
+            'name' => $request->get('name')
+        ]);
+
+        $axis->parishes()->sync($request->get('parish'));
 
         return $axis; 
     }

@@ -24,14 +24,16 @@ class CreateAxisRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'parishes' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Ingrese el nombre.'
+            'name.required' => 'Ingrese el nombre.',
+            'parishes.required' => 'Seleccione la parroquia.'
         ];
     }
 }

@@ -10,8 +10,20 @@ class Axis extends Model
 
     protected $fillable = [ 'name' ];
 
+    protected $appends = [ 'parish_names' ];
+
     public function claps()
     {
         return $this->hasMany(Clap::class, 'axis_id');
+    }
+
+    public function parishes()
+    {
+        return $this->belongsToMany(Parish::class);
+    }
+
+    public function getParishNamesAttribute()
+    {
+        return $this->parishes()->get()->implode('name', ', ');
     }
 }

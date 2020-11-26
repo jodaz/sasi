@@ -4,6 +4,7 @@ import {
   SimpleForm,
   TextInput
 } from 'react-admin';
+import { useFetch } from '../../fetch';
 
 const validator = (values) => {
   const errors = {};
