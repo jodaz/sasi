@@ -18,7 +18,7 @@ const validator = (values) => {
 const CategoryCreate = (props) => { 
   return (
     <Create {...props} title='Nueva categoría'>
-      <SimpleForm validate={validator}>
+      <SimpleForm validate={validator} redirect="list">
         <TextInput source='name' label='Nombre'/>
       </SimpleForm>
     </Create>
