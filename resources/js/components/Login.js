@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import {
   makeStyles,
-  TextField
+  TextField,
+  Grid
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Layout
@@ -12,6 +13,7 @@ import { clearAll, setErrors, postData, setUser, clearErrors } from '../actions'
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../initializers';
 import LoadingButton from './LoadingButton';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -96,6 +98,19 @@ const Login = () => {
         >
           Acceder
         </LoadingButton>
+
+        <Grid container>
+          <Grid item xs>
+            <Link to="/forget-password" variant="body2">
+              {"¿Olvidó su contraseña?"}
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link to="/register" variant="body2">
+              {"Registro"}
+            </Link>
+          </Grid>
+        </Grid>
       </form>
     </Auth>
   );

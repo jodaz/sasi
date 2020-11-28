@@ -73,8 +73,7 @@ export default function App() {
       theme={theme}
       ready={Loading}
     >
-      { isAuth && Screens}
+      { isAuth ? Screens : <></>}
     </Admin>
   );
 }
-

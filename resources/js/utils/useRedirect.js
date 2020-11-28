@@ -4,7 +4,8 @@ import * as React from 'react';
 const routes = [
   '/',
   '/register',
-  '/login'
+  '/login',
+  '/check-email'
 ];
 
 export default function(location, history, isAuth) {
@@ -12,7 +13,7 @@ export default function(location, history, isAuth) {
 
   React.useEffect(() => {
     const isDefinedRoute = routes.filter(route => route === pathname);
-    
+
     if (isAuth) {
       if (!isEmpty(isDefinedRoute)) {
         history.push('/home');

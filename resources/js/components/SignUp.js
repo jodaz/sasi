@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
-import axios from 'axios';
-import { useNotify } from 'react-admin';
 import { Link } from 'react-router-dom';
 import {
   makeStyles,
-  Typography,
-  Box,
-  FormControlLabel,
-  TextField,
+  Grid,
   Button,
+  TextField
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -60,80 +56,86 @@ const SignUp = () => {
   return (
     <Auth title={'Crear cuenta'}>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
-        <TextField
-          variant="outlined"
-          error={errors.first_name && true}
-          margin="normal"
-          fullWidth
-          id="first_name"
-          label="Primer nombre"
-          name="first_name"
-          onChange={handleChange}
-          required
-          helperText={errors.first_name && errors.first_name}
-        />
-        <TextField
-          variant="outlined"
-          error={errors.surname && true}
-          margin="normal"
-          fullWidth
-          id="surname"
-          label="Primer apellido"
-          name="surname"
-          onChange={handleChange}
-          required
-          helperText={errors.surname && errors.surname}
-        />
-        <TextField
-          variant="outlined"
-          error={errors.dni && true}
-          margin="normal"
-          fullWidth
-          id="dni"
-          label="Cédula de identidad"
-          name="dni"
-          onChange={handleChange}
-          required
-          helperText={errors.dni && errors.dni}
-        />
-        <TextField
-          variant="outlined"
-          error={errors.email && true}
-          margin="normal"
-          fullWidth
-          id="login"
-          label="Correo electrónico"
-          name="email"
-          onChange={handleChange}
-          required
-          helperText={errors.email && errors.email}
-        />
-        <TextField
-          variant="outlined"
-          error={errors.password && true}
-          margin="normal"
-          fullWidth
-          name="password"
-          label="Contraseña"
-          type="password"
-          id="password"
-          onChange={handleChange}
-          required
-          helperText={errors.password && errors.password}
-        />
-        <TextField
-          variant="outlined"
-          error={errors.password && true}
-          margin="normal"
-          fullWidth
-          name="password_confirmation"
-          label="Repita la contraseña"
-          type="password"
-          id="password_confirmation"
-          onChange={handleChange}
-          required
-          helperText={errors.password_confirmation && errors.password_confirmation}
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              error={errors.first_name && true}
+              margin="normal"
+              fullWidth
+              id="first_name"
+              label="Primer nombre"
+              name="first_name"
+              onChange={handleChange}
+              required
+              helperText={errors.first_name && errors.first_name}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              error={errors.surname && true}
+              margin="normal"
+              fullWidth
+              id="surname"
+              label="Primer apellido"
+              name="surname"
+              onChange={handleChange}
+              required
+              helperText={errors.surname && errors.surname}
+            />
+          </Grid>
+          <TextField
+            variant="outlined"
+            error={errors.dni && true}
+            margin="normal"
+            fullWidth
+            id="dni"
+            label="Cédula de identidad"
+            name="dni"
+            onChange={handleChange}
+            required
+            helperText={errors.dni && errors.dni}
+          />
+          <TextField
+            variant="outlined"
+            error={errors.email && true}
+            margin="normal"
+            fullWidth
+            id="login"
+            label="Correo electrónico"
+            name="email"
+            onChange={handleChange}
+            required
+            helperText={errors.email && errors.email}
+          />
+          <TextField
+            variant="outlined"
+            error={errors.password && true}
+            margin="normal"
+            fullWidth
+            name="password"
+            label="Contraseña"
+            type="password"
+            id="password"
+            onChange={handleChange}
+            required
+            helperText={errors.password && errors.password}
+          />
+          <TextField
+            variant="outlined"
+            error={errors.password && true}
+            margin="normal"
+            fullWidth
+            name="password_confirmation"
+            label="Repita la contraseña"
+            type="password"
+            id="password_confirmation"
+            onChange={handleChange}
+            required
+            helperText={errors.password_confirmation && errors.password_confirmation}
+          />
+        </Grid>
         <Button
           type="submit"
           variant="contained"
