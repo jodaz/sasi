@@ -11,18 +11,18 @@ class Profile extends Model
     protected $appends = [ 'full_name' ];
 
     protected $fillable = [
+        'first_name',
+        'surname',
         'second_name',
         'second_surname',
-        'address',
         'community_id',
         'parish_id',
-        'genre_id',
-        'user_id'
+        'genre_id'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
 
     public function genre()

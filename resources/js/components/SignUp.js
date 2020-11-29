@@ -74,6 +74,19 @@ const SignUp = () => {
           <Grid item xs={12} sm={6}>
             <TextField
               variant="outlined"
+              error={errors.second_name && true}
+              margin="normal"
+              fullWidth
+              id="first_name"
+              label="Segundo nombre"
+              name="second_name"
+              onChange={handleChange}
+              helperText={errors.second_name && errors.second_name}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
               error={errors.surname && true}
               margin="normal"
               fullWidth
@@ -83,6 +96,19 @@ const SignUp = () => {
               onChange={handleChange}
               required
               helperText={errors.surname && errors.surname}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              error={errors.second_surname && true}
+              margin="normal"
+              fullWidth
+              id="first_name"
+              label="Segundo apellido"
+              name="second_surname"
+              onChange={handleChange}
+              helperText={errors.second_surname && errors.second_surname}
             />
           </Grid>
           <TextField

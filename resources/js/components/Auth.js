@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
       <a color="inherit" href="http://somoscarupano.com.ve/">
         Alcaldía del Municipio Bermúdez
       </a>{' '}

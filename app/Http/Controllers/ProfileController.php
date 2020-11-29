@@ -46,9 +46,6 @@ class ProfileController extends Controller
             'password' => $password,
             'address' => $request->get('address'),
             'dni' => $identification,
-            'community_id' => $request->get('community')['value'],
-            'parish_id' => $request->get('parish')['value'],
-            'genre_id' => $request->get('genre')['value'],
         ]);
 
         return response()->json([
