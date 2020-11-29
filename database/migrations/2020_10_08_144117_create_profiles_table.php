@@ -20,15 +20,12 @@ class CreateProfilesTable extends Migration
             $table->string('second_name')->nullable();
             $table->string('surname');
             $table->string('second_surname')->nullable();
-            $table->string('address');
+            $table->date('birth_date');
             $table->string('phone')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('community_id');
-            $table->unsignedBigInteger('parish_id');
+            $table->unsignedBigInteger('clap_id');
             $table->unsignedBigInteger('genre_id');
-            $table->foreign('community_id')->references('id')->on('communities')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('parish_id')->references('id')->on('parishes')
+            $table->foreign('clap_id')->references('id')->on('claps')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')
                 ->onUpdate('cascade')->onDelete('cascade');

@@ -55,26 +55,9 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     { 
-        $citizenshipCorr = Citizenship::find($request->get('citizenship_id'))
-            ->correlative;
-        $identification = $citizenshipCorr.'-'.$request->get('identification');
-
         $password = Hash::make($request->password);
 
-        $profile = Profile::create([
-            'dni' => $request->get('identification'),
-            'first_name' => $request->first_name,
-            'second_name' => $request->second_name,
-            'surname' => $request->surname,
-            'second_surname' => $request->second_surname,
-            'address' => $request->address,
-            'community_id' => $request->get('community_id'),
-            'parish_id' => $request->get('parish_id'),
-            'genre_id' => $request->get('genre_id')
-        ]);
-
         $user = User::create([
-            'dni' => $request->dni,
             'email' => $request->email,
             'password' => $request->password,
             'activation_token' => Str::random(60),

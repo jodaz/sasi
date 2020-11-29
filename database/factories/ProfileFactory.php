@@ -3,18 +3,14 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Profile;
-use App\Community;
-use App\Parish;
+use App\Clap;
 use App\Genre;
 use Faker\Generator as Faker;
 
 $genres = Genre::all();
-$communities = Community::all();
-$parishes = Parish::all();
+$claps = Clap::all();
 
-$factory->define(Profile::class, function (Faker $faker) use ($genres, $communities, $parishes) {
-    $community = $communities->random(1)->first()->id;
-    $parish = $parishes->random(1)->first()->id;
+$factory->define(Profile::class, function (Faker $faker) use ($genres, $claps) {
     $genre = $genres->random(1)->first()->id;
 
     return [
@@ -23,9 +19,8 @@ $factory->define(Profile::class, function (Faker $faker) use ($genres, $communit
         'second_name' => $faker->firstName,
         'second_surname' => $faker->lastName,
         'dni' => $faker->unique()->randomNumber,
-        'address' => $faker->address,
-        'community_id' => $community,
-        'parish_id' => $parish,
+        'clap_id' => 1,
+        'birth_date' => $faker->dateTimeThisCentury->format('Y-m-d'),
         'genre_id' => $genre
     ];
 });

@@ -11,12 +11,14 @@ class Profile extends Model
     protected $appends = [ 'full_name' ];
 
     protected $fillable = [
+        'dni',
         'first_name',
         'surname',
         'second_name',
         'second_surname',
-        'community_id',
-        'parish_id',
+        'birth_date',
+        'phone',
+        'clap_id',
         'genre_id'
     ];
 
@@ -35,14 +37,9 @@ class Profile extends Model
         return $this->belongsTo(Genre::class);
     }
 
-    public function parish()
+    public function clap()
     {
-        return $this->belongsTo(Parish::class);
-    }
-
-    public function community()
-    {
-        return $this->belongsTo(Community::class);
+        return $this->belongsTo(Clap::class);
     }
 
     public function applications()
@@ -57,6 +54,6 @@ class Profile extends Model
 
     public function getFullNameAttribute()
     {
-        return "{$this->first_name} {$this->surname}";
+        return "{$this->first_name} {$this->second_name} {$this->surname} {$this->second_surname}";
     }
 }
