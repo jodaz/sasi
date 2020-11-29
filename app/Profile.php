@@ -20,6 +20,11 @@ class Profile extends Model
         'user_id'
     ];
 
+    public function familyLink()
+    {
+        return $this->hasOne(FamilyLink::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
