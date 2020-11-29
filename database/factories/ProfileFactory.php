@@ -18,8 +18,11 @@ $factory->define(Profile::class, function (Faker $faker) use ($genres, $communit
     $genre = $genres->random(1)->first()->id;
 
     return [
+        'first_name' => $faker->name,
+        'surname' => $faker->lastName,
         'second_name' => $faker->firstName,
         'second_surname' => $faker->lastName,
+        'dni' => $faker->unique()->randomNumber,
         'address' => $faker->address,
         'community_id' => $community,
         'parish_id' => $parish,

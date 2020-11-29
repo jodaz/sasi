@@ -4,9 +4,8 @@ import { useNotify, Admin, Resource } from 'react-admin';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
-import isEmpty from 'is-empty';
-import { setAuthToken, useAuth } from './utils';
-import { clearAll, setErrors, getData, setUser, clearErrors } from './actions';
+import { setAuthToken, useAuth, useRedirect } from './utils';
+import { clearAll, getData, setUser } from './actions';
 // Icons
 import { Loading, Login, Layout } from './components';
 import { clearNotifications } from './actions';
@@ -34,6 +33,7 @@ const theme = createMuiTheme({
 
 export default function App() {
   const isAuth = useAuth('sasiToken');
+  const redirect = useRedirect(location, history, isAuth);
   const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
@@ -50,11 +50,9 @@ export default function App() {
   // Check if authenticated
   React.useEffect(() => {
     if (isAuth) {
-      history.push('/home');
       (() => dispatch(getData('user')))();
     } else {
       setAuthToken();
-      history.push('/login'); 
     }
   }, [isAuth]);
 
@@ -75,8 +73,7 @@ export default function App() {
       theme={theme}
       ready={Loading}
     >
-      { isAuth && Screens}
+      { isAuth ? Screens : <></>}
     </Admin>
   );
 }
-

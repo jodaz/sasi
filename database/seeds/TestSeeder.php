@@ -20,12 +20,12 @@ class TestSeeder extends Seeder
         $categories = factory(Category::class, 10)->create();
         
         // Create users
-        factory(User::class, 100)
+        factory(Profile::class, 100)
             ->create()
-            ->each(function ($user) use ($categories) {
+            ->each(function ($profile) use ($categories) {
                 $category = $categories->random(1)->first();
                 
-                $profile = $user->profile()->save(factory(Profile::class)->make());
+                $user = $profile->user()->save(factory(User::class)->make());
 
                 // Create applications
                 factory(Application::class, rand(1, 5))
@@ -39,39 +39,39 @@ class TestSeeder extends Seeder
             });
         
         // Admin user
-        $admin = User::create([
+        $admin = Profile::create([
             'first_name' => 'Jesús',
             'surname' => 'Ordosgoitty',
+            'genre_id' => 1,
+            'community_id' => 1,
+            'parish_id' => 1,
+            'address' => 'Ave. Libertad 123',
+            'dni' => 'V-27572434',
+        ]);
+        $admin->user()->create([
             'email' => 'jesuodz@gmail.com',
             'password' => bcrypt('qwerty123'),
-            'dni' => 'V-27572434',
             'role_id' => 1,
             'active' => true,
             'activation_token' => Str::random(60),
         ]);
-        $admin->profile()->create([
+        
+        // Analyst user
+        $analyst = Profile::create([
+            'first_name' => 'Andreina',
+            'surname' => 'Santana',
             'genre_id' => 1,
             'community_id' => 1,
             'parish_id' => 1,
-            'address' => 'Ave. Libertad 123'
-        ]);
-        
-        // Analyst user
-        $analyst = User::create([
-            'first_name' => 'Andreina',
-            'surname' => 'Santana',
-            'email' => 'nomesetucorreo@gmail.com',
+            'address' => 'Ave. Libertad 123',
             'dni' => 'V-26292605',
+        ]);
+        $analyst->user()->create([
+            'email' => 'nomesetucorreo@gmail.com',
             'password' => bcrypt('qwerty123'),
             'role_id' => 2,
             'active' => true,
             'activation_token' => Str::random(60),
-        ]);
-        $analyst->profile()->create([
-            'genre_id' => 1,
-            'community_id' => 1,
-            'parish_id' => 1,
-            'address' => 'Ave. Libertad 123'
         ]);
     }
 }

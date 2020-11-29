@@ -7,12 +7,12 @@ export default function ({ loading, classes, icon, children, ...rest }) {
     
     return (
         <Button
-            className={classes.submit}
+            className={classes}
             startIcon={loading ? <CircularProgress size={10} /> : defaultIcon}  
             disabled={loading}
             {...rest}
         >
-        {children}
-      </Button>
+            {children}
+        </Button>
     );
 }

@@ -6,7 +6,7 @@ import Auth from './Auth';
 export default () => {
   return (
     <Auth title={'¡Revise su correo electrónico!'}>
-      <p>Volver al <Link to='/'>inicio</Link></p>
+      <p>Volver al <Link to='/login'>inicio</Link></p>
     </Auth>
   );
 };

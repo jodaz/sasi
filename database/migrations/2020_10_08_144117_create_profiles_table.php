@@ -15,7 +15,10 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('dni')->unique();
+            $table->string('first_name');
             $table->string('second_name')->nullable();
+            $table->string('surname');
             $table->string('second_surname')->nullable();
             $table->string('address');
             $table->string('phone')->nullable();
@@ -23,9 +26,6 @@ class CreateProfilesTable extends Migration
             $table->unsignedBigInteger('community_id');
             $table->unsignedBigInteger('parish_id');
             $table->unsignedBigInteger('genre_id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('community_id')->references('id')->on('communities')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('parish_id')->references('id')->on('parishes')

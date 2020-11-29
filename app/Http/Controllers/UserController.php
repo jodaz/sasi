@@ -8,6 +8,7 @@ use App\Genre;
 use App\Citizenship;
 use App\Parish;
 use App\Community;
+use App\Profile;
 use Illuminate\Support\Str;
 use App\Notifications\SignupActivate;
 use App\Http\Requests\CreateUserRequest;
@@ -53,19 +54,34 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreateUserRequest $request)
-    {
+    { 
+        $citizenshipCorr = Citizenship::find($request->get('citizenship_id'))
+            ->correlative;
+        $identification = $citizenshipCorr.'-'.$request->get('identification');
+
         $password = Hash::make($request->password);
 
-        $user = User::create([
+        $profile = Profile::create([
+            'dni' => $request->get('identification'),
             'first_name' => $request->first_name,
+            'second_name' => $request->second_name,
             'surname' => $request->surname,
+            'second_surname' => $request->second_surname,
+            'address' => $request->address,
+            'community_id' => $request->get('community_id'),
+            'parish_id' => $request->get('parish_id'),
+            'genre_id' => $request->get('genre_id')
+        ]);
+
+        $user = User::create([
             'dni' => $request->dni,
             'email' => $request->email,
             'password' => $request->password,
             'activation_token' => Str::random(60),
             'active' => false,
-            'role_id' => 3 // By default, users are common  
+            'role_id' => 3 // By default, users are guest  
         ]);
+
 
         $user->notify(new SignupActivate($user->activation_token));
 
