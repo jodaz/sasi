@@ -5,13 +5,16 @@
 use App\Profile;
 use App\Clap;
 use App\Genre;
+use App\Citizenship;
 use Faker\Generator as Faker;
 
 $genres = Genre::all();
+$citizenships = Citizenship::all();
 $claps = Clap::all();
 
-$factory->define(Profile::class, function (Faker $faker) use ($genres, $claps) {
+$factory->define(Profile::class, function (Faker $faker) use ($genres, $claps, $citizenships) {
     $genre = $genres->random(1)->first()->id;
+    $citizen = $citizenships->random(1)->first()->id;
 
     return [
         'first_name' => $faker->name,
@@ -21,6 +24,7 @@ $factory->define(Profile::class, function (Faker $faker) use ($genres, $claps) {
         'dni' => $faker->unique()->randomNumber,
         'clap_id' => 1,
         'birth_date' => $faker->dateTimeThisCentury->format('Y-m-d'),
+        'citizenship_id' => $citizen,
         'genre_id' => $genre
     ];
 });

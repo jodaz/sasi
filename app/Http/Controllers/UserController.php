@@ -59,6 +59,7 @@ class UserController extends Controller
 
         $user = User::create([
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => $request->password,
             'activation_token' => Str::random(60),
             'active' => false,

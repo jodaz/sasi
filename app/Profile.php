@@ -15,16 +15,23 @@ class Profile extends Model
         'first_name',
         'surname',
         'second_name',
+        'address',
         'second_surname',
         'birth_date',
         'phone',
         'clap_id',
+        'citizenship_id',
         'genre_id'
     ];
 
     public function familyLink()
     {
         return $this->hasOne(FamilyLink::class);
+    }
+
+    public function citizenship()
+    {
+        return $this->belongsTo(Citizen::class);
     }
 
     public function user()

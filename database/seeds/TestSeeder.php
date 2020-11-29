@@ -64,7 +64,9 @@ class TestSeeder extends Seeder
             'genre_id' => 1,
             'birth_date' => '1998-02-26',
             'dni' => '27572434',
-            'clap_id' => 1
+            'clap_id' => 1,
+            'citizenship_id' => 1,
+            'dni' => '27572434',
         ]);
         $admin->user()->create([
             'email' => 'jesuodz@gmail.com',
@@ -77,6 +79,7 @@ class TestSeeder extends Seeder
         // Analyst user
         $analyst = Profile::create([
             'first_name' => 'Andreina',
+            'citizenship_id' => 1,
             'surname' => 'Santana',
             'genre_id' => 1,
             'birth_date' => '1998-02-26',

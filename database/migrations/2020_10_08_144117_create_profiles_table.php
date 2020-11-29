@@ -25,7 +25,10 @@ class CreateProfilesTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('clap_id');
             $table->unsignedBigInteger('genre_id');
+            $table->unsignedBigInteger('citizenship_id');
             $table->foreign('clap_id')->references('id')->on('claps')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('citizenship_id')->references('id')->on('citizenships')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')
                 ->onUpdate('cascade')->onDelete('cascade');
