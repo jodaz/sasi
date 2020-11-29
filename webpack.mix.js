@@ -14,3 +14,7 @@ require('dotenv').config();
 
 mix.react('resources/js/bootstrap.js', 'public/js/app.js')
   .sass('resources/sass/app.scss', 'public/css');
+
+if (mix.inProduction()) {
+  mix.version();
+}

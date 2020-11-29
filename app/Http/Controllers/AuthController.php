@@ -29,7 +29,6 @@ class AuthController extends Controller
                 ]
             ], 401);
         }
-
         $user = Auth::user()->load('applications');
 
         $tokenResult = $user->createToken('authToken');
