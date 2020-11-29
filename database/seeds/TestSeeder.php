@@ -43,10 +43,11 @@ class TestSeeder extends Seeder
             'first_name' => 'Jesús',
             'surname' => 'Ordosgoitty',
             'genre_id' => 1,
+            'citizenship_id' => 1,
             'community_id' => 1,
             'parish_id' => 1,
             'address' => 'Ave. Libertad 123',
-            'dni' => 'V-27572434',
+            'dni' => '27572434',
         ]);
         $admin->user()->create([
             'email' => 'jesuodz@gmail.com',
@@ -59,6 +60,7 @@ class TestSeeder extends Seeder
         // Analyst user
         $analyst = Profile::create([
             'first_name' => 'Andreina',
+            'citizenship_id' => 1,
             'surname' => 'Santana',
             'genre_id' => 1,
             'community_id' => 1,

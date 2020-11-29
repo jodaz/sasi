@@ -14,11 +14,18 @@ class Profile extends Model
         'first_name',
         'surname',
         'second_name',
+        'address',
         'second_surname',
         'community_id',
         'parish_id',
+        'citizenship_id',
         'genre_id'
     ];
+
+    public function citizenship()
+    {
+        return $this->belongsTo(Citizen::class);
+    }
 
     public function user()
     {
