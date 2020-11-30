@@ -22,9 +22,11 @@ Route::post('recover-account', 'PasswordResetController@recover');
 Route::post('reset-password', 'PasswordResetController@resetPassword');
 Route::get('activate-account/{token}', 'UserController@activate');
 
-Route::get('applications/{application}/download', 'ApplicationController@download');
+Route::get('applications/{application}/download', 'ApplicationController@download')
+    ->name('applications.download-cert');
 
-Route::get('parishes/{parish}/communities', 'ParishController@getCommunities');
+Route::get('parishes/{parish}/communities', 'ParishController@getCommunities')
+    ->name('parish.communities');
 Route::resource('users', 'UserController');
 
 // Authenticated only
@@ -45,6 +47,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('axes', 'AxisController');
     Route::resource('claps', 'ClapController');
     Route::resource('organizations', 'OrganizationController');
+    Route::resource('organizations', 'OrganizationController')->except('edit');
 
     // Applications
     Route::resource('applications', 'ApplicationController');

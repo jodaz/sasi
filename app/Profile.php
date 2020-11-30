@@ -8,14 +8,11 @@ class Profile extends Model
 {
     protected $table = 'profiles';
 
-    protected $appends = [ 'full_name' ];
-
     protected $fillable = [
         'dni',
         'first_name',
         'surname',
         'second_name',
-        'address',
         'second_surname',
         'birth_date',
         'phone',
@@ -24,9 +21,18 @@ class Profile extends Model
         'genre_id'
     ];
 
+    protected $appends = [
+        'full_name',
+    ];
+
     public function familyLink()
     {
         return $this->hasOne(FamilyLink::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->second_name} {$this->surname} {$this->second_surname}";
     }
 
     public function citizenship()
@@ -58,9 +64,12 @@ class Profile extends Model
     {
         return $this->hasMany(Organization::class);
     }
+<<<<<<< HEAD
 
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->second_name} {$this->surname} {$this->second_surname}";
     }
+=======
+>>>>>>> master
 }

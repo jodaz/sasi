@@ -34,13 +34,6 @@ class ParishController extends Controller
 
     public function getCommunities(Parish $parish)
     {
-        $communities = $parish->communities->map(function ($c) {
-            return [
-                'label' => $c->name,
-                'value' => $c->id
-            ]; 
-        });
-
-        return Response($communities);
+        return Response($parish->communities);
     }
 }

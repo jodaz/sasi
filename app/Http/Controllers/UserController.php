@@ -44,7 +44,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $citizenships = Citizenship::get();
+        $parishes = Parish::get();
+        $genres = Genre::get();
+
+        return response()->json([
+            'genres' => $genres,
+            'parishes' => $parishes,
+            'citizenships' => $citizenships
+        ]);
     }
 
     /**
@@ -60,12 +68,11 @@ class UserController extends Controller
         $user = User::create([
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => $request->password,
+            'password' => $password,
             'activation_token' => Str::random(60),
             'active' => false,
             'role_id' => 3 // By default, users are guest  
         ]);
-
 
         $user->notify(new SignupActivate($user->activation_token));
 
