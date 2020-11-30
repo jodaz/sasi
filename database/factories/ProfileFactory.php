@@ -26,6 +26,7 @@ $factory->define(Profile::class, function (Faker $faker) use ($citizenships, $ge
         'second_name' => $faker->firstName,
         'second_surname' => $faker->lastName,
         'dni' => $faker->unique()->randomNumber,
+        'phone' => $faker->tollFreePhoneNumber,
         'address' => $faker->address,
         'community_id' => $community,
         'parish_id' => $parish,

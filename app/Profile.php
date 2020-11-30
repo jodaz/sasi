@@ -14,6 +14,7 @@ class Profile extends Model
         'surname',
         'second_name',
         'address',
+        'phone',
         'second_surname',
         'community_id',
         'parish_id',

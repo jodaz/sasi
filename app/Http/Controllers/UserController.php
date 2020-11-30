@@ -72,6 +72,7 @@ class UserController extends Controller
             'surname' => $request->surname,
             'second_surname' => $request->second_surname,
             'address' => $request->address,
+            'phone' => $request->phone,
             'community_id' => $request->community_id,
             'parish_id' => $request->parish_id,
             'citizenship_id' => $request->citizenship_id,

@@ -21,6 +21,7 @@ class CreateProfilesTable extends Migration
             $table->string('surname');
             $table->string('second_surname')->nullable();
             $table->string('address');
+            $table->string('phone')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('community_id');
             $table->unsignedBigInteger('parish_id');
