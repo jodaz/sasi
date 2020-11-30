@@ -25,10 +25,14 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'first_name' => 'required',
-            'dni' => 'required|unique:users',
+            'dni' => 'required|unique:profiles',
             'surname' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
+            'citizenship_id' => 'required',
+            'parish_id' => 'required',
+            'community_id' => 'required',
+            'genre_id' => 'required',
         ];
     }
 
@@ -43,6 +47,10 @@ class CreateUserRequest extends FormRequest
             'email.email' => 'Ingrese un correo electrónico válido',
             'email.unique' => 'Este correo ya ha sido utilizado',
             'password.required' => 'Ingrese una contraseña',
+            'genre_id.required' => 'Seleccione un género',
+            'citizenship_id.required' => 'Seleccione su nacionalidad',
+            'community_id.required' => 'Seleccione su comunidad',
+            'parish_id.required' => 'Seleccione su parroquia',
             'password.confirmed' => '¡La contraseña no coincide!'
         ];
     } 

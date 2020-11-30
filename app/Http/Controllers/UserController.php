@@ -44,7 +44,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $citizenships = Citizenship::get();
+        $parishes = Parish::get();
+        $genres = Genre::get();
+
+        return response()->json([
+            'genres' => $genres,
+            'parishes' => $parishes,
+            'citizenships' => $citizenships
+        ]);
     }
 
     /**
@@ -55,10 +63,6 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     { 
-        $citizenshipCorr = Citizenship::find($request->get('citizenship_id'))
-            ->correlative;
-        $identification = $citizenshipCorr.'-'.$request->get('identification');
-
         $password = Hash::make($request->password);
 
         $profile = Profile::create([
@@ -74,16 +78,14 @@ class UserController extends Controller
             'genre_id' => $request->genre_id
         ]);
 
-        $user = User::create([
-            'dni' => $request->dni,
+        $user = $profile->user()->create([
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => $request->password,
+            'password' => $password,
             'activation_token' => Str::random(60),
             'active' => false,
             'role_id' => 3 // By default, users are guest  
         ]);
-
 
         $user->notify(new SignupActivate($user->activation_token));
 
