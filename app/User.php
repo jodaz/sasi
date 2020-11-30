@@ -37,16 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function organizations()
-    {
-        return $this->profile->organizations();
-    }
-
-    public function applications()
-    {
-        return $this->profile->applications();
-    }
-
     public function profile()
     {
         return $this->belongsTo(Profile::class);

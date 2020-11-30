@@ -29,7 +29,7 @@ class AuthController extends Controller
                 ]
             ], 401);
         }
-        $user = Auth::user()->load('applications');
+        $user = Auth::user()->load('profile.applications', 'profile.organizations');
 
         $tokenResult = $user->createToken('authToken');
 
@@ -52,7 +52,9 @@ class AuthController extends Controller
     public function getUser(Request $request)
     {
         return response()->json([
-            'user' => $request->user()
+            'user' => $request
+                ->user()
+                ->load('profile.applications', 'profile.organizations')
         ]);
     }
 }
