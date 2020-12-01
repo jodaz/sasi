@@ -4,11 +4,13 @@ import { useNotify, Admin, Resource } from 'react-admin';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
-import { setAuthToken, useAuth, useRedirect } from './utils';
+import isEmpty from 'is-empty';
 import { clearAll, getData, setUser } from './actions';
+import jwt_decode from 'jwt-decode';
 // Icons
 import { Loading, Login, Layout } from './components';
 import { clearNotifications } from './actions';
+import { useFetch } from './fetch';
 
 import {
   dataProvider,
@@ -32,12 +34,10 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
-  const isAuth = useAuth('sasiToken');
-  const redirect = useRedirect(location, history, isAuth);
+  const { pathname } = location;
   const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
-  const { response, loading, success } = store.fetch;
   const { notifications } = store;
       
   React.useEffect(() => {
@@ -49,19 +49,17 @@ export default function App() {
  
   // Check if authenticated
   React.useEffect(() => {
-    if (isAuth) {
-      (() => dispatch(getData('user')))();
-    } else {
-      setAuthToken();
-    }
-  }, [isAuth]);
+    let route = pathname;
 
-  React.useEffect(() => {
-    if (success) {
-      dispatch(setUser(response));
-      dispatch(clearAll());
+    if (!isEmpty(localStorage.sasiToken)) {
+
+      route = (route == '/login' || route == '/') ? '/home' : route;
+    } else {
+      route = '/login';
     }
-  }, [success]);
+
+    history.push(route);
+  }, []);
 
   return (
     <Admin
@@ -72,8 +70,9 @@ export default function App() {
       customRoutes={customRoutes}
       theme={theme}
       ready={Loading}
+      i18nProvider={i18nProvider}
     >
-      { isAuth ? Screens : <></>}
+      {Screens}
     </Admin>
   );
 }

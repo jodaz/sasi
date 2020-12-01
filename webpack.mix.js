@@ -13,7 +13,10 @@ require('dotenv').config();
  */
 
 mix.react('resources/js/bootstrap.js', 'public/js/app.js')
-  .sass('resources/sass/app.scss', 'public/css');
+  .sass('resources/sass/app.scss', 'public/css')
+  .browserSync({
+    proxy: 'http://201.249.178.134:5452'
+  });
 
 if (mix.inProduction()) {
   mix.version();

@@ -3,16 +3,17 @@ import {
   Create,
   TextInput,
   SimpleForm,
-  DateInput,
   NumberInput,
-  SelectInput
+  SelectInput,
+  useNotify,
+  useRedirect
 } from 'react-admin';
 import { useFetch } from '../../fetch';
 
 const validator = (values) => {
   const errors = {};
 
-  if (!values.description) {
+  if (!values.description || !values.description.trim()) {
     errors.description = ['Ingrese un asunto.'];
   }
 
@@ -25,19 +26,27 @@ const validator = (values) => {
 
 const ApplicationCreate = (props) => { 
   const { isLoading, response, error } = useFetch('applications/create');
+  const notify = useNotify();
+  const redirect = useRedirect();
+
+  const onSuccess = () => {
+    notify('¡Solicitud enviada!');
+    redirect('/home');
+  }
 
   return (
-    <Create {...props} title="Nueva solicitud">
-      <SimpleForm validate={validator} redirect={'/home'}>
+    <Create {...props} title="Nueva solicitud" onSuccess={onSuccess}>
+      <SimpleForm validate={validator}>
+        { (!isLoading) &&
+          <SelectInput label="Categorías" source="category" choices={response} fullWidth/>
+        }
+        <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
         <TextInput
           source="description"
           label="Asunto"
           multiline
+          fullWidth
         />
-        { (!isLoading) &&
-          <SelectInput label="Categorías" source="category" choices={response} />
-        }
-        <NumberInput source="quantity" label='Elementos requeridos' />
       </SimpleForm>
     </Create>
   );
