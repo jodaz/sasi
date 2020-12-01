@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   List, 
+  SimpleList,
   Datagrid, 
   TextField,
 } from 'react-admin';
@@ -8,8 +9,10 @@ import { Filter, ModuleActions } from '../../components';
 import { Actions } from '../../components';
 import { history } from '../../initializers';
 import isEmpty from 'is-empty';
+import { useMediaQuery } from '@material-ui/core';
 
 export default function(props) {
+  const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   React.useEffect(() => {
     if (isEmpty(localStorage.sasiToken)) {
@@ -23,12 +26,19 @@ export default function(props) {
       actions={<ModuleActions />}
       filters={<Filter defaultfilter='description'/>}
     >
-      <Datagrid>
-        <TextField label='Descripción' source="description" />
-        <TextField label='Estado' source="state.name" />
-        <TextField label='Categoría' source="category.name" />
-        <Actions {...props} shouldShow shouldDelete={{ label: 'Anular' }} />
-      </Datagrid>
+      {isSmall ? (
+        <SimpleList
+          primaryText={record => `${record.description}`}
+          secondaryText={record => `${record.state.name}`}
+        />
+      ) : (
+        <Datagrid>
+          <TextField label='Descripción' source="description" />
+          <TextField label='Estado' source="state.name" />
+          <TextField label='Categoría' source="category.name" />
+          <Actions {...props} shouldShow shouldDelete={{ label: 'Anular' }} />
+        </Datagrid>
+      )}
     </List>
   );
 }
