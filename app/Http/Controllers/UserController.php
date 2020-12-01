@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::latest()->with(['role']);
+        $query = User::latest()->with(['role', 'profile']);
         $results = $request->perPage;
 
         if ($request->has('filter')) {
