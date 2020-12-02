@@ -8,8 +8,6 @@ import {
 } from 'react-admin';
 import { Filter, ModuleActions } from '../../components';
 import { Actions } from '../../components';
-import { history } from '../../initializers';
-import isEmpty from 'is-empty';
 import { useMediaQuery } from '@material-ui/core';
 
 export default function(props) {
@@ -20,6 +18,7 @@ export default function(props) {
       title="Solicitudes"
       actions={<ModuleActions />}
       filters={<Filter defaultfilter='description'/>}
+      bulkActionButtons={false}
     >
       {isSmall ? (
         <SimpleList

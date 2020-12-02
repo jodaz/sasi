@@ -22,9 +22,9 @@ export default function(props) {
   return (
     <List {...props}
       title="Categorías"
-      bulkActionButtons={<CategoriesActionsButtons />}
       actions={<ModuleActions shouldCreate/>}
       filters={<Filter defaultfilter='name'/>}
+      bulkActionButtons={false}
     >
       {isSmall ? (
         <SimpleList

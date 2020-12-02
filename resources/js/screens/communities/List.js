@@ -17,6 +17,7 @@ export default function(props) {
       title="Comunidades"
       actions={<ModuleActions shouldCreate/>}
       filters={<Filter defaultfilter='name' />}
+      bulkActionButtons={false}
     >
       {isSmall ? (
         <SimpleList
