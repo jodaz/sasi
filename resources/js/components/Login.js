@@ -101,7 +101,7 @@ const Login = () => {
 
         <Grid container>
           <Grid item xs>
-            <Link to="/forget-password" variant="body2">
+            <Link to="/reset-password" variant="body2">
               {"¿Olvidó su contraseña?"}
             </Link>
           </Grid>
