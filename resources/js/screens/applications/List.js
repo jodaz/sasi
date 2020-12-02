@@ -27,7 +27,7 @@ export default function(props) {
           linkType={"show"}
         />
       ) : (
-        <Datagrid rowClick="show">
+        <Datagrid>
           <TextField label='Descripción' source="description" />
           <TextField label='Estado' source="state.name" />
           <ChipField label='Categoría' source="category.name" />
