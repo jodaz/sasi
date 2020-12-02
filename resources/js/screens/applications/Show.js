@@ -26,11 +26,11 @@ const ApplicationShow = (props) => {
           label="Asunto"
           multiline
         />
-        <TextField
-          source="category.name"
-          label='Categoría'
-        />
+        <TextField source="category.name" label='Categoría' />
+        <TextField source="state.name" label='Estado' />
         <NumberField source="quantity" label='Elementos requeridos' />
+        <TextField source="profile.full_name" label='Usuario' />
+        <DateField source="created_at" label="Enviada" />
       </SimpleShowLayout>
     </Show>
   );

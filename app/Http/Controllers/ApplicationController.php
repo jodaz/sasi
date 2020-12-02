@@ -77,7 +77,7 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+        return Response($application->load(['category', 'state', 'profile']));
     }
 
     /**
