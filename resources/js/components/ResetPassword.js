@@ -10,6 +10,7 @@ import {
   Grid
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useNotify } from 'react-admin';
 // Layout
 import Auth from './Auth';
 import { setErrors, postData } from '../actions';
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+  const notify = useNotify();
   const classes = useStyles();
   const [data, setData] = useState({});
   const dispatch = useDispatch();
@@ -49,6 +51,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (response.success) {
+      notify(response.message);
       history.push('/check-email');
     }
   }, [response]);

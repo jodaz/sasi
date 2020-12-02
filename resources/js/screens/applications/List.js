@@ -31,7 +31,12 @@ export default function(props) {
           <TextField label='Descripción' source="description" />
           <TextField label='Estado' source="state.name" />
           <ChipField label='Categoría' source="category.name" />
-          <Actions {...props} shouldShow shouldDelete={{ label: 'Anular' }} />
+          <Actions {...props}
+            shouldShow
+            shouldDelete={{ label: 'Borrar' }}
+          >
+
+          </Actions>
         </Datagrid>
       )}
     </List>

@@ -61,6 +61,8 @@ export default function Auth(props) {
           <Copyright />
         </Box>
       </Container>
+
+      <Notification />
     </>
   );
 }
