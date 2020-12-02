@@ -50,7 +50,7 @@ class TestSeeder extends Seeder
             'dni' => '27572434',
         ]);
         $admin->user()->create([
-            'email' => 'jesuodz@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('qwerty123'),
             'role_id' => 1,
             'active' => true,
@@ -69,7 +69,7 @@ class TestSeeder extends Seeder
             'dni' => 'V-26292605',
         ]);
         $analyst->user()->create([
-            'email' => 'nomesetucorreo@gmail.com',
+            'email' => 'analista@gmail.com',
             'password' => bcrypt('qwerty123'),
             'role_id' => 2,
             'active' => true,

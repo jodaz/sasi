@@ -46,12 +46,14 @@ class UserController extends Controller
     {
         $citizenships = Citizenship::get();
         $parishes = Parish::get();
+        $communities = Community::get();
         $genres = Genre::get();
 
         return response()->json([
             'genres' => $genres,
             'parishes' => $parishes,
-            'citizenships' => $citizenships
+            'citizenships' => $citizenships,
+            'communities' => $communities
         ]);
     }
 
@@ -81,7 +83,6 @@ class UserController extends Controller
 
         $user = $profile->user()->create([
             'email' => $request->email,
-            'phone' => $request->phone,
             'password' => $password,
             'activation_token' => Str::random(60),
             'active' => false,
