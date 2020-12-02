@@ -9,11 +9,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Layout
 import Auth from './Auth';
 import { setAuthToken } from '../utils';
-import { clearAll, setErrors, postData, setUser, clearErrors } from '../actions';
+import { clearAll, setErrors, postData, setUser, setNotifications, clearErrors } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../initializers';
 import LoadingButton from './LoadingButton';
-import { Link } from 'react-router-dom';
+import isEmpty from 'is-empty';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -35,6 +37,7 @@ const Login = () => {
     loading,
     success
   } = useSelector(store => store.fetch);
+  const { token } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +50,14 @@ const Login = () => {
     setData({...data, [name]: value });
     dispatch(setErrors({...errors, [name]: ''}));
   }
+
+  React.useEffect(() => {
+    clearErrors();
+    if (!isEmpty(token)) {
+      axios.get(`/activate-account/${token}`)
+        .then(res => dispatch(setNotifications(res.data.message)));
+    }
+  }, []);
 
   React.useEffect(() => {
     if (success) {
@@ -107,7 +118,7 @@ const Login = () => {
           </Grid>
           <Grid item>
             <Link to="/register" variant="body2">
-              {"Registro"}
+              {"Registrarme"}
             </Link>
           </Grid>
         </Grid>

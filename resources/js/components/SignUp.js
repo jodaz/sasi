@@ -21,7 +21,7 @@ import isEmpty from 'is-empty';
 import LoadingButton from './LoadingButton';
 // Layout
 import Auth from './Auth';
-import { postData, setErrors } from '../actions';
+import { postData, setErrors, clearErrors } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -71,6 +71,10 @@ const SignUp = () => {
       setCreateData(userCreateResponse);
     }
   }, [userCreateResponse]);
+
+  React.useEffect(() => {
+    clearErrors();
+  }, []);
 
   return (
     <Auth title={'Crear cuenta'}>

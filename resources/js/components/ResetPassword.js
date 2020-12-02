@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { useNotify } from 'react-admin';
 // Layout
 import Auth from './Auth';
-import { setErrors, postData } from '../actions';
+import { setErrors, postData, clearErrors } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -55,6 +55,10 @@ const Login = () => {
       history.push('/check-email');
     }
   }, [response]);
+
+  React.useEffect(() => {
+    clearErrors();
+  }, []);
 
   return (
     <Auth title='Recuperar contraseña'>
