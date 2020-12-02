@@ -21,10 +21,11 @@ export default function(props) {
       {isSmall ? (
         <SimpleList
           primaryText={record => `${record.name}`}
-          secondaryText={record => `${record.applications_count}`}
+          secondaryText={record => `${record.applications_count} solicitudes`}
+          linkType={"show"}
         />
       ) : (
-        <Datagrid>
+        <Datagrid rowClick="show">
           <TextField source='name' label='Nombre' />
           <TextField source='applications_count' label='Solicitudes' />
           <TextField source='parish_names' label='Parroquia (s)' />

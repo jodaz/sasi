@@ -29,10 +29,11 @@ export default function(props) {
       {isSmall ? (
         <SimpleList
           primaryText={record => `${record.name}`}
-          secondaryText={record => `${record.applications_count}`}
+          secondaryText={record => `${record.applications_count} solicitudes`}
+          linkType={"show"}
         />
       ) : (
-        <Datagrid>
+        <Datagrid rowClick="show">
           <TextField source='name' label='Nombre' />
           <TextField source='applications_count' label='Solicitudes' />
           <Actions {...props} shouldEdit shouldDelete />

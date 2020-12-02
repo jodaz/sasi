@@ -67,7 +67,8 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        return $community->load('parishes');
+        return $community->load(['applications'])
+            ->loadCount('applications');
     }
 
     /**

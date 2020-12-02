@@ -59,7 +59,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return Response($category->load('applications'));
+        return $category->load(['applications'])
+            ->loadCount('applications');
     }
 
     /**
