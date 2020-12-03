@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Rol;
 use App\Genre;
 use App\Citizenship;
 use App\Parish;
@@ -150,6 +151,18 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function changeRole(Request $request, User $user)
+    {
+        $role = Rol::find($request->rol_id);
+        
+        $user->role_id = $role->id;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Ha cambiado el rol a '.$role->name 
+        ]);
     }
 
     /**
