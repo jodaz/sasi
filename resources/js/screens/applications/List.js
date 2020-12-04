@@ -35,7 +35,6 @@ export default function(props) {
             shouldShow
             shouldDelete={{ label: 'Borrar' }}
           >
-
           </Actions>
         </Datagrid>
       )}

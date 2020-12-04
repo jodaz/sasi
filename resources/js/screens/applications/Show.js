@@ -4,13 +4,7 @@ import {
   TextField,
   SimpleShowLayout,
   DateField,
-  SelectField
-} from 'react-admin';
-import {
-  useQuery,
-  NumberField,
-  Loading,
-  Error
+  NumberField
 } from 'react-admin';
 
 const ApplicationTitle = ({ record }) => (

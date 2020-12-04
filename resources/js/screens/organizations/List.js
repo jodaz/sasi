@@ -24,6 +24,7 @@ export default function(props) {
           primaryText={record => `${record.name}`}
           secondaryText={record => `${record.full_address}`}
           tertiaryText={record => `${record.applications_count} solicitudes`}
+          linkType={"show"}
         />
       ) : (
         <Datagrid>
@@ -31,7 +32,10 @@ export default function(props) {
           <TextField source='name' label='Nombre' />
           <TextField source='full_address' label='Dirección' />
           <TextField source='applications_count' label='Solicitudes' />
-          <Actions {...props} />
+          <Actions {...props}
+            shouldShow
+            shouldDelete={{ label: 'Borrar' }}
+          />
         </Datagrid>
       )}
     </List>
