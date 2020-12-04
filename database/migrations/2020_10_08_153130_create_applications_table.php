@@ -16,6 +16,7 @@ class CreateApplicationsTable extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->string('num', 8);
+            $table->string('title', 100);
             $table->string('description', 500);
             $table->integer('quantity')->default(0);
             $table->unsignedBigInteger('category_id');

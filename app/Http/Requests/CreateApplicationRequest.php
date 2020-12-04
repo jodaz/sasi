@@ -24,7 +24,8 @@ class CreateApplicationRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required',
+            'title' => 'required|max:100',
+            'description' => 'required|max:500',
             'category' => 'required'
         ];
     }
@@ -32,6 +33,9 @@ class CreateApplicationRequest extends FormRequest
     public function messages()
     {
         return [
+            'title.required' => 'Ingrese un título',
+            'title.max' => '100 caracteres permitidos',
+            'description.max' => '500 caracteres permitidos',
             'description.required' => 'Ingrese una descripción',
             'category.required' => 'Seleccione una categoría'
         ];
