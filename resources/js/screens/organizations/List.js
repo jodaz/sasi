@@ -32,10 +32,7 @@ export default function(props) {
           <TextField source='name' label='Nombre' />
           <TextField source='full_address' label='Dirección' />
           <TextField source='applications_count' label='Solicitudes' />
-          <Actions {...props}
-            shouldShow
-            shouldDelete={{ label: 'Borrar' }}
-          />
+          <Actions {...props} shouldShow />
         </Datagrid>
       )}
     </List>

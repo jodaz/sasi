@@ -1,23 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNotify, Admin, Resource } from 'react-admin';
+import { useNotify, Admin } from 'react-admin';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
 import isEmpty from 'is-empty';
-import { clearAll, getData, setUser } from './actions';
-import jwt_decode from 'jwt-decode';
 // Icons
 import { Loading, Login, Layout } from './components';
-import { clearNotifications } from './actions';
+import { clearNotifications, setUser } from './actions';
 import { useFetch } from './fetch';
-
-import {
-  dataProvider,
-  i18nProvider,
-  history
-} from './initializers';
-
+import { dataProvider, i18nProvider,  history } from './initializers';
 // Screens
 import Screens from './screens';
 
@@ -35,6 +27,7 @@ const theme = createMuiTheme({
 
 export default function App() {
   const { pathname } = location;
+  const { response } = useFetch('user');
   const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
@@ -46,13 +39,18 @@ export default function App() {
       dispatch(clearNotifications());
     }
   }, [notifications]);
+
+  React.useEffect(() => {
+    if (!isEmpty(response)) {
+      dispatch(setUser(response.user));
+    }
+  }, [response]);
  
   // Check if authenticated
   React.useEffect(() => {
     let route = pathname;
 
     if (!isEmpty(localStorage.sasiToken)) {
-
       route = (route == '/login' || route == '/') ? '/home' : route;
     } else {
       route = '/login';

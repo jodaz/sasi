@@ -13,12 +13,32 @@ import { useFetch } from '../../fetch';
 const validator = (values) => {
   const errors = {};
 
-  if (!values.name) {
-    errors.description = ['Ingrese un asunto.'];
+  if (!values.rif || !values.rif.trim()) {
+    errors.rif = ['Ingrese el RIF.'];
   }
 
-  if (!values.categories.length) {
-    errors.categories = ['Seleccione una categoría.'];
+  if (!values.address || !values.address.trim()) {
+    errors.address = ['Ingrese la dirección.'];
+  }
+
+  if (!values.name || !values.name.trim()) {
+    errors.name = ['Ingrese un nombre.'];
+  }
+
+  if (!values.community_id) {
+    errors.community_id = ['Seleccione una comunidad.'];
+  }
+
+  if (!values.parish_id) {
+    errors.parish_id = ['Seleccione una parroquia.'];
+  }
+
+  if (!values.organization_type_id) {
+    errors.organization_type_id = ['Seleccione el tipo de la institución.'];
+  }
+
+  if (!values.category_id) {
+    errors.category_id = ['Seleccione el sector al cual pertenece.'];
   }
 
   return errors;
@@ -30,7 +50,7 @@ const OrganizationCreate = (props) => {
   const redirect = useRedirect();
 
   const onSuccess = ({ data }) => {
-    notify(`¡Ha creado la organización ${data.name}!`);
+    notify(`¡Ha creado la institución ${data.name}!`);
     redirect('/organizations');
   }
 
@@ -39,44 +59,18 @@ const OrganizationCreate = (props) => {
       { (isLoading)
         ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
         : (
-        <SimpleForm>
-          <SelectInput
-            source="types"
-            choices={data.types} 
-            label='Tipo (*)'
-            initialValue={1}
-          />
+        <SimpleForm validate={validator}>
+          <SelectInput source="organization_type_id" choices={data.types} label='Tipo (*)' />
           <TextInput
             source="rif"
             label="RIF"
+            resettable
           />
-          <TextInput
-            source="name"
-            label="Nombre"
-          />
-          <SelectInput
-            source="parishes"
-            choices={data.parishes} 
-            label='Parroquia (*)'
-            initialValue={1}
-          />
-          <SelectInput
-            source="communities"
-            choices={data.communities} 
-            label='Comunidad (*)'
-            initialValue={1}
-          />
-
-          <TextInput
-            source="address"
-            label="Dirección"
-          />
-          <SelectInput
-            source="categories"
-            choices={data.categories} 
-            label='Sector (*)'
-            initialValue={1}
-          />
+          <TextInput source="name" label="Nombre" resettable/>
+          <SelectInput source="parish_id" choices={data.parishes} label='Parroquia (*)' />
+          <SelectInput source="community_id" choices={data.communities} label='Comunidad (*)'/>
+          <TextInput source="address" label="Dirección" resettable/>
+          <SelectInput source="category_id" choices={data.categories} label='Sector (*)'/>
         </SimpleForm>
       )}
     </Create>

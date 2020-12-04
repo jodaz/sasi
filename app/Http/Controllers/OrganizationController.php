@@ -8,6 +8,7 @@ use App\Community;
 use App\Parish;
 use App\OrganizationType;
 use App\Category;
+use App\Http\Requests\CreateOrganizationRequest;
 
 class OrganizationController extends Controller
 {
@@ -52,19 +53,11 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOrganizationRequest $request)
     {
         $profile = $request->user()->profile;
 
-        $organization = $profile->organizations()->create([
-            'name' => $request->get('name'),
-            'rif' => $request->get('rif'),
-            'address' => $request->get('address'),
-            'category_id' => $request->get('categories'),
-            'parish_id' => $request->get('parishes'),
-            'organization_type_id' => $request->get('types'),
-            'community_id' => $request->get('communities')
-        ]);
+        $organization = $profile->organizations()->create($request->all());
 
         return Response([
             'success' => true,

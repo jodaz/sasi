@@ -30,7 +30,7 @@ const validator = (values) => {
   if (values.description) {
     if (values.description.length > 500) {
       errors.description = ['El máximo número de caracteres permitidos es 500.'];
-    }
+    }1
   }
 
   if (!values.category) {
