@@ -40,7 +40,8 @@ class OrganizationController extends Controller
     {
         return Response([
             'categories' => Category::get(),
-            'parishes' => Parish::with('communities')->get(),
+            'communities' => Community::get(),
+            'parishes' => Parish::get(),
             'types' => OrganizationType::get()
         ]);
     }
@@ -67,7 +68,8 @@ class OrganizationController extends Controller
 
         return Response([
             'success' => true,
-            'message' => '¡Ha agregado a '.$organization->name.' con éxito'
+            'id' => $organization->id,
+            'attributes' => $organization
         ]);
     }
 

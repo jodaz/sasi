@@ -13,6 +13,7 @@ class Application extends Model
     protected $table = 'applications';
 
     protected $fillable = [
+        'title',
         'description',
         'quantity',
         'profile_id',

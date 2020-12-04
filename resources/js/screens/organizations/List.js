@@ -23,7 +23,7 @@ export default function(props) {
         <SimpleList
           primaryText={record => `${record.name}`}
           secondaryText={record => `${record.full_address}`}
-          tertiaryText={record => `${record.applications_count}`}
+          tertiaryText={record => `${record.applications_count} solicitudes`}
         />
       ) : (
         <Datagrid>

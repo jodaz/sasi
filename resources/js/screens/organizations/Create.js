@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import {
   Create,
   TextInput,
   SimpleForm,
   SelectInput,
-  useQuery,
   Loading,
-  Error
+  useNotify,
+  useRedirect
 } from 'react-admin';
-import isEmpty from 'is-empty';
+import { useFetch } from '../../fetch';
 
 const validator = (values) => {
   const errors = {};
@@ -24,34 +24,21 @@ const validator = (values) => {
   return errors;
 }
 
-const OrganizationCreate = (props) => { 
-  const [communities, setCommunities] = useState({});
-  const [parish, setParish] = useState(-1);
-  const { data, loading, error } = useQuery({
-    type: 'NEW', 
-    resource: 'organizations'
-  });
+const OrganizationCreate = (props) => {
+  const { isLoading, response: data } = useFetch('organizations/create');
+  const notify = useNotify();
+  const redirect = useRedirect();
 
-  useEffect(() => {
-    if (parish !== -1) {
-      const comm = data.parishes.filter((parish) =>
-        parish.id === parish
-      ); 
-      () => setCommunities(comm); 
-    }
-  }, [parish]);
-  
-  useEffect(() => {
-    if (!loading) {
-      setCommunities(data.parishes[0].communities);
-    }
-  }, [loading]);
+  const onSuccess = ({ data }) => {
+    notify(`¡Ha creado la organización ${data.name}!`);
+    redirect('/organizations');
+  }
 
   return (
-    <Create {...props} title="Nueva institución">
-      { (loading)
+    <Create {...props} title="Nueva institución" onSuccess={onSuccess}>
+      { (isLoading)
         ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
-        : ( 
+        : (
         <SimpleForm>
           <SelectInput
             source="types"
@@ -71,17 +58,14 @@ const OrganizationCreate = (props) => {
             source="parishes"
             choices={data.parishes} 
             label='Parroquia (*)'
-            onChange={e => setParish(e.target.value)}
             initialValue={1}
           />
-          { (!isEmpty(communities)) && (
-            <SelectInput
-              source="communities"
-              choices={communities} 
-              label='Comunidad (*)'
-              initialValue={1}
-            />
-          )}
+          <SelectInput
+            source="communities"
+            choices={data.communities} 
+            label='Comunidad (*)'
+            initialValue={1}
+          />
 
           <TextInput
             source="address"

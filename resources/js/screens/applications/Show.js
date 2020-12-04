@@ -21,11 +21,8 @@ const ApplicationShow = (props) => {
   return (
     <Show {...props} title={<ApplicationTitle />}>
       <SimpleShowLayout>
-        <TextField
-          source="description"
-          label="Asunto"
-          multiline
-        />
+        <TextField source="title" label="Asunto" />
+        <TextField source="description" label="Mensaje" />
         <TextField source="category.name" label='Categoría' />
         <TextField source="state.name" label='Estado' />
         <NumberField source="quantity" label='Elementos requeridos' />

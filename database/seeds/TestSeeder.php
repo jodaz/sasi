@@ -50,7 +50,7 @@ class TestSeeder extends Seeder
             'dni' => '27572434',
         ]);
         $admin->user()->create([
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@admin.com',
             'password' => bcrypt('qwerty123'),
             'role_id' => 1,
             'active' => true,

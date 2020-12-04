@@ -22,13 +22,13 @@ export default function(props) {
     >
       {isSmall ? (
         <SimpleList
-          primaryText={record => `${record.description}`}
+          primaryText={record => `${record.title}`}
           secondaryText={record => `${record.state.name}`}
           linkType={"show"}
         />
       ) : (
         <Datagrid>
-          <TextField label='Descripción' source="description" />
+          <TextField label='Asunto' source="title" />
           <TextField label='Estado' source="state.name" />
           <ChipField label='Categoría' source="category.name" />
           <Actions {...props}
