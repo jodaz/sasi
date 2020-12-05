@@ -22,15 +22,22 @@ class ApplicationController extends Controller
     {
         $results = $request->perPage;
 
-        $query = Application::latest()
-            ->with(['category', 'state']);
+        $query = Application::withTrashed()
+            ->latest()
+            ->with('category');
 
         if ($request->has('filter')) {
             $filters = $request->filter;
             // Get fields
-            $description = $filters['description'];
-            
-            $query->whereLike('description', $description);
+            foreach($filters as $filter) {
+                if ($filter == 'Pendiente' || $filter == 'Aprobado' || $filter == 'Denegado') {
+                    $query->whereHas('state', function ($query) use ($filter) {
+                         return $query->whereName($filter);
+                     });
+                } else {
+                    $query->whereLike($filter, $filters[$filter]);
+                }
+            }
         }
 
         return $query->paginate($results);
@@ -132,7 +139,7 @@ class ApplicationController extends Controller
                 'message' => 'Las solicitudes aprobadas no pueden ser borradas'
             ]);
         }
-        $application->delete();
+        $application->update([ 'state_id' => 3 ]);
 
         return Response([
             'success' => true,
