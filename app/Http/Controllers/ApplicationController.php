@@ -29,14 +29,13 @@ class ApplicationController extends Controller
         if ($request->has('filter')) {
             $filters = $request->filter;
             // Get fields
-            foreach($filters as $filter) {
-                if ($filter == 'Pendiente' || $filter == 'Aprobado' || $filter == 'Denegado') {
-                    $query->whereHas('state', function ($query) use ($filter) {
-                         return $query->whereName($filter);
-                     });
-                } else {
-                    $query->whereLike($filter, $filters[$filter]);
-                }
+            if (array_key_exists('title', $filters)) {
+                $query->whereLike('title', $filters['title']);
+            }
+            if (array_key_exists('status', $filters)) {
+                $query->whereHas('state', function ($query) use ($filters) {
+                    return $query->whereName($filters['status']);
+                });
             }
         }
 
