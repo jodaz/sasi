@@ -9,11 +9,14 @@ import {
   useListContext,
   ListContextProvider
 } from 'react-admin';
+import DownloadButton from './DownloadButton';
 import ApproveButton from './ApproveButton';
 import { Filter, ModuleActions } from '../../components';
 import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
 import { useFetch } from "../../fetch";
+import isEmpty from 'is-empty';
+import { useSelector } from 'react-redux';
 
 const useGetTotals = (filterValues) => {
   const { total: pendings } = useGetList(
@@ -45,6 +48,7 @@ const useGetTotals = (filterValues) => {
 };
 
 const TabbedDataGrid = props => {
+  const user = useSelector(store => store.user.user);
   const listContext = useListContext();
   const { ids, filterValues, setFilters, displayedFilters } = listContext;
   const classes = useDatagridStyles();
@@ -107,7 +111,7 @@ const TabbedDataGrid = props => {
               <TextField label='Asunto' source="title" />
               <ChipField label='Categoría' source="category.name" />
               <Actions {...props} shouldShow shouldDelete={{ label: 'Rechazar' }}>
-                <ApproveButton />
+                { (!isEmpty(user) && (user.role_id === 1)) && <ApproveButton /> }
               </Actions>
             </Datagrid>
           </ListContextProvider>
@@ -120,6 +124,7 @@ const TabbedDataGrid = props => {
               <TextField label='Asunto' source="title" />
               <ChipField label='Categoría' source="category.name" />
               <Actions {...props} shouldShow>
+                <DownloadButton />
               </Actions>
             </Datagrid>
           </ListContextProvider>
