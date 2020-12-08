@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cloneElement, useMemo } from 'react';
+import { cloneElement } from 'react';
 import {
   useListContext,
   sanitizeListRestProps,
@@ -33,7 +33,7 @@ const ModuleActions = props => {
         filterValues,
         context: 'button',
       })}
-      {shouldCreate && <CreateButton label="Agregar" basePath={basePath}/>}
+      {shouldCreate && <CreateButton label="Agregar" basePath={basePath} />}
     </TopToolbar>
   );
 };

@@ -9,6 +9,7 @@ import {
   useListContext,
   ListContextProvider
 } from 'react-admin';
+import ApproveButton from './ApproveButton';
 import { Filter, ModuleActions } from '../../components';
 import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
@@ -105,7 +106,8 @@ const TabbedDataGrid = props => {
               <TextField label='Número' source="num" />
               <TextField label='Asunto' source="title" />
               <ChipField label='Categoría' source="category.name" />
-              <Actions {...props} shouldShow shouldDelete={{ label: 'Borrar' }}>
+              <Actions {...props} shouldShow shouldDelete={{ label: 'Rechazar' }}>
+                <ApproveButton />
               </Actions>
             </Datagrid>
           </ListContextProvider>

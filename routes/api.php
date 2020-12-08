@@ -22,9 +22,6 @@ Route::post('recover-account', 'PasswordResetController@recover');
 Route::post('reset-password', 'PasswordResetController@resetPassword');
 Route::get('activate-account/{token}', 'UserController@activate');
 
-Route::get('applications/{application}/download', 'ApplicationController@download')
-    ->name('applications.download-cert');
-
 Route::get('parishes/{parish}/communities', 'ParishController@getCommunities')
     ->name('parish.communities');
 Route::resource('users', 'UserController');
@@ -48,6 +45,8 @@ Route::middleware('auth:api')->group(function () {
 
     // Applications
     Route::resource('applications', 'ApplicationController');
+    Route::get('applications/{application}/download', 'ApplicationController@download')
+        ->name('applications.download-cert');
     // Analytics
     Route::prefix('analytics')->group(function () {
         Route::get('home', 'AnalyticsController@home');

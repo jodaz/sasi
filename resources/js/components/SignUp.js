@@ -304,7 +304,7 @@ const SignUp = () => {
           loading={loading}
           fullWidth
         >
-          Registrar
+          Registrarme
         </LoadingButton>
         <p>¿Ya tiene una cuenta? <Link to='/login'>Iniciar sesión</Link></p>
       </form>
