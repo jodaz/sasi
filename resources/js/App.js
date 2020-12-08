@@ -9,7 +9,7 @@ import isEmpty from 'is-empty';
 import { Loading, Login, Layout } from './components';
 import { clearNotifications, setUser } from './actions';
 import { useFetch } from './fetch';
-import { dataProvider, i18nProvider,  history } from './initializers';
+import { dataProvider, i18nProvider, history } from './initializers';
 // Screens
 import Screens from './screens';
 

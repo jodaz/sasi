@@ -56,7 +56,7 @@ const ApplicationCreate = (props) => {
         <TextInput source="title" label="Título" multiline fullWidth />
         <TextInput source="description" label="Mensaje" multiline fullWidth />
         { (!isLoading) &&
-          <SelectInput label="Categorías" source="category" choices={response} fullWidth/>
+          <SelectInput label="Categoría" source="category" choices={response} fullWidth/>
         }
         <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
       </SimpleForm>

@@ -6,9 +6,9 @@ use App\State;
 class StatesSeeder extends Seeder
 {
     public $states = Array(
-        'Pendiente',
-        'Aprobado',
-        'Denegado'
+        ['name' => 'Pendiente', 'list_name' => 'Pendientes'],
+        ['name' => 'Aprobada', 'list_name' => 'Aprobadas'],
+        ['name' => 'Denegada', 'list_name' => 'Denegadas'],
     );
 
     /**
@@ -18,10 +18,8 @@ class StatesSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->states as $key => $state) {
-            State::create([
-                'name' => $state
-            ]);
+        foreach ($this->states as $item) {
+            State::create($item);
         }
     }
 }

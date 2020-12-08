@@ -21,12 +21,17 @@ class OrganizationController extends Controller
     {
         $query = Organization::query()->withCount('applications');
         $results = $request->perPage;
+        $user = $request->user();
 
         if ($request->has('filter')) {
             $filters = $request->filter;
             // Get fields
             $name = $filters['name'];
             $query->whereLike('name', $name);
+        }
+
+        if ($user->role_id == 3) {
+            $query->whereProfileId($user->profile_id);
         }
 
         return $query->paginate($results);

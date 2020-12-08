@@ -15,6 +15,10 @@ const { MIX_PROXY_URL } = process.env;
 mix.react('resources/js/bootstrap.js', 'public/js/app.js')
   .sass('resources/sass/app.scss', 'public/css')
   .browserSync({
+    files: [
+      'public/js/**/*',
+      'public/css/**/*',
+    ],
     proxy: `${MIX_PROXY_URL}`
   });
 

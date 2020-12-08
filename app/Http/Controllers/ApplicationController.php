@@ -35,7 +35,7 @@ class ApplicationController extends Controller
             }
             if (array_key_exists('status', $filters)) {
                 $query->whereHas('state', function ($query) use ($filters) {
-                    return $query->whereName($filters['status']);
+                    return $query->whereListName($filters['status']);
                 });
             }
         }
@@ -147,7 +147,7 @@ class ApplicationController extends Controller
 
         return Response([
             'success' => true,
-            'message' => '¡Solicitud borrada!'
+            'message' => '¡Ha rechazado la solicitud #'.$application->num.'!'
         ]);
     }
 }

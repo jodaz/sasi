@@ -14,7 +14,7 @@ export default function(props) {
   return (
     <List
       {...props}
-      title="Organizaciones"
+      title="Instituciones"
       actions={<ModuleActions shouldCreate/>}
       filters={<Filter defaultfilter='name' />}
       bulkActionButtons={false}

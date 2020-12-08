@@ -33,7 +33,7 @@ export default function(props) {
           linkType={"show"}
         />
       ) : (
-        <Datagrid rowClick="show">
+        <Datagrid>
           <TextField source='name' label='Nombre' />
           <TextField source='applications_count' label='Solicitudes' />
           <Actions {...props} shouldEdit shouldDelete />

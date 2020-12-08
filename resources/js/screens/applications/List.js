@@ -19,27 +19,27 @@ const useGetTotals = (filterValues) => {
     'applications',
     { perPage: 1, page: 1 },
     { field: 'id', order: 'ASC' },
-    {...filterValues, status: 'Pendiente' }
+    {...filterValues, status: 'Pendientes' }
   );
 
   const { total: approved } = useGetList(
     'applications',
     { perPage: 1, page: 1 },
     { field: 'id', order: 'ASC' },
-    {...filterValues, status: 'Aprobado' }
+    {...filterValues, status: 'Aprobadas' }
   );
 
   const { total: refused } = useGetList(
     'applications',
     { perPage: 1, page: 1 },
     { field: 'id', order: 'ASC' },
-    {...filterValues, status: 'Denegado' }
+    {...filterValues, status: 'Denegadas' }
   );
 
   return {
-    'Pendiente': pendings,
-    'Aprobado': approved,
-    'Denegado': refused
+    'Pendientes': pendings,
+    'Aprobadas': approved,
+    'Denegadas': refused
   };
 };
 
@@ -61,13 +61,13 @@ const TabbedDataGrid = props => {
   React.useEffect(() => {
     if (ids) {
       switch (filterValues.status) {
-        case 'Pendiente':
+        case 'Pendientes':
           setPending(ids);
           break;
-        case 'Aprobado':
+        case 'Aprobadas':
           setApproved(ids);
           break;
-        case 'Denegado':
+        case 'Denegadas':
           setRefused(ids);
           break;
       }
@@ -88,18 +88,18 @@ const TabbedDataGrid = props => {
             <Tab
               key={choice.id}
               label={
-                totals[choice.name]
-                  ? `${choice.name} (${totals[choice.name]})`
-                  : choice.name
+                totals[choice.list_name]
+                  ? `${choice.list_name} (${totals[choice.list_name]})`
+                  : choice.list_name
               }
-              value={choice.name}
+              value={choice.list_name}
             />
           ))
         )}
       </Tabs>
       <Divider />
       <div>
-        {filterValues.status === 'Pendiente' && (
+        {filterValues.status === 'Pendientes' && (
           <ListContextProvider value={{ ...listContext, ids: pending }}>
             <Datagrid {...props} optimized>
               <TextField label='Número' source="num" />
@@ -111,7 +111,7 @@ const TabbedDataGrid = props => {
           </ListContextProvider>
         )}
 
-        {filterValues.status === 'Aprobado' && (
+        {filterValues.status === 'Aprobadas' && (
           <ListContextProvider value={{ ...listContext, ids: approved }}>
             <Datagrid {...props} optimized>
               <TextField label='Número' source="num" />
@@ -123,7 +123,7 @@ const TabbedDataGrid = props => {
           </ListContextProvider>
         )}
 
-        {filterValues.status === 'Denegado' && (
+        {filterValues.status === 'Denegadas' && (
           <ListContextProvider value={{ ...listContext, ids: refused }}>
             <Datagrid {...props} optimized>
               <TextField label='Número' source="num" />
@@ -143,7 +143,7 @@ export default function(props) {
     <List {...props}
       title="Solicitudes"
       actions={<ModuleActions />}
-      filterDefaultValues={{ status: 'Pendiente' }}
+      filterDefaultValues={{ status: 'Pendientes' }}
       filters={<Filter defaultfilter='title'/>}
       bulkActionButtons={false}
     >
