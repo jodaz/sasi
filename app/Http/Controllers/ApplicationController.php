@@ -21,6 +21,7 @@ class ApplicationController extends Controller
     public function index(Request $request)
     {
         $results = $request->perPage;
+        $user = $request->user();
 
         $query = Application::withTrashed()
             ->latest()
@@ -37,6 +38,10 @@ class ApplicationController extends Controller
                     return $query->whereName($filters['status']);
                 });
             }
+        }
+
+        if ($user->role_id == 3) {
+            $query->whereProfileId($user->profile_id);
         }
 
         return $query->paginate($results);
