@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use App\Category;
+use App\State;
 use App\Http\Requests\CreateApplicationRequest;
 use Auth;
 use PDF;
@@ -37,6 +38,17 @@ class ApplicationController extends Controller
                     return $query->whereName($filters['status']);
                 });
             }
+        }
+
+        if ($request->get('pdf')) {
+            $applications = $query->get();
+            $total = $query->count();
+            $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
+
+            $data = compact(['applications', 'emissionDate', 'total']);
+
+            $pdf = PDF::loadView('pdf.report', $data);
+            return $pdf->download('reporte-solicitudes.pdf');
         }
 
         return $query->paginate($results);
@@ -118,7 +130,7 @@ class ApplicationController extends Controller
 
     public function download(Application $application)
     {
-        $user = $application->user;
+        $user = $application->profile;
         $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
         
         return $pdf->download('certificado.pdf');
