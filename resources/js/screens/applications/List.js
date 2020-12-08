@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
   List, 
-  SimpleList,
   useGetList,
   ChipField,
   Datagrid, 

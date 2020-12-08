@@ -78,7 +78,7 @@ const MenuActions = props => {
       >
         { (shouldShow) &&
           <ButtonMenu
-            label={shouldShow.label ? shouldShow.label : 'Ver'}
+            label={shouldShow.label ? shouldShow.label : '  Ver'}
             icon={<Visibility />}
             onClick={
               (e) => {

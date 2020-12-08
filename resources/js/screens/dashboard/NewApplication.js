@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
   makeStyles,
   Card,
@@ -29,10 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewApplication() {
+export default function NewApplication({ profile }) {
   const classes = useStyles();
   const redirect = useRedirect();
-  const { profile } = useSelector(store => store.user.user);
 
   return (<>{
     (!isEmpty(profile)) &&

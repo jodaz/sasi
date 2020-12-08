@@ -6,9 +6,13 @@ import {
   Grid,
   makeStyles
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import NewApplication from './NewApplication';
+import isEmpty from 'is-empty';
 
 export default function Dashboard() {
+  const { user } = useSelector(store => store.user);
+
   return (
     <Grid container spacing={3}>
       <Title title='Inicio' />
@@ -18,8 +22,10 @@ export default function Dashboard() {
       </Grid>
 
       <Totals />
-
-      <NewApplication />
+      
+      { (!isEmpty(user) && (user.role_id === 3)) &&
+        <NewApplication profile={user.profile}/>
+      }
     </Grid>
   );
 };
