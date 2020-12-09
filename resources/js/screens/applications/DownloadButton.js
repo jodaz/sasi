@@ -1,4 +1,5 @@
 import * as React from "react";
+import fileDownload from 'js-file-download';
 import { useNotify } from 'react-admin';
 import { ButtonMenu } from '../../components';
 import GetAppIcon from '@material-ui/icons/GetApp';
@@ -10,18 +11,23 @@ import { download } from '../../utils';
 export default function (props) {
   const { onClick, record, ...rest } = props;
   const notify = useNotify();
+  const url = `${apiURL}/applications/${record.id}/download`;
 
   const handleDownload = async () => {
-    await download(`${apiURL}/applications/${record.id}/download`, 'certificado.pdf');
-    // const { response, error } = await axios.put(`${apiURL}/applications/${record.id}`)
-    //   .then(res => ({ response: res.data }))
-    //   .catch(error => ({ error: error.message.data }));
+    const {
+      error,
+      response
+    } = await axios.get(url, { responseType: 'blob'})
+          .then(res => ({ response: res.data }))
+          .catch(error => ({ error: error.message.data }));
 
-    // if (!isEmpty(response)) {
-    //   setShowDialog(false);
-    //   refresh();
-    //   notify(`¡Ha aprobado la solicitud #${record.num}`);
-    // }
+    if (!isEmpty(response)) {
+      fileDownload(response, 'certificado.pdf');
+      notify('¡El certificado ha sido descargado!');
+    }
+    if (!isEmpty(error)) {
+      notify('Ha ocurrido un error en su solicitud.')
+    }
   };
 
   return (

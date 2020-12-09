@@ -117,7 +117,7 @@ class ApplicationController extends Controller
 
         return Response([
             'success' => true,
-            'message' => '¡Solicitud aprobada!'
+            'message' => '¡La solicitud '.'#'.$application->num.' fue aprobada!'
         ]);
     }
 

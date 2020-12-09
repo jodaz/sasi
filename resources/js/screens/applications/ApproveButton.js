@@ -39,7 +39,7 @@ export default function (props) {
     if (!isEmpty(response)) {
       setShowDialog(false);
       refresh();
-      notify(`¡Ha aprobado la solicitud #${record.num}`);
+      notify(response.message);
     }
   };
 
