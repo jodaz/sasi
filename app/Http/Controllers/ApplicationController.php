@@ -123,10 +123,10 @@ class ApplicationController extends Controller
 
     public function download(Application $application)
     {
-        $user = $application->user;
+        $user = $application->profile;
         $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
         
-        return $pdf->download('certificado.pdf');
+        return $pdf->stream('certificado.pdf');
     }
 
     /**

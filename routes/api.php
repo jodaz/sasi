@@ -26,6 +26,9 @@ Route::get('parishes/{parish}/communities', 'ParishController@getCommunities')
     ->name('parish.communities');
 Route::resource('users', 'UserController');
 
+Route::get('applications/{application}/download', 'ApplicationController@download')
+    ->name('applications.download-cert');
+
 // Authenticated only
 Route::middleware('auth:api')->group(function () {
     Route::get('logout', 'AuthController@logout');
@@ -45,8 +48,6 @@ Route::middleware('auth:api')->group(function () {
 
     // Applications
     Route::resource('applications', 'ApplicationController');
-    Route::get('applications/{application}/download', 'ApplicationController@download')
-        ->name('applications.download-cert');
     // Analytics
     Route::prefix('analytics')->group(function () {
         Route::get('home', 'AnalyticsController@home');
