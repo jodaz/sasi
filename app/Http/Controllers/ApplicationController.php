@@ -126,7 +126,7 @@ class ApplicationController extends Controller
         $user = $application->profile;
         $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
         
-        return $pdf->stream('certificado.pdf');
+        return $pdf->download('certificado.pdf');
     }
 
     /**
