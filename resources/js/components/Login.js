@@ -70,7 +70,7 @@ const Login = () => {
   }, [success]);
 
   return (
-    <Auth title='Iniciar sesión'>
+    <Auth title='Inicio de sesión'>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
           variant="outlined"

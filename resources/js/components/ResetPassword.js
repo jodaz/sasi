@@ -90,12 +90,12 @@ const Login = () => {
 
         <Grid container>
           <Grid item xs>
-            <Link to="/login" variant="body2">
+            <Link to="/login" variant="body2" style={{ textDecoration: 'none' }}>
               {"Iniciar sesión"}
             </Link>
           </Grid>
           <Grid item>
-            <Link to="/register" variant="body2">
+            <Link to="/register" variant="body2" style={{ textDecoration: 'none' }}>
               {"¿No tiene una cuenta?"}
             </Link>
           </Grid>
