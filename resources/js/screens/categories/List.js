@@ -29,7 +29,7 @@ export default function(props) {
         <Datagrid>
           <TextField source='name' label='Nombre' />
           <TextField source='applications_count' label='Solicitudes' />
-          <Actions {...props} shouldEdit shouldDelete />
+          <Actions {...props} shouldEdit shouldShow shouldDelete />
         </Datagrid>
       )}
     </List>

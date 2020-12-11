@@ -306,7 +306,7 @@ const SignUp = () => {
         >
           Registrarme
         </LoadingButton>
-        <p>¿Ya tiene una cuenta? <Link to='/login'>Iniciar sesión</Link></p>
+        <p>¿Ya tiene una cuenta? <Link to='/login' style={{ textDecoration: 'none' }}>Iniciar sesión</Link></p>
       </form>
     </Auth>
   );

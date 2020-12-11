@@ -8,7 +8,7 @@ class StatesSeeder extends Seeder
     public $states = Array(
         ['name' => 'Pendiente', 'list_name' => 'Pendientes'],
         ['name' => 'Aprobada', 'list_name' => 'Aprobadas'],
-        ['name' => 'Denegada', 'list_name' => 'Denegadas'],
+        ['name' => 'Rechazada', 'list_name' => 'Rechazadas'],
     );
 
     /**
