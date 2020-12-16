@@ -4,7 +4,10 @@ import polyglotI18nProvider from 'ra-i18n-polyglot';
 import { history, dataProvider as apiClient } from './utils';
 import { apiURL } from './config';
 
-const i18nProvider = polyglotI18nProvider(() => spanishMessages);
+const i18nProvider = polyglotI18nProvider(() => ({
+  'organizations': 'instituciones',
+  ...spanishMessages
+}));
 
 export const dataProvider = apiClient(apiURL);
 
