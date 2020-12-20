@@ -11,3 +11,4 @@ export { default as ModuleActions } from './ModuleActions';
 export { default as UpdatePassword } from './UpdatePassword';
 export { default as Loading } from './Loading';
 export { default as Welcome } from './Welcome';
+export { default as Dialog } from './Dialog';
