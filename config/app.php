@@ -167,7 +167,6 @@ return [
          */
 
         Barryvdh\DomPDF\ServiceProvider::class,
-        Watson\Active\ActiveServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +229,5 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Active' => Watson\Active\Facades\Active::class
     ],
 ];
