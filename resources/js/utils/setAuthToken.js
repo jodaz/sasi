@@ -1,8 +1,8 @@
 const setAuthToken = token => {
   if (token) {
-    localStorage.setItem('sasiToken', token);
+    localStorage.setItem('token', token);
   } else {
-    localStorage.removeItem('sasiToken');
+    localStorage.removeItem('token');
   }
 }
 
