@@ -24,6 +24,7 @@
         "jwt-decode": "^3.1.2",
         "laravel-mix": "^5.0.9",
         "lodash": "^4.17.20",
+        "prop-types": "^15.7.2",
         "ra-i18n-polyglot": "^3.10.2",
         "ra-input-rich-text": "^3.10.1",
         "ra-laravel-client": "^1.0.2",
