@@ -13,7 +13,7 @@ class AnalyticsController extends Controller
     {
         $applications = Application::whereStateId(2)->count();
         $users = User::with('profile')->count();
-        $categoriesQuery = Category::withCount('applications')->get()->map(function ($value, $key) {
+        $categories = Category::withCount('applications')->get()->map(function ($value, $key) {
             return [
                 'name' => $value['name'],
                 'value' => $value['applications_count']

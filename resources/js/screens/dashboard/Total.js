@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import {
   makeStyles,
   CircularProgress,
@@ -8,7 +8,9 @@ import {
   Typography
 } from '@material-ui/core';
 import { apiURL } from '../../config';
+import { Chart } from 'mui-extra';
 import axios from 'axios';
+import isEmpty from 'is-empty';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +26,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const LoadingCards = ({ classes, loading, data }) => ( 
+const LoadingCards = ({ classes, loading, data }) => (
   <Grid item xs={6}>
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          { (loading) 
+          { (loading)
             ? <CircularProgress />
             : <>
               <Typography component="h5" variant="h5">
@@ -46,12 +48,15 @@ const LoadingCards = ({ classes, loading, data }) => (
   </Grid>
 );
 
+const colors = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
+
 function Analytics() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [categories, setCategories] = React.useState({});
+  const [data, setData] = React.useState({});
   const classes = useStyles();
 
-  useEffect(() => {
+  React.useEffect(() => {
     axios.get(`${apiURL}/analytics/home`)
       .then(res => {
         setData(res.data);
@@ -59,9 +64,37 @@ function Analytics() {
       });
   }, []);
 
+  React.useEffect(() => {
+    if (!isEmpty(data)) {
+      let names = data.categories.map(item => item.name);
+      let values = data.categories.map(item => item.value);
+
+      setCategories({
+        'labels': names,
+        'values': values
+      });
+    }
+  }, [data]);
+
   return (<>
     <LoadingCards classes={classes} loading={isLoading} data={data.applications} />
     <LoadingCards classes={classes} loading={isLoading} data={data.users} />
+    <Grid item xs={6}>
+      { (!isEmpty(categories)) &&
+        <Chart
+          chartLabel='Solicitudes por categoría'
+          type='pie'
+          height="400"
+          width="400"
+          borderColor={colors}
+          backgroundColor={colors}
+          labels={categories.labels}
+          data={categories.values}
+          borderColor={colors}
+          borderWith={1}
+        />
+      }
+    </Grid>
   </>);
 };
 
