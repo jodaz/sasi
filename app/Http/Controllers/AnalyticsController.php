@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Application;
 use App\Category;
 use App\User;
+use App\State;
 use Illuminate\Http\Request;
 
 class AnalyticsController extends Controller
@@ -19,6 +20,12 @@ class AnalyticsController extends Controller
                 'value' => $value['applications_count']
             ];
         });
+        $appsByStatus = State::withCount('applications')->get()->map(function ($value, $key) {
+            return [
+                'name' => $value['list_name'],
+                'value' => $value['applications_count']
+            ];
+        });
 
         $data = [
             'applications' => [
@@ -30,6 +37,7 @@ class AnalyticsController extends Controller
                 'amount' => $users
             ],
             'categories' => $categories,
+            'status' => $appsByStatus
         ];
 
         return response()->json($data);
