@@ -28,14 +28,8 @@ class AnalyticsController extends Controller
         });
 
         $data = [
-            'applications' => [
-                'name' => 'Solicitudes aprobadas',
-                'amount' => $applications
-            ],
-            'users' => [
-                'name' => 'Usuarios registrados',
-                'amount' => $users
-            ],
+            'applications' => $applications,
+            'users' => $users,
             'categories' => $categories,
             'status' => $appsByStatus
         ];
