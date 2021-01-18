@@ -53,6 +53,7 @@ const colors = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
 function Analytics() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [categories, setCategories] = React.useState({});
+  const [status, setStatus] = React.useState({});
   const [data, setData] = React.useState({});
   const classes = useStyles();
 
@@ -69,9 +70,16 @@ function Analytics() {
       let names = data.categories.map(item => item.name);
       let values = data.categories.map(item => item.value);
 
+      let statusNames = data.status.map(item => item.name);
+      let statusValues = data.status.map(item => item.value);
+
       setCategories({
         'labels': names,
         'values': values
+      });
+      setStatus({
+        'labels': statusNames,
+        'values': statusValues
       });
     }
   }, [data]);
@@ -82,15 +90,25 @@ function Analytics() {
     <Grid item sm={6} xs={12}>
       <Chart
         name='Solicitudes por categoría'
+        name='Solicitudes según estado'
+        type='doughnut'
+        height="400"
+        width="350"
+        loading={isLoading}
+        labels={status.labels}
+        data={status.values}
+        borderWith={1}
+      />
+    </Grid>
+    <Grid item sm={6} xs={12}>
+      <Chart
+        name='Categorías'
         type='pie'
         height="400"
         width="350"
         loading={isLoading}
-        borderColor={colors}
-        backgroundColor={colors}
         labels={categories.labels}
         data={categories.values}
-        borderColor={colors}
         borderWith={1}
       />
     </Grid>
