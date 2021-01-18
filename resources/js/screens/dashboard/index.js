@@ -22,7 +22,7 @@ export default function Dashboard() {
       </Grid>
 
       <Totals />
-      
+
       { (!isEmpty(user) && (user.role_id === 3)) &&
         <NewApplication profile={user.profile}/>
       }
