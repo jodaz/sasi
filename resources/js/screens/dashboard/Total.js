@@ -79,21 +79,20 @@ function Analytics() {
   return (<>
     <LoadingCards classes={classes} loading={isLoading} data={data.applications} />
     <LoadingCards classes={classes} loading={isLoading} data={data.users} />
-    <Grid item xs={6}>
-      { (!isEmpty(categories)) &&
-        <Chart
-          chartLabel='Solicitudes por categoría'
-          type='pie'
-          height="400"
-          width="400"
-          borderColor={colors}
-          backgroundColor={colors}
-          labels={categories.labels}
-          data={categories.values}
-          borderColor={colors}
-          borderWith={1}
-        />
-      }
+    <Grid item sm={6} xs={12}>
+      <Chart
+        name='Solicitudes por categoría'
+        type='pie'
+        height="400"
+        width="350"
+        loading={isLoading}
+        borderColor={colors}
+        backgroundColor={colors}
+        labels={categories.labels}
+        data={categories.values}
+        borderColor={colors}
+        borderWith={1}
+      />
     </Grid>
   </>);
 };

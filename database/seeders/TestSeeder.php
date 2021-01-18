@@ -17,14 +17,14 @@ class TestSeeder extends Seeder
     public function run()
     {
         // Create categories
-        $categories = factory(Category::class, 10)->create();
-        
+        $categories = factory(Category::class, 5)->create();
+
         // Create users
         factory(Profile::class, 100)
             ->create()
             ->each(function ($profile) use ($categories) {
                 $category = $categories->random(1)->first();
-                
+
                 $user = $profile->user()->save(factory(User::class)->make());
 
                 // Create applications
@@ -37,7 +37,7 @@ class TestSeeder extends Seeder
                             ->save();
                     });
             });
-        
+
         // Admin user
         $admin = Profile::create([
             'first_name' => 'Jesús',
@@ -56,7 +56,7 @@ class TestSeeder extends Seeder
             'active' => true,
             'activation_token' => Str::random(60),
         ]);
-        
+
         // Analyst user
         $analyst = Profile::create([
             'first_name' => 'Andreina',

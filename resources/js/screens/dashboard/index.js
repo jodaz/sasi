@@ -2,7 +2,6 @@ import React from 'react';
 import { Title } from 'react-admin';
 import Totals from './Total';
 import { Welcome } from '../../components';
-import Chart from './Chart';
 import {
   Grid,
   makeStyles
@@ -26,10 +25,6 @@ export default function Dashboard() {
 
       { (!isEmpty(user) && (user.role_id === 3)) &&
         <NewApplication profile={user.profile}/>
-      }
-
-      { (!isEmpty(user) && (user.role_id !== 3)) &&
-        <Chart title={'Solicitudes por comunidad'}/>
       }
     </Grid>
   );
