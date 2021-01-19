@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useRefresh, useNotify } from 'react-admin';
-import { ButtonMenu, Dialog } from '../../components';
+import { ButtonMenu } from '../../components';
+import { Dialog } from 'mui-extra';
 import GradeIcon from '@material-ui/icons/Grade';
 import axios from 'axios';
 import isEmpty from 'is-empty';
