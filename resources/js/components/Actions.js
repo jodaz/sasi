@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Dialog } from 'mui-extra';
 import {
   useNotify,
   useDelete,
@@ -19,6 +20,7 @@ const ITEM_HEIGHT = 48;
 const ref =  React.createRef();
 
 const MenuActions = props => {
+  const [showDialog, setShowDialog] = React.useState(false);
   const refresh = useRefresh();
   const redirect = useRedirect();
   const notify = useNotify();
@@ -33,6 +35,8 @@ const MenuActions = props => {
   } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const handleClick = () => setShowDialog(!showDialog);
 
   const [deleteOne, {
     data,
@@ -51,7 +55,7 @@ const MenuActions = props => {
 
   if (error) return notify('Ha ocurrido un error');
 
-  const handleClick = (e) => setAnchorEl(e.currentTarget);
+  const handleModalClick = (e) => setAnchorEl(e.currentTarget);
 
   const handleClose = () => setAnchorEl(null);
 
@@ -109,16 +113,31 @@ const MenuActions = props => {
           />
         }
         { (shouldDelete) &&
-          <ButtonMenu
-            label={shouldDelete.label ? shouldDelete.label : 'Eliminar'}
-            icon={<DeleteIcon />}
-            onClick={
-              (e) => {
-                deleteOne();
+          <React.Fragment>
+            <ButtonMenu
+              label={shouldDelete.label ? shouldDelete.label : 'Eliminar'}
+              icon={<DeleteIcon />}
+              onClick={
+                (e) => {
+                  deleteOne();
+                  handleClose();
+              }}
+              ref={ref}
+            />
+            <Dialog
+              fullWidth
+              open={showDialog}
+              ariaLabel={'Eliminar la categoría'}
+              title={`¿Realmente desea eliminar la categoría #${record.name}?`}
+              submitLabel={'Eliminar'}
+              handleClick={handleModalClick}
+              action={() => {
                 handleClose();
-            }}
-            ref={ref}
-          />
+                deleteOne();
+                handleModalClick();
+              }}
+            />
+          </React.Fragment >
         }
       </Menu>
     </div>
