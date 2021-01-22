@@ -21,7 +21,9 @@ export default function Dashboard() {
         <Welcome title={'Sistema de Atención Social Integral'} />
       </Grid>
 
-      <Totals />
+      {!isEmpty(user) && (user.role_id !== 3) &&
+        <Totals />
+      }
 
       { (!isEmpty(user) && (user.role_id === 3)) &&
         <NewApplication profile={user.profile}/>

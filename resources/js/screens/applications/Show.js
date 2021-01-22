@@ -1,31 +1,44 @@
 import * as React from "react";
+import { useShowController } from 'react-admin';
 import {
-  Show,
-  TextField,
-  SimpleShowLayout,
-  DateField,
-  NumberField
-} from 'react-admin';
+  Card,
+  CircularProgress,
+  Grid,
+  Typography,
+  CardContent
+} from '@material-ui/core';
+import { CardProgress } from 'mui-extra';
+import isEmpty from 'is-empty';
 
-const ApplicationTitle = ({ record }) => (
-  <span>Solicitud #{record ? `${record.num}` : ''}</span>
+const ApplicationTitle = ({ record  }) => (
+  <span>{record ? `${record.name}` : ''}</span>
 );
 
-const ApplicationShow = (props) => { 
+const ApplicationShow = (props) => {
+  const {
+    basePath,
+    loaded,
+    loading,
+    record,
+  } = useShowController(props);
+
   return (
-    <Show {...props} title={<ApplicationTitle />}>
-      <SimpleShowLayout>
-        <TextField source="title" label="Asunto" />
-        <TextField source="description" label="Mensaje" />
-        <TextField source="category.name" label='Categoría' />
-        <TextField source="state.name" label='Estado' />
-        <NumberField source="quantity" label='Elementos requeridos' />
-        <TextField source="profile.full_name" label='Usuario' />
-        <DateField source="created_at" label="Enviada" />
-      </SimpleShowLayout>
-    </Show>
+    <Grid>
+      <Grid item xs={12}>
+        {(loading) ?(
+          <CardProgress circular />
+          ) : (
+          <Card>
+            <CardContent>
+              <Typography>{record.title}</Typography>
+            </CardContent>
+          </Card>
+        )}
+      </Grid>
+    </Grid>
   );
 };
 
-export default ApplicationShow;
-
+export default function(props) {
+  return <ApplicationShow {...props} />;
+};

@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
-  List, 
-  Datagrid, 
+  List,
+  Datagrid,
   TextField,
   SimpleList,
   Pagination
@@ -33,7 +33,7 @@ export default function(props) {
           <TextField label='Correo' source="email" />
           <TextField label='Nombre' source="profile.full_name" />
           <TextField label='Rol' source="role.name" />
-          <Actions />
+          <Actions shouldShow/>
         </Datagrid>
       )}
     </List>
