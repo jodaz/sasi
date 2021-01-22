@@ -9,7 +9,7 @@ import {
   SignUp
 } from '../components';
 import Dashboard from '../screens/dashboard';
-import { Help } from '../screens/help';
+import Help from '../screens/help';
 
 export default [
   <Route exact path="/home" component={Dashboard} />,
