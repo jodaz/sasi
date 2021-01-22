@@ -1,18 +1,8 @@
 import * as React from "react";
-import {
-  useRefresh,
-  useNotify,
-  Button,
-} from 'react-admin';
+import { useRefresh, useNotify } from 'react-admin';
 import { ButtonMenu } from '../../components';
+import { Dialog } from 'mui-extra';
 import GradeIcon from '@material-ui/icons/Grade';
-import {
-  Dialog,
-  DialogTitle,
-  DialogActions
-} from '@material-ui/core';
-import IconCancel from '@material-ui/icons/Cancel';
-import IconCheck from '@material-ui/icons/CheckCircleOutline';
 import axios from 'axios';
 import isEmpty from 'is-empty';
 import { apiURL } from '../../config';
@@ -23,13 +13,7 @@ export default function (props) {
   const notify = useNotify();
   const refresh = useRefresh();
 
-  const handleClick = () => {
-      setShowDialog(true);
-  };
-
-  const handleCloseClick = () => {
-      setShowDialog(false);
-  };
+  const handleClick = () => setShowDialog(!showDialog);
 
   const handleApprove = async () => {
     const { response, error } = await axios.put(`${apiURL}/applications/${record.id}`)
@@ -37,7 +21,7 @@ export default function (props) {
       .catch(error => ({ error: error.message.data }));
 
     if (!isEmpty(response)) {
-      setShowDialog(false);
+      handleClick();
       refresh();
       notify(response.message);
     }
@@ -57,26 +41,14 @@ export default function (props) {
     <Dialog
       fullWidth
       open={showDialog}
-      onClose={handleCloseClick}
-      aria-label={'Aprobar solicitud'}
-    >
-      <DialogTitle>¿Realmente desea aprobar la solicitud #{record.num}?</DialogTitle>
-      <DialogActions>
-        <Button
-          label="Cancelar"
-          onClick={handleCloseClick}
-        >
-          <IconCancel />
-        </Button>
-        <Button
-          label="Aprobar"
-          alignIcon="right"
-          onClick={handleApprove}
-          color="primary"
-        >
-          <IconCheck />
-        </Button>
-      </DialogActions>
-    </Dialog>
+      ariaLabel={'Aprobar solicitud'}
+      title={`¿Realmente desea aprobar la solicitud #${record.num}?`}
+      submitLabel={'Aprobar'}
+      handleClick={handleClick}
+      action={() => {
+        handleApprove();
+        handleClick();
+      }}
+    />
   </>);
 }

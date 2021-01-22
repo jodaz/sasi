@@ -1,57 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import {
-  makeStyles,
-  CircularProgress,
-  Card,
-  Grid,
-  CardContent,
-  Typography
-} from '@material-ui/core';
+import * as React from 'react';
+import { useRedirect } from 'react-admin';
+import { Grid } from '@material-ui/core';
 import { apiURL } from '../../config';
-import axios from 'axios';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    marginBottom: theme.spacing(4)
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-  }
-}));
-
-const LoadingCards = ({ classes, loading, data }) => ( 
-  <Grid item xs={6}>
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          { (loading) 
-            ? <CircularProgress />
-            : <>
-              <Typography component="h5" variant="h5">
-                {data.amount}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {data.name}
-              </Typography>
-            </>
-          }
-        </CardContent>
-      </div>
-    </Card>
-  </Grid>
-);
+import { Chart, CardButton } from 'mui-extra';
+import isEmpty from 'is-empty';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import PeopleIcon from '@material-ui/icons/People';
 
 function Analytics() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState(true);
-  const classes = useStyles();
+  const redirect = useRedirect();
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [categories, setCategories] = React.useState({});
+  const [status, setStatus] = React.useState({});
+  const [applications, setApplications] = React.useState(0);
+  const [users, setUsers] = React.useState(0);
+  const [data, setData] = React.useState({});
 
-  useEffect(() => {
+  React.useEffect(() => {
     axios.get(`${apiURL}/analytics/home`)
       .then(res => {
         setData(res.data);
@@ -59,10 +24,73 @@ function Analytics() {
       });
   }, []);
 
-  return (<>
-    <LoadingCards classes={classes} loading={isLoading} data={data.applications} />
-    <LoadingCards classes={classes} loading={isLoading} data={data.users} />
-  </>);
+  React.useEffect(() => {
+    if (!isEmpty(data)) {
+      let names = data.categories.map(item => item.name);
+      let values = data.categories.map(item => item.value);
+
+      let statusNames = data.status.map(item => item.name);
+      let statusValues = data.status.map(item => item.value);
+
+      setCategories({
+        'labels': names,
+        'values': values
+      });
+      setStatus({
+        'labels': statusNames,
+        'values': statusValues
+      });
+      setApplications(data.applications);
+      setUsers(data.users);
+    }
+  }, [data]);
+
+  return (
+    <>
+      <Grid item sm={6} xs={12}>
+        <CardButton
+          title='Solicitudes aprobadas'
+          loading={isLoading}
+          total={applications}
+          icon={<MailOutlineIcon />}
+          handleClick={() => redirect('/applications')}
+        />
+      </Grid>
+      <Grid item sm={6} xs={12}>
+        <CardButton
+          title='Usuarios registrados'
+          loading={isLoading}
+          total={users}
+          icon={<PeopleIcon />}
+          handleClick={() => redirect('/users')}
+        />
+      </Grid>
+      <Grid item md={4} sm={6} xs={12}>
+        <Chart
+          name='Solicitudes por estado'
+          type='doughnut'
+          height="400"
+          width="350"
+          loading={isLoading}
+          labels={status.labels}
+          data={status.values}
+          borderWith={1}
+        />
+      </Grid>
+      <Grid item md={4} sm={6} xs={12}>
+        <Chart
+          name='Categorías'
+          type='pie'
+          height="400"
+          width="350"
+          loading={isLoading}
+          labels={categories.labels}
+          data={categories.values}
+          borderWith={1}
+        />
+      </Grid>
+    </>
+  );
 };
 
 export default Analytics;

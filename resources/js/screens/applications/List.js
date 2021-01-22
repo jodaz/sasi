@@ -37,13 +37,13 @@ const useGetTotals = (filterValues) => {
     'applications',
     { perPage: 1, page: 1 },
     { field: 'id', order: 'ASC' },
-    {...filterValues, status: 'Denegadas' }
+    {...filterValues, status: 'Rechazadas' }
   );
 
   return {
     'Pendientes': pendings,
     'Aprobadas': approved,
-    'Denegadas': refused
+    'Rechazadas': refused
   };
 };
 
@@ -72,7 +72,7 @@ const TabbedDataGrid = props => {
         case 'Aprobadas':
           setApproved(ids);
           break;
-        case 'Denegadas':
+        case 'Rechazadas':
           setRefused(ids);
           break;
       }
@@ -130,7 +130,7 @@ const TabbedDataGrid = props => {
           </ListContextProvider>
         )}
 
-        {filterValues.status === 'Denegadas' && (
+        {filterValues.status === 'Rechazadas' && (
           <ListContextProvider value={{ ...listContext, ids: refused }}>
             <Datagrid {...props} optimized>
               <TextField label='Número' source="num" />

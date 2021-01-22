@@ -100,7 +100,7 @@ const MenuActions = props => {
         { (shouldEdit) &&
           <ButtonMenu
             label={shouldEdit.label ? shouldEdit.label : 'Editar' }
-            icon={< EditIcon />}
+            icon={<EditIcon />}
             onClick={() => {
               redirect(basePath + '/' + record.id);
               handleClose();

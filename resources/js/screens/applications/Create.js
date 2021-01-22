@@ -8,6 +8,8 @@ import {
   useNotify,
   useRedirect
 } from 'react-admin';
+import isEmpty from 'is-empty';
+import { useSelector } from 'react-redux';
 import { useFetch } from '../../fetch';
 
 const validator = (values) => {
@@ -30,7 +32,7 @@ const validator = (values) => {
   if (values.description) {
     if (values.description.length > 500) {
       errors.description = ['El máximo número de caracteres permitidos es 500.'];
-    }1
+    }
   }
 
   if (!values.category) {
@@ -41,6 +43,7 @@ const validator = (values) => {
 }
 
 const ApplicationCreate = (props) => { 
+  const user = useSelector(store => store.user.user);
   const { isLoading, response, error } = useFetch('applications/create');
   const notify = useNotify();
   const redirect = useRedirect();
@@ -57,6 +60,13 @@ const ApplicationCreate = (props) => {
         <TextInput source="description" label="Mensaje" multiline fullWidth />
         { (!isLoading) &&
           <SelectInput label="Categoría" source="category" choices={response} fullWidth/>
+        }
+        { (!isEmpty(user) && !isEmpty(user.profile.organizations)) &&
+            <SelectInput
+              label="Institución"
+              source="institution_id"
+              choices={user.profile.organizations} fullWidth
+            />
         }
         <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
       </SimpleForm>

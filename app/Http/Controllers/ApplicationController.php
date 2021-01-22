@@ -74,6 +74,10 @@ class ApplicationController extends Controller
 
         $profile->applications()->save($application);
 
+        if ($request->has('institution_id')) {
+            $application->organization()->sync($request->institution_id);
+        }
+
         return response()->json([
             'success' => true,
             'message' => '¡Solicitud recibida!'
