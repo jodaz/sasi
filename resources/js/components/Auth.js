@@ -10,6 +10,8 @@ import {
   makeStyles
 } from '@material-ui/core';
 
+const background = 'images/front.jpg';
+
 const useStyles = makeStyles((theme) => ({
   main: {
     display: 'flex',
@@ -18,14 +20,14 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'url(https://source.unsplash.com/random/1600x900)',
+    background: `url(${background})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
   },
   header: {
     margin: '1em',
     display: 'flex',
-    flexDirection: 'column', 
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -70,7 +72,7 @@ export default function Auth(props) {
         <div className={classes.header}>
           <Avatar className={classes.avatar} variant="square" alt="logo" src="/images/logo.png"/>
           <Typography component="h1" variant="h5">
-            {title} 
+            {title}
           </Typography>
           <Typography variant="body2" >
             Sistema de Atención Social Integral
