@@ -1,158 +1,67 @@
 import * as React from "react";
+import { Card, CardHeader, CardContent  } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import {
-  List,
-  useGetList,
-  ChipField,
-  Datagrid,
+  DateField,
+  EditButton,
+  NumberField,
   TextField,
-  useDatagridStyles,
-  useListContext,
-  ListContextProvider
+  BooleanField,
+  useTranslate,
+  RecordMap,
+  Identifier,
+  Record,
 } from 'react-admin';
-import { Filter, ModuleActions } from '../../components';
-import { Actions } from '../../components';
-import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
-import { useFetch } from "../../fetch";
 import isEmpty from 'is-empty';
 import { useSelector } from 'react-redux';
 
-const useGetTotals = (filterValues) => {
-  const { total: pendings } = useGetList(
-    'applications',
-    { perPage: 1, page: 1 },
-    { field: 'id', order: 'ASC' },
-    {...filterValues, status: 'Pendientes' }
-  );
+const useListStyles = makeStyles(theme => ({
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '0.5rem 0',
+  },
+  cardTitleContent: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cardContent: theme.typography.body1,
+  cardContentRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: '0.5rem 0',
+  },
+}));
 
-  const { total: approved } = useGetList(
-    'applications',
-    { perPage: 1, page: 1 },
-    { field: 'id', order: 'ASC' },
-    {...filterValues, status: 'Aprobadas' }
-  );
-
-  const { total: refused } = useGetList(
-    'applications',
-    { perPage: 1, page: 1 },
-    { field: 'id', order: 'ASC' },
-    {...filterValues, status: 'Rechazadas' }
-  );
-
-  return {
-    'Pendientes': pendings,
-    'Aprobadas': approved,
-    'Rechazadas': refused
-  };
-};
-
-const TabbedDataGrid = props => {
-  const user = useSelector(store => store.user.user);
-  const listContext = useListContext();
-  const { ids, filterValues, setFilters, displayedFilters } = listContext;
-  const classes = useDatagridStyles();
-  const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
-  const { isLoading, response: tabs } = useFetch('states');
-  const [pending, setPending] = React.useState([]);
-  const [approved, setApproved] = React.useState([]);
-  const [refused, setRefused] = React.useState([]);
-  const totals = useGetTotals(filterValues);
-
-  const handleChange = React.useCallback((e, newValue) => {
-    setFilters && setFilters({ ...filterValues, status: newValue }, displayedFilters);
-  }, [displayedFilters, filterValues, setFilters]);
-
-  React.useEffect(() => {
-    if (ids) {
-      switch (filterValues.status) {
-        case 'Pendientes':
-          setPending(ids);
-          break;
-        case 'Aprobadas':
-          setApproved(ids);
-          break;
-        case 'Rechazadas':
-          setRefused(ids);
-          break;
-      }
-    }
-  }, [ids, filterValues.status]);
+const MobileGrid = ({ ids, data, basePath }) => {
+  const classes = useListStyles();
 
   return (
-    <React.Fragment>
-      <Tabs
-        variant="fullWidth"
-        centered
-        value={filterValues.status}
-        indicatorColor="primary"
-        onChange={handleChange}
-      >
-        {(!isLoading) && (
-          tabs.map(choice => (
-            <Tab
-              key={choice.id}
-              label={
-                totals[choice.list_name]
-                  ? `${choice.list_name} (${totals[choice.list_name]})`
-                  : choice.list_name
-              }
-              value={choice.list_name}
-            />
-          ))
-        )}
-      </Tabs>
-      <Divider />
-      <div>
-        {filterValues.status === 'Pendientes' && (
-          <ListContextProvider value={{ ...listContext, ids: pending }}>
-            <Datagrid {...props} optimized>
-              <TextField label='Número' source="num" />
-              <TextField label='Asunto' source="title" />
-              <ChipField label='Categoría' source="category.name" />
-              <Actions {...props} shouldShow shouldDelete={{ label: 'Rechazar' }}>
-                { (!isEmpty(user) && (user.role_id === 1)) && <ApproveButton /> }
-              </Actions>
-            </Datagrid>
-          </ListContextProvider>
-        )}
+    <div style={{ margin: '1em' }}>
+      {ids.map(id => (
+        <Card key={id} className={classes.card}>
+          <CardHeader
+            title={
+              <div className={classes.cardTitleContent}>
+                <span>
+                  <TextField record={data[id]} source="title" />
+                </span>
+              </div>
+            }
+          />
+          <CardContent className={classes.cardContent}>
+            <span className={classes.cardContentRow}>
 
-        {filterValues.status === 'Aprobadas' && (
-          <ListContextProvider value={{ ...listContext, ids: approved }}>
-            <Datagrid {...props} optimized>
-              <TextField label='Número' source="num" />
-              <TextField label='Asunto' source="title" />
-              <ChipField label='Categoría' source="category.name" />
-              <Actions {...props} shouldShow>
-                <DownloadButton />
-              </Actions>
-            </Datagrid>
-          </ListContextProvider>
-        )}
-
-        {filterValues.status === 'Rechazadas' && (
-          <ListContextProvider value={{ ...listContext, ids: refused }}>
-            <Datagrid {...props} optimized>
-              <TextField label='Número' source="num" />
-              <TextField label='Asunto' source="title" />
-              <ChipField label='Categoría' source="category.name" />
-              <Actions {...props} shouldShow />
-            </Datagrid>
-          </ListContextProvider>
-        )}
-      </div>
-    </React.Fragment>
+            </span>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 }
 
-export default function(props) {
-  return (
-    <List {...props}
-      title="Solicitudes"
-      actions={<ModuleActions />}
-      filterDefaultValues={{ status: 'Pendientes' }}
-      filters={<Filter defaultfilter='title'/>}
-      bulkActionButtons={false}
-    >
-      <TabbedDataGrid />
-    </List>
-  );
-}
+export default MobileGrid;

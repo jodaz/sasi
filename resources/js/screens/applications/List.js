@@ -1,14 +1,15 @@
 import * as React from "react";
 import {
-  List, 
+  List,
   useGetList,
   ChipField,
-  Datagrid, 
+  Datagrid,
   TextField,
   useDatagridStyles,
   useListContext,
   ListContextProvider
 } from 'react-admin';
+import MobileGrid from './MobileGrid';
 import DownloadButton from './DownloadButton';
 import ApproveButton from './ApproveButton';
 import { Filter, ModuleActions } from '../../components';
@@ -54,7 +55,7 @@ const TabbedDataGrid = props => {
   const classes = useDatagridStyles();
   const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const { isLoading, response: tabs } = useFetch('states');
-  const [pending, setPending] = React.useState([]); 
+  const [pending, setPending] = React.useState([]);
   const [approved, setApproved] = React.useState([]);
   const [refused, setRefused] = React.useState([]);
   const totals = useGetTotals(filterValues);
@@ -103,44 +104,50 @@ const TabbedDataGrid = props => {
         )}
       </Tabs>
       <Divider />
-      <div>
-        {filterValues.status === 'Pendientes' && (
-          <ListContextProvider value={{ ...listContext, ids: pending }}>
-            <Datagrid {...props} optimized>
-              <TextField label='Número' source="num" />
-              <TextField label='Asunto' source="title" />
-              <ChipField label='Categoría' source="category.name" />
-              <Actions {...props} shouldShow shouldDelete={{ label: 'Rechazar' }}>
-                { (!isEmpty(user) && (user.role_id === 1)) && <ApproveButton /> }
-              </Actions>
-            </Datagrid>
-          </ListContextProvider>
-        )}
+      {isSmall ? (
+        <ListContextProvider value={{ ...listContext, ids: pending }} >
+          <MobileGrid {...props} ids={pending} />
+        </ListContextProvider>
+      ) : (
+        <div>
+          {filterValues.status === 'Pendientes' && (
+            <ListContextProvider value={{ ...listContext, ids: pending }}>
+              <Datagrid {...props} optimized>
+                <TextField label='Número' source="num" />
+                <TextField label='Asunto' source="title" />
+                <ChipField label='Categoría' source="category.name" />
+                <Actions {...props} shouldShow shouldDelete={{ label: 'Rechazar' }}>
+                  { (!isEmpty(user) && (user.role_id === 1)) && <ApproveButton /> }
+                </Actions>
+              </Datagrid>
+            </ListContextProvider>
+          )}
 
-        {filterValues.status === 'Aprobadas' && (
-          <ListContextProvider value={{ ...listContext, ids: approved }}>
-            <Datagrid {...props} optimized>
-              <TextField label='Número' source="num" />
-              <TextField label='Asunto' source="title" />
-              <ChipField label='Categoría' source="category.name" />
-              <Actions {...props} shouldShow>
-                <DownloadButton />
-              </Actions>
-            </Datagrid>
-          </ListContextProvider>
-        )}
+          {filterValues.status === 'Aprobadas' && (
+            <ListContextProvider value={{ ...listContext, ids: approved }}>
+              <Datagrid {...props} optimized>
+                <TextField label='Número' source="num" />
+                <TextField label='Asunto' source="title" />
+                <ChipField label='Categoría' source="category.name" />
+                <Actions {...props} shouldShow>
+                  <DownloadButton />
+                </Actions>
+              </Datagrid>
+            </ListContextProvider>
+          )}
 
-        {filterValues.status === 'Rechazadas' && (
-          <ListContextProvider value={{ ...listContext, ids: refused }}>
-            <Datagrid {...props} optimized>
-              <TextField label='Número' source="num" />
-              <TextField label='Asunto' source="title" />
-              <ChipField label='Categoría' source="category.name" />
-              <Actions {...props} shouldShow />
-            </Datagrid>
-          </ListContextProvider>
-        )}
-      </div>
+          {filterValues.status === 'Rechazadas' && (
+            <ListContextProvider value={{ ...listContext, ids: refused }}>
+              <Datagrid {...props} optimized>
+                <TextField label='Número' source="num" />
+                <TextField label='Asunto' source="title" />
+                <ChipField label='Categoría' source="category.name" />
+                <Actions {...props} shouldShow />
+              </Datagrid>
+            </ListContextProvider>
+          )}
+        </div>
+      )}
     </React.Fragment>
   );
 }
