@@ -31,7 +31,7 @@ class UserController extends Controller
             $filters = $request->filter;
             // Get fields
             $email = $filters['email'];
-            
+
             $query->whereLike('email', $email);
         }
 
@@ -65,7 +65,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreateUserRequest $request)
-    { 
+    {
         $password = Hash::make($request->password);
 
         $profile = Profile::create([
@@ -87,7 +87,7 @@ class UserController extends Controller
             'password' => $password,
             'activation_token' => Str::random(60),
             'active' => false,
-            'role_id' => 3 // By default, users are guest  
+            'role_id' => 3 // By default, users are guest
         ]);
 
         $user->notify(new SignupActivate($user->activation_token));
@@ -156,12 +156,12 @@ class UserController extends Controller
     public function changeRole(Request $request, User $user)
     {
         $role = Rol::find($request->rol_id);
-        
+
         $user->role_id = $role->id;
         $user->save();
 
         return response()->json([
-            'message' => 'Ha cambiado el rol a '.$role->name 
+            'message' => 'Ha cambiado el rol a '.$role->name
         ]);
     }
 
@@ -171,8 +171,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
+    }
+
+    public function changeStatus(User $user)
+    {
+        $status = $user->active;
+        $user->active = !$status;
+        $user->save();
+        $message = 'desactivado';
+
+        if (!$status) {
+            $message = 'activado';
+        }
+
+        return response()->json([
+            'message' => 'El usuario '.$user->profile->fullName.' ha sido '.$message
+        ]);
     }
 }
