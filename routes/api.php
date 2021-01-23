@@ -55,7 +55,7 @@ Route::middleware('auth:api')->group(function () {
     // Roles
     Route::resource('roles', 'RoleController');
     Route::post('users/{user}/change-role', 'UserController@changeRole');
-    Route::post('users/{user}/update-status', 'UserController@chandeStatus');
+    Route::post('users/{user}/update-status', 'UserController@changeStatus');
 });
 
 
