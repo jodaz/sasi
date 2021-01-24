@@ -1,8 +1,6 @@
 import * as React from "react";
 import {
   useCreate,
-  FormWithRedirect,
-  useTranslate,
   Title,
   TextInput,
   SimpleForm,
@@ -64,10 +62,6 @@ const CustomCreate = props => {
   const [create] = useCreate('organizations');
   const classes = useStyles();
   const createControllerProps = useCreateController(props);
-  const {
-    defaultTitle,
-    resource
-  } = createControllerProps;
   const { isLoading, response: data } = useFetch('organizations/create');
   const notify = useNotify();
   const redirect = useRedirect();
@@ -78,7 +72,7 @@ const CustomCreate = props => {
     }, {
       onSuccess: (response) => {
         const { data: res } = response;
-        notify(`¡Ha registrado a la institución ${res.name}!`);
+        notify(`¡Ha realizado el registro de la institución ${res.name} de manera exitosa!`);
         redirect('/organizations');
       }
     })
