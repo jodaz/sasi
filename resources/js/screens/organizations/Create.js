@@ -87,7 +87,15 @@ const CustomCreate = props => {
           : (
           <SimpleForm validate={validator} save={handleSave}>
             <div className={classes.root}>
+              <Grid item xs={12} className={classes.child}>
+                <Typography variant="h6" gutterBottom>
+                  Información básica
+                </Typography>
+              </Grid>
               <Grid container>
+                <Grid item xs={12} className={classes.child}>
+                  <TextInput source="name" label="Nombre" resettable fullWidth />
+                </Grid>
                 <Grid item xs={12} sm={12} md={4} className={classes.child}>
                   <SelectInput source="organization_type_id" choices={data.types} label='Tipo (*)' fullWidth />
                 </Grid>
@@ -95,23 +103,23 @@ const CustomCreate = props => {
                   <TextInput source="rif" label="RIF" resettable fullWidth />
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                  <TextInput source="name" label="Nombre" resettable fullWidth />
+                  <SelectInput source="category_id" choices={data.categories} label='Sector (*)' fullWidth />
                 </Grid>
               </Grid>
               <Grid container>
+                <Grid item xs={12} className={classes.child}>
+                  <Typography variant="h6" gutterBottom>
+                    Dirección
+                  </Typography>
+                </Grid>
                 <Grid item xs={12} sm={12} md={4} className={classes.child}>
                   <SelectInput source="parish_id" choices={data.parishes} label='Parroquia (*)' fullWidth />
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} className={classes.child}>
                   <SelectInput source="community_id" choices={data.communities} label='Comunidad (*)' fullWidth />
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                <Grid item xs={12} className={classes.child}>
                   <TextInput source="address" label="Dirección" resettable fullWidth />
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                  <SelectInput source="category_id" choices={data.categories} label='Sector (*)' fullWidth />
                 </Grid>
               </Grid>
             </div>
