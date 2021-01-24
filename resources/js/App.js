@@ -33,7 +33,8 @@ export default function App() {
   const dispatch = useDispatch();
   const { notifications } = store;
   const { user } = store.user;
-  const [rol, setRol] = React.useState(0);
+  const [rol, setRol] = React.useState(1);
+  const resources = React.useMemo(() => Screens(rol).filter(Boolean), []);
 
   React.useEffect(() => {
     if (notifications.show) {
@@ -42,12 +43,14 @@ export default function App() {
     }
   }, [notifications]);
 
+  /**
   React.useEffect(() => {
     if (!isEmpty(response)) {
       dispatch(setUser(response.user));
     }
   }, [response]);
- 
+   **/
+
   // Check if authenticated
   React.useEffect(() => {
     let route = pathname;
@@ -67,11 +70,9 @@ export default function App() {
     }
   }, [user]);
 
-  const resources = Screens(rol).filter(Boolean);
-
   return (
     <Admin
-      layout={Layout}  
+      layout={Layout}
       dataProvider={dataProvider}
       loginPage={Login}
       history={history}
