@@ -6,8 +6,12 @@ import { apiURL } from './config';
 import apiClient from 'ra-laravel-client';
 
 const i18nProvider = polyglotI18nProvider(() => ({
-  'organizations': 'instituciones',
-  ...spanishMessages
+  ...spanishMessages,
+  resources: {
+    organizations: {
+      name: 'Institución |||| Instituciones'
+    }
+  },
 }));
 
 export const dataProvider = apiClient(apiURL);
