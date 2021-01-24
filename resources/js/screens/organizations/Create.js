@@ -90,7 +90,7 @@ const CustomCreate = props => {
           { (isLoading)
             ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
             : (
-            <SimpleForm validate={validator} onSave={handleSave}>
+            <SimpleForm validate={validator} save={handleSave}>
               <div className={classes.root}>
                 <Box width={1}>
                   <Grid container>
@@ -130,23 +130,9 @@ const CustomCreate = props => {
   );
 }
 
-const OrganizationCreate = (props) => {
-
-  return <CustomCreate {...props} />;
-
-  /**
-  return (
-    <Create {...props} title="Nueva institución" onSuccess={onSuccess}>
-      { (isLoading)
-        ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
-        : (
-        <SimpleForm validate={validator}>
-        </SimpleForm>
-      )}
-    </Create>
-  );
-   **/
-};
+const OrganizationCreate = (props) => (
+  <CustomCreate {...props} />
+);
 
 export default OrganizationCreate;
 
