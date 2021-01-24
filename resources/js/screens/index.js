@@ -12,7 +12,7 @@ import help from './help';
 export default (rol) => {
   return ([
     <Resource {...applications } key={1}/>,
-    <Resource {...organizations} key={2}/>,
+    <Resource {...organizations(rol)} key={2}/>,
     (rol === 1) ? <Resource {...users} key={3}/> : null,
     (rol === 1) ? <Resource {...categories} key={4}/> : null,
     (rol === 1) ? <Resource {...communities} key={5} /> : null,
