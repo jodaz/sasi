@@ -16,9 +16,13 @@ import {
 import { Typography, Grid, makeStyles, InputLabel, Box } from '@material-ui/core';
 import { useFetch } from '../../fetch';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%"
+  },
+  child: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1)
   }
 }));
 
@@ -74,7 +78,7 @@ const CustomCreate = props => {
     }, {
       onSuccess: (response) => {
         const { data: res } = response;
-        notify(`¡Ha registrado a la institución ${res.name}`);
+        notify(`¡Ha registrado a la institución ${res.name}!`);
         redirect('/organizations');
       }
     })
@@ -83,49 +87,42 @@ const CustomCreate = props => {
   return (
     <CreateContextProvider value={createControllerProps}>
       <Title title='Nueva institución' />
-      <Grid container spacing={1}>
-        <Grid item xs={12} sm={12} md={10}>
-          <Typography variant="h6" gutterBottom>
-            Nueva institución
-          </Typography>
-          { (isLoading)
-            ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
-            : (
-            <SimpleForm validate={validator} save={handleSave}>
-              <div className={classes.root}>
-                <Box width={1}>
-                  <Grid container>
-                    <Grid item xs={12} sm={12} md={4}>
-                      <SelectInput source="organization_type_id" choices={data.types} label='Tipo (*)' fullWidth />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4}>
-                      <TextInput source="rif" label="RIF" resettable fullWidth />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4}>
-                      <TextInput source="name" label="Nombre" resettable fullWidth />
-                    </Grid>
-                  </Grid>
-                  <Grid container>
-                    <Grid item xs={12} sm={12} md={4}>
-                      <SelectInput source="parish_id" choices={data.parishes} label='Parroquia (*)' fullWidth />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4}>
-                      <SelectInput source="community_id" choices={data.communities} label='Comunidad (*)' fullWidth />
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={4}>
-                      <TextInput source="address" label="Dirección" resettable fullWidth />
-                    </Grid>
-                  </Grid>
-                  <Grid container>
-                    <Grid item xs={12} sm={12} md={4}>
-                      <SelectInput source="category_id" choices={data.categories} label='Sector (*)' fullWidth />
-                    </Grid>
-                  </Grid>
-                </Box>
-              </div>
-            </SimpleForm>
-          )}
-        </Grid>
+      <Grid spacing={1}>
+        { (isLoading)
+          ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
+          : (
+          <SimpleForm validate={validator} save={handleSave}>
+            <div className={classes.root}>
+              <Grid container>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="organization_type_id" choices={data.types} label='Tipo (*)' fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <TextInput source="rif" label="RIF" resettable fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <TextInput source="name" label="Nombre" resettable fullWidth />
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="parish_id" choices={data.parishes} label='Parroquia (*)' fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="community_id" choices={data.communities} label='Comunidad (*)' fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <TextInput source="address" label="Dirección" resettable fullWidth />
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="category_id" choices={data.categories} label='Sector (*)' fullWidth />
+                </Grid>
+              </Grid>
+            </div>
+          </SimpleForm>
+        )}
       </Grid>
     </CreateContextProvider>
   );
