@@ -31,7 +31,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('logout', 'AuthController@logout');
     Route::get('user', 'AuthController@getUser');
     Route::post('update-password', 'UpdatePasswordController');
-    
+
     Route::resource('users', 'UserController')->only([
         'index', 'destroy', 'update', 'show'
     ]);
@@ -53,7 +53,7 @@ Route::middleware('auth:api')->group(function () {
     });
 
     // Roles
-    Route::resource('roles', 'RoleController');
+    Route::get('roles', 'RoleController@index');
     Route::post('users/{user}/change-role', 'UserController@changeRole');
 });
 
