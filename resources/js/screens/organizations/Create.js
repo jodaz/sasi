@@ -72,8 +72,9 @@ const CustomCreate = props => {
     create({
       payload: { data: { ...values } }
     }, {
-      onSuccess: ({ data: newRecord }) => {
-        notify(`¡Ha creado la institución ${data.name}!`);
+      onSuccess: (response) => {
+        const { data: res } = response;
+        notify(`¡Ha registrado a la institución ${res.name}`);
         redirect('/organizations');
       }
     })
