@@ -14,6 +14,7 @@ import { Filter, ModuleActions } from '../../components';
 import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
 import { useFetch } from "../../fetch";
+import ActiveStatusButton from './ActiveStatusButton';
 import isEmpty from 'is-empty';
 
 const useGetTotals = (filterValues) => {
@@ -115,7 +116,9 @@ const TabbedDataGrid = props => {
                 <TextField label='Correo' source="email" />
                 <TextField label='Nombre' source="profile.full_name" />
                 <TextField label='Rol' source="role.name" />
-                <Actions shouldShow/>
+                <Actions shouldShow>
+                  <ActiveStatusButton />
+                </Actions>
               </Datagrid>
             </ListContextProvider>
           )}
@@ -126,7 +129,9 @@ const TabbedDataGrid = props => {
                 <TextField label='Correo' source="email" />
                 <TextField label='Nombre' source="profile.full_name" />
                 <TextField label='Rol' source="role.name" />
-                <Actions shouldShow/>
+                <Actions shouldShow>
+                  <ActiveStatusButton />
+                </Actions>
               </Datagrid>
             </ListContextProvider>
           )}
