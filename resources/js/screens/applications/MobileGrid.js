@@ -36,6 +36,10 @@ const MobileGrid = ({ ids, data, basePath }) => {
   const classes = useListStyles();
   const redirect = useRedirect();
 
+  if (!ids || !data || !basePath) {
+    return null;
+  }
+
   return (
     <div style={{ margin: '1em' }}>
       {ids.map(id => (

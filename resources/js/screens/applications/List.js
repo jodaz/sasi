@@ -80,6 +80,13 @@ const TabbedDataGrid = props => {
     }
   }, [ids, filterValues.status]);
 
+  const selectedIds =
+    filterValues.status == 'Pendientes'
+      ? pending
+      : filterValues.status == 'Aprobadas'
+      ? approved
+      : refused;
+
   return (
     <React.Fragment>
       <Tabs
@@ -105,13 +112,13 @@ const TabbedDataGrid = props => {
       </Tabs>
       <Divider />
       {isSmall ? (
-        <ListContextProvider value={{ ...listContext, ids: pending }} >
-          <MobileGrid {...props} ids={pending} />
+        <ListContextProvider value={{ ...listContext, ids: selectedIds }} >
+          <MobileGrid {...props} ids={selectedIds} />
         </ListContextProvider>
       ) : (
         <div>
           {filterValues.status === 'Pendientes' && (
-            <ListContextProvider value={{ ...listContext, ids: pending }}>
+            <ListContextProvider value={{ ...listContext, ids: selectedIds }}>
               <Datagrid {...props} optimized>
                 <TextField label='Número' source="num" />
                 <TextField label='Asunto' source="title" />
@@ -124,7 +131,7 @@ const TabbedDataGrid = props => {
           )}
 
           {filterValues.status === 'Aprobadas' && (
-            <ListContextProvider value={{ ...listContext, ids: approved }}>
+            <ListContextProvider value={{ ...listContext, ids: selectedIds }}>
               <Datagrid {...props} optimized>
                 <TextField label='Número' source="num" />
                 <TextField label='Asunto' source="title" />
@@ -137,7 +144,7 @@ const TabbedDataGrid = props => {
           )}
 
           {filterValues.status === 'Rechazadas' && (
-            <ListContextProvider value={{ ...listContext, ids: refused }}>
+            <ListContextProvider value={{ ...listContext, ids: selectedIds }}>
               <Datagrid {...props} optimized>
                 <TextField label='Número' source="num" />
                 <TextField label='Asunto' source="title" />
