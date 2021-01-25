@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Community;
+use App\Profile;
+use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
 {
@@ -13,19 +14,25 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Community::create(['name' => 'Centro']);
-
-        User::create([
-            'first_name' => env('FIRST_NAME', 'admin'),
-            'surname' => env('SURNAME', 'user'),
-            'email' => env('EMAIL', 'email@example.com'),
-            'dni' => env('IDENTIFICATION', 'V-00000000'),
-            'password' => bcrypt(env('PASSWORD', 'query123')),
-            'genre_id' => 1,
+        $profile = Profile::create([
+            'first_name' => config('app.first_name'),
+            'surname' => config('app.surname'),
+            'address' => config('app.address'),
+            'dni' => config('app.dni'),
             'community_id' => 1,
             'parish_id' => 1,
+            'citizenship_id' => 1,
+            'genre_id' => 1
+        ]);
+
+        User::create([
+            'email' => config('app.email'),
+            'password' => bcrypt('qwerty123'),
+            'active' => true,
+            'activation_token' => Str::random(60),
+            'remember_token' => Str::random(10),
             'role_id' => 1,
-            'address' => 'NULL'
+            'profile_id' => $profile->id
         ]);
     }
 }

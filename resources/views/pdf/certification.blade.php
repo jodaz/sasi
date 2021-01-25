@@ -71,6 +71,9 @@
     <body>
         <div class="header">
             <div class="description">
+                <div style="float:left; padding-right: 20px;">
+                    <img src="{{ base_path().'/public/images/mayor_logo.jpg' }}" height="65px" width="85px" alt="logo" />
+                </div>
                <p>
                     REPÚBLICA BOLIVARIANA DE VENEZUELA<br>
                     ALCALDÍA BOLIVARIANA DEL MUNICIPIO BERMÚDEZ<br>
@@ -79,7 +82,7 @@
                 </p>
             </div>
             <div id="mayorLOGO">
-                <img src="{{ base_path().'/public/images/mayor_logo.jpg' }}" height="60px" width="80px" alt="logo" />
+                <img src="{{ base_path().'/public/images/logo.png' }}" height="60px" width="80px" alt="logo" />
             </div>
         </div>
         <div class="section">

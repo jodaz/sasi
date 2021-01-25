@@ -17,7 +17,7 @@ function Analytics() {
   const [data, setData] = React.useState({});
 
   React.useEffect(() => {
-    axios.get(`${apiURL}/analytics/home`)
+    axios.get(`${apiURL}/home`)
       .then(res => {
         setData(res.data);
         setIsLoading(false);

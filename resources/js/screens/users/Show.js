@@ -10,11 +10,11 @@ import {
 import { CardProgress } from 'mui-extra';
 import isEmpty from 'is-empty';
 
-const CommunityTitle = ({ record  }) => (
+const UserTitle = ({ record  }) => (
   <span>{record ? `${record.name}` : ''}</span>
 );
 
-const CommunityShow = (props) => {
+const UserShow = (props) => {
   const {
     basePath,
     loaded,
@@ -40,5 +40,5 @@ const CommunityShow = (props) => {
 };
 
 export default function(props) {
-  return <CommunityShow {...props} />;
+  return <UserShow {...props} />;
 };
