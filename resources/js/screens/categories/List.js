@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cloneElement, useMemo } from 'react';
 import {
   List, 
   Datagrid,
@@ -9,12 +8,6 @@ import {
 } from 'react-admin';
 import { Actions, Filter, ModuleActions } from '../../components';
 import { useMediaQuery } from '@material-ui/core';
-
-const CategoriesActionsButtons = props => (
-  <>
-    <BulkDeleteButton {...props} />
-  </>
-);
 
 export default function(props) {
   const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -33,10 +26,10 @@ export default function(props) {
           linkType={"show"}
         />
       ) : (
-        <Datagrid rowClick="show">
+        <Datagrid>
           <TextField source='name' label='Nombre' />
           <TextField source='applications_count' label='Solicitudes' />
-          <Actions {...props} shouldEdit shouldDelete />
+          <Actions {...props} shouldEdit shouldShow shouldDelete />
         </Datagrid>
       )}
     </List>

@@ -240,7 +240,7 @@ const SignUp = () => {
             required
             helperText={errors.dni && errors.dni}
             onInput={(e)=>{ 
-              e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,10)
+              e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,8)
             }}
             min={0}
           />
@@ -304,9 +304,9 @@ const SignUp = () => {
           loading={loading}
           fullWidth
         >
-          Registrar
+          Registrarme
         </LoadingButton>
-        <p>¿Ya tiene una cuenta? <Link to='/login'>Iniciar sesión</Link></p>
+        <p>¿Ya tiene una cuenta? <Link to='/login'>Inicie sesión</Link></p>
       </form>
     </Auth>
   );

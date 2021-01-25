@@ -28,7 +28,8 @@ const MenuActions = props => {
     shouldEdit,
     shouldDelete,
     shouldShow,
-    record
+    record,
+    children
   } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -54,6 +55,12 @@ const MenuActions = props => {
 
   const handleClose = () => setAnchorEl(null);
 
+  const childrenWithProps = children => {
+    if (children) {
+      return React.cloneElement(children, { onClick: handleClose, ref: ref, record: record });
+    }
+  }
+
   return (
     <div>
       <IconButton
@@ -76,9 +83,11 @@ const MenuActions = props => {
           },
         }}
       >
+        {childrenWithProps(children)}
+
         { (shouldShow) &&
           <ButtonMenu
-            label={shouldShow.label ? shouldShow.label : 'Ver'}
+            label={shouldShow.label ? shouldShow.label : '  Ver'}
             icon={<Visibility />}
             onClick={
               (e) => {
@@ -91,7 +100,7 @@ const MenuActions = props => {
         { (shouldEdit) &&
           <ButtonMenu
             label={shouldEdit.label ? shouldEdit.label : 'Editar' }
-            icon={< EditIcon />}
+            icon={<EditIcon />}
             onClick={() => {
               redirect(basePath + '/' + record.id);
               handleClose();

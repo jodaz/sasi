@@ -8,7 +8,7 @@ class State extends Model
 {
     protected $table = 'states';
 
-    protected $fillable = [ 'name' ];
+    protected $fillable = [ 'name', 'list_name' ];
 
     public function applications()
     {

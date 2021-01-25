@@ -70,7 +70,7 @@ const Login = () => {
   }, [success]);
 
   return (
-    <Auth title='Iniciar sesión'>
+    <Auth title='Inicio de sesión'>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
@@ -112,12 +112,12 @@ const Login = () => {
 
         <Grid container>
           <Grid item xs>
-            <Link to="/reset-password" variant="body2">
+            <Link to="/reset-password" variant="body2" style={{ textDecoration: 'none' }}>
               {"¿Olvidó su contraseña?"}
             </Link>
           </Grid>
           <Grid item>
-            <Link to="/register" variant="body2">
+            <Link to="/register" variant="body2" style={{ textDecoration: 'none' }}>
               {"Registrarme"}
             </Link>
           </Grid>

@@ -22,6 +22,7 @@ class ApplicationController extends Controller
     public function index(Request $request)
     {
         $results = $request->perPage;
+        $user = $request->user();
 
         $query = Application::withTrashed()
             ->latest()
@@ -35,23 +36,28 @@ class ApplicationController extends Controller
             }
             if (array_key_exists('status', $filters)) {
                 $query->whereHas('state', function ($query) use ($filters) {
-                    return $query->whereName($filters['status']);
+                    return $query->whereListName($filters['status']);
                 });
             }
         }
 
-        if ($request->get('pdf')) {
-            $applications = $query->get();
-            $total = $query->count();
-            $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
-
-            $data = compact(['applications', 'emissionDate', 'total']);
-
-            $pdf = PDF::loadView('pdf.report', $data);
-            return $pdf->download('reporte-solicitudes.pdf');
+        if ($user->role_id == 3) {
+            $query->whereProfileId($user->profile_id);
         }
 
         return $query->paginate($results);
+    }
+
+    public function printReport(Request $request)
+    {
+        $applications = Application::query()->get();
+        $total = $query->count();
+        $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
+
+        $data = compact(['applications', 'emissionDate', 'total']);
+
+        $pdf = PDF::loadView('pdf.report', $data);
+        return $pdf->download('reporte-solicitudes.pdf');
     }
 
     /**
@@ -80,6 +86,10 @@ class ApplicationController extends Controller
         $application->category_id = $category;
 
         $profile->applications()->save($application);
+
+        if ($request->has('institution_id')) {
+            $application->organization()->sync($request->institution_id);
+        }
 
         return response()->json([
             'success' => true,
@@ -124,7 +134,7 @@ class ApplicationController extends Controller
 
         return Response([
             'success' => true,
-            'message' => '¡Solicitud aprobada!'
+            'message' => '¡La solicitud '.'#'.$application->num.' fue aprobada!'
         ]);
     }
 
@@ -132,7 +142,7 @@ class ApplicationController extends Controller
     {
         $user = $application->profile;
         $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
-        
+
         return $pdf->download('certificado.pdf');
     }
 
@@ -154,7 +164,7 @@ class ApplicationController extends Controller
 
         return Response([
             'success' => true,
-            'message' => '¡Solicitud borrada!'
+            'message' => '¡Ha rechazado la solicitud #'.$application->num.'!'
         ]);
     }
 }

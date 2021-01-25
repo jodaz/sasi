@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect  } from 'react-redux';
 import { MenuItemLink, getResources, Responsive  } from 'react-admin';
-import Badge from '@material-ui/core/Badge';
+import EmojiPeople from '@material-ui/icons/EmojiPeople';
 import { withRouter } from 'react-router-dom';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -26,6 +26,13 @@ const Menu = ({ resources, onMenuClick }) => (
         />
       ))
     }
+
+    <MenuItemLink
+      to="/help"
+      primaryText="Ayuda"
+      onClick={onMenuClick}
+      leftIcon={<EmojiPeople />}
+    />
   </>
 );
 

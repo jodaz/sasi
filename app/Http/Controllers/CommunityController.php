@@ -53,9 +53,10 @@ class CommunityController extends Controller
         ]);
         $community->parishes()->sync($request->parishes);
 
-        return response()->json([
+        return Response([
             'success' => true,
-            'message' => '¡La comunidad '.$community->name.' ha sido creada!'
+            'id' => $community->id,
+            'attributes' => $community
         ]);
     }
 
