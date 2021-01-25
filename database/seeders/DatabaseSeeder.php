@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
         $this->call(StatesSeeder::class);
         $this->call(OrganizationTypesSeeder::class);
         $this->call(RolesSeeder::class);
+        $this->call(CommunitiesSeeder::class);
+        $this->call(CommunityParishSeeder::class);
 
         if (App::environment() == 'production') {
-           $this->call(AdminSeeder::class); 
-        } 
+           $this->call(AdminSeeder::class);
+        }
 
         if (App::environment() == 'local') {
-            $this->call(CommunitiesSeeder::class);
-            $this->call(CommunityParishSeeder::class);
             $this->call(TestSeeder::class);
         }
     }
