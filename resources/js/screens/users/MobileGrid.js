@@ -3,7 +3,6 @@ import { Card, CardHeader, CardContent, ButtonBase, Typography } from '@material
 import { makeStyles } from '@material-ui/core/styles';
 import { useRedirect, TextField } from 'react-admin';
 import isEmpty from 'is-empty';
-import { useSelector } from 'react-redux';
 
 const useListStyles = makeStyles(theme => ({
   root: {
@@ -43,14 +42,14 @@ const MobileGrid = ({ ids, data, basePath }) => {
   return (
     <div style={{ margin: '1em' }}>
       {ids.map(id => (
-        <ButtonBase className={classes.root} onClick={() => redirect(`applications/${id}/show`)}>
+        <ButtonBase className={classes.root} onClick={() => redirect(`users/${id}/show`)}>
           <Card key={id} className={classes.card}>
             <CardHeader
               title={
                 <div className={classes.cardTitleContent}>
                   <span>
                     <Typography variant="title">
-                      {data[id].title}
+                      {data[id].profile.full_name}
                     </Typography>
                   </span>
                 </div>
@@ -58,16 +57,12 @@ const MobileGrid = ({ ids, data, basePath }) => {
             />
             <CardContent className={classes.cardContent}>
               <span className={classes.cardContentRow}>
-                <Typography variant="subtitle">Número: </Typography>&nbsp;
-                <TextField record={data[id]} source="num" />
+                <Typography variant="subtitle">Correo: </Typography>&nbsp;
+                <TextField record={data[id]} source="email" />
               </span>
               <span className={classes.cardContentRow}>
-                <Typography variant="subtitle">Enviada: </Typography>&nbsp;
-                <TextField record={data[id]} source="created_at" />
-              </span>
-              <span className={classes.cardContentRow}>
-                <Typography variant="subtitle">Categoría: </Typography>&nbsp;
-                <TextField record={data[id]} source="category.name" />
+                <Typography variant="subtitle">Rol: </Typography>&nbsp;
+                <TextField record={data[id]} source="role.name" />
               </span>
             </CardContent>
           </Card>
