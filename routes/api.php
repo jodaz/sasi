@@ -31,7 +31,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('logout', 'AuthController@logout');
     Route::get('user', 'AuthController@getUser');
     Route::post('update-password', 'UpdatePasswordController');
-    
+
     Route::resource('users', 'UserController')->only([
         'index', 'destroy', 'update', 'show'
     ]);
@@ -48,13 +48,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get('applications/{application}/download', 'ApplicationController@download')
         ->name('applications.download-cert');
     // Analytics
-    Route::prefix('analytics')->group(function () {
-        Route::get('home', 'AnalyticsController@home');
-    });
+    Route::get('home', 'AnalyticsController@home');
 
     // Roles
     Route::resource('roles', 'RoleController');
     Route::post('users/{user}/change-role', 'UserController@changeRole');
+    Route::post('users/{user}/update-status', 'UserController@changeStatus');
 });
 
 
