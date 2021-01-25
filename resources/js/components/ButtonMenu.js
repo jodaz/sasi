@@ -12,6 +12,7 @@ const ButtonMenu = React.forwardRef(( props, ref ) => (
     <ListItemIcon>
       {props.icon}
       <Typography fontSize="small">
+        &nbsp;
         {props.label}
       </Typography>
     </ListItemIcon>
