@@ -30,9 +30,13 @@ class UserController extends Controller
         if ($request->has('filter')) {
             $filters = $request->filter;
             // Get fields
-            $email = $filters['email'];
-
-            $query->whereLike('email', $email);
+            if (array_key_exists('email', $filters)) {
+                $query->whereLike('email', $filters['email']);
+            }
+            if (array_key_exists('status', $filters)) {
+                $status = ($filters['status'] == 'Activos') ? 1 : 0;
+                $query->whereActive($status);
+            }
         }
 
         return $query->paginate($results);
