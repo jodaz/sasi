@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useShowController } from 'react-admin';
+import { Title, useShowController } from 'react-admin';
 import {
   Card,
   CircularProgress,
@@ -23,19 +23,48 @@ const ApplicationShow = (props) => {
   } = useShowController(props);
 
   return (
-    <Grid>
-      <Grid item xs={12}>
+    <React.Fragment>
+      <Title title={<ApplicationTitle {...props} />} />
+      <Grid container spacing={4}>
         {(loading) ?(
           <CardProgress circular />
           ) : (
           <Card>
             <CardContent>
-              <Typography>{record.title}</Typography>
+              <Typography variant="h6">{record.title}</Typography>
             </CardContent>
           </Card>
         )}
       </Grid>
-    </Grid>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={6}>
+          {(loading) ?(
+            <CardProgress circular />
+          ) : (
+            <Card>
+              <CardContent>
+                <Typography variant="subtitle">
+                  {record.description}
+                </Typography>
+              </CardContent>
+            </Card>
+          )}
+        </Grid>
+        <Grid item xs={12} md={6}>
+          {(loading) ?(
+            <CardProgress circular />
+          ) : (
+            <Card>
+              <CardContent>
+                <Typography variant="subtitle">
+                  {record.profile.fullName}
+                </Typography>
+              </CardContent>
+            </Card>
+          )}
+        </Grid>
+      </Grid>
+    </React.Fragment>
   );
 };
 
