@@ -48,9 +48,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('applications/{application}/download', 'ApplicationController@download')
         ->name('applications.download-cert');
     // Analytics
-    Route::prefix('analytics')->group(function () {
-        Route::get('home', 'AnalyticsController@home');
-    });
+    Route::get('home', 'AnalyticsController@home');
 
     // Roles
     Route::resource('roles', 'RoleController');
