@@ -17,7 +17,25 @@ import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
 import { useFetch } from "../../fetch";
 import isEmpty from 'is-empty';
+import fileDownload from 'js-file-download';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { apiURL } from '../../config';
+
+const url = `${apiURL}/report/applications`;
+
+const handleDownload = async () => {
+  const {
+    error,
+    response
+  } = await axios.get(url, { responseType: 'blob'})
+        .then(res => ({ response: res.data }))
+        .catch(error => ({ error: error.message.data }));
+
+  if (!isEmpty(response)) {
+    fileDownload(response, 'reporte.pdf');
+  }
+};
 
 const useGetTotals = (filterValues) => {
   const { total: pendings } = useGetList(
@@ -163,7 +181,7 @@ export default function(props) {
   return (
     <List {...props}
       title="Solicitudes"
-      actions={<ModuleActions />}
+      actions={<ModuleActions shouldExport handleClick={handleDownload}/>}
       filterDefaultValues={{ status: 'Pendientes' }}
       filters={<Filter defaultfilter='title'/>}
       bulkActionButtons={false}

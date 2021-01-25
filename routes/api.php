@@ -44,10 +44,10 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('organizations', 'OrganizationController')->except('edit');
 
     // Applications
+    Route::get('report/applications', 'AnalyticsController@report');
     Route::resource('applications', 'ApplicationController');
     Route::get('applications/{application}/download', 'ApplicationController@download')
         ->name('applications.download-cert');
-    Route::get('applications/report', 'ApplicationController@printReport');
     // Analytics
     Route::get('home', 'AnalyticsController@home');
 
@@ -56,5 +56,4 @@ Route::middleware('auth:api')->group(function () {
     Route::post('users/{user}/change-role', 'UserController@changeRole');
     Route::post('users/{user}/update-status', 'UserController@changeStatus');
 });
-
 

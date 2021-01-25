@@ -48,18 +48,6 @@ class ApplicationController extends Controller
         return $query->paginate($results);
     }
 
-    public function printReport(Request $request)
-    {
-        $applications = Application::query()->get();
-        $total = $query->count();
-        $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
-
-        $data = compact(['applications', 'emissionDate', 'total']);
-
-        $pdf = PDF::loadView('pdf.report', $data);
-        return $pdf->download('reporte-solicitudes.pdf');
-    }
-
     /**
      * Show the form for creating a new resource.
      *

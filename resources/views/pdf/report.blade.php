@@ -30,7 +30,7 @@
             }
             table {
                 border-collapse: collapse;
-                width: 100%;                
+                width: 100%;
                 margin-top: 5px;
             }
             .details td {
@@ -72,23 +72,24 @@
     <body>
         <div class="header">
             <div class="description">
+                <div style="float:left; padding-right: 20px;">
+                    <img src="{{ base_path().'/public/images/mayor_logo.jpg' }}" height="65px" width="85px" alt="logo" />
+                </div>
                <p>
-                REPÚBLICA BOLIVARIANA DE VENEZUELA<br>
-                ESTADO SUCRE<br>
-                ALCALDÍA DEL MUNICIPIO BERMÚDEZ<br>
-                DESPACHO MUNICIPAL<br>
-                RIF: G-20000222-1<br>
-                DIRECCIÓN: AV. CARABOBO, EDIFICIO MUNICIPAL
+                    REPÚBLICA BOLIVARIANA DE VENEZUELA<br>
+                    ALCALDÍA BOLIVARIANA DEL MUNICIPIO BERMÚDEZ<br>
+                    DESPACHO DE LA ALCALDÍA BOLIVARIANA DEL MUNICIPIO BERMÚDEZ<br>
+                    ESTADO SUCRE - MUNICIPIO BERMÚDEZ<br>
                 </p>
             </div>
             <div id="mayorLOGO">
-                <img src="{{ base_path().'/public/images/logo.png' }}" height="70px" width="130px" alt="logo" />
+                <img src="{{ base_path().'/public/images/logo.png' }}" height="60px" width="80px" alt="logo" />
             </div>
         </div>
-        
+
         <div class="tables">
            <table style="text-align: center">
-                <caption>REPORTE DE SOLICITUDES</caption>
+                <caption>REPORTE DE SOLICITUDES APROBADAS</caption>
                 <thead>
                   <tr>
                     <th width="10%">NO. SOLICITUD</th>
@@ -99,11 +100,11 @@
                 <tbody>
                 @foreach($applications as $application)
                  <tr>
-                    <td>{{ $application->num }}</td> 
-                    <td>{{ $application->title }}</td>   
+                    <td>{{ $application->num }}</td>
+                    <td>{{ $application->title }}</td>
                     <td>{{ $application->category->name }}</td>
                 </tr>
-                @endforeach   
+                @endforeach
              </table>
             <br>
             <div class="bill-info">
