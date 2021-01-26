@@ -27,6 +27,10 @@ export default function (props) {
     }
   };
 
+  if (!record) {
+    return null;
+  }
+
   const message = (record.active)
     ? `¿Desea inhabilitar al usuario ${record.profile.full_name}?`
     : `¿Desea habilitar el usuario ${record.profile.full_name}?`;

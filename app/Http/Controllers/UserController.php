@@ -43,6 +43,11 @@ class UserController extends Controller
                     return $query->whereLike('surname', $filters['surname']);
                 });
             }
+            if (array_key_exists('rol', $filters)) {
+                $query->whereHas('role', function ($query) use ($filters) {
+                    return $query->whereLike('name', $filters['rol']);
+                });
+            }
             if (array_key_exists('status', $filters)) {
                 $status = ($filters['status'] == 'Activos') ? 1 : 0;
                 $query->whereActive($status);
@@ -164,13 +169,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $role = Rol::find($request->role_id);
-
-        $user->role_id = $role->id;
-        $user->save();
+        $user->update(['role_id' => $request->get('role_id')]);;
 
         return response()->json([
-            'message' => 'Ha cambiado el rol a '.$role->name
+            'id' => $user->id,
+            'attributes' => $user
         ]);
     }
 

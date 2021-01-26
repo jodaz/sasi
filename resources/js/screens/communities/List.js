@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
   List,
-  Datagrid, 
+  Datagrid,
   SimpleList,
   TextField
 } from 'react-admin';
@@ -30,7 +30,7 @@ export default function(props) {
           <TextField source='name' label='Nombre' />
           <TextField source='applications_count' label='Solicitudes' />
           <TextField source='parish_names' label='Parroquia (s)' />
-          <Actions {...props} shouldShow shouldEdit shouldDelete={{ 'label': 'Eliminar' }} />
+          <Actions {...props} shouldShow shouldDelete={{ 'label': 'Eliminar' }} />
         </Datagrid>
       )}
     </List>

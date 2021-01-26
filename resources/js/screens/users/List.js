@@ -151,6 +151,7 @@ const UsersFilter = props => (
     <TextInput label="Buscar" source='email' alwaysOn />
     <TextInput label="Nombre" source="name" />
     <TextInput label="Apellido" source="surname" />
+    <TextInput label="Rol" source="rol" />
   </Filter>
 );
 

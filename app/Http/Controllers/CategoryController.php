@@ -48,7 +48,7 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->all());
 
-        return $category; 
+        return $category;
     }
 
     /**
@@ -71,7 +71,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return $category;
+        //
     }
 
     /**
@@ -86,14 +86,9 @@ class CategoryController extends Controller
         $category->update($request->all());
 
         return response()->json([
-            'success' => true,
-            'message' => '¡La categoría '.$category->name.' fue actualizada!'
+            'id' => $category->id,
+            'attributes' => $category
         ]);
-    }
-
-    public function deleteMany(Request $request)
-    {
-        dd($request->all());
     }
 
     /**

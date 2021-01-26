@@ -92,7 +92,13 @@ class CommunityController extends Controller
      */
     public function update(Request $request, Community $community)
     {
-        //
+        $community->name = $request->name;
+        $community->parishes()->sync($request->parishes);
+
+        return response()->json([
+            'id' => $user->id,
+            'attributes' => $user
+        ]);
     }
 
     /**

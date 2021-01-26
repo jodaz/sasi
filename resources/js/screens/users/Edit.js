@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Edit,
+  Toolbar,
   SaveButton,
   useRedirect,
   useNotify,
@@ -45,11 +46,11 @@ const UserEdit = (props) => {
   } = useEditController(props);
 
   return (
-    <Edit {...props} toolbar={<EditToolbar />} title={<UserName />} redirect={'/users'}>
+    <Edit {...props} title={<UserName />} redirect={'/users'}>
     { (isLoading)
         ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
         : (
-          <SimpleForm validate={validator}>
+          <SimpleForm toolbar={<EditToolbar />} validate={validator}>
             <SelectInput
               source="rol"
               label='Rol'
