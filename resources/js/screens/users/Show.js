@@ -1,44 +1,28 @@
 import * as React from "react";
-import { useShowController } from 'react-admin';
 import {
-  Card,
-  CircularProgress,
-  Grid,
-  Typography,
-  CardContent
-} from '@material-ui/core';
-import { CardProgress } from 'mui-extra';
-import isEmpty from 'is-empty';
+  Show,
+  TextField,
+  SimpleShowLayout,
+  DateField,
+  NumberField
+} from 'react-admin';
 
-const UserTitle = ({ record  }) => (
+const UserTitle = ({ record   }) => (
   <span>{record ? `${record.name}` : ''}</span>
 );
 
 const UserShow = (props) => {
-  const {
-    basePath,
-    loaded,
-    loading,
-    record,
-  } = useShowController(props);
-
   return (
-    <Grid>
-      <Grid item xs={12}>
-        {(loading) ?(
-          <CardProgress circular />
-          ) : (
-          <Card>
-            <CardContent>
-              <Typography>{record.name}</Typography>
-            </CardContent>
-          </Card>
-        )}
-      </Grid>
-    </Grid>
+    <Show {...props} title={<UserTitle />}>
+      <SimpleShowLayout>
+        <TextField source="profile.full_name" label="Nombre completo" />
+        <TextField source="profile.dni" label="Cédula" />
+        <TextField source="profile.address" label='Dirección' />
+        <TextField source="email" label='Correo electrónico' />
+        <TextField source="applications_count" label='Solicitudes enviadas' />
+      </SimpleShowLayout>
+    </Show>
   );
-};
+}
 
-export default function(props) {
-  return <UserShow {...props} />;
-};
+export default UserShow;

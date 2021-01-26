@@ -125,7 +125,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return Response($user->load('profile.applications', 'profile.organizations'));
+        $query = $user->load([
+                'profile.applications',
+                'profile.organizations'
+            ])->loadCount('applications');
+
+        return Response($query);
     }
 
     public function activate($token)

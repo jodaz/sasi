@@ -1,44 +1,28 @@
 import * as React from "react";
-import { useShowController } from 'react-admin';
 import {
-  Card,
-  CircularProgress,
-  Grid,
-  Typography,
-  CardContent
-} from '@material-ui/core';
-import { CardProgress } from 'mui-extra';
-import isEmpty from 'is-empty';
+  Show,
+  TextField,
+  SimpleShowLayout,
+  DateField,
+  NumberField
+} from 'react-admin';
 
-const OrganizationTitle = ({ record  }) => (
+const OrganizationTitle = ({ record   }) => (
   <span>{record ? `${record.name}` : ''}</span>
 );
 
 const OrganizationShow = (props) => {
-  const {
-    basePath,
-    loaded,
-    loading,
-    record,
-  } = useShowController(props);
-
   return (
-    <Grid>
-      <Grid item xs={12}>
-        {(loading) ?(
-          <CardProgress circular />
-          ) : (
-          <Card>
-            <CardContent>
-              <Typography>{record.title}</Typography>
-            </CardContent>
-          </Card>
-        )}
-      </Grid>
-    </Grid>
+    <Show {...props} title={<title />}>
+      <SimpleShowLayout>
+        <TextField source="name" label="Nombre" />
+        <TextField source="rif" label="RIF" />
+        <TextField source="full_address" label='Dirección' />
+        <TextField source="category.name" label='Categoría' />
+        <TextField source="applications_count" label='Solicitudes enviadas' />
+      </SimpleShowLayout>
+    </Show>
   );
-};
+}
 
-export default function(props) {
-  return <OrganizationShow {...props} />;
-};
+export default OrganizationShow;

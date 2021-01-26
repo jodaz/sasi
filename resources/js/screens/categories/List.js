@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  List, 
+  List,
   Datagrid,
   SimpleList,
   BulkDeleteButton,
@@ -23,13 +23,12 @@ export default function(props) {
         <SimpleList
           primaryText={record => `${record.name}`}
           secondaryText={record => `${record.applications_count} solicitudes`}
-          linkType={"show"}
         />
       ) : (
         <Datagrid>
           <TextField source='name' label='Nombre' />
           <TextField source='applications_count' label='Solicitudes' />
-          <Actions {...props} shouldEdit shouldShow shouldDelete />
+          <Actions {...props} shouldEdit shouldDelete />
         </Datagrid>
       )}
     </List>
