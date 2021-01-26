@@ -15,8 +15,7 @@ const ModuleActions = props => {
     filters,
     maxResults,
     shouldCreate,
-    handleClick,
-    shouldExport,
+    children,
     ...rest
   } = props;
   const {
@@ -37,7 +36,7 @@ const ModuleActions = props => {
         context: 'button',
       })}
       {shouldCreate && <CreateButton label="Agregar" basePath={basePath} />}
-      {shouldExport && <Button variant="outlined" color="primary" onClick={handleClick}>{'Imprimir'}</Button>}
+      {children}
     </TopToolbar>
   );
 };

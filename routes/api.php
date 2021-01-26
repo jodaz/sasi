@@ -44,7 +44,6 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('organizations', 'OrganizationController')->except('edit');
 
     // Applications
-    Route::get('report/applications', 'AnalyticsController@report');
     Route::resource('applications', 'ApplicationController');
     Route::get('applications/{application}/download', 'ApplicationController@download')
         ->name('applications.download-cert');

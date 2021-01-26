@@ -51,7 +51,24 @@ class ApplicationController extends Controller
             $query->whereProfileId($user->profile_id);
         }
 
+        if ($request->get('type')) {
+            return $this->report($query);
+        }
+
         return $query->paginate($results);
+    }
+
+    public function report($query)
+    {
+        $applications = $query->get();
+        $listName = strtoupper($applications->first()->state->list_name);
+        $total = $query->count();
+        $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
+
+        $data = compact(['applications', 'emissionDate', 'total', 'listName']);
+
+        $pdf = PDF::loadView('pdf.report', $data);
+        return $pdf->download('reporte-solicitudes.pdf');
     }
 
     /**

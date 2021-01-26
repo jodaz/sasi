@@ -12,6 +12,7 @@ import {
   useListContext,
   ListContextProvider
 } from 'react-admin';
+import ReportButton from './ReportButton';
 import MobileGrid from './MobileGrid';
 import DownloadButton from './DownloadButton';
 import ApproveButton from './ApproveButton';
@@ -20,25 +21,9 @@ import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
 import { useFetch } from "../../fetch";
 import isEmpty from 'is-empty';
-import fileDownload from 'js-file-download';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { apiURL } from '../../config';
-
-const url = `${apiURL}/report/applications`;
-
-const handleDownload = async () => {
-  const {
-    error,
-    response
-  } = await axios.get(url, { responseType: 'blob'})
-        .then(res => ({ response: res.data }))
-        .catch(error => ({ error: error.message.data }));
-
-  if (!isEmpty(response)) {
-    fileDownload(response, 'reporte.pdf');
-  }
-};
 
 const useGetTotals = (filterValues) => {
   const { total: pendings } = useGetList(
@@ -188,11 +173,17 @@ const ApplicationFilter = props => (
   </Filter>
 );
 
+const ApplicationsModuleActions = props => (
+  <ModuleActions {...props}>
+    <ReportButton />
+  </ModuleActions>
+);
+
 export default function(props) {
   return (
     <List {...props}
       title="Solicitudes"
-      actions={<ModuleActions shouldExport handleClick={handleDownload}/>}
+      actions={<ApplicationsModuleActions {...props}/>}
       filterDefaultValues={{ status: 'Pendientes' }}
       filters={<ApplicationFilter />}
       bulkActionButtons={false}

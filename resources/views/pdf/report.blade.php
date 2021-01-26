@@ -89,7 +89,7 @@
 
         <div class="tables">
            <table style="text-align: center">
-                <caption>REPORTE DE SOLICITUDES APROBADAS</caption>
+                <caption>REPORTE DE SOLICITUDES {{ $listName }}</caption>
                 <thead>
                   <tr>
                     <th width="10%">NO. SOLICITUD</th>
@@ -109,7 +109,7 @@
             <br>
             <div class="bill-info">
                 <div class="col-bill-info">
-                    FECHA: {{ $emissionDate }}
+                    FECHA DE EMISIÓN: {{ $emissionDate }}
                 </div>
             </div>
         </div>

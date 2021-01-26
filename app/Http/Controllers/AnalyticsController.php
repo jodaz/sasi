@@ -38,16 +38,4 @@ class AnalyticsController extends Controller
 
         return response()->json($data);
     }
-
-    public function report()
-    {
-        $applications = Application::withTrashed()->whereStateId(2)->orderBy('id', 'DESC')->get();
-        $total = $applications->count();
-        $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
-
-        $data = compact(['applications', 'emissionDate', 'total']);
-
-        $pdf = PDF::loadView('pdf.report', $data);
-        return $pdf->download('reporte-solicitudes.pdf');
-    }
 }
