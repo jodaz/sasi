@@ -34,6 +34,12 @@ class ApplicationController extends Controller
             if (array_key_exists('title', $filters)) {
                 $query->whereLike('title', $filters['title']);
             }
+            if (array_key_exists('created_at', $filters)) {
+                $query->whereDate('created_at', $filters['created_at']);
+            }
+            if (array_key_exists('num', $filters)) {
+                $query->whereLike('num', $filters['num']);
+            }
             if (array_key_exists('status', $filters)) {
                 $query->whereHas('state', function ($query) use ($filters) {
                     return $query->whereListName($filters['status']);

@@ -1,6 +1,9 @@
 import * as React from "react";
 import {
   List,
+  Filter,
+  TextInput,
+  DateInput,
   useGetList,
   ChipField,
   Datagrid,
@@ -12,7 +15,7 @@ import {
 import MobileGrid from './MobileGrid';
 import DownloadButton from './DownloadButton';
 import ApproveButton from './ApproveButton';
-import { Filter, ModuleActions } from '../../components';
+import { ModuleActions } from '../../components';
 import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
 import { useFetch } from "../../fetch";
@@ -177,13 +180,21 @@ const TabbedDataGrid = props => {
   );
 }
 
+const ApplicationFilter = props => (
+  <Filter {...props}>
+    <TextInput label="Buscar" source='title' alwaysOn />
+    <TextInput label="Número" source="num" />
+    <DateInput label="Enviado" source="created_at" />
+  </Filter>
+);
+
 export default function(props) {
   return (
     <List {...props}
       title="Solicitudes"
       actions={<ModuleActions shouldExport handleClick={handleDownload}/>}
       filterDefaultValues={{ status: 'Pendientes' }}
-      filters={<Filter defaultfilter='title'/>}
+      filters={<ApplicationFilter />}
       bulkActionButtons={false}
     >
       <TabbedDataGrid />
