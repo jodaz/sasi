@@ -33,6 +33,16 @@ class UserController extends Controller
             if (array_key_exists('email', $filters)) {
                 $query->whereLike('email', $filters['email']);
             }
+            if (array_key_exists('name', $filters)) {
+                $query->whereHas('profile', function ($query) use ($filters) {
+                    return $query->whereLike('first_name', $filters['name']);
+                });
+            }
+            if (array_key_exists('surname', $filters)) {
+                $query->whereHas('profile', function ($query) use ($filters) {
+                    return $query->whereLike('surname', $filters['surname']);
+                });
+            }
             if (array_key_exists('status', $filters)) {
                 $status = ($filters['status'] == 'Activos') ? 1 : 0;
                 $query->whereActive($status);

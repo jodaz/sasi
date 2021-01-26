@@ -16,6 +16,5 @@ export default (rol) => {
     (rol === 1) ? <Resource {...users} key={3}/> : null,
     (rol === 1) ? <Resource {...categories} key={4}/> : null,
     (rol === 1) ? <Resource {...communities} key={5} /> : null,
-    (rol === 1) ? <Resource name='help' key={6} /> : null
   ])
 };
