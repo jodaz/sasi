@@ -6,12 +6,22 @@ import {
   Grid,
   makeStyles
 } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../actions';
+import { useFetch } from '../../fetch';
 import NewApplication from './NewApplication';
 import isEmpty from 'is-empty';
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
   const { user } = useSelector(store => store.user);
+  const { response } = useFetch('user');
+
+  React.useEffect(() => {
+    if (!isEmpty(response)) {
+      dispatch(setUser(response.user));
+    }
+  }, [response]);
 
   return (
     <Grid container spacing={3}>
