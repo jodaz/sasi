@@ -12,6 +12,7 @@ import {
   useListContext,
   ListContextProvider
 } from 'react-admin';
+import { useSelector } from 'react-redux';
 import MobileGrid from './MobileGrid';
 import { ModuleActions } from '../../components';
 import { Actions } from '../../components';
@@ -59,6 +60,7 @@ const TabbedDataGrid = props => {
   const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
   const [active, setActive] = React.useState([]);
   const [deactive, setDeactive] = React.useState([]);
+  const user = useSelector(store => store.user.user);
   const totals = useGetTotals(filterValues);
 
   const handleChange = React.useCallback((e, newValue) => {
@@ -119,7 +121,7 @@ const TabbedDataGrid = props => {
                 <TextField label='Correo' source="email" />
                 <TextField label='Nombre' source="profile.full_name" />
                 <TextField label='Rol' source="role.name" />
-                <Actions shouldShow>
+                <Actions shouldShow shouldEdit={{ label: 'Cambiar rol' }}>
                   <ActiveStatusButton />
                 </Actions>
               </Datagrid>
@@ -132,7 +134,7 @@ const TabbedDataGrid = props => {
                 <TextField label='Correo' source="email" />
                 <TextField label='Nombre' source="profile.full_name" />
                 <TextField label='Rol' source="role.name" />
-                <Actions shouldShow>
+                <Actions shouldShow shouldEdit={{ label: 'Cambiar rol' }}>
                   <ActiveStatusButton />
                 </Actions>
               </Datagrid>

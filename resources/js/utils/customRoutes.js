@@ -8,13 +8,11 @@ import {
   SignUp
 } from '../components';
 import Dashboard from '../screens/dashboard';
-import ChangeRole from '../screens/users/ChangeRole';
 import Help from '../screens/help';
 
 export default [
   <Route exact path="/home" component={Dashboard} />,
   <Route exact path="/help" component={Help} />,
-  <Route exact path="/change-role" component={ChangeRole} />,
   <Route exact path="/update-password" component={UpdatePassword} />,
   <Route exact path="/login/:token?" component={Login} noLayout />,
   <Route exact path="/reset-password" component={ResetPassword} noLayout />,

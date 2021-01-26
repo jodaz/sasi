@@ -120,7 +120,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return Response($user->load('applications', 'organizations'));
+        return Response($user->load('profile.applications', 'profile.organizations'));
     }
 
     public function activate($token)
@@ -162,14 +162,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
-    }
-
-    public function changeRole(Request $request, User $user)
-    {
-        $role = Rol::find($request->rol_id);
+        $role = Rol::find($request->role_id);
 
         $user->role_id = $role->id;
         $user->save();
