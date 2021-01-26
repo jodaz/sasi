@@ -5,12 +5,15 @@ import {
   ChipField,
   Datagrid,
   TextField,
+  Filter,
+  TextInput,
+  DateInput,
   useDatagridStyles,
   useListContext,
   ListContextProvider
 } from 'react-admin';
 import MobileGrid from './MobileGrid';
-import { Filter, ModuleActions } from '../../components';
+import { ModuleActions } from '../../components';
 import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
 import { useFetch } from "../../fetch";
@@ -141,13 +144,21 @@ const TabbedDataGrid = props => {
   );
 }
 
+const UsersFilter = props => (
+  <Filter {...props}>
+    <TextInput label="Buscar" source='email' alwaysOn />
+    <TextInput label="Nombre" source="name" />
+    <TextInput label="Apellido" source="surname" />
+  </Filter>
+);
+
 export default function(props) {
   return (
     <List {...props}
       title="Usuarios"
       actions={<ModuleActions />}
       filterDefaultValues={{ status: 'Activos' }}
-      filters={<Filter defaultfilter='email'/>}
+      filters={<UsersFilter />}
       bulkActionButtons={false}
     >
       <TabbedDataGrid />

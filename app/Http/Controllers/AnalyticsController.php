@@ -7,6 +7,8 @@ use App\Category;
 use App\User;
 use App\State;
 use Illuminate\Http\Request;
+use PDF;
+use Carbon\Carbon;
 
 class AnalyticsController extends Controller
 {

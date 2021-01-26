@@ -1,12 +1,24 @@
 import * as React from "react";
 import {
-  List, 
-  Datagrid, 
+  List,
+  Datagrid,
+  Filter,
+  TextInput,
+  DateInput,
   SimpleList,
   TextField
 } from 'react-admin';
-import { Filter, Actions, ModuleActions } from '../../components';
+import { Actions, ModuleActions } from '../../components';
 import { useMediaQuery } from '@material-ui/core';
+
+const OrganizationFilter = props => (
+  <Filter {...props}>
+    <TextInput label="Buscar" source='name' alwaysOn />
+    <TextInput label="Dirección" source="address" />
+    <TextInput label="RIF" source="rif" />
+    <DateInput label="Ingreso" source="created_at" />
+  </Filter>
+);
 
 export default function(props) {
   const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -16,7 +28,7 @@ export default function(props) {
       {...props}
       title="Instituciones"
       actions={<ModuleActions shouldCreate/>}
-      filters={<Filter defaultfilter='name' />}
+      filters={<OrganizationFilter />}
       bulkActionButtons={false}
     >
       {isSmall ? (

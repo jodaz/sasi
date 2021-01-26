@@ -25,9 +25,18 @@ class OrganizationController extends Controller
 
         if ($request->has('filter')) {
             $filters = $request->filter;
-            // Get fields
-            $name = $filters['name'];
-            $query->whereLike('name', $name);
+            if (array_key_exists('rif', $filters)) {
+                $query->whereLike('rif', $filters['rif']);
+            }
+            if (array_key_exists('name', $filters)) {
+                $query->whereLike('name', $filters['name']);
+            }
+            if (array_key_exists('created_at', $filters)) {
+                $query->whereDate('created_at', $filters['created_at']);
+            }
+            if (array_key_exists('address', $filters)) {
+                $query->whereLike('address', $filters['address']);
+            }
         }
 
         if ($user->role_id == 3) {
