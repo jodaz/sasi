@@ -6,6 +6,7 @@ import {
   TopToolbar,
   CreateButton,
 } from 'react-admin';
+import { Button } from '@material-ui/core';
 
 const ModuleActions = props => {
   const {
@@ -14,6 +15,7 @@ const ModuleActions = props => {
     filters,
     maxResults,
     shouldCreate,
+    children,
     ...rest
   } = props;
   const {
@@ -34,6 +36,7 @@ const ModuleActions = props => {
         context: 'button',
       })}
       {shouldCreate && <CreateButton label="Agregar" basePath={basePath} />}
+      {children}
     </TopToolbar>
   );
 };

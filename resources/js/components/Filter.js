@@ -4,14 +4,16 @@ import {
   TextInput
 } from 'react-admin';
 
-const CustomFilter = (props) => { 
+const CustomFilter = (props) => {
   const {
-    defaultfilter
+    defaultfilter,
+    children
   } = props;
 
   return (
     <Filter {...props}>
       <TextInput label="Buscar" source={defaultfilter} alwaysOn />
+      {children}
     </Filter>
   );
 }

@@ -1,6 +1,9 @@
 import * as React from "react";
 import {
   List,
+  Filter,
+  TextInput,
+  DateInput,
   useGetList,
   ChipField,
   Datagrid,
@@ -9,15 +12,18 @@ import {
   useListContext,
   ListContextProvider
 } from 'react-admin';
+import ReportButton from './ReportButton';
 import MobileGrid from './MobileGrid';
 import DownloadButton from './DownloadButton';
 import ApproveButton from './ApproveButton';
-import { Filter, ModuleActions } from '../../components';
+import { ModuleActions } from '../../components';
 import { Actions } from '../../components';
 import { Tab, Tabs, Divider, useMediaQuery } from '@material-ui/core';
 import { useFetch } from "../../fetch";
 import isEmpty from 'is-empty';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { apiURL } from '../../config';
 
 const useGetTotals = (filterValues) => {
   const { total: pendings } = useGetList(
@@ -159,13 +165,27 @@ const TabbedDataGrid = props => {
   );
 }
 
+const ApplicationFilter = props => (
+  <Filter {...props}>
+    <TextInput label="Buscar" source='title' alwaysOn />
+    <TextInput label="Número" source="num" />
+    <DateInput label="Enviado" source="created_at" />
+  </Filter>
+);
+
+const ApplicationsModuleActions = props => (
+  <ModuleActions {...props}>
+    <ReportButton />
+  </ModuleActions>
+);
+
 export default function(props) {
   return (
     <List {...props}
       title="Solicitudes"
-      actions={<ModuleActions />}
+      actions={<ApplicationsModuleActions {...props}/>}
       filterDefaultValues={{ status: 'Pendientes' }}
-      filters={<Filter defaultfilter='title'/>}
+      filters={<ApplicationFilter />}
       bulkActionButtons={false}
     >
       <TabbedDataGrid />

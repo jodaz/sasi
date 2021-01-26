@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use App\Category;
+use App\State;
 use App\Http\Requests\CreateApplicationRequest;
 use Auth;
 use PDF;
@@ -33,6 +34,12 @@ class ApplicationController extends Controller
             if (array_key_exists('title', $filters)) {
                 $query->whereLike('title', $filters['title']);
             }
+            if (array_key_exists('created_at', $filters)) {
+                $query->whereDate('created_at', $filters['created_at']);
+            }
+            if (array_key_exists('num', $filters)) {
+                $query->whereLike('num', $filters['num']);
+            }
             if (array_key_exists('status', $filters)) {
                 $query->whereHas('state', function ($query) use ($filters) {
                     return $query->whereListName($filters['status']);
@@ -44,7 +51,24 @@ class ApplicationController extends Controller
             $query->whereProfileId($user->profile_id);
         }
 
+        if ($request->get('type')) {
+            return $this->report($query);
+        }
+
         return $query->paginate($results);
+    }
+
+    public function report($query)
+    {
+        $applications = $query->get();
+        $listName = strtoupper($applications->first()->state->list_name);
+        $total = $query->count();
+        $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
+
+        $data = compact(['applications', 'emissionDate', 'total', 'listName']);
+
+        $pdf = PDF::loadView('pdf.report', $data);
+        return $pdf->download('reporte-solicitudes.pdf');
     }
 
     /**
@@ -129,7 +153,7 @@ class ApplicationController extends Controller
     {
         $user = $application->profile;
         $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
-        
+
         return $pdf->download('certificado.pdf');
     }
 

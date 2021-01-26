@@ -56,4 +56,3 @@ Route::middleware('auth:api')->group(function () {
     Route::post('users/{user}/update-status', 'UserController@changeStatus');
 });
 
-
