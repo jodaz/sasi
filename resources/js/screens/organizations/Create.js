@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const rifFormatter = value => Math.max(0, parseInt(value) ).toString().slice(0,8);
+const rifFormatter = value => {
+  if (value) {
+    return Math.max(0, parseInt(value) ).toString().slice(0,8);
+  }
+}
 
 const validator = (values) => {
   const errors = {};
@@ -106,7 +110,6 @@ const CustomCreate = props => {
                     source="rif"
                     label="RIF"
                     parse={rifFormatter}
-                    resettable
                     fullWidth
                   />
                 </Grid>
