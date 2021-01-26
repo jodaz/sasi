@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const rifFormatter = value => Math.max(0, parseInt(value) ).toString().slice(0,8);
+
 const validator = (values) => {
   const errors = {};
 
@@ -100,7 +102,13 @@ const CustomCreate = props => {
                   <SelectInput source="organization_type_id" choices={data.types} label='Tipo (*)' fullWidth />
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                  <TextInput source="rif" label="RIF" resettable fullWidth />
+                  <TextInput
+                    source="rif"
+                    label="RIF"
+                    parse={rifFormatter}
+                    resettable
+                    fullWidth
+                  />
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} className={classes.child}>
                   <SelectInput source="category_id" choices={data.categories} label='Sector (*)' fullWidth />
