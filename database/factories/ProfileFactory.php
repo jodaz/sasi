@@ -24,6 +24,10 @@ $factory->define(Profile::class, function (Faker $faker) use ($genres, $claps, $
         'dni' => $faker->unique()->randomNumber,
         'clap_id' => 1,
         'birth_date' => $faker->dateTimeThisCentury->format('Y-m-d'),
+        'phone' => $faker->tollFreePhoneNumber,
+        'address' => $faker->address,
+        'community_id' => $community,
+        'parish_id' => $parish,
         'citizenship_id' => $citizen,
         'genre_id' => $genre
     ];

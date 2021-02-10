@@ -1,11 +1,12 @@
 import * as React from "react";
-import { cloneElement, useMemo } from 'react';
+import { cloneElement } from 'react';
 import {
   useListContext,
   sanitizeListRestProps,
   TopToolbar,
   CreateButton,
 } from 'react-admin';
+import { Button } from '@material-ui/core';
 
 const ModuleActions = props => {
   const {
@@ -14,6 +15,7 @@ const ModuleActions = props => {
     filters,
     maxResults,
     shouldCreate,
+    children,
     ...rest
   } = props;
   const {
@@ -33,7 +35,8 @@ const ModuleActions = props => {
         filterValues,
         context: 'button',
       })}
-      {shouldCreate && <CreateButton label="Agregar" basePath={basePath}/>}
+      {shouldCreate && <CreateButton label="Agregar" basePath={basePath} />}
+      {children}
     </TopToolbar>
   );
 };

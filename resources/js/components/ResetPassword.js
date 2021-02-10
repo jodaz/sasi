@@ -1,42 +1,21 @@
 import * as React from 'react';
 import { useState } from 'react';
-import {
-  useLogin, 
-  useNotify,
-  Notification,
-  Title
-} from 'react-admin';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../initializers';
+import SendIcon from '@material-ui/icons/Send';
+import LoadingButton from './LoadingButton';
 import {
   makeStyles,
-  Typography,
-  Box,
-  Grid,
-  Link,
-  FormControlLabel,
   TextField,
-  Button,
-  Avatar
+  Grid
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { useNotify } from 'react-admin';
 // Layout
 import Auth from './Auth';
-
-const ErrorTypo = (text) => (
-  <Typography variant="overline" color="error">
-    {text}
-  </Typography>
-);
+import { setErrors, postData, clearErrors } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -47,67 +26,81 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const [errors, setErrors] = useState({});
-  const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const login = useLogin();
   const notify = useNotify();
+  const classes = useStyles();
+  const [data, setData] = useState({});
+  const dispatch = useDispatch();
+  const errors = useSelector(store => store.errors.form);
+  const {
+    response,
+    loading,
+    success
+  } = useSelector(store => store.fetch);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ email, password })
-      .catch(() => notify('Correo o contraseña inválidos.'));
+    dispatch(postData(data, 'recover-account'));
   };
 
-  return (
-    <Auth>
-      <Title title='Inicio de sesión' />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Inicio de sesión
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <TextField
-            variant="outlined"
-            error={errors.email && true}
-            margin="normal"
-            fullWidth
-            id="login"
-            label="Correo electrónico"
-            name="email"
-            onChange={e => setEmail(e.target.value)}
-            required
-            helperText={errors.email && 'Ingrese su correo electrónico'}
-          />
-          <TextField
-            variant="outlined"
-            error={errors.password && true}
-            margin="normal"
-            fullWidth
-            name="password"
-            label="Contraseña"
-            type="password"
-            id="password"
-            onChange={e => setPassword(e.target.value)}
-            required
-            helperText={errors.password && 'Introduzca su contraseña'}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Acceder
-          </Button>
-        </form>
-      </div>
+  const handleData = (e) => {
+    const { name, value } = e.target;
 
-      <Notification />
+    setData({...data, [name]: value });
+    dispatch(setErrors({...errors, [name]: ''}));
+  }
+
+  React.useEffect(() => {
+    if (response.success) {
+      notify(response.message);
+      history.push('/check-email');
+    }
+  }, [response]);
+
+  React.useEffect(() => {
+    clearErrors();
+  }, []);
+
+  return (
+    <Auth title='Recuperar contraseña'>
+      <form className={classes.form} noValidate onSubmit={handleSubmit}>
+        <TextField
+          variant="outlined"
+          error={errors.email && true}
+          type='email'
+          margin="normal"
+          fullWidth
+          id="login"
+          label="Correo electrónico"
+          name="email"
+          onChange={handleData}
+          required
+          helperText={errors.email && errors.email}
+        />
+        <LoadingButton
+          type="submit"
+          variant="contained"
+          color='secondary'
+          classes={classes.submit}
+          icon={<SendIcon />} 
+          loading={loading}
+          fullWidth
+        >
+          Enviar
+        </LoadingButton>
+
+        <Grid container>
+          <Grid item xs>
+            <Link to="/login" variant="body2" style={{ textDecoration: 'none' }}>
+              {"Iniciar sesión"}
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link to="/register" variant="body2" style={{ textDecoration: 'none' }}>
+              {"¿No tiene una cuenta?"}
+            </Link>
+          </Grid>
+        </Grid>
+      </form>
     </Auth>
   );
 };

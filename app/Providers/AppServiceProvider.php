@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Builder::macro('whereLike', function (string $attribute, string $searchTerm) {
-            return $this->where($attribute, 'ILIKE', "%{$searchTerm}%");
+            return $this->where($attribute, 'LIKE', "%{$searchTerm}%");
         });
     }
 }

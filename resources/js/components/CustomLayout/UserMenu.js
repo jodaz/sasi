@@ -9,13 +9,6 @@ const MenuItems = forwardRef(({ onClick  }, ref) => (
   <>
     <MenuItemLink
       ref={ref}
-      to="/profile"
-      primaryText="Mi perfil"
-      leftIcon={<AccountBoxIcon />}
-      onClick={onClick} // close the menu on click
-    />
-    <MenuItemLink
-      ref={ref}
       to="/update-password"
       primaryText="Cambiar contraseña"
       leftIcon={<VpnKeyIcon />}

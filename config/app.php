@@ -57,6 +57,20 @@ return [
     'asset_url' => env('ASSET_URL', null),
 
     /*
+     * User seeder env
+     */
+
+    'first_name' => env('NAME', 'admin@admin.com'),
+
+    'surname' => env('SURNAME', 'admin@admin.com'),
+
+    'address' => env('ADDRESS', 'admin@admin.com'),
+
+    'dni' => env('DNI', 'admin@admin.com'),
+
+    'email' => env('EMAIL', 'admin@admin.com'),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
@@ -167,7 +181,6 @@ return [
          */
 
         Barryvdh\DomPDF\ServiceProvider::class,
-        Watson\Active\ActiveServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +243,5 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Active' => Watson\Active\Facades\Active::class
     ],
 ];

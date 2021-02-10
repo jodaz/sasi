@@ -1,103 +1,149 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import {
-  Create,
+  useCreate,
+  Title,
   TextInput,
   SimpleForm,
   SelectInput,
-  useQuery,
   Loading,
-  Error
+  useNotify,
+  useCreateController,
+  CreateContextProvider,
+  useRedirect
 } from 'react-admin';
-import isEmpty from 'is-empty';
+import { Typography, Grid, makeStyles, InputLabel, Box } from '@material-ui/core';
+import { useFetch } from '../../fetch';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%"
+  },
+  child: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1)
+  }
+}));
+
+const rifFormatter = value => {
+  if (value) {
+    return Math.max(0, parseInt(value) ).toString().slice(0,8);
+  }
+}
 
 const validator = (values) => {
   const errors = {};
 
-  if (!values.name) {
-    errors.description = ['Ingrese un asunto.'];
+  if (!values.rif || !values.rif.trim()) {
+    errors.rif = ['Ingrese el RIF.'];
   }
 
-  if (!values.categories.length) {
-    errors.categories = ['Seleccione una categoría.'];
+  if (!values.address || !values.address.trim()) {
+    errors.address = ['Ingrese la dirección.'];
+  }
+
+  if (!values.name || !values.name.trim()) {
+    errors.name = ['Ingrese un nombre.'];
+  }
+
+  if (!values.community_id) {
+    errors.community_id = ['Seleccione una comunidad.'];
+  }
+
+  if (!values.parish_id) {
+    errors.parish_id = ['Seleccione una parroquia.'];
+  }
+
+  if (!values.organization_type_id) {
+    errors.organization_type_id = ['Seleccione el tipo de la institución.'];
+  }
+
+  if (!values.category_id) {
+    errors.category_id = ['Seleccione el sector al cual pertenece.'];
   }
 
   return errors;
 }
 
-const OrganizationCreate = (props) => { 
-  const [communities, setCommunities] = useState({});
-  const [parish, setParish] = useState(-1);
-  const { data, loading, error } = useQuery({
-    type: 'NEW', 
-    resource: 'organizations'
-  });
+const CustomCreate = props => {
+  const [create] = useCreate('organizations');
+  const classes = useStyles();
+  const createControllerProps = useCreateController(props);
+  const { isLoading, response: data } = useFetch('organizations/create');
+  const notify = useNotify();
+  const redirect = useRedirect();
 
-  useEffect(() => {
-    if (parish !== -1) {
-      const comm = data.parishes.filter((parish) =>
-        parish.id === parish
-      ); 
-      () => setCommunities(comm); 
-    }
-  }, [parish]);
-  
-  useEffect(() => {
-    if (!loading) {
-      setCommunities(data.parishes[0].communities);
-    }
-  }, [loading]);
+  const handleSave = React.useCallback((values) => {
+    create({
+      payload: { data: { ...values } }
+    }, {
+      onSuccess: (response) => {
+        const { data: res } = response;
+        notify(`¡Ha realizado el registro de la institución ${res.name} de manera exitosa!`);
+        redirect('/organizations');
+      }
+    })
+  }, [create, notify, redirect]);
 
   return (
-    <Create {...props} title="Nueva institución">
-      { (loading)
-        ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
-        : ( 
-        <SimpleForm>
-          <SelectInput
-            source="types"
-            choices={data.types} 
-            label='Tipo (*)'
-            initialValue={1}
-          />
-          <TextInput
-            source="rif"
-            label="RIF"
-          />
-          <TextInput
-            source="name"
-            label="Nombre"
-          />
-          <SelectInput
-            source="parishes"
-            choices={data.parishes} 
-            label='Parroquia (*)'
-            onChange={e => setParish(e.target.value)}
-            initialValue={1}
-          />
-          { (!isEmpty(communities)) && (
-            <SelectInput
-              source="communities"
-              choices={communities} 
-              label='Comunidad (*)'
-              initialValue={1}
-            />
-          )}
-
-          <TextInput
-            source="address"
-            label="Dirección"
-          />
-          <SelectInput
-            source="categories"
-            choices={data.categories} 
-            label='Sector (*)'
-            initialValue={1}
-          />
-        </SimpleForm>
-      )}
-    </Create>
+    <CreateContextProvider value={createControllerProps}>
+      <Title title='Nueva institución' />
+      <Grid spacing={1}>
+        { (isLoading)
+          ? <Loading loadingPrimary="Cargando..." loadingSecondary="Cargando..." />
+          : (
+          <SimpleForm validate={validator} save={handleSave}>
+            <div className={classes.root}>
+              <Grid item xs={12} className={classes.child}>
+                <Typography variant="h6" gutterBottom>
+                  Información básica
+                </Typography>
+              </Grid>
+              <Grid container>
+                <Grid item xs={12} className={classes.child}>
+                  <TextInput source="name" label="Nombre" resettable fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="organization_type_id" choices={data.types} label='Tipo (*)' fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <TextInput
+                    source="rif"
+                    label="RIF"
+                    parse={rifFormatter}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="category_id" choices={data.categories} label='Sector (*)' fullWidth />
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item xs={12} className={classes.child}>
+                  <Typography variant="h6" gutterBottom>
+                    Dirección
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="parish_id" choices={data.parishes} label='Parroquia (*)' fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                  <SelectInput source="community_id" choices={data.communities} label='Comunidad (*)' fullWidth />
+                </Grid>
+                <Grid item xs={12} className={classes.child}>
+                  <TextInput source="address" label="Dirección" resettable fullWidth />
+                </Grid>
+              </Grid>
+            </div>
+          </SimpleForm>
+        )}
+      </Grid>
+    </CreateContextProvider>
   );
-};
+}
+
+const OrganizationCreate = (props) => (
+  <CustomCreate {...props} />
+);
 
 export default OrganizationCreate;
 

@@ -19,6 +19,8 @@ class Organization extends Model
         'community_id'
     ];
 
+    protected $appends = [ 'full_address' ];
+
     public function profile()
     {
         return $this->belongsTo(Profile::class);
@@ -53,5 +55,4 @@ class Organization extends Model
     {
         return "{$this->community->name} {$this->address}";
     }
-
 }

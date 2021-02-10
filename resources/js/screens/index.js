@@ -9,14 +9,14 @@ import claps from './claps';
 import axes from './axes';
 import communities from './communities';
 import organizations from './organizations';
+import help from './help';
 
-export default [
-  <Resource {...applications } />,
-  <Resource {...organizations} />,
-  <Resource {...users}/>,
-  <Resource {...axes} />,
-  <Resource {...claps} />,
-  <Resource {...categories} />,
-  <Resource  {...communities} />
-];
-
+export default (rol) => {
+  return ([
+    <Resource {...applications } key={1}/>,
+    <Resource {...organizations} key={2}/>,
+    (rol === 1) ? <Resource {...users} key={3}/> : null,
+    (rol === 1) ? <Resource {...categories} key={4}/> : null,
+    (rol === 1) ? <Resource {...communities} key={5} /> : null,
+  ])
+};

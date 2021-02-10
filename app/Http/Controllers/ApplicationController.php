@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application;
 use App\Category;
+use App\State;
 use App\Http\Requests\CreateApplicationRequest;
 use Auth;
 use PDF;
@@ -21,19 +22,53 @@ class ApplicationController extends Controller
     public function index(Request $request)
     {
         $results = $request->perPage;
+        $user = $request->user();
 
-        $query = Application::latest()
-            ->with(['category', 'state']);
+        $query = Application::withTrashed()
+            ->latest()
+            ->with('category');
 
         if ($request->has('filter')) {
             $filters = $request->filter;
             // Get fields
-            $description = $filters['description'];
-            
-            $query->whereLike('description', $description);
+            if (array_key_exists('title', $filters)) {
+                $query->whereLike('title', $filters['title']);
+            }
+            if (array_key_exists('created_at', $filters)) {
+                $query->whereDate('created_at', $filters['created_at']);
+            }
+            if (array_key_exists('num', $filters)) {
+                $query->whereLike('num', $filters['num']);
+            }
+            if (array_key_exists('status', $filters)) {
+                $query->whereHas('state', function ($query) use ($filters) {
+                    return $query->whereListName($filters['status']);
+                });
+            }
+        }
+
+        if ($user->role_id == 3) {
+            $query->whereProfileId($user->profile_id);
+        }
+
+        if ($request->get('type')) {
+            return $this->report($query);
         }
 
         return $query->paginate($results);
+    }
+
+    public function report($query)
+    {
+        $applications = $query->get();
+        $listName = strtoupper($applications->first()->state->list_name);
+        $total = $query->count();
+        $emissionDate = date('d-m-Y', strtotime(Carbon::now()));
+
+        $data = compact(['applications', 'emissionDate', 'total', 'listName']);
+
+        $pdf = PDF::loadView('pdf.report', $data);
+        return $pdf->download('reporte-solicitudes.pdf');
     }
 
     /**
@@ -63,6 +98,10 @@ class ApplicationController extends Controller
 
         $profile->applications()->save($application);
 
+        if ($request->has('institution_id')) {
+            $application->organization()->sync($request->institution_id);
+        }
+
         return response()->json([
             'success' => true,
             'message' => '¡Solicitud recibida!'
@@ -77,7 +116,7 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+        return Response($application->load(['category', 'state', 'profile']));
     }
 
     /**
@@ -106,15 +145,15 @@ class ApplicationController extends Controller
 
         return Response([
             'success' => true,
-            'message' => '¡Solicitud aprobada!'
+            'message' => '¡La solicitud '.'#'.$application->num.' fue aprobada!'
         ]);
     }
 
     public function download(Application $application)
     {
-        $user = $application->user;
+        $user = $application->profile;
         $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
-        
+
         return $pdf->download('certificado.pdf');
     }
 
@@ -132,11 +171,11 @@ class ApplicationController extends Controller
                 'message' => 'Las solicitudes aprobadas no pueden ser borradas'
             ]);
         }
-        $application->delete();
+        $application->update([ 'state_id' => 3 ]);
 
         return Response([
             'success' => true,
-            'message' => '¡Solicitud borrada!'
+            'message' => '¡Ha rechazado la solicitud #'.$application->num.'!'
         ]);
     }
 }

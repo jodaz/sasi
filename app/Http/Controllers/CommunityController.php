@@ -53,9 +53,10 @@ class CommunityController extends Controller
         ]);
         $community->parishes()->sync($request->parishes);
 
-        return response()->json([
+        return Response([
             'success' => true,
-            'message' => '¡La comunidad '.$community->name.' ha sido creada!'
+            'id' => $community->id,
+            'attributes' => $community
         ]);
     }
 
@@ -67,7 +68,8 @@ class CommunityController extends Controller
      */
     public function show(Community $community)
     {
-        return $community->load('parishes');
+        return $community->load(['applications'])
+            ->loadCount('applications');
     }
 
     /**
@@ -90,7 +92,13 @@ class CommunityController extends Controller
      */
     public function update(Request $request, Community $community)
     {
-        //
+        $community->name = $request->name;
+        $community->parishes()->sync($request->parishes);
+
+        return response()->json([
+            'id' => $user->id,
+            'attributes' => $user
+        ]);
     }
 
     /**

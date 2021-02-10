@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-require('dotenv').config();
+const { MIX_PROXY_URL } = process.env;
 
 /*
  |--------------------------------------------------------------------------
@@ -13,7 +13,14 @@ require('dotenv').config();
  */
 
 mix.react('resources/js/bootstrap.js', 'public/js/app.js')
-  .sass('resources/sass/app.scss', 'public/css');
+  .sass('resources/sass/app.scss', 'public/css')
+  .browserSync({
+    files: [
+      'public/js/**/*',
+      'public/css/**/*',
+    ],
+    proxy: `${MIX_PROXY_URL}`
+  });
 
 if (mix.inProduction()) {
   mix.version();

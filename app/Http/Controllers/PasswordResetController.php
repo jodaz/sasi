@@ -24,8 +24,10 @@ class PasswordResetController extends Controller
         if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => '¡No pudimos encontrar a un usuario con ese correo electrónico!'
-            ]);
+                'errors' => [
+                    'email' => '¡No pudimos encontrar a un usuario con ese correo electrónico!'
+                ]
+            ], 400);
         }
 
         $hash = bin2hex(random_bytes(60));

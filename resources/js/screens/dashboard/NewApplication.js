@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
   makeStyles,
-  CircularProgress,
   Card,
   Grid,
   CardContent,
@@ -11,6 +9,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { useRedirect } from 'react-admin';
+import isEmpty from 'is-empty';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,21 +28,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewApplication() {
+export default function NewApplication({ profile }) {
   const classes = useStyles();
   const redirect = useRedirect();
-  //const user = useSelector(store => store.user.user);
-  const user = {
-    full_name: 'Jesus Ordosgoitty',
-    applications: []
-  }
 
-  return (
+  return (<>{
+    (!isEmpty(profile)) &&
     <Grid item xs={12}>
       <Card className={classes.root}>
         <CardContent className={classes.details}>
           <Typography component="h5" variant="h5">
-            {user.full_name}
+            {profile.full_name}
           </Typography>
           <CardActions>
             <Button
@@ -60,7 +55,7 @@ export default function NewApplication() {
         </CardContent>
         <div className={classes.cover}>
           <Typography variant="h2">
-            {user.applications.length}
+            {profile.applications.length}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             Solicitudes enviadas
@@ -68,6 +63,6 @@ export default function NewApplication() {
         </div>
       </Card>
     </Grid>
-  );
+  }</>);
 };
 

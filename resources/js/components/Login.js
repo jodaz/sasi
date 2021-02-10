@@ -9,11 +9,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Layout
 import Auth from './Auth';
 import { setAuthToken } from '../utils';
-import { clearAll, setErrors, postData, setUser, clearErrors } from '../actions';
+import { clearAll, setErrors, postData, setUser, setNotifications, clearErrors } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../initializers';
 import LoadingButton from './LoadingButton';
-import { Link } from 'react-router-dom';
+import isEmpty from 'is-empty';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -35,6 +37,7 @@ const Login = () => {
     loading,
     success
   } = useSelector(store => store.fetch);
+  const { token } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +52,14 @@ const Login = () => {
   }
 
   React.useEffect(() => {
+    clearErrors();
+    if (!isEmpty(token)) {
+      axios.get(`/activate-account/${token}`)
+        .then(res => dispatch(setNotifications(res.data.message)));
+    }
+  }, []);
+
+  React.useEffect(() => {
     if (success) {
       const { token, user } = response;
       setAuthToken(token);
@@ -59,7 +70,7 @@ const Login = () => {
   }, [success]);
 
   return (
-    <Auth title='Iniciar sesión'>
+    <Auth title='Inicio de sesión'>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
@@ -92,7 +103,7 @@ const Login = () => {
           variant="contained"
           color='secondary'
           classes={classes.submit}
-          icon={<ExitToAppIcon />} 
+          icon={<ExitToAppIcon />}
           loading={loading}
           fullWidth
         >
@@ -100,14 +111,9 @@ const Login = () => {
         </LoadingButton>
 
         <Grid container>
-          <Grid item xs>
-            <Link to="/forget-password" variant="body2">
-              {"¿Olvidó su contraseña?"}
-            </Link>
-          </Grid>
           <Grid item>
-            <Link to="/register" variant="body2">
-              {"Registro"}
+            <Link to="/register" variant="body2" style={{ textDecoration: 'none' }}>
+              {"Registrarme"}
             </Link>
           </Grid>
         </Grid>

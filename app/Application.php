@@ -13,6 +13,7 @@ class Application extends Model
     protected $table = 'applications';
 
     protected $fillable = [
+        'title',
         'description',
         'quantity',
         'profile_id',
@@ -40,6 +41,11 @@ class Application extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getApprovedAtAttribute($value)
+    {
+        return Date('d/m/Y', strtotime($value));
     }
 
     public function getCreatedAtAttribute($value)

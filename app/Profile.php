@@ -13,6 +13,8 @@ class Profile extends Model
         'first_name',
         'surname',
         'second_name',
+        'address',
+        'phone',
         'second_surname',
         'birth_date',
         'phone',

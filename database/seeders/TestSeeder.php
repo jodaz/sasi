@@ -19,7 +19,7 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-        // Create categories
+        // Create axis
         $parishes = Parish::all();
         $categories = factory(Category::class, 16)->create();
         $axes = factory(Axis::class, 10)->create()->each(function ($axis) use ($parishes) {
@@ -38,13 +38,15 @@ class TestSeeder extends Seeder
                         ->save();
                 });
         });
-        
+        $categories = factory(Category::class, 5)->create();
+
         // Create users
         factory(Profile::class, 100)
             ->create()
             ->each(function ($profile) use ($categories) {
                 $category = $categories->random(1)->first();
-                
+
+                $user = $profile->user()->save(factory(User::class)->make());
 
                 // Create applications
                 factory(Application::class, rand(1, 5))
@@ -56,7 +58,7 @@ class TestSeeder extends Seeder
                             ->save();
                     });
             });
-        
+
         // Admin user
         $admin = Profile::create([
             'first_name' => 'Jesús',
@@ -69,13 +71,13 @@ class TestSeeder extends Seeder
             'dni' => '27572434',
         ]);
         $admin->user()->create([
-            'email' => 'jesuodz@gmail.com',
+            'email' => 'admin@admin.com',
             'password' => bcrypt('qwerty123'),
             'role_id' => 1,
             'active' => true,
             'activation_token' => Str::random(60),
         ]);
-        
+
         // Analyst user
         $analyst = Profile::create([
             'first_name' => 'Andreina',
@@ -87,7 +89,7 @@ class TestSeeder extends Seeder
             'clap_id' => 1
         ]);
         $analyst->user()->create([
-            'email' => 'nomesetucorreo@gmail.com',
+            'email' => 'analista@gmail.com',
             'password' => bcrypt('qwerty123'),
             'role_id' => 2,
             'active' => true,

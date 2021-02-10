@@ -5,12 +5,12 @@ import Show from './Show';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
 export default {
-    name: "applications",
-    list: List,
-    show: Show,
-    create: Create,
-    icon: <TelegramIcon />,
-    options: {
-      label: 'Solicitudes'
-    }
+  name: "applications",
+  list: List,
+  show: Show,
+  create: Create,
+  icon: <TelegramIcon />,
+  options: {
+    label: 'Solicitudes'
+  }
 }

@@ -8,6 +8,7 @@ use App\Community;
 use App\Parish;
 use App\OrganizationType;
 use App\Category;
+use App\Http\Requests\CreateOrganizationRequest;
 
 class OrganizationController extends Controller
 {
@@ -20,12 +21,26 @@ class OrganizationController extends Controller
     {
         $query = Organization::query()->withCount('applications');
         $results = $request->perPage;
+        $user = $request->user();
 
         if ($request->has('filter')) {
             $filters = $request->filter;
-            // Get fields
-            $name = $filters['name'];
-            $query->whereLike('name', $name);
+            if (array_key_exists('rif', $filters)) {
+                $query->whereLike('rif', $filters['rif']);
+            }
+            if (array_key_exists('name', $filters)) {
+                $query->whereLike('name', $filters['name']);
+            }
+            if (array_key_exists('created_at', $filters)) {
+                $query->whereDate('created_at', $filters['created_at']);
+            }
+            if (array_key_exists('address', $filters)) {
+                $query->whereLike('address', $filters['address']);
+            }
+        }
+
+        if ($user->role_id == 3) {
+            $query->whereProfileId($user->profile_id);
         }
 
         return $query->paginate($results);
@@ -40,7 +55,8 @@ class OrganizationController extends Controller
     {
         return Response([
             'categories' => Category::get(),
-            'parishes' => Parish::with('communities')->get(),
+            'communities' => Community::get(),
+            'parishes' => Parish::get(),
             'types' => OrganizationType::get()
         ]);
     }
@@ -51,23 +67,16 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOrganizationRequest $request)
     {
         $profile = $request->user()->profile;
 
-        $organization = $profile->organizations()->create([
-            'name' => $request->get('name'),
-            'rif' => $request->get('rif'),
-            'address' => $request->get('address'),
-            'category_id' => $request->get('categories'),
-            'parish_id' => $request->get('parishes'),
-            'organization_type_id' => $request->get('types'),
-            'community_id' => $request->get('communities')
-        ]);
+        $organization = $profile->organizations()->create($request->all());
 
         return Response([
             'success' => true,
-            'message' => '¡Ha agregado a '.$organization->name.' con éxito'
+            'id' => $organization->id,
+            'attributes' => $organization
         ]);
     }
 
@@ -77,9 +86,13 @@ class OrganizationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Organization $organization)
     {
-        //
+        $organization = $organization->load([
+            'category'
+        ])->loadCount('applications');
+
+        return Response($organization);
     }
 
     /**

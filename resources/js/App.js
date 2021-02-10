@@ -4,18 +4,12 @@ import { useNotify, Admin, Resource } from 'react-admin';
 import { createMuiTheme } from '@material-ui/core';
 import { customRoutes } from './utils';
 import { green, purple } from '@material-ui/core/colors';
-import { setAuthToken, useAuth, useRedirect } from './utils';
-import { clearAll, getData, setUser } from './actions';
+import isEmpty from 'is-empty';
 // Icons
 import { Loading, Login, Layout } from './components';
-import { clearNotifications } from './actions';
-
-import {
-  dataProvider,
-  i18nProvider,
-  history
-} from './initializers';
-
+import { clearNotifications, setUser } from './actions';
+import { useFetch } from './fetch';
+import { dataProvider, i18nProvider, history } from './initializers';
 // Screens
 import Screens from './screens';
 
@@ -32,36 +26,48 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
-  const isAuth = useAuth('sasiToken');
-  const redirect = useRedirect(location, history, isAuth);
+  const { pathname } = location;
+  const { response } = useFetch('user');
   const store = useSelector(store => store);
   const notify = useNotify();
   const dispatch = useDispatch();
-  const { response, loading, success } = store.fetch;
   const { notifications } = store;
-      
+  const { user } = store.user;
+  const [rol, setRol] = React.useState(0);
+
   React.useEffect(() => {
     if (notifications.show) {
       notify(notifications.message);
       dispatch(clearNotifications());
     }
   }, [notifications]);
+
+  React.useEffect(() => {
+    if (!isEmpty(response)) {
+      dispatch(setUser(response.user));
+    }
+  }, [response]);
  
   // Check if authenticated
   React.useEffect(() => {
-    if (isAuth) {
-      (() => dispatch(getData('user')))();
+    let route = pathname;
+
+    if (!isEmpty(localStorage.sasiToken)) {
+      route = (route == '/login' || route == '/') ? '/home' : route;
     } else {
-      setAuthToken();
+      route = '/login';
     }
-  }, [isAuth]);
+
+    history.push(route);
+  }, []);
 
   React.useEffect(() => {
-    if (success) {
-      dispatch(setUser(response));
-      dispatch(clearAll());
+    if (!isEmpty(user)) {
+      setRol(user.role_id);
     }
-  }, [success]);
+  }, [user]);
+
+  const resources = Screens(rol).filter(Boolean);
 
   return (
     <Admin
@@ -72,8 +78,9 @@ export default function App() {
       customRoutes={customRoutes}
       theme={theme}
       ready={Loading}
+      i18nProvider={i18nProvider}
     >
-      { isAuth ? Screens : <></>}
+      {resources}
     </Admin>
   );
 }

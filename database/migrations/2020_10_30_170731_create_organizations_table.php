@@ -16,7 +16,7 @@ class CreateOrganizationsTable extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('rif');
+            $table->string('rif')->unique()->index();
             $table->string('address');
             $table->unsignedBigInteger('parish_id');
             $table->unsignedBigInteger('profile_id');
