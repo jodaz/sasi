@@ -10,6 +10,16 @@ class Parish extends Model
 
     protected $fillable = [ 'name' ];
 
+    public function axes()
+    {
+        return $this->belongsToMany(Axis::class);
+    }
+
+    public function claps()
+    {
+        return $this->hasMany(Clap::class);
+    }
+
     public function communities()
     {
         return $this->belongsToMany(Community::class, 'community_parish');

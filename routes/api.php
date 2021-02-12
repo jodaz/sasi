@@ -41,6 +41,9 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('communities', 'CommunityController');
     Route::post('categories/delete', 'CategoryController@deleteMany');
     Route::resource('categories', 'CategoryController');
+    Route::resource('axes', 'AxisController');
+    Route::resource('claps', 'ClapController');
+    Route::resource('organizations', 'OrganizationController');
     Route::resource('organizations', 'OrganizationController')->except('edit');
 
     // Applications

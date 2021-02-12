@@ -16,25 +16,25 @@ class Profile extends Model
         'address',
         'phone',
         'second_surname',
-        'community_id',
-        'parish_id',
+        'birth_date',
+        'phone',
+        'clap_id',
         'citizenship_id',
         'genre_id'
     ];
 
     protected $appends = [
         'full_name',
-        'full_address'
     ];
+
+    public function familyLink()
+    {
+        return $this->hasOne(FamilyLink::class);
+    }
 
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->second_name} {$this->surname} {$this->second_surname}";
-    }
-
-    public function getFullAddressAttribute()
-    {
-        return "{$this->parish->name}, {$this->community->name}, {$this->address}";
     }
 
     public function citizenship()
@@ -52,14 +52,9 @@ class Profile extends Model
         return $this->belongsTo(Genre::class);
     }
 
-    public function parish()
+    public function clap()
     {
-        return $this->belongsTo(Parish::class);
-    }
-
-    public function community()
-    {
-        return $this->belongsTo(Community::class);
+        return $this->belongsTo(Clap::class);
     }
 
     public function applications()
@@ -71,4 +66,12 @@ class Profile extends Model
     {
         return $this->hasMany(Organization::class);
     }
+<<<<<<< HEAD
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->second_name} {$this->surname} {$this->second_surname}";
+    }
+=======
+>>>>>>> master
 }

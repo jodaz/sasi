@@ -5,6 +5,8 @@ import { Resource } from 'react-admin';
 import users from './users';
 import applications from './applications';
 import categories from './categories';
+import claps from './claps';
+import axes from './axes';
 import communities from './communities';
 import organizations from './organizations';
 import help from './help';
