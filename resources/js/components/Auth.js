@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     alignItems: 'center',
     justifyContent: 'center',
-    background: `url(${background})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
   },

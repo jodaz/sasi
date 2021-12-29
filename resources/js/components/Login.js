@@ -109,14 +109,6 @@ const Login = () => {
         >
           Acceder
         </LoadingButton>
-
-        <Grid container>
-          <Grid item>
-            <Link to="/register" variant="body2" style={{ textDecoration: 'none' }}>
-              {"Registrarme"}
-            </Link>
-          </Grid>
-        </Grid>
       </form>
     </Auth>
   );
