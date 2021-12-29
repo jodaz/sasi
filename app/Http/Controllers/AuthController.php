@@ -29,7 +29,7 @@ class AuthController extends Controller
                 ]
             ], 401);
         }
-        $user = Auth::user()->load('profile.applications', 'profile.organizations');
+        $user = Auth::user();
 
         $tokenResult = $user->createToken('authToken');
 

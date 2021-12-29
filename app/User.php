@@ -9,8 +9,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-    use HasApiTokens;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -37,11 +36,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'active' => 'boolean'
     ];
-
-    public function profile()
-    {
-        return $this->belongsTo(Profile::class);
-    }
 
     public function role()
     {

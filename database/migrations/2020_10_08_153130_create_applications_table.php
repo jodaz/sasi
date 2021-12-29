@@ -21,12 +21,12 @@ class CreateApplicationsTable extends Migration
             $table->integer('quantity')->default(0);
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('state_id');
-            $table->unsignedBigInteger('profile_id');
+            $table->unsignedBigInteger('person_id');
             $table->foreign('category_id')->references('id')->on('categories')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('state_id')->references('id')->on('states')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('profile_id')->references('id')->on('profiles')
+            $table->foreign('person_id')->references('id')->on('people')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('approved_at')->nullable();
             $table->softDeletes();

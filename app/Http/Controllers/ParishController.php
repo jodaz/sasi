@@ -12,9 +12,12 @@ class ParishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Parish::get();
+        $query = Parish::query();
+        $results = $request->perPage;
+
+        return $query->paginate($results);
     }
 
     /**

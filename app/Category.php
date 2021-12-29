@@ -10,11 +10,6 @@ class Category extends Model
 
     protected $fillable = [ 'name' ];
 
-    public function organizations()
-    {
-        return $this->hasMany(Organization::class);
-    }
-
     public function applications()
     {
         return $this->hasMany(Application::class);

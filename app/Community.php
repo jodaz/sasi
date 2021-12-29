@@ -20,17 +20,12 @@ class Community extends Model {
 
     public function applications()
     {
-        return $this->hasManyThrough(Application::class, Profile::class);
+        return $this->hasManyThrough(Application::class, Person::class);
     }
 
-    public function profile()
+    public function people()
     {
-        return $this->hasMany(Profile::class);
-    }
-
-    public function organizations()
-    {
-       return $this->hasMany(Organization::class);
+        return $this->hasMany(Person::class);
     }
 
     public function getParishNamesAttribute()

@@ -27,7 +27,6 @@ class CommunityController extends Controller
         }
 
         return $query->paginate($results);
-
     }
 
     /**

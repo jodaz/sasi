@@ -15,9 +15,9 @@ class Parish extends Model
         return $this->belongsToMany(Community::class, 'community_parish');
     }
 
-    public function profiles()
+    public function people()
     {
-        return $this->hasMany(Profile::class);
+        return $this->hasMany(Person::class);
     }
 
     public function organizations()

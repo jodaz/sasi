@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Application;
 use App\Category;
 use App\State;
+use App\Person;
 use App\Http\Requests\CreateApplicationRequest;
 use Auth;
 use PDF;
@@ -89,18 +90,23 @@ class ApplicationController extends Controller
      */
     public function store(CreateApplicationRequest $request)
     {
-        $profile = $request->user()->profile;
+        $person = Person::create([
+            'dni' => $request->dni,
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'community_id' => $request->community_id,
+            'parish_id' => $request->parish_id,
+            'genre_id' => $request->genre_id,
+            'citizenship_id' => $request->citizenship_id
+        ]);
         $category = $request->get('category');
         $application = new Application($request->all());
         $application->num = Application::getNewNum();
         $application->state_id = 1;
         $application->category_id = $category;
 
-        $profile->applications()->save($application);
-
-        if ($request->has('institution_id')) {
-            $application->organization()->sync($request->institution_id);
-        }
+        $person->applications()->save($application);
 
         return response()->json([
             'success' => true,

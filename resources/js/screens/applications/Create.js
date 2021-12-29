@@ -10,11 +10,15 @@ import {
   useNotify,
   useCreateController,
   CreateContextProvider,
-  useRedirect
+  useRedirect,
+  ReferenceInput
 } from 'react-admin';
-import isEmpty from 'is-empty';
 import { useSelector } from 'react-redux';
-import { Typography, Grid, makeStyles, InputLabel, Box } from '@material-ui/core';
+import { 
+  Typography, 
+  Grid, 
+  makeStyles
+} from '@material-ui/core';
 import { useFetch } from '../../fetch';
 
 const useStyles = makeStyles((theme) => ({
@@ -57,8 +61,9 @@ const validator = (values) => {
   return errors;
 }
 
+const optionRenderer = choice => `${choice.name}`;
+
 const ApplicationCreate = (props) => {
-  const user = useSelector(store => store.user.user);
   const [create] = useCreate('applications');
   const classes = useStyles();
   const createControllerProps = useCreateController(props);
@@ -73,7 +78,7 @@ const ApplicationCreate = (props) => {
       onSuccess: (response) => {
         const { data: res } = response;
         notify(`¡Su solicitud ha sido enviada con éxito!`);
-        redirect('/home');
+        redirect('/applications');
       }
     })
   }, [create, notify, redirect]);
@@ -87,25 +92,54 @@ const ApplicationCreate = (props) => {
         : (
           <SimpleForm validate={validator} save={handleSave}>
             <div className={classes.root}>
-              <Grid container className={classes.child}>
-                <TextInput source="title" label="Título" multiline fullWidth />
-                <TextInput source="description" label="Mensaje" multiline fullWidth />
-              </Grid>
               <Grid container>
-                { (!isEmpty(user) && !isEmpty(user.profile.organizations)) &&
-                  <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                    <SelectInput
-                      label="Institución"
-                      source="institution_id"
-                      choices={user.profile.organizations} fullWidth
-                    />
+                <Grid container>
+                  <Typography variant="subtitle1">
+                    Crear solicitud
+                  </Typography>
+                  <Grid container className={classes.child}>
+                    <TextInput source="title" label="Título" multiline fullWidth />
+                    <TextInput source="description" label="Mensaje" multiline fullWidth />
                   </Grid>
-                }
-                <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                  <SelectInput label="Categoría" source="category" choices={data} fullWidth/>
+                  <Grid container>
+                    <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                      <SelectInput label="Categoría" source="category" choices={data} fullWidth/>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={4} className={classes.child}>
+                      <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
+                    </Grid>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                  <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
+                <Grid container spacing={2}>
+                  <Typography variant="subtitle1">
+                    Usuario
+                  </Typography>
+                  <Grid item xs={12} sm={6}>
+                    <TextInput source="name" label="Nombre" fullWidth />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextInput source="dni" label="Cédula" fullWidth />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <ReferenceInput label="Nacionalidad" source="citizenship_id" reference="citizenships">
+                        <SelectInput optionText="name" source="name" />
+                    </ReferenceInput>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <ReferenceInput label="Parroquia" source="parish_id" reference="parishes">
+                      <SelectInput optionText={optionRenderer} source="name" />
+                    </ReferenceInput>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <ReferenceInput label="Comunidad" source="community_id" reference="communities">
+                      <SelectInput optionText={optionRenderer} source="name" />
+                    </ReferenceInput>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <ReferenceInput label="Género" source="genre_id" reference="genres">
+                        <SelectInput optionText={optionRenderer} source="name" />
+                    </ReferenceInput>
+                  </Grid>
                 </Grid>
               </Grid>
             </div>

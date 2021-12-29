@@ -41,7 +41,8 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('communities', 'CommunityController');
     Route::post('categories/delete', 'CategoryController@deleteMany');
     Route::resource('categories', 'CategoryController');
-    Route::resource('organizations', 'OrganizationController')->except('edit');
+    Route::get('citizenships', 'CitizenshipController@index');
+    Route::get('genres', 'GenreController@index');
 
     // Applications
     Route::resource('applications', 'ApplicationController');

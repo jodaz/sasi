@@ -19,7 +19,7 @@ class Application extends Model
         'profile_id',
         'category_id',
         'state_id',
-        'profile_id',
+        'person_id',
         'approved_at'
     ];
 
@@ -28,9 +28,9 @@ class Application extends Model
         return $this->belongsToMany(Organization::class, 'organization_application');
     }
 
-    public function profile()
+    public function person()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(Person::class);
     }
 
     public function state()

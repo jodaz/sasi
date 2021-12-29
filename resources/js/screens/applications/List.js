@@ -5,6 +5,7 @@ import {
   TextInput,
   DateInput,
   useGetList,
+  CreateButton,
   ChipField,
   Datagrid,
   TextField,
@@ -176,6 +177,7 @@ const ApplicationFilter = props => (
 const ApplicationsModuleActions = props => (
   <ModuleActions {...props}>
     <ReportButton />
+    <CreateButton basePath="applications" />
   </ModuleActions>
 );
 

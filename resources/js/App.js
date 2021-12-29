@@ -10,8 +10,6 @@ import { Loading, Login, Layout } from './components';
 import { clearNotifications, setUser } from './actions';
 import { useFetch } from './fetch';
 import { dataProvider, i18nProvider, history } from './initializers';
-// Screens
-import Screens from './screens';
 
 const theme = createMuiTheme({
   palette: {
@@ -24,6 +22,11 @@ const theme = createMuiTheme({
     }
   }
 });
+
+
+import applications from './screens/applications';
+import categories from './screens/categories';
+import communities from './screens/communities';
 
 export default function App() {
   const { pathname } = location;
@@ -67,8 +70,6 @@ export default function App() {
     }
   }, [user]);
 
-  const resources = Screens(rol).filter(Boolean);
-
   return (
     <Admin
       layout={Layout}  
@@ -80,7 +81,9 @@ export default function App() {
       ready={Loading}
       i18nProvider={i18nProvider}
     >
-      {resources}
+      <Resource {...applications} />
+      <Resource {...communities} />
+      <Resource {...categories} />
     </Admin>
   );
 }

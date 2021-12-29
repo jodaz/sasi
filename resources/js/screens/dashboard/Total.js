@@ -56,15 +56,6 @@ function Analytics() {
           handleClick={() => redirect('/applications')}
         />
       </Grid>
-      <Grid item sm={6} xs={12}>
-        <CardButton
-          title='Usuarios registrados'
-          loading={isLoading}
-          total={users}
-          icon={<PeopleIcon />}
-          handleClick={() => redirect('/users')}
-        />
-      </Grid>
       <Grid item md={4} sm={6} xs={12}>
         <Chart
           name='Solicitudes por estado'

@@ -27,17 +27,14 @@ export default function Dashboard() {
     <Grid container spacing={3}>
       <Title title='Inicio' />
 
-      <Grid item xs={12}>
-        <Welcome title={'Sistema de Atención Social Integral'} />
+      <Grid container>
+        <Grid item xs={12}>
+          <Welcome title={'Sistema de Atención Social Integral'} />
+        </Grid>
       </Grid>
-
-      {!isEmpty(user) && (user.role_id !== 3) &&
+      <Grid container>
         <Totals />
-      }
-
-      { (!isEmpty(user) && (user.role_id === 3)) &&
-        <NewApplication profile={user.profile}/>
-      }
+      </Grid>
     </Grid>
   );
 };
