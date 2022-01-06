@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { useRedirect } from 'react-admin';
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { apiURL } from '../../config';
 import { Chart, CardButton } from 'mui-extra';
 import isEmpty from 'is-empty';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import PeopleIcon from '@material-ui/icons/People';
 
 function Analytics() {
   const redirect = useRedirect();
@@ -46,41 +45,45 @@ function Analytics() {
   }, [data]);
 
   return (
-    <>
-      <Grid item sm={6} xs={12}>
-        <CardButton
-          title='Solicitudes aprobadas'
-          loading={isLoading}
-          total={applications}
-          icon={<MailOutlineIcon />}
-          handleClick={() => redirect('/applications')}
-        />
+    <Grid container>
+      <Grid container>
+        <Grid item md={12} sm={6} xs={12}>
+          <CardButton
+            title='Solicitudes aprobadas'
+            loading={isLoading}
+            total={applications}
+            icon={<MailOutlineIcon />}
+            handleClick={() => redirect('/applications')}
+          />
+        </Grid>
       </Grid>
-      <Grid item md={4} sm={6} xs={12}>
-        <Chart
-          name='Solicitudes por estado'
-          type='doughnut'
-          height="400"
-          width="350"
-          loading={isLoading}
-          labels={status.labels}
-          data={status.values}
-          borderWith={1}
-        />
+      <Grid container>
+        <Grid item md={4} sm={6} xs={12}>
+          <Chart
+            name='Solicitudes por estado'
+            type='doughnut'
+            height="400"
+            width="350"
+            loading={isLoading}
+            labels={status.labels}
+            data={status.values}
+            borderWith={1}
+          />
+        </Grid>
+        <Grid item md={4} sm={6} xs={12}>
+          <Chart
+            name='Categorías'
+            type='pie'
+            height="400"
+            width="350"
+            loading={isLoading}
+            labels={categories.labels}
+            data={categories.values}
+            borderWith={1}
+          />
+        </Grid>
       </Grid>
-      <Grid item md={4} sm={6} xs={12}>
-        <Chart
-          name='Categorías'
-          type='pie'
-          height="400"
-          width="350"
-          loading={isLoading}
-          labels={categories.labels}
-          data={categories.values}
-          borderWith={1}
-        />
-      </Grid>
-    </>
+    </Grid>
   );
 };
 

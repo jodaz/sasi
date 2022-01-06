@@ -88,19 +88,17 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateApplicationRequest $request)
+    public function store(Request $request)
     {
         $person = Person::create([
             'dni' => $request->dni,
-            'name' => $request->name,
+            'name' => $request->full_name,
             'address' => $request->address,
             'phone' => $request->phone,
             'community_id' => $request->community_id,
             'parish_id' => $request->parish_id,
-            'genre_id' => $request->genre_id,
-            'citizenship_id' => $request->citizenship_id
         ]);
-        $category = $request->get('category');
+        $category = $request->get('category_id');
         $application = new Application($request->all());
         $application->num = Application::getNewNum();
         $application->state_id = 1;

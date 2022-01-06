@@ -56,6 +56,12 @@ const validator = (values) => {
   if (!values.community_id) {
     errors.community_id = ['Seleccione una comunidad.'];
   }
+  if (!values.full_name) {
+    errors.full_name = 'Ingrese el nombre de la persona';
+  }
+  if (!values.dni) {
+    errors.dni = 'Ingrese la cédula de identidad';
+  }
 
   return errors;
 }
@@ -70,8 +76,20 @@ const parishes = [
   { id: 5, name: "SANTA TERESA" }
 ]
 
+const categories = [
+  { id: 1, name: "Salud" },
+  { id: 2, name: "Servicios Funerarios" },
+  { id: 3, name: "Electricidad" },
+  { id: 4, name: "Agua" },
+  { id: 6, name: "Financiero" },
+  { id: 7, name: "Otros" },
+]
+
+const communities = [
+  {"id":1,"name":"CENTRO","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA, SANTA ROSA"},{"id":2,"name":"LOS MOLINOS","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":3,"name":"UVEROS","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":4,"name":"COPEY","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":5,"name":"COPACABANA","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":6,"name":"G\u00dcIRIA DE LA PLAYA","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":7,"name":"PATILLA","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":8,"name":"POZO COLORADO","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":9,"name":"GUATAPANARE","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":10,"name":"PLAYA GRANDE","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":11,"name":"LAS PEONIAS","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":12,"name":"HATO ROMAN","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":13,"name":"GUACA","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":14,"name":"LEBRANCHE","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"BOL\u00cdVAR"},{"id":15,"name":"EL MACO","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"MACARAPANA"},{"id":16,"name":"TAPARO","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"MACARAPANA"},{"id":17,"name":"URB. LA ESTANCIA","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"MACARAPANA"},{"id":18,"name":"JOS\u00c9 FRANCISCO BERM\u00daDEZ","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":19,"name":"LA VI\u00d1A","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":20,"name":"1\u00ba DE MAYO","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":21,"name":"GUAYAC\u00c1N DE LAS FLORES","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":22,"name":"CHARALLAVE","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":23,"name":"CANCHUNCH\u00da","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":24,"name":"LOMA DE GRAN POBRE","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"},{"id":25,"name":"EL CHARCAL","created_at":"2022-01-06T17:41:12.000000Z","updated_at":"2022-01-06T17:41:12.000000Z","applications_count":0,"parish_names":"SANTA CATALINA"}
+]
+
 const ApplicationCreate = (props) => {
-  const classes = useStyles();
   const createControllerProps = useCreateController(props);
   const [mutate, { loaded, data }] = useMutation();
   const redirect = useRedirect()
@@ -102,50 +120,20 @@ const ApplicationCreate = (props) => {
     <CreateContextProvider value={createControllerProps}>
       <Title title='Nueva solicitud' />
       <SimpleForm validate={validator} save={handleSave}>
-        <div className={classes.root}>
-          <Grid container>
-            <Grid container>
-              <Typography variant="subtitle1">
-                Nueva solicitud
-              </Typography>
-              <Grid container className={classes.child}>
-                <TextInput source="title" label="Título" multiline fullWidth />
-                <TextInput source="description" label="Mensaje" multiline fullWidth />
-              </Grid>
-              <Grid container>
-                <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                  <ReferenceInput label="Categoría" source="category_id" reference="categories">
-                    <SelectInput optionText={optionRenderer} source="name" fullWidth />
-                  </ReferenceInput>
-                </Grid>
-                <Grid item xs={12} sm={12} md={4} className={classes.child}>
-                  <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                <Typography variant="subtitle1">
-                  Datos del solicitante
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <TextInput source="name" label="Nombre" fullWidth />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <TextInput source="dni" label="Cédula" fullWidth />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <SelectInput optionText={optionRenderer} source="name" choices={parishes} fullWidth />
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <ReferenceInput label="Comunidad" source="community_id" reference="communities">
-                  <SelectInput optionText={optionRenderer} source="name" fullWidth />
-                </ReferenceInput>
-              </Grid>
-            </Grid>
-          </Grid>
-        </div>
+        <Typography variant="subtitle1">
+          Nueva solicitud
+        </Typography>
+        <TextInput source="title" label="Título" multiline fullWidth />
+        <TextInput source="description" label="Mensaje" multiline fullWidth />
+        <SelectInput source="category_id" choices={categories} fullWidth label="Comunidad" />
+        <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
+        <Typography variant="subtitle1">
+          Datos del solicitante
+        </Typography>
+        <TextInput source="full_name" label="Nombre" fullWidth />
+        <TextInput source="dni" label="Cédula" fullWidth />
+        <SelectInput optionText={optionRenderer} source="parish_id" label="Parroquia" choices={parishes} fullWidth />
+        <SelectInput optionText={optionRenderer} source="community_id" label="Comunidad" choices={communities} fullWidth />
       </SimpleForm>
     </CreateContextProvider>
   );
