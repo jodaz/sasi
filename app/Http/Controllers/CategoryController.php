@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Category::query()->withCount('applications');
+        $query = Category::query();
         $results = $request->perPage;
 
         if ($request->has('filter')) {
