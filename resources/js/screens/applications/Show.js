@@ -19,9 +19,10 @@ const ApplicationShow = (props) => {
         <TextField source="description" label="Mensaje" />
         <TextField source="category.name" label='Categoría' />
         <TextField source="state.name" label='Estado' />
-        <NumberField source="quantity" label='Elementos requeridos' />
-        <TextField source="profile.full_name" label='Usuario' />
         <TextField source="created_at" label="Enviada" />
+        <TextField source="person.name" label='Nombre del solicitante' />
+        <TextField source="person.dni" label='Cédula' />
+        <TextField source="address" label='Direccón' />
       </SimpleShowLayout>
     </Show>
   );

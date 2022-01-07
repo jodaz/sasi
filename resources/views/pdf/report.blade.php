@@ -98,13 +98,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                @foreach($applications as $application)
-                 <tr>
-                    <td>{{ $application->num }}</td>
-                    <td>{{ $application->title }}</td>
-                    <td>{{ $application->category->name }}</td>
-                </tr>
-                @endforeach
              </table>
             <br>
             <div class="bill-info">

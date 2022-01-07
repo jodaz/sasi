@@ -48,10 +48,6 @@ class ApplicationController extends Controller
             }
         }
 
-        if ($user->role_id == 3) {
-            $query->whereProfileId($user->profile_id);
-        }
-
         if ($request->get('type')) {
             return $this->report($query);
         }
@@ -120,7 +116,7 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        return Response($application->load(['category', 'state', 'profile']));
+        return Response($application->load(['category', 'state', 'person']));
     }
 
     /**
@@ -155,8 +151,7 @@ class ApplicationController extends Controller
 
     public function download(Application $application)
     {
-        $user = $application->profile;
-        $pdf = PDF::loadView('pdf.certification', compact(['user', 'application']));
+        $pdf = PDF::loadView('pdf.certification', compact(['application']));
 
         return $pdf->download('certificado.pdf');
     }

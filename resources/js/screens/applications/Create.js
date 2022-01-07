@@ -9,12 +9,11 @@ import {
   useCreateController,
   CreateContextProvider,
   useRedirect,
-  ReferenceInput,
+  AutocompleteInput,
   useMutation
 } from 'react-admin';
 import { 
   Typography, 
-  Grid, 
   makeStyles
 } from '@material-ui/core';
 
@@ -66,8 +65,6 @@ const validator = (values) => {
   return errors;
 }
 
-const optionRenderer = choice => `${choice.name}`;
-
 const parishes = [
   { id: 1, name: "BOLÍVAR" },
   { id: 2, name: "MACARAPANA" },
@@ -81,8 +78,11 @@ const categories = [
   { id: 2, name: "Servicios Funerarios" },
   { id: 3, name: "Electricidad" },
   { id: 4, name: "Agua" },
+  { id: 5, name: "Otros" },
   { id: 6, name: "Financiero" },
-  { id: 7, name: "Otros" },
+  { id: 7, name: "Gas" },
+  { id: 8, name: "Transporte" },
+  { id: 8, name: "Aseo" },
 ]
 
 const communities = [
@@ -121,19 +121,21 @@ const ApplicationCreate = (props) => {
       <Title title='Nueva solicitud' />
       <SimpleForm validate={validator} save={handleSave}>
         <Typography variant="subtitle1">
-          Nueva solicitud
-        </Typography>
-        <TextInput source="title" label="Título" multiline fullWidth />
-        <TextInput source="description" label="Mensaje" multiline fullWidth />
-        <SelectInput source="category_id" choices={categories} fullWidth label="Comunidad" />
-        <NumberInput source="quantity" label='Elementos requeridos' fullWidth/>
-        <Typography variant="subtitle1">
           Datos del solicitante
         </Typography>
         <TextInput source="full_name" label="Nombre" fullWidth />
         <TextInput source="dni" label="Cédula" fullWidth />
-        <SelectInput optionText={optionRenderer} source="parish_id" label="Parroquia" choices={parishes} fullWidth />
-        <SelectInput optionText={optionRenderer} source="community_id" label="Comunidad" choices={communities} fullWidth />
+        <TextInput source="phone" label="Teléfono" fullWidth />
+        <TextInput source="address" label="Dirección" fullWidth />
+        <AutocompleteInput source="parish_id" label="Parroquia" choices={parishes} fullWidth />
+        <AutocompleteInput source="community_id" label="Comunidad" choices={communities} fullWidth />
+        <Typography variant="subtitle1">
+          Datos de la solicitud
+        </Typography>
+        <TextInput source="title" label="Título" multiline fullWidth />
+        <TextInput source="description" label="Mensaje" multiline fullWidth />
+        <AutocompleteInput source="category_id" choices={categories} fullWidth label="Categoría" />
+        <NumberInput source="quantity" label='Cantidad de elementos' fullWidth/>
       </SimpleForm>
     </CreateContextProvider>
   );

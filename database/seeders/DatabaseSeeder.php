@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
         $this->call(CommunitiesSeeder::class);
         $this->call(CommunityParishSeeder::class);
+        $this->call(CategoriesSeeder::class);
 
         if (App::environment() == 'production') {
            $this->call(AdminSeeder::class);
