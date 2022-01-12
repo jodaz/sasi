@@ -22,7 +22,7 @@ const ApplicationShow = (props) => {
         <TextField source="created_at" label="Enviada" />
         <TextField source="person.name" label='Nombre del solicitante' />
         <TextField source="person.dni" label='Cédula' />
-        <TextField source="address" label='Direccón' />
+        <TextField source="person.address" label='Direccón' />
       </SimpleShowLayout>
     </Show>
   );

@@ -143,9 +143,7 @@ const TabbedDataGrid = props => {
                 <TextField label='Número' source="num" />
                 <TextField label='Asunto' source="title" />
                 <ChipField label='Categoría' source="category.name" />
-                <Actions {...props} shouldShow>
-                  <DownloadButton />
-                </Actions>
+                <Actions {...props} shouldShow />
               </Datagrid>
             </ListContextProvider>
           )}
@@ -176,7 +174,6 @@ const ApplicationFilter = props => (
 
 const ApplicationsModuleActions = props => (
   <ModuleActions {...props}>
-    <ReportButton />
     <CreateButton basePath="applications" />
   </ModuleActions>
 );

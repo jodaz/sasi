@@ -135,7 +135,6 @@ const ApplicationCreate = (props) => {
         <TextInput source="title" label="Título" multiline fullWidth />
         <TextInput source="description" label="Mensaje" multiline fullWidth />
         <AutocompleteInput source="category_id" choices={categories} fullWidth label="Categoría" />
-        <NumberInput source="quantity" label='Cantidad de elementos' fullWidth/>
       </SimpleForm>
     </CreateContextProvider>
   );
