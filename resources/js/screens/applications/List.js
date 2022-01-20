@@ -168,6 +168,11 @@ const ApplicationFilter = props => (
   <Filter {...props}>
     <TextInput label="Buscar" source='title' alwaysOn />
     <TextInput label="Número" source="num" />
+    <TextInput label="Documento de la persona" source="document" />
+    <TextInput label="Nombre de la persona" source="person_name" />
+    <TextInput label="Comunidad" source="community_name" />
+    <TextInput label="Parroquia" source="parish_name" />
+    <TextInput label="Categoria" source="category" />
     <DateInput label="Enviado" source="created_at" />
   </Filter>
 );

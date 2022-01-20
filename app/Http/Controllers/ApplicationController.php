@@ -35,6 +35,35 @@ class ApplicationController extends Controller
             if (array_key_exists('title', $filters)) {
                 $query->whereLike('title', $filters['title']);
             }
+            if (array_key_exists('person_name', $filters)) {
+                $query->whereHas('person', function ($q) use ($filters) {
+                    $q->whereLike('name', $filters['person_name']);
+                });
+            }
+            if (array_key_exists('category', $filters)) {
+                $query->whereHas('category', function ($q) use ($filters) {
+                    $q->whereLike('name', $filters['category']);
+                });
+            }
+            if (array_key_exists('document', $filters)) {
+                $query->whereHas('person', function ($q) use ($filters) {
+                    $q->whereLike('dni', $filters['document']);
+                });
+            }
+            if (array_key_exists('community_name', $filters)) {
+                $query->whereHas('person', function ($query) use ($filters) {
+                    $query->whereHas('community', function ($query) use ($filters) {
+                        $query->whereLike('name', $filters['community_name']);
+                    });
+                });
+            }
+            if (array_key_exists('parish_name', $filters)) {
+                $query->whereHas('person', function ($query) use ($filters) {
+                    $query->whereHas('parish', function ($query) use ($filters) {
+                        $query->whereLike('name', $filters['parish_name']);
+                    });
+                });
+            }
             if (array_key_exists('created_at', $filters)) {
                 $query->whereDate('created_at', $filters['created_at']);
             }

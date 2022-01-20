@@ -32,7 +32,6 @@ class Application extends Model
     {
         return $this->belongsTo(Person::class);
     }
-
     public function state()
     {
         return $this->belongsTo(State::class);
